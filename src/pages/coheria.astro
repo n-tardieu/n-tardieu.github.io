@@ -1,0 +1,170 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+	<main class="container">
+		<div class="content">
+			<div class="back-link">
+				<a href="/" class="back-btn">← Retour</a>
+			</div>
+			
+			<h1 class="title">Coheria</h1>
+			<p class="subtitle">Application de cohérence cardiaque</p>
+			
+			<div class="quote">
+				<p>“La respiration est le berceau du rythme.”</p>
+				<span class="author">— Rainer Maria Rilke</span>
+			</div>
+			
+			<div class="description">
+				<p>Retrouvez le calme en quelques minutes. Coheria vous aide à gérer le stress quotidien et l'anxiété grâce à des techniques de respiration simples et efficaces.</p>
+				
+				<p>Que vous cherchiez à améliorer votre sommeil, réduire votre stress au travail ou simplement vous sentir plus serein, Coheria s'adapte à votre rythme et vos besoins.</p>
+			</div>
+			
+			<div class="status">
+				<p><strong>Statut :</strong> Prêt pour publication sur le store Android</p>
+			</div>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	.container {
+		min-height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 2rem;
+		max-width: 600px;
+		margin: 0 auto;
+		transform: translateY(-5vh);
+	}
+
+	.content {
+		width: 100%;
+		animation: fadeInUp 0.8s ease-out;
+	}
+
+	@keyframes fadeInUp {
+		from {
+			opacity: 0;
+			transform: translateY(30px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.back-link {
+		margin-bottom: 2rem;
+	}
+
+	.back-btn {
+		color: #FF6B6B;
+		text-decoration: none;
+		font-weight: 500;
+		transition: all 0.3s ease;
+		font-size: 0.9rem;
+	}
+
+	.back-btn:hover {
+		opacity: 0.7;
+	}
+
+	.title {
+		font-size: 2.5rem;
+		font-weight: 600;
+		margin: 0 0 0.5rem 0;
+		color: #ffffff;
+		background: linear-gradient(135deg, #ffffff, #FF6B6B, #FF8E8E);
+		background-size: 200% 200%;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+		animation: textShimmer 3s ease-in-out infinite alternate;
+	}
+
+	@keyframes textShimmer {
+		0% {
+			background-position: 0% 50%;
+		}
+		100% {
+			background-position: 100% 50%;
+		}
+	}
+
+	.subtitle {
+		font-size: 1.1rem;
+		color: #cccccc;
+		margin-bottom: 2rem;
+	}
+
+	.quote {
+		margin-bottom: 2rem;
+		padding: 1.5rem;
+		border-left: 3px solid #FF6B6B;
+		background: rgba(255, 107, 107, 0.05);
+		border-radius: 0 8px 8px 0;
+	}
+
+	.quote p {
+		color: #ffffff;
+		font-style: italic;
+		font-size: 1rem;
+		line-height: 1.6;
+		margin: 0 0 0.5rem 0;
+		opacity: 0.9;
+	}
+
+	.author {
+		color: #FF6B6B;
+		font-size: 0.85rem;
+		font-weight: 500;
+		display: block;
+		text-align: right;
+	}
+
+	.description {
+		margin-bottom: 2rem;
+	}
+
+	.description p {
+		color: #ffffff;
+		line-height: 1.6;
+		margin-bottom: 1.5rem;
+	}
+
+	.status {
+		margin-top: 2rem;
+		padding-top: 2rem;
+		border-top: 1px solid rgba(255, 107, 107, 0.2);
+	}
+
+	.status p {
+		color: #cccccc;
+		font-size: 0.9rem;
+		margin: 0;
+	}
+
+	.status strong {
+		color: #FF6B6B;
+	}
+
+	@media (max-width: 768px) {
+		.container {
+			padding: 1.5rem;
+			transform: translateY(-3vh);
+		}
+
+		.title {
+			font-size: 2rem;
+		}
+
+		.subtitle {
+			font-size: 1rem;
+		}
+	}
+</style>
