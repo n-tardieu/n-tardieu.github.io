@@ -1,0 +1,126 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+	<main class="container">
+		<div class="content">
+			<h1 class="name">Nicolas Tardieu</h1>
+			
+			<div class="bio">
+				<p>Founded <a href="#" target="_blank" rel="noopener noreferrer">Coheria</a>.</p>
+			</div>
+
+			<div class="links">
+				<a href="https://github.com/n-tardieu" target="_blank" rel="noopener noreferrer" class="link">
+					GitHub
+				</a>
+				<a href="mailto:contact@nicolastardieu.com" class="link button">
+					Send Email
+				</a>
+			</div>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	.container {
+		min-height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 2rem;
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.content {
+		width: 100%;
+		max-width: 600px;
+	}
+
+	.name {
+		font-size: 2.5rem;
+		font-weight: 600;
+		margin: 0 0 1.5rem 0;
+		color: #000000;
+	}
+
+	.bio {
+		font-size: 1.125rem;
+		margin-bottom: 2rem;
+		color: #333333;
+	}
+
+	.bio p {
+		margin: 0;
+	}
+
+	.bio a {
+		color: #000000;
+		font-weight: 500;
+		border-bottom: 1px solid #000000;
+		text-decoration: none;
+		transition: opacity 0.2s ease;
+	}
+
+	.bio a:hover {
+		opacity: 0.7;
+		text-decoration: none;
+	}
+
+	.links {
+		display: flex;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+
+	.link {
+		font-size: 1rem;
+		font-weight: 500;
+		padding: 0.75rem 1.5rem;
+		border: 1px solid #e5e5e5;
+		border-radius: 6px;
+		transition: all 0.2s ease;
+		text-decoration: none;
+		display: inline-block;
+	}
+
+	.link:hover {
+		border-color: #000000;
+		text-decoration: none;
+	}
+
+	.button {
+		background-color: #000000;
+		color: #ffffff;
+		border-color: #000000;
+	}
+
+	.button:hover {
+		background-color: #333333;
+		border-color: #333333;
+	}
+
+	@media (max-width: 768px) {
+		.container {
+			padding: 1.5rem;
+		}
+
+		.name {
+			font-size: 2rem;
+		}
+
+		.bio {
+			font-size: 1rem;
+		}
+
+		.links {
+			flex-direction: column;
+		}
+
+		.link {
+			text-align: center;
+		}
+	}
+</style>
