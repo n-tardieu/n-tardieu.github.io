@@ -1,0 +1,237 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const lastUpdated = 'March 20, 2026';
+---
+
+<Layout>
+	<main class="container">
+		<div class="content">
+			<div class="back-link">
+				<a href="/coheria" class="back-btn">← Back to Coheria</a>
+			</div>
+
+			<div class="lang-switch">
+				<a href="/coheria/privacy" class="lang-link">Version francaise</a>
+			</div>
+
+			<h1>Privacy Policy</h1>
+			<p class="updated">Last updated: {lastUpdated}</p>
+
+			<p>
+				Coheria is a mobile app dedicated to relaxation, guided breathing, and meditation.
+				This policy fully discloses what data the app accesses, how it is used, and where it is stored.
+			</p>
+
+			<section>
+				<h2>1. Summary</h2>
+				<p>
+					Coheria does not collect personal data on any server, does not sell data,
+					and does not share data with third parties.
+				</p>
+				<p>
+					The only data used by the app is technical preference data stored locally on your device
+					to personalize your experience.
+				</p>
+			</section>
+
+			<section>
+				<h2>2. Data Accessed and Collected</h2>
+				<p>
+					The following data may be stored locally by the app. It never leaves your device.
+				</p>
+				<ul>
+					<li>Selected session preference (session 1, 2, 3, or 4).</li>
+					<li>Language preference.</li>
+					<li>Display mode preference (theme).</li>
+					<li>Audio preferences (on/off and in-app volume).</li>
+				</ul>
+				<p>
+					Sole purpose: remembering your settings for a better user experience.
+				</p>
+				<p>
+					None of this data is used to identify, profile, or track you.
+				</p>
+			</section>
+
+			<section>
+				<h2>3. Health Data</h2>
+				<p>
+					Coheria does not access or collect any Health Data.
+				</p>
+				<ul>
+					<li>No access to Google Health Connect, Google Fit, Apple Health, or equivalent services.</li>
+					<li>No reading or collection of medical, biometric, activity, or sleep data.</li>
+					<li>No health-related inference from app usage.</li>
+				</ul>
+				<p>
+					The app does not rely on health data to provide its features.
+				</p>
+			</section>
+
+			<section>
+				<h2>4. No Sharing or External Transmission</h2>
+				<p>Coheria does not collect, store, or transmit to third parties:</p>
+				<ul>
+					<li>Identity data (name, email, phone number, address).</li>
+					<li>Health or medical data.</li>
+					<li>Location data, contacts, or advertising identifiers.</li>
+				</ul>
+				<p>
+					No external API is used to process your preferences. No cloud sync is enabled.
+				</p>
+			</section>
+
+			<section>
+				<h2>5. Data Retention and Deletion</h2>
+				<p>
+					Preferences remain stored locally while the app is installed.
+				</p>
+				<ul>
+					<li>Uninstalling the app removes associated local data.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>6. Security and Confidentiality</h2>
+				<p>Because all data stays on your device:</p>
+				<ul>
+					<li>You keep full control over your information.</li>
+					<li>Privacy is ensured by design (Privacy by Design).</li>
+					<li>No server access exists to view your preferences.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>7. Your Rights</h2>
+				<p>
+					Under GDPR, you have rights over your data. However, since no data is collected
+					or processed outside your device, no external request is needed to exercise those rights.
+				</p>
+				<p>
+					The publisher has no access to your preferences (session, language, display mode, audio),
+					as they remain stored locally on your device.
+				</p>
+			</section>
+
+			<section>
+				<h2>8. Changes</h2>
+				<p>
+					This policy may be updated to reflect technical or regulatory changes.
+					Any update will be indicated in the application.
+				</p>
+			</section>
+
+			<section>
+				<h2>9. Contact</h2>
+				<p>
+					For any question about this privacy policy, you can contact the publisher
+					using the contact details shown on the app page.
+				</p>
+			</section>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	.container {
+		min-height: 100vh;
+		display: flex;
+		justify-content: center;
+		padding: 2rem 1.5rem 4rem;
+	}
+
+	.content {
+		width: min(780px, 100%);
+		animation: fadeInUp 0.5s ease-out;
+	}
+
+	@keyframes fadeInUp {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.back-link {
+		margin-bottom: 1rem;
+	}
+
+	.back-btn {
+		color: #e5e5e5;
+		font-size: 0.9rem;
+		font-weight: 500;
+	}
+
+	.lang-switch {
+		margin-bottom: 1.2rem;
+	}
+
+	.lang-link {
+		font-size: 0.85rem;
+		color: rgba(255, 255, 255, 0.72);
+		text-decoration: none;
+		border-bottom: 1px solid transparent;
+		transition: color 0.2s ease, border-color 0.2s ease;
+	}
+
+	.lang-link:hover {
+		color: rgba(255, 255, 255, 0.95);
+		border-color: rgba(255, 255, 255, 0.55);
+	}
+
+	h1 {
+		margin: 0;
+		font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+		line-height: 1.2;
+	}
+
+	.updated {
+		margin-top: 0.65rem;
+		color: #cccccc;
+		font-size: 0.95rem;
+	}
+
+	p {
+		color: #f2f2f2;
+		line-height: 1.7;
+	}
+
+	section {
+		margin-top: 1.3rem;
+		padding: 1rem 1.1rem;
+		background: rgba(255, 255, 255, 0.03);
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		border-radius: 12px;
+	}
+
+	h2 {
+		margin: 0 0 0.5rem;
+		font-size: 1.08rem;
+		color: #ffffff;
+	}
+
+	ul {
+		margin: 0.35rem 0 0;
+		padding-left: 1.2rem;
+	}
+
+	li {
+		line-height: 1.6;
+		margin-bottom: 0.35rem;
+	}
+
+	@media (max-width: 768px) {
+		.container {
+			padding: 1.25rem 1rem 2.25rem;
+		}
+
+		section {
+			padding: 0.9rem;
+		}
+	}
+</style>

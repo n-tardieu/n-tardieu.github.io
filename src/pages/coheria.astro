@@ -28,7 +28,9 @@ import Layout from '../layouts/Layout.astro';
 			</div>
 
 			<div class="legal-link">
-				<a href="/coheria/privacy" class="legal-link-text">Confidentialité</a>
+				<a href="/coheria/privacy-fr" class="legal-link-text">Confidentialité</a>
+				<span class="legal-separator">·</span>
+				<a href="/coheria/privacy-en" class="legal-link-text">Privacy (EN)</a>
 			</div>
 		</div>
 	</main>
@@ -159,6 +161,15 @@ import Layout from '../layouts/Layout.astro';
 
 	.legal-link {
 		margin-top: 0.85rem;
+		display: flex;
+		align-items: center;
+		gap: 0.45rem;
+	}
+
+	.legal-separator {
+		color: rgba(255, 255, 255, 0.45);
+		font-size: 0.8rem;
+		line-height: 1;
 	}
 
 	.legal-link-text {

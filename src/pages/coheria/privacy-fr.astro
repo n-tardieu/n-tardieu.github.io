@@ -1,0 +1,241 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const lastUpdated = '20 mars 2026';
+---
+
+<Layout>
+	<main class="container">
+		<div class="content">
+			<div class="back-link">
+				<a href="/coheria" class="back-btn">← Retour à Coheria</a>
+			</div>
+
+			<div class="lang-switch">
+				<a href="/coheria/privacy-en" class="lang-link">English version</a>
+			</div>
+
+			<h1>Règles de confidentialité</h1>
+			<p class="updated">Dernière mise à jour : {lastUpdated}</p>
+
+			<p>
+				Coheria est une application mobile dédiée à la relaxation, à la respiration guidée et à la
+				méditation. Cette politique décrit de manière exhaustive les données consultées par l'application,
+				leur usage et leur stockage.
+			</p>
+
+			<section>
+				<h2>1. Résumé</h2>
+				<p>
+					Coheria ne collecte aucune donnée personnelle sur un serveur, ne vend aucune donnée,
+					et ne partage aucune donnée avec des tiers.
+				</p>
+				<p>
+					Les données utilisées sont uniquement des préférences techniques enregistrées localement sur
+					votre appareil pour personnaliser votre expérience.
+				</p>
+			</section>
+
+			<section>
+				<h2>2. Données consultées et collectées</h2>
+				<p>
+					Les données suivantes peuvent être enregistrées localement par l'application. Elles ne quittent
+					jamais votre appareil.
+				</p>
+				<ul>
+					<li>Préférence de session choisie (session 1, 2, 3 ou 4).</li>
+					<li>Préférence de langue.</li>
+					<li>Préférence de mode d'affichage (thème).</li>
+					<li>Préférences audio (activation/désactivation et volume dans l'app).</li>
+				</ul>
+				<p>
+					Finalité unique : mémoriser vos réglages pour le confort d'utilisation.
+				</p>
+				<p>
+					Aucune de ces données n'est utilisée pour vous identifier, vous profiler, ou vous suivre.
+				</p>
+			</section>
+
+			<section>
+				<h2>3. Health Data (données de santé)</h2>
+				<p>
+					Coheria n'accède à aucune Health Data et n'en collecte aucune.
+				</p>
+				<ul>
+					<li>Aucun accès à Google Health Connect, Google Fit, Apple Health ou services équivalents.</li>
+					<li>Aucune lecture ou collecte de données médicales, biométriques, d'activité ou de sommeil.</li>
+					<li>Aucune inférence de données de santé à partir de votre utilisation.</li>
+				</ul>
+				<p>
+					L'application n'utilise pas vos données de santé pour fournir ses fonctionnalités.
+				</p>
+			</section>
+
+			<section>
+				<h2>4. Absence de transmission et de partage</h2>
+				<p>Coheria ne collecte, ne stocke, ni ne transmet à des tiers :</p>
+				<ul>
+					<li>Données d'identité (nom, e-mail, téléphone, adresse).</li>
+					<li>Données de santé ou médicales.</li>
+					<li>Données de localisation, contacts, identifiants publicitaires.</li>
+				</ul>
+				<p>
+					Aucune API externe n'est utilisée pour traiter vos préférences. Aucune synchronisation cloud n'est
+					activée.
+				</p>
+			</section>
+
+			<section>
+				<h2>5. Conservation et suppression</h2>
+				<p>
+					Les préférences restent stockées localement tant que l'application est installée.
+				</p>
+				<ul>
+					<li>La désinstallation de l'application supprime les données locales associées.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>6. Sécurité et confidentialité</h2>
+				<p>Puisque toutes les données restent sur votre appareil :</p>
+				<ul>
+					<li>Vous gardez un contrôle total sur vos informations.</li>
+					<li>La confidentialité est assurée par conception (Privacy by Design).</li>
+					<li>Aucun accès serveur n'existe pour consulter vos préférences.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>7. Vos droits</h2>
+				<p>
+					Conformément au RGPD, vous disposez de droits sur vos données. Toutefois, comme aucune donnée n'est
+					collectée ni traitée en dehors de votre appareil, aucune demande externe n'est nécessaire pour exercer
+					ces droits.
+				</p>
+				<p>
+					L'éditeur n'a pas accès à vos préférences (session, langue, mode, audio), car elles restent stockées
+					localement sur votre appareil.
+				</p>
+			</section>
+
+			<section>
+				<h2>8. Modifications</h2>
+				<p>
+					Cette politique peut être mise à jour pour refléter des évolutions techniques ou réglementaires. Toute
+					modification sera indiquée dans l'application.
+				</p>
+			</section>
+
+			<section>
+				<h2>9. Contact</h2>
+				<p>
+					Pour toute question sur cette politique de confidentialité, vous pouvez contacter l'éditeur via les
+					coordonnées publiées sur la page de l'application.
+				</p>
+			</section>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	.container {
+		min-height: 100vh;
+		display: flex;
+		justify-content: center;
+		padding: 2rem 1.5rem 4rem;
+	}
+
+	.content {
+		width: min(780px, 100%);
+		animation: fadeInUp 0.5s ease-out;
+	}
+
+	@keyframes fadeInUp {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.back-link {
+		margin-bottom: 1.5rem;
+	}
+
+	.back-btn {
+		color: #e5e5e5;
+		font-size: 0.9rem;
+		font-weight: 500;
+	}
+
+	.lang-switch {
+		margin-bottom: 1.2rem;
+	}
+
+	.lang-link {
+		font-size: 0.85rem;
+		color: rgba(255, 255, 255, 0.72);
+		text-decoration: none;
+		border-bottom: 1px solid transparent;
+		transition: color 0.2s ease, border-color 0.2s ease;
+	}
+
+	.lang-link:hover {
+		color: rgba(255, 255, 255, 0.95);
+		border-color: rgba(255, 255, 255, 0.55);
+	}
+
+	h1 {
+		margin: 0;
+		font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+		line-height: 1.2;
+	}
+
+	.updated {
+		margin-top: 0.65rem;
+		color: #cccccc;
+		font-size: 0.95rem;
+	}
+
+	p {
+		color: #f2f2f2;
+		line-height: 1.7;
+	}
+
+	section {
+		margin-top: 1.3rem;
+		padding: 1rem 1.1rem;
+		background: rgba(255, 255, 255, 0.03);
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		border-radius: 12px;
+	}
+
+	h2 {
+		margin: 0 0 0.5rem;
+		font-size: 1.08rem;
+		color: #ffffff;
+	}
+
+	ul {
+		margin: 0.35rem 0 0;
+		padding-left: 1.2rem;
+	}
+
+	li {
+		line-height: 1.6;
+		margin-bottom: 0.35rem;
+	}
+
+	@media (max-width: 768px) {
+		.container {
+			padding: 1.25rem 1rem 2.25rem;
+		}
+
+		section {
+			padding: 0.9rem;
+		}
+	}
+</style>
