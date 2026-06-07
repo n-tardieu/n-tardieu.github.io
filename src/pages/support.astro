@@ -1,0 +1,254 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+	<main class="container">
+		<div class="content">
+			<div class="back-link">
+				<a href="/coheria" class="back-btn">← Retour à Coheria / Back to Coheria</a>
+			</div>
+
+			<nav class="lang-switch">
+				<a href="#fr" class="lang-link">Français</a>
+				<span class="lang-sep">·</span>
+				<a href="#en" class="lang-link">English</a>
+			</nav>
+
+			<section id="fr" class="lang-section">
+				<h1>Assistance</h1>
+
+				<p>
+					Coheria est une application de cohérence cardiaque qui vous guide visuellement à travers des
+					exercices de respiration pour vous aider à retrouver le calme et à gérer le stress au
+					quotidien. Vous trouverez ci-dessous les réponses aux questions les plus fréquentes.
+				</p>
+
+				<article>
+					<h2>Comment lancer une session de respiration ?</h2>
+					<p>
+						Depuis l'écran d'accueil de Coheria, choisissez une séance puis appuyez sur le bouton de
+						lecture pour démarrer l'animation de respiration guidée. Il ne vous reste qu'à suivre le
+						rythme visuel à l'écran pour inspirer et expirer.
+					</p>
+				</article>
+
+				<article>
+					<h2>Comment obtenir la version Pro (achat lifetime) ?</h2>
+					<p>
+						Rendez-vous dans la section dédiée à la version Pro de l'application et sélectionnez
+						l'achat à vie (« lifetime »), ou l'offre promotionnelle si elle est proposée. Le paiement
+						est géré de manière sécurisée par l'App Store via RevenueCat ; une fois l'achat confirmé,
+						les fonctionnalités Pro sont débloquées définitivement, sans frais récurrents.
+					</p>
+				</article>
+
+				<article>
+					<h2>Comment restaurer un achat déjà effectué ?</h2>
+					<p>
+						Si vous avez déjà acheté la version Pro (sur cet appareil ou sur un autre, avec le même
+						identifiant Apple), utilisez le bouton « Restaurer mes achats » disponible dans l'écran
+						d'achat ou dans les réglages de l'application. Vos achats sont vérifiés et restaurés
+						automatiquement via RevenueCat.
+					</p>
+				</article>
+
+				<article>
+					<h2>Les notifications ne fonctionnent pas ?</h2>
+					<p>
+						Vérifiez d'abord que les notifications sont activées pour Coheria dans les réglages de
+						votre système (Réglages › Notifications › Coheria). Vérifiez ensuite que vos rappels sont
+						bien configurés dans Paramètres › Rappels au sein de l'application. Les notifications
+						étant planifiées localement sur votre appareil, assurez-vous également qu'aucune
+						restriction d'économie de batterie ne les empêche de se déclencher.
+					</p>
+				</article>
+
+				<article>
+					<h2>Comment supprimer mes données ?</h2>
+					<p>
+						Toutes les données de Coheria (préférences, historique des sessions, séries, rappels,
+						paramètres d'accessibilité) sont stockées uniquement sur votre appareil, et nulle part
+						ailleurs. Pour les supprimer, il vous suffit de désinstaller l'application : l'ensemble des
+						données locales est alors effacé automatiquement.
+					</p>
+				</article>
+
+				<article>
+					<h2>Contact</h2>
+					<p>
+						Vous n'avez pas trouvé de réponse à votre question ? Écrivez-nous à 
+						<a href="mailto:ntardieu.contact@gmail.com">ntardieu.contact@gmail.com</a>
+					</p>
+				</article>
+			</section>
+
+			<hr class="lang-divider" />
+
+			<section id="en" class="lang-section">
+				<h1>Support</h1>
+
+				<p>
+					Coheria is a heart coherence app that visually guides you through breathing exercises to
+					help you relax and manage everyday stress. Below are answers to the most frequently asked
+					questions.
+				</p>
+
+				<article>
+					<h2>How do I start a breathing session?</h2>
+					<p>
+						From the Coheria home screen, pick a session and tap the play button to start the guided
+						breathing animation. Simply follow the visual rhythm on screen to inhale and exhale.
+					</p>
+				</article>
+
+				<article>
+					<h2>How do I get the Pro version (lifetime purchase)?</h2>
+					<p>
+						Open the Pro section of the app and select the lifetime purchase, or the promotional
+						offer if one is available. Payment is securely handled by the App Store via RevenueCat;
+						once the purchase is confirmed, all Pro features are unlocked permanently, with no
+						recurring fees.
+					</p>
+				</article>
+
+				<article>
+					<h2>How do I restore a purchase I already made?</h2>
+					<p>
+						If you've already purchased the Pro version (on this device or another one, with the same
+						Apple ID), use the "Restore purchases" button available on the purchase screen or in the
+						app's settings. Your purchases are automatically verified and restored via RevenueCat.
+					</p>
+				</article>
+
+				<article>
+					<h2>Notifications aren't working?</h2>
+					<p>
+						First, check that notifications are enabled for Coheria in your system settings (Settings
+						› Notifications › Coheria). Then make sure your reminders are properly set up in Settings
+						› Reminders within the app. Since notifications are scheduled locally on your device, also
+						make sure no battery-saving restriction is preventing them from triggering.
+					</p>
+				</article>
+
+				<article>
+					<h2>How do I delete my data?</h2>
+					<p>
+						All Coheria data (preferences, session history, streaks, reminders, accessibility
+						settings) is stored only on your device, and nowhere else. To delete it, simply uninstall
+						the app: all local data is then automatically erased.
+					</p>
+				</article>
+
+				<article>
+					<h2>Contact</h2>
+					<p>
+						Couldn't find an answer to your question? Reach out at 
+						<a href="mailto:ntardieu.contact@gmail.com">ntardieu.contact@gmail.com</a>
+					</p>
+				</article>
+			</section>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	.container {
+		min-height: 100vh;
+		display: flex;
+		justify-content: center;
+		padding: 2rem 1.5rem 4rem;
+	}
+
+	.content {
+		width: min(780px, 100%);
+		animation: fadeInUp 0.5s ease-out;
+	}
+
+	@keyframes fadeInUp {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.back-link {
+		margin-bottom: 1.5rem;
+	}
+
+	.back-btn {
+		color: #e5e5e5;
+		font-size: 0.9rem;
+		font-weight: 500;
+	}
+
+	.lang-switch {
+		margin-bottom: 1.5rem;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.lang-sep {
+		color: rgba(255, 255, 255, 0.45);
+		font-size: 0.85rem;
+	}
+
+	.lang-link {
+		font-size: 0.85rem;
+		color: rgba(255, 255, 255, 0.72);
+		text-decoration: none;
+		border-bottom: 1px solid transparent;
+		transition: color 0.2s ease, border-color 0.2s ease;
+	}
+
+	.lang-link:hover {
+		color: rgba(255, 255, 255, 0.95);
+		border-color: rgba(255, 255, 255, 0.55);
+	}
+
+	.lang-divider {
+		margin: 2.5rem 0;
+		border: none;
+		border-top: 1px solid rgba(255, 255, 255, 0.1);
+	}
+
+	h1 {
+		margin: 0 0 1rem;
+		font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+		line-height: 1.2;
+	}
+
+	p {
+		color: #f2f2f2;
+		line-height: 1.7;
+	}
+
+	article {
+		margin-top: 1.3rem;
+		padding: 1rem 1.1rem;
+		background: rgba(255, 255, 255, 0.03);
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		border-radius: 12px;
+	}
+
+	h2 {
+		margin: 0 0 0.5rem;
+		font-size: 1.08rem;
+		color: #ffffff;
+	}
+
+	@media (max-width: 768px) {
+		.container {
+			padding: 1.25rem 1rem 2.25rem;
+		}
+
+		article {
+			padding: 0.9rem;
+		}
+	}
+</style>
