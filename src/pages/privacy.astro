@@ -1,8 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const lastUpdatedFr = '7 juin 2026';
-const lastUpdatedEn = 'June 7, 2026';
+// Même texte que l'écran Confidentialité de l'app (features/privacy/Privacy*.tsx) : à tenir à jour ensemble.
+const lastUpdatedFr = '7 octobre 2026';
+const lastUpdatedEn = 'October 7, 2026';
 ---
 
 <Layout>
@@ -21,107 +22,75 @@ const lastUpdatedEn = 'June 7, 2026';
 			<section id="fr" class="lang-section">
 				<h1>Politique de confidentialité</h1>
 				<p class="updated">Dernière mise à jour : {lastUpdatedFr}</p>
-
-				<p>
-					Coheria est une application de cohérence cardiaque et de respiration guidée visuellement,
-					éditée par Nicolas Tardieu. Cette page décrit en toute transparence les données traitées par
-					l'application, leur usage et leur stockage.
-				</p>
-
+				<p>Coheria est une application de respiration guidée, éditée par Nicolas Tardieu. Cette page décrit, sans jargon, les données que l’application utilise, où elles vont et comment tu en gardes le contrôle. En deux mots : tout reste sur ton téléphone, sauf si tu crées un compte (sauvegarde), si tu achètes Coheria Complet (paiement) ou si tu acceptes les statistiques d’usage (mesure). Rien d’autre ne sort de l’appareil.</p>
 				<article>
-					<h2>1. Traitement local des données</h2>
-					<p>
-						Coheria fonctionne intégralement en local, sur votre appareil. À l'exception des achats
-						intégrés décrits à la section 4, aucune donnée n'est transmise à un serveur, collectée ou
-						partagée avec des tiers.
-					</p>
+					<h2>1. Qui est responsable</h2>
+					<p>Coheria est éditée par Nicolas Tardieu, développeur indépendant, responsable du traitement de tes données. Pour toute question : Réglages › Écrire au créateur, ou <a href="mailto:ntardieu.contact@gmail.com">ntardieu.contact@gmail.com</a>.</p>
 				</article>
-
 				<article>
-					<h2>2. Données utilisées</h2>
-					<p>Les données suivantes sont stockées uniquement sur votre appareil :</p>
+					<h2>2. Ce qui reste sur ton téléphone</h2>
+					<p>Sans compte, tout ce que Coheria enregistre vit uniquement sur ton appareil :</p>
 					<ul>
-						<li>Préférences (thème, langue, retours haptiques, audio).</li>
-						<li>Historique des sessions de respiration.</li>
-						<li>Séries (streaks) et progression.</li>
-						<li>Horaires des rappels et notifications.</li>
-						<li>Paramètres d'accessibilité.</li>
-						<li>Fichiers de traduction de l'application.</li>
+						<li>tes séances (date, heure, durée, nom de la séance), ta série et tes jours de gel ;</li>
+						<li>tes ressentis de fin de séance ;</li>
+						<li>tes séances personnalisées et les réglages de chaque séance (durée, rythme, sons, vibrations) ;</li>
+						<li>tes préférences : thème, langue, rappels, réponse donnée sur les statistiques d’usage ;</li>
+						<li>l’état de ton abonnement ou de ton achat.</li>
 					</ul>
-					<p>
-						Ces données ne quittent jamais votre appareil et servent uniquement au fonctionnement de
-						l'application et à la personnalisation de votre expérience.
-					</p>
+					<p>Ces données disparaissent si tu désinstalles l’application, ou d’un geste dans Réglages › Compte › Effacer mes données.</p>
 				</article>
-
 				<article>
-					<h2>3. Notifications</h2>
-					<p>
-						Coheria peut vous envoyer des rappels sous forme de notifications. Ces notifications sont
-						uniquement locales : elles sont planifiées et gérées directement sur votre appareil, sans
-						transiter par un serveur ni être transmises à qui que ce soit. Vous pouvez les désactiver à
-						tout moment depuis Paramètres › Rappels dans l'application, ou via les réglages de
-						notifications de votre système.
-					</p>
+					<h2>3. Le compte, facultatif</h2>
+					<p>Tu peux créer un compte avec Google ou Apple pour mettre ta progression à l’abri et la retrouver sur un autre téléphone. Coheria n’oblige jamais à en créer un.</p>
+					<p>Ce que le compte contient : ton adresse e-mail, un identifiant technique, le fournisseur utilisé (Google ou Apple) et la date de création. Aucun mot de passe n’est demandé ni stocké. Avec Apple, tu peux masquer ton adresse : Coheria reçoit alors une adresse relais.</p>
+					<p>Ce qui est sauvegardé : une copie de ta série, de tes séances, de tes ressentis, de tes réglages et de tes rappels, mise à jour à chaque changement et rattachée à ton compte. La réponse donnée sur les statistiques d’usage, elle, reste propre à chaque téléphone.</p>
+					<p>Où : la connexion et la sauvegarde sont assurées par Supabase (Supabase Inc.), prestataire d’authentification et d’hébergement de bases de données. Google et Apple ne reçoivent que la demande de connexion. Politique de Supabase : <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer">supabase.com/privacy</a>.</p>
+					<p>Supprimer : « Effacer mes données » retire la copie rattachée au compte. « Supprimer mon compte » supprime le compte et sa copie immédiatement. Les deux gestes sont dans Réglages › Compte, en deux taps, sans délai ni demande à faire.</p>
 				</article>
-
 				<article>
-					<h2>4. Achats intégrés</h2>
-					<p>
-						Coheria propose un achat unique « à vie » (<code>coheria_lifetime</code>) ainsi qu'une offre
-						promotionnelle (<code>coheria_lifetime_offer</code>) pour débloquer la version Pro. Ces
-						achats sont traités via <strong>RevenueCat</strong>, un prestataire tiers qui peut collecter
-						des données de transaction et d'appareil afin de vérifier et gérer les achats. Coheria ne
-						stocke elle-même aucune information de paiement. Pour en savoir plus sur le traitement de
-						ces données par RevenueCat, consultez 
-						<a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener noreferrer">revenuecat.com/privacy</a>.
-					</p>
+					<h2>4. Les achats</h2>
+					<p>Coheria Complet s’achète par abonnement annuel (avec une période d’essai) ou en une fois, à vie, via l’App Store ou Google Play. Le paiement est traité par Apple ou Google : Coheria ne voit jamais tes informations bancaires.</p>
+					<p>Pour vérifier l’achat et ouvrir Complet, Coheria s’appuie sur RevenueCat (RevenueCat Inc.), qui reçoit un identifiant d’application anonyme, l’identifiant de la transaction et le type d’appareil. « Restaurer l’achat » relit tes achats auprès d’Apple ou de Google. Politique de RevenueCat : <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener noreferrer">revenuecat.com/privacy</a>.</p>
 				</article>
-
 				<article>
-					<h2>5. Aucune autre collecte</h2>
-					<p>
-						En dehors des achats intégrés, Coheria ne collecte, ne stocke ni ne transmet aucune donnée
-						personnelle, de santé, d'identification ou de suivi. L'application n'intègre aucun outil
-						d'analytics ni de tracking, et ne fait appel à aucun SDK tiers en dehors de RevenueCat.
-					</p>
+					<h2>5. Les statistiques d’usage, avec ton accord</h2>
+					<p>Coheria ne te demande pas tout de suite si elle peut mesurer son usage : la question vient plus tard, sur l’accueil, quand tu connais l’app. D’ici là, les événements décrits ci-dessous restent sur ton téléphone et rien n’est envoyé. Si tu acceptes, ils partent ; si tu refuses, ils sont effacés aussitôt ; sans réponse, chacun est effacé au bout de sept jours. Tu peux changer d’avis à tout moment dans Réglages › Statistiques d’usage : retirer ton accord arrête la mesure immédiatement.</p>
+					<p>Si tu acceptes, Coheria envoie les événements de son plan de mesure : fin de l’onboarding (l’objectif choisi parmi trois, si tu veux un rappel, si tu commences tout de suite), séance commencée, séance terminée (type et durée), ressenti noté (le fait, jamais la réponse), rappel ajouté, modifié ou retiré, réponse à l’autorisation des notifications, ouverture de l’app depuis une notification, affichage de l’offre Complet, achat. Les écrans visités sont aussi comptés. Rien de ce que tu ressens, aucun nom, aucune adresse, aucune position.</p>
+					<p>Ces mesures sont traitées par PostHog (PostHog Inc.) et hébergées dans l’Union européenne, à Francfort. Chaque installation reçoit un identifiant aléatoire. Les mesures ne sont jamais rattachées à ton compte ni à ton adresse e-mail, même si tu en as un. Elles sont conservées 12 mois puis supprimées. Politique de PostHog : <a href="https://posthog.com/privacy" target="_blank" rel="noopener noreferrer">posthog.com/privacy</a>.</p>
 				</article>
-
 				<article>
-					<h2>6. Sécurité</h2>
-					<p>
-						Coheria a été conçue selon le principe du « Privacy by Design » : vos données restent sous
-						votre contrôle, sur votre appareil. La désinstallation de l'application entraîne la
-						suppression de l'ensemble des données stockées localement.
-					</p>
+					<h2>6. Les rappels</h2>
+					<p>Les rappels sont des notifications locales, planifiées et gérées sur ton téléphone. Rien n’est envoyé à un serveur. Tu peux les couper dans l’application (Réglages › Rappels) ou dans les réglages du téléphone.</p>
 				</article>
-
 				<article>
-					<h2>7. Vos droits (RGPD)</h2>
-					<p>
-						Aucune donnée personnelle n'étant collectée ni traitée en dehors de votre appareil, aucune
-						démarche externe n'est nécessaire pour exercer vos droits : il vous suffit de gérer ou
-						supprimer vos données directement depuis l'application, ou en la désinstallant. Pour les
-						données traitées par RevenueCat dans le cadre des achats, consultez leur politique de
-						confidentialité sur 
-						<a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener noreferrer">revenuecat.com/privacy</a>.
-					</p>
+					<h2>7. Ce que Coheria ne fait pas</h2>
+					<ul>
+						<li>Aucune publicité, aucun suivi publicitaire, aucun croisement avec d’autres applications.</li>
+						<li>Aucune donnée de santé lue ou écrite : Coheria n’utilise ni Apple Santé ni Google Fit.</li>
+						<li>Aucune position, aucun contact, aucun micro.</li>
+						<li>Aucune vente ni cession de données.</li>
+					</ul>
 				</article>
-
 				<article>
-					<h2>8. Modifications</h2>
-					<p>
-						Cette politique peut évoluer pour refléter des changements techniques, fonctionnels ou
-						réglementaires. Toute mise à jour sera signalée directement dans l'application.
-					</p>
+					<h2>8. Combien de temps</h2>
+					<ul>
+						<li>Sur ton téléphone : tant que l’application est installée, ou jusqu’à « Effacer mes données ».</li>
+						<li>Sur ton compte : jusqu’à « Effacer mes données » ou « Supprimer mon compte ».</li>
+						<li>Statistiques d’usage : 12 mois.</li>
+						<li>Achats : les justificatifs de transaction sont conservés par Apple, Google et RevenueCat selon leurs propres règles et les obligations comptables.</li>
+					</ul>
 				</article>
-
 				<article>
-					<h2>Contact</h2>
-					<p>
-						Pour toute question relative à cette politique de confidentialité, contactez l'éditeur : 
-						<a href="mailto:ntardieu.contact@gmail.com">ntardieu.contact@gmail.com</a>
-					</p>
+					<h2>9. Tes droits</h2>
+					<p>Conformément au RGPD, tu peux accéder à tes données, les corriger, les effacer, les récupérer ou t’opposer à un traitement. Dans l’application, tout se fait sans demande : effacer ou supprimer dans Réglages › Compte, retirer ton accord dans Réglages › Statistiques d’usage. Pour une copie de tes données ou toute autre demande, écris-nous depuis Réglages › Écrire au créateur ou à <a href="mailto:ntardieu.contact@gmail.com">ntardieu.contact@gmail.com</a> ; réponse sous 30 jours. Tu peux aussi saisir la CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer">cnil.fr</a>).</p>
+				</article>
+				<article>
+					<h2>10. Sécurité</h2>
+					<p>Les échanges avec le compte, les achats et les statistiques passent par des connexions chiffrées. L’accès à ton compte repose sur ta session Google ou Apple : Coheria ne détient aucun mot de passe. Sur le téléphone, les données sont dans l’espace privé de l’application.</p>
+				</article>
+				<article>
+					<h2>11. Modifications</h2>
+					<p>La date en tête de cette page indique la dernière mise à jour. Une version précédente du texte peut être demandée par e-mail.</p>
 				</article>
 			</section>
 
@@ -130,103 +99,75 @@ const lastUpdatedEn = 'June 7, 2026';
 			<section id="en" class="lang-section">
 				<h1>Privacy Policy</h1>
 				<p class="updated">Last updated: {lastUpdatedEn}</p>
-
-				<p>
-					Coheria is a heart coherence and visually guided breathing app, published by Nicolas
-					Tardieu. This page transparently describes what data the app processes, how it is used, and
-					where it is stored.
-				</p>
-
+				<p>Coheria is a guided breathing app, published by Nicolas Tardieu. This page describes, in plain words, the data the app uses, where it goes and how you stay in control. In short: everything stays on your phone, unless you create an account (backup), buy Coheria Complete (payment) or agree to usage statistics (measurement). Nothing else leaves the device.</p>
 				<article>
-					<h2>1. Local data processing</h2>
-					<p>
-						Coheria runs entirely on your device. With the exception of in-app purchases described in
-						section 4, no data is transmitted to a server, collected, or shared with third parties.
-					</p>
+					<h2>1. Who is responsible</h2>
+					<p>Coheria is published by Nicolas Tardieu, an independent developer, who is the data controller. For any question: Settings › Write to the creator, or <a href="mailto:ntardieu.contact@gmail.com">ntardieu.contact@gmail.com</a>.</p>
 				</article>
-
 				<article>
-					<h2>2. Data used</h2>
-					<p>The following data is stored only on your device:</p>
+					<h2>2. What stays on your phone</h2>
+					<p>Without an account, everything Coheria records lives only on your device:</p>
 					<ul>
-						<li>Preferences (theme, language, haptics, audio).</li>
-						<li>Breathing session history.</li>
-						<li>Streaks and progress.</li>
-						<li>Reminder and notification schedules.</li>
-						<li>Accessibility settings.</li>
-						<li>App translation files.</li>
+						<li>your sessions (date, time, duration, session name), your streak and your freeze days;</li>
+						<li>how you felt at the end of each session;</li>
+						<li>your custom sessions and each session’s settings (duration, rhythm, sounds, vibrations);</li>
+						<li>your preferences: theme, language, reminders, your answer about usage statistics;</li>
+						<li>the state of your subscription or purchase.</li>
 					</ul>
-					<p>
-						This data never leaves your device and is used solely to run the app and personalize your
-						experience.
-					</p>
+					<p>This data disappears when you uninstall the app, or with one tap in Settings › Account › Erase my data.</p>
 				</article>
-
 				<article>
-					<h2>3. Notifications</h2>
-					<p>
-						Coheria may send you reminders as notifications. These notifications are entirely local:
-						they are scheduled and managed directly on your device, without going through a server or
-						being transmitted to anyone. You can disable them at any time from Settings › Reminders
-						within the app, or from your system's notification settings.
-					</p>
+					<h2>3. The account, optional</h2>
+					<p>You can create an account with Google or Apple to keep your progress safe and find it again on another phone. Coheria never requires one.</p>
+					<p>What the account holds: your email address, a technical identifier, the provider you used (Google or Apple) and the creation date. No password is asked for or stored. With Apple, you can hide your address: Coheria then receives a relay address.</p>
+					<p>What is backed up: a copy of your streak, sessions, feelings, settings and reminders, updated on every change and attached to your account. Your answer about usage statistics stays specific to each phone.</p>
+					<p>Where: sign-in and backup are provided by Supabase (Supabase Inc.), an authentication and database hosting provider. Google and Apple only receive the sign-in request. Supabase privacy policy: <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer">supabase.com/privacy</a>.</p>
+					<p>Deleting: “Erase my data” removes the copy attached to the account. “Delete my account” deletes the account and its copy immediately. Both are in Settings › Account, two taps, no delay and no request to send.</p>
 				</article>
-
 				<article>
-					<h2>4. In-app purchases</h2>
-					<p>
-						Coheria offers a one-time "lifetime" purchase (<code>coheria_lifetime</code>) as well as a
-						promotional offer (<code>coheria_lifetime_offer</code>) to unlock the Pro version. These
-						purchases are processed via <strong>RevenueCat</strong>, a third-party provider that may
-						collect transaction and device data in order to verify and manage purchases. Coheria itself
-						does not store any payment information. To learn more about how RevenueCat processes this
-						data, see 
-						<a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener noreferrer">revenuecat.com/privacy</a>.
-					</p>
+					<h2>4. Purchases</h2>
+					<p>Coheria Complete is sold as a yearly subscription (with a trial period) or as a one-time lifetime purchase, through the App Store or Google Play. Payment is handled by Apple or Google: Coheria never sees your payment details.</p>
+					<p>To verify the purchase and unlock Complete, Coheria relies on RevenueCat (RevenueCat Inc.), which receives an anonymous app identifier, the transaction identifier and the device type. “Restore purchase” re-reads your purchases from Apple or Google. RevenueCat privacy policy: <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener noreferrer">revenuecat.com/privacy</a>.</p>
 				</article>
-
 				<article>
-					<h2>5. No other collection</h2>
-					<p>
-						Other than in-app purchases, Coheria does not collect, store, or transmit any personal,
-						health, identification, or tracking data. The app does not include any analytics or
-						advertising tracking tools, and does not use any third-party SDK other than RevenueCat.
-					</p>
+					<h2>5. Usage statistics, with your consent</h2>
+					<p>Coheria doesn’t ask right away whether it may measure its usage: the question comes later, on the home screen, once you know the app. Until then, the events described below stay on your phone and nothing is sent. If you agree, they are sent; if you decline, they are deleted at once; with no answer, each one is deleted after seven days. You can change your mind at any time in Settings › Usage statistics: withdrawing consent stops measurement immediately.</p>
+					<p>If you agree, Coheria sends the events of its measurement plan: onboarding finished (the goal chosen out of three, whether you want a reminder, whether you start right away), session started, session completed (type and duration), feeling logged (the fact, never the answer), reminder added, changed or removed, answer to the notification permission, app opened from a notification, Complete offer shown, purchase. Screens visited are also counted. Nothing about how you feel, no name, no address, no location.</p>
+					<p>These measurements are processed by PostHog (PostHog Inc.) and hosted in the European Union, in Frankfurt. Each installation gets a random identifier. Measurements are never attached to your account or your email address, even if you have one. They are kept for 12 months, then deleted. PostHog privacy policy: <a href="https://posthog.com/privacy" target="_blank" rel="noopener noreferrer">posthog.com/privacy</a>.</p>
 				</article>
-
 				<article>
-					<h2>6. Security</h2>
-					<p>
-						Coheria was designed with Privacy by Design in mind: your data stays under your control, on
-						your device. Uninstalling the app removes all locally stored data.
-					</p>
+					<h2>6. Reminders</h2>
+					<p>Reminders are local notifications, scheduled and managed on your phone. Nothing is sent to a server. You can turn them off in the app (Settings › Reminders) or in the phone settings.</p>
 				</article>
-
 				<article>
-					<h2>7. Your rights (GDPR)</h2>
-					<p>
-						Since no personal data is collected or processed outside your device, no external request
-						is required to exercise your rights: simply manage or delete your data directly from the
-						app, or by uninstalling it. For data processed by RevenueCat as part of purchases, see
-						their privacy policy at 
-						<a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener noreferrer">revenuecat.com/privacy</a>.
-					</p>
+					<h2>7. What Coheria does not do</h2>
+					<ul>
+						<li>No advertising, no ad tracking, no cross-referencing with other apps.</li>
+						<li>No health data read or written: Coheria uses neither Apple Health nor Google Fit.</li>
+						<li>No location, no contacts, no microphone.</li>
+						<li>No sale or transfer of data.</li>
+					</ul>
 				</article>
-
 				<article>
-					<h2>8. Changes</h2>
-					<p>
-						This policy may evolve to reflect technical, functional, or regulatory changes. Any update
-						will be indicated directly within the app.
-					</p>
+					<h2>8. How long</h2>
+					<ul>
+						<li>On your phone: as long as the app is installed, or until “Erase my data”.</li>
+						<li>On your account: until “Erase my data” or “Delete my account”.</li>
+						<li>Usage statistics: 12 months.</li>
+						<li>Purchases: transaction records are kept by Apple, Google and RevenueCat under their own rules and accounting obligations.</li>
+					</ul>
 				</article>
-
 				<article>
-					<h2>Contact</h2>
-					<p>
-						For any question about this privacy policy, contact the publisher: 
-						<a href="mailto:ntardieu.contact@gmail.com">ntardieu.contact@gmail.com</a>
-					</p>
+					<h2>9. Your rights</h2>
+					<p>Under the GDPR, you can access your data, correct it, erase it, retrieve it or object to a processing. In the app, everything is done without a request: erase or delete in Settings › Account, withdraw consent in Settings › Usage statistics. For a copy of your data or any other request, write to us from Settings › Write to the creator or at <a href="mailto:ntardieu.contact@gmail.com">ntardieu.contact@gmail.com</a>; we answer within 30 days. You can also lodge a complaint with your data protection authority (in France, the CNIL).</p>
+				</article>
+				<article>
+					<h2>10. Security</h2>
+					<p>Exchanges with the account, purchases and statistics go through encrypted connections. Access to your account relies on your Google or Apple session: Coheria holds no password. On the phone, data lives in the app’s private storage.</p>
+				</article>
+				<article>
+					<h2>11. Changes</h2>
+					<p>The date at the top of this page shows the last update. A previous version of the text can be requested by email.</p>
 				</article>
 			</section>
 		</div>
