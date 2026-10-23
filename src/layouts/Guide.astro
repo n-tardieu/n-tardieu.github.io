@@ -1,10 +1,12 @@
 ---
 // Gabarit des guides (pages Markdown, via `layout:` dans le frontmatter) et des
 // outils (pages .astro qui passent les mêmes champs en props). Il porte le fil
-// d'Ariane, l'auteur, les sources, l'encart de l'app et les données structurées.
+// d'Ariane, l'auteur, la couverture (un tableau du domaine public, reprise en
+// image de partage pour LinkedIn et Medium), les sources, l'encart de l'app et
+// les données structurées.
 import Site from './Site.astro';
 import AppCta from '../components/AppCta.astro';
-import { GUIDES, TOPICS, guidesFor } from '../data/guides';
+import { GUIDES, TOPICS, coverSrc, guidesFor } from '../data/guides';
 import { getApp } from '../data/apps';
 
 export interface GuideFields {
@@ -40,6 +42,8 @@ const fmt = (d: string) =>
 	new Date(`${d}T12:00:00`).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
 const site = Astro.site!;
 const url = new URL(path, site).href;
+const ogImage = coverSrc(entry.cover, 'jpg');
+const shareLinkedIn = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
 const crumbs = [
 	{ name: 'Accueil', href: '/' },
 	{ name: 'Guides et outils', href: '/guides/' },
@@ -55,6 +59,7 @@ const graph: Record<string, unknown>[] = [
 			: { headline: h1 }),
 		description,
 		url,
+		image: new URL(ogImage, site).href,
 		inLanguage: 'fr',
 		author,
 		datePublished: published,
@@ -81,6 +86,7 @@ if (faq.length) {
 <Site
 	title={title}
 	description={description}
+	image={ogImage}
 	iosAppId={app.stores.iosId}
 	jsonLd={{ '@context': 'https://schema.org', '@graph': graph }}
 >
@@ -96,16 +102,29 @@ if (faq.length) {
 			}
 		</nav>
 
-		<header class="guide-head">
+		<header class="guide-head" data-reveal>
 			<p class="label kind">{entry.kind === 'outil' ? 'Outil gratuit' : 'Guide'} · {TOPICS[entry.topic]}</p>
 			<h1 class="display">{h1}</h1>
 			{lede && <p class="lede">{lede}</p>}
-			<p class="byline">
-				Par <a href="/a-propos/">Nicolas Tardieu</a> · {updated ? `Mis à jour le ${fmt(updated)}` : `Publié le ${fmt(published)}`}
-			</p>
+			<div class="meta">
+				<p class="byline">
+					Par <a href="/a-propos/">Nicolas Tardieu</a>
+					<span>{updated ? `Mis à jour le ${fmt(updated)}` : fmt(published)}</span>
+					<span>{entry.minutes} min de lecture</span>
+				</p>
+				<p class="share">
+					<a href={shareLinkedIn} target="_blank" rel="noopener">LinkedIn</a>
+					<button type="button" data-copy={url}>Copier le lien</button>
+				</p>
+			</div>
 		</header>
 
-		<div class="guide-body">
+		<figure class="cover" data-reveal style="--d: 0.1s">
+			<img src={coverSrc(entry.cover)} alt="" width="1600" height="900" fetchpriority="high" />
+			<figcaption>{entry.cover.credit}</figcaption>
+		</figure>
+
+		<div class:list={['guide-body', { 'is-article': entry.kind === 'guide' }]}>
 			<slot />
 
 			{
@@ -155,7 +174,8 @@ if (faq.length) {
 						{related.map((g) => (
 							<li>
 								<a href={g.href}>
-									<span class="label">{g.kind === 'outil' ? 'Outil' : 'Guide'}</span>
+									<img src={coverSrc(g.cover)} alt="" width="1600" height="900" loading="lazy" />
+									<span class="label">{g.kind === 'outil' ? 'Outil' : 'Guide'} · {g.minutes} min</span>
 									<strong>{g.title}</strong>
 									<span class="sum">{g.summary}</span>
 								</a>
@@ -167,6 +187,15 @@ if (faq.length) {
 		}
 	</main>
 </Site>
+
+<script>
+	document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((btn) =>
+		btn.addEventListener('click', async () => {
+			await navigator.clipboard.writeText(btn.dataset.copy!);
+			btn.textContent = 'Lien copié';
+		}),
+	);
+</script>
 
 <style>
 	.guide {
@@ -192,9 +221,9 @@ if (faq.length) {
 	}
 
 	.guide-head {
-		max-width: 860px;
-		padding: 40px 0 32px;
-		border-bottom: 1px solid var(--line);
+		max-width: 820px;
+		margin: 0 auto;
+		padding: 48px 0 32px;
 	}
 
 	.kind {
@@ -202,7 +231,7 @@ if (faq.length) {
 	}
 
 	.guide-head h1 {
-		font-size: clamp(40px, 6.4vw, 76px);
+		font-size: clamp(40px, 6vw, 72px);
 		margin: 14px 0 20px;
 	}
 
@@ -213,15 +242,86 @@ if (faq.length) {
 		color: #2a2a27;
 	}
 
-	.byline {
+	.meta {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: center;
+		gap: 12px 24px;
+		padding-top: 16px;
+		border-top: 1px solid var(--line);
+	}
+
+	.byline,
+	.share {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 4px 16px;
 		margin: 0;
 		font-size: 14px;
 		color: var(--ink-2);
 	}
 
+	.byline a {
+		color: var(--ink);
+		font-weight: 600;
+	}
+
+	.share a,
+	.share button {
+		padding: 6px 12px;
+		border: 1.5px solid var(--ink);
+		background: transparent;
+		color: var(--ink);
+		font: inherit;
+		font-size: 13px;
+		font-weight: 700;
+		text-decoration: none;
+		cursor: pointer;
+	}
+
+	.share a:hover,
+	.share button:hover {
+		background: var(--ink);
+		color: var(--paper);
+	}
+
+	.cover {
+		margin: 8px 0 0;
+	}
+
+	.cover img {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 16 / 9;
+		object-fit: cover;
+		max-height: 620px;
+	}
+
+	.cover figcaption {
+		max-width: 820px;
+		margin: 10px auto 0;
+		font-size: 13px;
+		font-style: italic;
+		color: var(--ink-2);
+	}
+
 	.guide-body {
 		max-width: 720px;
-		padding-top: 16px;
+		margin: 0 auto;
+		padding-top: 40px;
+		font-size: 18.5px;
+		line-height: 1.7;
+	}
+
+	.is-article > :global(p:first-of-type::first-letter) {
+		float: left;
+		margin: 6px 10px 0 0;
+		font-family: var(--narrow);
+		font-size: 4.4em;
+		font-weight: 700;
+		line-height: 0.8;
 	}
 
 	.guide-body :global(h2) {
@@ -352,6 +452,19 @@ if (faq.length) {
 		flex-direction: column;
 		gap: 4px;
 		text-decoration: none;
+	}
+
+	.related img {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 16 / 9;
+		object-fit: cover;
+		margin-bottom: 10px;
+		transition: transform 0.4s ease;
+	}
+
+	.related a:hover img {
+		transform: scale(1.02);
 	}
 
 	.related a:hover strong {

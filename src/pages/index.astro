@@ -1,13 +1,14 @@
 ---
 // Le hub, « la collection » : un cadre papier et encre, et chaque app numérotée
-// dans une carte compacte à sa propre identité, avec ses badges de stores. Puis les outils gratuits,
-// les guides, les principes et l'auteur.
+// dans une carte compacte à sa propre identité, avec ses badges de stores. Puis
+// les guides, les principes, l'auteur et comment le soutenir.
 import Site from '../layouts/Site.astro';
 import StoreButtons from '../components/StoreButtons.astro';
+import SupportSection from '../components/SupportSection.astro';
+import GuideGrid from '../components/GuideGrid.astro';
 import { APPS } from '../data/apps';
 import { GUIDES } from '../data/guides';
 
-const tools = GUIDES.filter((g) => g.kind === 'outil');
 const guides = GUIDES.filter((g) => g.kind === 'guide');
 
 const jsonLd = {
@@ -43,8 +44,8 @@ const jsonLd = {
 >
 	<main>
 		<section class="intro wrap">
-			<h1 class="display">Des apps qui prennent soin de tes journées.</h1>
-			<ul class="facts">
+			<h1 class="display" data-reveal>Des apps qui prennent soin de tes journées.</h1>
+			<ul class="facts" data-reveal style="--d: 0.12s">
 				<li><strong>2</strong> apps</li>
 				<li>iPhone &amp; Android</li>
 				<li><strong>0</strong> pub</li>
@@ -55,7 +56,7 @@ const jsonLd = {
 		<div id="apps" class="apps wrap">
 			{
 				APPS.map((app, i) => (
-					<article class:list={['app', `is-${app.slug}`]}>
+					<article class:list={['app', `is-${app.slug}`]} data-reveal style={`--d: ${0.2 + i * 0.12}s`}>
 						<a href={`/${app.slug}`} class="app-link" aria-label={`Découvrir ${app.name}`} />
 						<header class="app-head">
 							<img src={app.icon} alt="" width="56" height="56" class="app-icon" />
@@ -68,6 +69,7 @@ const jsonLd = {
 							</span>
 						</header>
 						<p class="pitch">{app.tagline}</p>
+						<p class="price">{app.price}</p>
 						<div class="app-shots" aria-hidden="true">
 							{app.preview.map((src) => (
 								<img src={src} alt="" loading="lazy" width="600" height="998" />
@@ -79,49 +81,15 @@ const jsonLd = {
 			}
 		</div>
 
-		<section class="tools wrap" aria-labelledby="outils">
-			<div class="head">
-				<h2 id="outils" class="display">Outils gratuits</h2>
-				<p>Les calculs de mes apps, utilisables ici, sans inscription.</p>
-			</div>
-			<ol class="rows">
-				{
-					tools.map((t, i) => (
-						<li>
-							<a href={t.href}>
-								<span class="row-num">{String(i + 1).padStart(2, '0')}</span>
-								<strong>{t.title}</strong>
-								<span class="row-sum">{t.summary}</span>
-								<span class="row-arrow" aria-hidden="true">
-									→
-								</span>
-							</a>
-						</li>
-					))
-				}
-			</ol>
-		</section>
-
 		<section class="tools wrap" aria-labelledby="guides">
-			<div class="head">
+			<div class="head" data-reveal>
 				<h2 id="guides" class="display">Guides</h2>
-				<p>Des réponses claires et sourcées. <a href="/guides/">Tous les guides →</a></p>
+				<p>Des réponses claires et sourcées. <a href="/guides/">Tous les guides et outils →</a></p>
 			</div>
-			<ul class="cards">
-				{
-					guides.map((g) => (
-						<li>
-							<a href={g.href}>
-								<strong>{g.title}</strong>
-								<span>{g.summary}</span>
-							</a>
-						</li>
-					))
-				}
-			</ul>
+			<GuideGrid guides={guides} />
 		</section>
 
-		<section class="principles wrap" aria-labelledby="principes">
+		<section class="principles wrap" aria-labelledby="principes" data-reveal>
 			<h2 id="principes" class="label">Comment je fais mes apps</h2>
 			<div class="cols">
 				<div>
@@ -132,14 +100,10 @@ const jsonLd = {
 					<p class="big display">Chez toi</p>
 					<p>Tes données restent sur ton téléphone. Pas de compte obligatoire, aucune donnée revendue.</p>
 				</div>
-				<div>
-					<p class="big display">Gratuit</p>
-					<p>L’essentiel est gratuit, pour toujours. Quand une option payante existe, c’est un achat simple et facultatif.</p>
-				</div>
 			</div>
 		</section>
 
-		<section class="author wrap" aria-labelledby="auteur">
+		<section class="author wrap" aria-labelledby="auteur" data-reveal>
 			<p class="label">Qui fait ces apps</p>
 			<h2 id="auteur" class="display">Nicolas Tardieu, développeur indépendant.</h2>
 			<p>
@@ -148,6 +112,8 @@ const jsonLd = {
 			</p>
 			<a href="/a-propos/" class="more">En savoir plus sur moi <span aria-hidden="true">→</span></a>
 		</section>
+
+		<SupportSection />
 	</main>
 </Site>
 
@@ -365,82 +331,22 @@ const jsonLd = {
 		color: var(--ink-2);
 	}
 
-	.rows {
-		list-style: none;
-		margin: 0;
-		padding: 0;
-	}
-
-	.rows a {
-		display: grid;
-		grid-template-columns: 64px 1fr 1.2fr 32px;
-		gap: 24px;
-		align-items: baseline;
-		padding: 24px 0;
-		border-bottom: 1px solid var(--line);
-		text-decoration: none;
-	}
-
-	.rows a:hover strong {
-		text-decoration: underline;
-	}
-
-	.row-num {
-		font-family: var(--narrow);
-		font-size: 34px;
+	.price {
+		align-self: flex-start;
+		margin: 12px 0 0;
+		padding: 3px 10px;
+		font-size: 13px;
 		font-weight: 700;
-		line-height: 1;
 	}
 
-	.rows strong {
-		font-size: 20px;
-		line-height: 1.25;
+	.is-coheria .price {
+		border-radius: 999px;
+		background: #ebe9ff;
+		color: #5b4bf5;
 	}
 
-	.row-sum {
-		color: var(--ink-2);
-	}
-
-	.row-arrow {
-		font-size: 22px;
-		transition: transform 0.2s ease;
-	}
-
-	.rows a:hover .row-arrow {
-		transform: translateX(4px);
-	}
-
-	.cards {
-		display: grid;
-		grid-template-columns: repeat(4, 1fr);
-		gap: 0 24px;
-		list-style: none;
-		margin: 0;
-		padding: 0;
-	}
-
-	.cards a {
-		display: flex;
-		flex-direction: column;
-		gap: 6px;
-		height: 100%;
-		padding: 20px 0;
-		border-bottom: 1px solid var(--line);
-		text-decoration: none;
-	}
-
-	.cards strong {
-		font-size: 18px;
-		line-height: 1.25;
-	}
-
-	.cards a:hover strong {
-		text-decoration: underline;
-	}
-
-	.cards span {
-		font-size: 14px;
-		color: var(--ink-2);
+	.is-eau-et-cafe .price {
+		border: 1.5px solid var(--ink);
 	}
 
 	/* Principes */
@@ -453,7 +359,7 @@ const jsonLd = {
 
 	.principles .cols {
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: repeat(2, 1fr);
 		gap: 40px;
 		margin-top: 28px;
 	}
@@ -498,19 +404,6 @@ const jsonLd = {
 			justify-self: start;
 		}
 
-		.rows a {
-			grid-template-columns: 48px 1fr 24px;
-		}
-
-		.row-sum {
-			grid-column: 2;
-			grid-row: 2;
-		}
-
-		.cards {
-			grid-template-columns: 1fr 1fr;
-		}
-
 		.principles {
 			padding: 40px 24px;
 		}
@@ -528,10 +421,6 @@ const jsonLd = {
 
 		.facts li {
 			padding: 0 12px;
-		}
-
-		.cards {
-			grid-template-columns: 1fr;
 		}
 	}
 </style>

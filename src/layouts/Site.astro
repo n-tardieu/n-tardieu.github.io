@@ -11,6 +11,7 @@ interface Props {
 	image?: string;
 	iosAppId?: string | null;
 	jsonLd?: Record<string, unknown>;
+	noindex?: boolean;
 }
 
 const props = Astro.props;
@@ -27,6 +28,28 @@ const props = Astro.props;
 		<SiteFooter />
 	</div>
 </Base>
+
+<script>
+	// Apparitions : chaque [data-reveal] entre en fondu et glisse vers le haut quand il
+	// arrive à l'écran (au chargement pour ce qui est déjà visible). Sans JavaScript,
+	// la classe `js` n'est jamais posée et tout reste visible.
+	const items = document.querySelectorAll<HTMLElement>('[data-reveal]');
+	if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+		const io = new IntersectionObserver(
+			(entries) => {
+				for (const e of entries) {
+					if (!e.isIntersecting) continue;
+					e.target.classList.add('in');
+					io.unobserve(e.target);
+				}
+			},
+			{ rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
+		);
+		items.forEach((el) => io.observe(el));
+	} else {
+		items.forEach((el) => el.classList.add('in'));
+	}
+</script>
 
 <style is:global>
 	.site {
@@ -200,6 +223,27 @@ const props = Astro.props;
 
 		.site .tool-result {
 			padding: 20px;
+		}
+	}
+
+	/* Apparitions (voir le script plus bas) ; --d décale un élément dans une série. */
+	.js .site [data-reveal] {
+		opacity: 0;
+		transform: translateY(28px);
+		transition:
+			opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0s),
+			transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0s);
+	}
+
+	.js .site [data-reveal].in {
+		opacity: 1;
+		transform: none;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.js .site [data-reveal] {
+			opacity: 1;
+			transform: none;
 		}
 	}
 

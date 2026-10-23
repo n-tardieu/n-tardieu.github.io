@@ -1,36 +1,32 @@
 ---
-// Index des guides et outils, groupés par thème.
+// Index des guides et outils, groupés par thème, en cartes façon blog.
 import Site from '../../layouts/Site.astro';
+import GuideGrid from '../../components/GuideGrid.astro';
 import { GUIDES, TOPICS, type Topic } from '../../data/guides';
 
 const topics = Object.keys(TOPICS) as Topic[];
+// Dans chaque thème, les guides avant les outils.
+const order = { guide: 0, outil: 1 };
 ---
 
 <Site
 	title="Guides et outils : cohérence cardiaque, caféine, eau"
 	description="Calculateurs gratuits et guides sourcés sur la cohérence cardiaque, la caféine et l’hydratation, par le développeur de Coheria et Eau & Café."
+	image="/guides/covers/hokusai-vague.jpg"
 >
 	<main class="wrap index">
-		<p class="label">Guides et outils</p>
-		<h1 class="display">Des réponses claires, des calculs transparents.</h1>
+		<p class="label" data-reveal>Guides et outils</p>
+		<h1 class="display" data-reveal style="--d: 0.08s">Des réponses claires, des calculs transparents.</h1>
 		{
 			topics.map((topic) => {
-				const items = GUIDES.filter((g) => g.topic === topic);
+				const items = GUIDES.filter((g) => g.topic === topic).sort((a, b) => order[a.kind] - order[b.kind]);
 				return (
 					items.length > 0 && (
 						<section id={topic} aria-labelledby={`t-${topic}`}>
-							<h2 id={`t-${topic}`} class="display">{TOPICS[topic]}</h2>
-							<ul>
-								{items.map((g) => (
-									<li>
-										<a href={g.href}>
-											<span class="label">{g.kind === 'outil' ? 'Outil gratuit' : 'Guide'}</span>
-											<strong>{g.title}</strong>
-											<span class="sum">{g.summary}</span>
-										</a>
-									</li>
-								))}
-							</ul>
+							<h2 id={`t-${topic}`} class="display" data-reveal>
+								{TOPICS[topic]}
+							</h2>
+							<GuideGrid guides={items} showKind />
 						</section>
 					)
 				);
@@ -46,12 +42,12 @@ const topics = Object.keys(TOPICS) as Topic[];
 
 	h1 {
 		max-width: 18ch;
-		margin: 12px 0 40px;
+		margin: 12px 0 24px;
 		font-size: clamp(44px, 7vw, 88px);
 	}
 
 	section {
-		margin-top: 56px;
+		margin-top: 72px;
 		scroll-margin-top: 24px;
 	}
 
@@ -60,48 +56,5 @@ const topics = Object.keys(TOPICS) as Topic[];
 		padding-bottom: 12px;
 		border-bottom: 2px solid var(--ink);
 		font-size: clamp(30px, 4vw, 44px);
-	}
-
-	ul {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 0 32px;
-		margin: 0;
-		padding: 0;
-		list-style: none;
-	}
-
-	a {
-		display: flex;
-		flex-direction: column;
-		gap: 4px;
-		height: 100%;
-		padding: 20px 0;
-		border-bottom: 1px solid var(--line);
-		text-decoration: none;
-	}
-
-	a .label {
-		color: var(--ink-2);
-	}
-
-	strong {
-		font-size: 19px;
-		line-height: 1.25;
-	}
-
-	a:hover strong {
-		text-decoration: underline;
-	}
-
-	.sum {
-		font-size: 15px;
-		color: var(--ink-2);
-	}
-
-	@media (max-width: 860px) {
-		ul {
-			grid-template-columns: 1fr;
-		}
 	}
 </style>

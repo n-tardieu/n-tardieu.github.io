@@ -16,9 +16,11 @@ interface Props {
 	/** Fonts Google à charger (paramètre family=…). */
 	fonts?: string;
 	jsonLd?: Record<string, unknown>;
+	/** Page à ne pas indexer (prototypes). */
+	noindex?: boolean;
 }
 
-const { title, description, image, iosAppId, themeColor = '#ffffff', favicon = '/favicon.svg', fonts, jsonLd } =
+const { title, description, image, iosAppId, themeColor = '#ffffff', favicon = '/favicon.svg', fonts, jsonLd, noindex } =
 	Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const imageUrl = image ? new URL(image, Astro.site).href : undefined;
@@ -28,10 +30,12 @@ const imageUrl = image ? new URL(image, Astro.site).href : undefined;
 <html lang="fr">
 	<head>
 		<meta charset="UTF-8" />
+		<script is:inline>document.documentElement.classList.add('js');</script>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		<link rel="canonical" href={canonical} />
+		{noindex && <meta name="robots" content="noindex" />}
 		<link rel="icon" href={favicon} />
 		<link rel="apple-touch-icon" href={favicon} />
 		<meta name="theme-color" content={themeColor} />

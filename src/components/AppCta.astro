@@ -21,7 +21,7 @@ const defaults = {
 <aside class:list={['app-cta', `is-${slug}`]}>
 	<img src={app.icon} alt="" width="72" height="72" />
 	<div class="body">
-		<p class="kicker">L’app gratuite · iPhone et Android</p>
+		<p class="kicker">{app.price} · iPhone et Android</p>
 		<p class="name"><a href={`/${slug}`}>{app.name}</a></p>
 		<p class="pitch">{pitch ?? defaults[slug]}</p>
 		<StoreButtons app={app} />

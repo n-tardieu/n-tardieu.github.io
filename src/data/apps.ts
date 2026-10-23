@@ -17,6 +17,8 @@ export interface AppEntry {
 	tagline: string;
 	/** Domaine, pour le surtitre de la carte du hub. */
 	category: string;
+	/** Ce qui est gratuit aujourd'hui, en quelques mots. À tenir à jour quand un prix change. */
+	price: string;
 	icon: string;
 	/** Deux captures sans texte incrusté, pour la carte du hub. */
 	preview: [string, string];
@@ -36,6 +38,7 @@ export const APPS: AppEntry[] = [
 		name: 'Coheria',
 		tagline: 'La cohérence cardiaque, cinq minutes à la fois. Une vague à suivre, des rappels qui savent se taire.',
 		category: 'Cohérence cardiaque',
+		price: 'Gratuit · achat facultatif',
 		icon: '/apps/coheria/icon.png',
 		preview: ['/apps/coheria/ecrans/01-home.webp', '/apps/coheria/ecrans/02-state.webp'],
 		accent: '#5B4BF5',
@@ -54,6 +57,7 @@ export const APPS: AppEntry[] = [
 		name: 'Eau & Café',
 		tagline: 'Ton eau et ton café en un geste, l’heure de ton dernier café, et une œuvre d’art par jour.',
 		category: 'Eau et caféine',
+		price: 'Gratuit',
 		icon: '/apps/eau-et-cafe/icon.png',
 		preview: ['/apps/eau-et-cafe/ecrans/01-home.webp', '/apps/eau-et-cafe/ecrans/04-coffee.webp'],
 		accent: '#1B2FD6',
@@ -73,3 +77,14 @@ export function getApp(slug: string): AppEntry {
 }
 
 export const SITE_NAME = 'Nicolas Tardieu';
+
+/** Page Ko-fi pour les dons ponctuels. Tant qu'elle vaut null, la carte « Offre-moi un café » est masquée. */
+export const KOFI_URL: string | null = null;
+
+/** Lien direct vers le formulaire d'avis de chaque store. */
+export function reviewLinks(app: AppEntry): { label: string; url: string }[] {
+	const links: { label: string; url: string }[] = [];
+	if (app.stores.ios) links.push({ label: 'App Store', url: `${app.stores.ios}?action=write-review` });
+	if (app.stores.android) links.push({ label: 'Google Play', url: `${app.stores.android}&showAllReviews=true` });
+	return links;
+}

@@ -1,0 +1,106 @@
+---
+// Grille de cartes façon blog : couverture, thème et durée de lecture, titre,
+// résumé. Utilisée sur l'accueil et dans l'index des guides.
+import { TOPICS, coverSrc, type Guide } from '../data/guides';
+
+interface Props {
+	guides: Guide[];
+	/** Affiche « Outil » ou « Guide » plutôt que le thème. */
+	showKind?: boolean;
+}
+
+const { guides, showKind = false } = Astro.props;
+---
+
+<ul class="guide-grid">
+	{
+		guides.map((g, i) => (
+			<li data-reveal style={`--d: ${(i % 4) * 0.08}s`}>
+				<a href={g.href}>
+					<span class="img">
+						<img src={coverSrc(g.cover)} alt="" width="1600" height="900" loading="lazy" />
+					</span>
+					<span class="meta-line">
+						{showKind ? (g.kind === 'outil' ? 'Outil gratuit' : 'Guide') : TOPICS[g.topic]} · {g.minutes} min
+					</span>
+					<strong>{g.title}</strong>
+					<span class="sum">{g.summary}</span>
+				</a>
+			</li>
+		))
+	}
+</ul>
+
+<style>
+	.guide-grid {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 32px 20px;
+		margin: 24px 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	a {
+		display: block;
+		text-decoration: none;
+	}
+
+	.img {
+		display: block;
+		overflow: hidden;
+		background: var(--paper-2);
+	}
+
+	img {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 16 / 10;
+		object-fit: cover;
+		transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+	}
+
+	a:hover img {
+		transform: scale(1.05);
+	}
+
+	.meta-line {
+		display: block;
+		margin: 14px 0 6px;
+		font-size: 12px;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--ink-2);
+	}
+
+	strong {
+		display: block;
+		font-size: 20px;
+		line-height: 1.22;
+	}
+
+	a:hover strong {
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+
+	.sum {
+		display: block;
+		margin-top: 6px;
+		font-size: 15px;
+		color: var(--ink-2);
+	}
+
+	@media (max-width: 960px) {
+		.guide-grid {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+
+	@media (max-width: 560px) {
+		.guide-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
