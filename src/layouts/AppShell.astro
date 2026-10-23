@@ -105,6 +105,55 @@ const fonts =
 		</footer>
 	</div>
 	<Reveal />
+	{
+		slug === 'coheria' && (
+			<script>
+				// En-tête de Coheria au défilement, comme dans une app mobile : il est
+				// « poussé » par le contenu (il monte exactement de la distance défilée) et
+				// redescend de même quand on remonte. Arrêté à mi-course, il finit son
+				// mouvement vers le côté le plus proche. Une fois la colline passée, il
+				// quitte le pêche pour un blanc translucide.
+				const bar = document.querySelector<HTMLElement>('.app-bar');
+				if (bar && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+					const hero = document.querySelector<HTMLElement>('.hero');
+					let last = Math.max(0, scrollY);
+					let offset = 0;
+					let frame = 0;
+					let settle = 0;
+
+					const place = (animate = false) => {
+						bar.style.transition = animate ? 'transform 0.22s cubic-bezier(0.2, 0.7, 0.2, 1)' : '';
+						bar.style.transform = offset ? `translate3d(0, ${offset}px, 0)` : '';
+					};
+
+					const update = () => {
+						frame = 0;
+						const y = Math.max(0, scrollY);
+						const h = bar.offsetHeight;
+						bar.classList.toggle('is-past', y > (hero ? hero.offsetHeight - h : 80));
+						// Suit le défilement, sans jamais découvrir le haut de la page.
+						offset = Math.min(0, Math.max(-h, offset - (y - last), -y));
+						last = y;
+						place();
+						clearTimeout(settle);
+						settle = window.setTimeout(() => {
+							if (offset === 0 || offset === -h) return;
+							offset = offset < -h / 2 && y > h ? -h : 0;
+							place(true);
+						}, 120);
+					};
+
+					addEventListener('scroll', () => (frame ||= requestAnimationFrame(update)), { passive: true });
+					update();
+				} else if (bar) {
+					const hero = document.querySelector<HTMLElement>('.hero');
+					const update = () => bar.classList.toggle('is-past', scrollY > (hero ? hero.offsetHeight - bar.offsetHeight : 80));
+					addEventListener('scroll', update, { passive: true });
+					update();
+				}
+			</script>
+		)
+	}
 </Base>
 
 <style>
@@ -119,6 +168,22 @@ const fonts =
 	.app-bar.over-hero {
 		border-bottom-color: transparent;
 	}
+
+	/* Coheria : l'en-tête quitte le pêche une fois la colline passée (voir le script). */
+	.theme-coheria .app-bar {
+		will-change: transform;
+		transition:
+			background 0.3s ease,
+			border-color 0.3s ease;
+	}
+
+	.theme-coheria .app-bar.is-past {
+		background: rgba(255, 255, 255, 0.82);
+		-webkit-backdrop-filter: saturate(1.4) blur(14px);
+		backdrop-filter: saturate(1.4) blur(14px);
+		border-bottom-color: var(--line);
+	}
+
 
 	.theme-eau-et-cafe .app-bar {
 		border-bottom: 2px solid var(--ink);
