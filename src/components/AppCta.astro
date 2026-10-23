@@ -18,7 +18,7 @@ const defaults = {
 };
 ---
 
-<aside class:list={['app-cta', `is-${slug}`]} style={`--sb-bg: ${app.accent}`}>
+<aside class:list={['app-cta', `is-${slug}`]}>
 	<img src={app.icon} alt="" width="72" height="72" />
 	<div class="body">
 		<p class="kicker">L’app gratuite · iPhone et Android</p>
@@ -40,14 +40,12 @@ const defaults = {
 	}
 
 	.is-coheria {
-		--sb-radius: 14px;
 		border-color: #5b4bf5;
 		border-radius: 20px;
 		background: linear-gradient(180deg, #fce3ce, #fff8f2);
 	}
 
 	.is-eau-et-cafe {
-		--sb-radius: 0;
 		background: #fbfaf6;
 	}
 

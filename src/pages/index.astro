@@ -1,15 +1,12 @@
 ---
 // Le hub, « la collection » : un cadre papier et encre, et chaque app numérotée
-// dans sa propre identité, avec ses boutons de stores. Puis les outils gratuits,
+// dans une carte compacte à sa propre identité, avec ses badges de stores. Puis les outils gratuits,
 // les guides, les principes et l'auteur.
 import Site from '../layouts/Site.astro';
 import StoreButtons from '../components/StoreButtons.astro';
-import BreathOrb from '../components/BreathOrb.astro';
-import { getApp, APPS } from '../data/apps';
+import { APPS } from '../data/apps';
 import { GUIDES } from '../data/guides';
 
-const coheria = getApp('coheria');
-const eauCafe = getApp('eau-et-cafe');
 const tools = GUIDES.filter((g) => g.kind === 'outil');
 const guides = GUIDES.filter((g) => g.kind === 'guide');
 
@@ -56,59 +53,30 @@ const jsonLd = {
 		</section>
 
 		<div id="apps" class="apps wrap">
-			<!-- N°01 Coheria, dans son identité : pêche, violet, police système -->
-			<article class="app coheria" style="--sb-bg: #5B4BF5; --sb-radius: 14px">
-				<div class="app-text">
-					<p class="num">N°01 · Cohérence cardiaque</p>
-					<h2><a href="/coheria">Coheria</a></h2>
-					<p class="pitch">
-						Respire cinq minutes, trois fois par jour. Une vague à suivre, sans voix, et une série qui pardonne un jour
-						manqué.
-					</p>
-					<ul class="points">
-						<li>La méthode 365 : 3 séances, 6 respirations par minute, 5 minutes</li>
-						<li>Des rappels qui se taisent si tu as déjà respiré</li>
-						<li>Gratuit pour pratiquer</li>
-					</ul>
-					<StoreButtons app={coheria} />
-					<a href="/coheria" class="more">Découvrir Coheria <span aria-hidden="true">→</span></a>
-				</div>
-				<div class="app-visual">
-					<BreathOrb size="min(360px, 70vw)" />
-				</div>
-			</article>
-
-			<!-- N°02 Eau & Café, dans son identité : papier, encre, bleu Klein -->
-			<article class="app eau" style="--sb-bg: #1B2FD6; --sb-radius: 0">
-				<div class="app-text">
-					<p class="num">N°02 · Eau et caféine</p>
-					<h2><a href="/eau-et-cafe">Eau &amp; Café</a></h2>
-					<p class="pitch">
-						Ton eau et ton café en un geste, l’heure de ton dernier café, et chaque jour une œuvre d’art à découvrir.
-					</p>
-					<ul class="points">
-						<li>Un objectif d’eau estimé d’après les repères de l’EFSA</li>
-						<li>Ton heure limite du café, selon ton coucher</li>
-						<li>Gratuit, sans compte, sans pub</li>
-					</ul>
-					<StoreButtons app={eauCafe} />
-					<a href="/eau-et-cafe" class="more">Découvrir Eau &amp; Café <span aria-hidden="true">→</span></a>
-				</div>
-				<figure class="app-visual painting">
-					<img
-						src="/apps/eau-et-cafe/oeuvres/cezanne-cafetiere.webp"
-						alt="La Femme à la cafetière, Paul Cézanne"
-						width="900"
-						height="1383"
-						loading="lazy"
-					/>
-					<figcaption>
-						<span class="n">N°12</span>
-						<span>La Femme à la cafetière<small>Paul Cézanne, vers 1895</small></span>
-						<span class="fig">1,4<em>L</em></span>
-					</figcaption>
-				</figure>
-			</article>
+			{
+				APPS.map((app, i) => (
+					<article class:list={['app', `is-${app.slug}`]}>
+						<a href={`/${app.slug}`} class="app-link" aria-label={`Découvrir ${app.name}`} />
+						<header class="app-head">
+							<img src={app.icon} alt="" width="56" height="56" class="app-icon" />
+							<div>
+								<p class="num">N°{String(i + 1).padStart(2, '0')} · {app.category}</p>
+								<h2>{app.name}</h2>
+							</div>
+							<span class="app-arrow" aria-hidden="true">
+								→
+							</span>
+						</header>
+						<p class="pitch">{app.tagline}</p>
+						<div class="app-shots" aria-hidden="true">
+							{app.preview.map((src) => (
+								<img src={src} alt="" loading="lazy" width="600" height="998" />
+							))}
+						</div>
+						<StoreButtons app={app} class="app-stores" />
+					</article>
+				))
+			}
 		</div>
 
 		<section class="tools wrap" aria-labelledby="outils">
@@ -185,13 +153,13 @@ const jsonLd = {
 
 <style>
 	.intro {
-		padding: 56px 0 40px;
+		padding: 48px 0 32px;
 	}
 
 	.intro h1 {
 		max-width: 17ch;
 		margin: 0 0 28px;
-		font-size: clamp(46px, 7.4vw, 112px);
+		font-size: clamp(42px, 6.4vw, 96px);
 	}
 
 	.facts {
@@ -215,165 +183,161 @@ const jsonLd = {
 		border-left: 0;
 	}
 
-	/* Apps */
+	/* Apps : deux cartes côte à côte, chacune dans l'identité de son app */
 	.apps {
 		display: grid;
-		gap: 24px;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 20px;
 	}
 
 	.app {
-		display: grid;
-		grid-template-columns: 1.1fr 0.9fr;
-		gap: 32px;
-		align-items: center;
-		padding: 48px;
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		padding: 24px 24px 22px;
 		overflow: hidden;
+		isolation: isolate;
 	}
 
-	.app h2 {
-		margin: 8px 0 12px;
-		font-size: clamp(44px, 6vw, 72px);
-		line-height: 1;
+	.app-link {
+		position: absolute;
+		inset: 0;
+		z-index: 1;
 	}
 
-	.app h2 a {
-		text-decoration: none;
+	.app-link:focus-visible {
+		outline: 3px solid var(--ink);
+		outline-offset: 3px;
+	}
+
+	.app-head {
+		display: flex;
+		align-items: center;
+		gap: 14px;
+	}
+
+	.app-icon {
+		border-radius: 14px;
+	}
+
+	.app-head div {
+		flex: 1;
 	}
 
 	.num {
-		margin: 0;
-		font-size: 13px;
+		margin: 0 0 2px;
+		font-size: 11px;
 		font-weight: 700;
 		letter-spacing: 0.12em;
 		text-transform: uppercase;
 	}
 
-	.pitch {
-		margin: 0 0 20px;
+	.app h2 {
+		margin: 0;
+		font-size: 30px;
+		line-height: 1;
+	}
+
+	.app-arrow {
+		display: grid;
+		place-items: center;
+		width: 40px;
+		height: 40px;
 		font-size: 20px;
+		transition: transform 0.25s ease;
+	}
+
+	.app:hover .app-arrow {
+		transform: translateX(4px);
+	}
+
+	.pitch {
+		margin: 14px 0 0;
+		font-size: 17px;
 		line-height: 1.45;
-		max-width: 26em;
 	}
 
-	.points {
-		list-style: none;
-		margin: 0 0 28px;
-		padding: 0;
-		font-size: 15px;
+	.app-shots {
+		display: flex;
+		justify-content: center;
+		gap: 14px;
+		height: 230px;
+		margin: 20px -4px 18px;
+		overflow: hidden;
+		-webkit-mask-image: linear-gradient(180deg, #000 72%, transparent);
+		mask-image: linear-gradient(180deg, #000 72%, transparent);
 	}
 
-	.points li {
-		padding: 8px 0;
-		border-top: 1px solid var(--rule);
+	.app-shots img {
+		align-self: flex-start;
+		width: 44%;
+		height: auto;
+		border-radius: 12px;
+		transition: transform 0.5s ease;
 	}
 
-	.more {
-		display: inline-block;
-		margin-top: 20px;
-		font-weight: 700;
-		text-decoration: none;
+	.app-shots img + img {
+		margin-top: 28px;
 	}
 
-	.more:hover {
-		text-decoration: underline;
+	.app:hover .app-shots img {
+		transform: translateY(-8px);
 	}
 
-	.app-visual {
-		justify-self: center;
+	.app-stores {
+		position: relative;
+		z-index: 2;
+		margin-top: auto;
 	}
 
-	.coheria {
-		--rule: rgba(21, 23, 28, 0.1);
+	.is-coheria {
 		background: linear-gradient(180deg, #fce3ce, #fdeee1 55%, #fff8f2);
-		border-radius: 32px;
+		border-radius: 24px;
 		color: #15171c;
 		font-family: -apple-system, 'SF Pro Display', 'Helvetica Neue', system-ui, sans-serif;
 	}
 
-	.coheria h2 {
+	.is-coheria h2 {
 		font-weight: 800;
-		letter-spacing: -0.045em;
+		letter-spacing: -0.04em;
 	}
 
-	.coheria .num,
-	.coheria .more {
+	.is-coheria .num {
 		color: #5b4bf5;
 	}
 
-	.coheria .pitch {
+	.is-coheria .pitch {
 		color: #4a4f59;
 	}
 
-	.eau {
-		--rule: #c9c7be;
+	.is-coheria .app-arrow {
+		border-radius: 50%;
+		background: #5b4bf5;
+		color: #fff;
+	}
+
+	.is-eau-et-cafe {
 		background: #fbfaf6;
 		border: 2px solid var(--ink);
 	}
 
-	.eau h2 {
+	.is-eau-et-cafe h2 {
 		font-family: var(--narrow);
 		font-weight: 700;
 		text-transform: uppercase;
 	}
 
-	.eau .num,
-	.eau .more {
+	.is-eau-et-cafe .num {
 		color: #1b2fd6;
 	}
 
-	.eau .pitch {
+	.is-eau-et-cafe .pitch {
 		color: var(--ink-2);
 	}
 
-	.painting {
-		margin: 0;
-		width: min(340px, 100%);
-		border: 2px solid var(--ink);
-		background: var(--paper);
-	}
-
-	.painting img {
-		width: 100%;
-		height: auto;
-		aspect-ratio: 4 / 4.2;
-		object-fit: cover;
-		object-position: 50% 30%;
-	}
-
-	.painting figcaption {
-		display: flex;
-		align-items: center;
-		gap: 10px;
-		padding: 10px 12px;
-		font-size: 13px;
-		font-weight: 600;
-		line-height: 1.2;
-	}
-
-	.painting small {
-		display: block;
-		font-weight: 400;
-		color: var(--ink-2);
-	}
-
-	.painting .n {
-		padding: 3px 5px;
+	.is-eau-et-cafe .app-arrow {
 		background: #1b2fd6;
 		color: #fff;
-		font-family: var(--narrow);
-	}
-
-	.painting .fig {
-		margin-left: auto;
-		font-family: var(--narrow);
-		font-size: 30px;
-		font-weight: 600;
-	}
-
-	.painting em {
-		font-style: normal;
-		font-size: 14px;
-		color: #1b2fd6;
 	}
 
 	/* Outils et guides */
@@ -521,13 +485,8 @@ const jsonLd = {
 	}
 
 	@media (max-width: 960px) {
-		.app {
+		.apps {
 			grid-template-columns: 1fr;
-			padding: 32px 24px;
-		}
-
-		.app-visual {
-			order: -1;
 		}
 
 		.head {
@@ -569,14 +528,6 @@ const jsonLd = {
 
 		.facts li {
 			padding: 0 12px;
-		}
-
-		.coheria {
-			border-radius: 24px;
-		}
-
-		.pitch {
-			font-size: 18px;
 		}
 
 		.cards {

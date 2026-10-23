@@ -1,10 +1,11 @@
 ---
-// Vitrine de Coheria, « respire avec la page » : le disque du hero respire au
-// rythme de la séance de référence (5 s / 5 s) et le visiteur peut lancer une
+// Vitrine de Coheria, « respire avec la page » : le hero montre l'onde de
+// l'écran de séance de l'app (5 s / 5 s) et le visiteur peut lancer une
 // minute sur place. Identité de l'app : violet seul, colline pêche, violet
 // nuit pour le soir, police système grasse, aucune ombre.
 import Base from '../layouts/Base.astro';
 import StoreButtons from '../components/StoreButtons.astro';
+import BreathWave from '../components/BreathWave.astro';
 import { getApp } from '../data/apps';
 import { guidesFor } from '../data/guides';
 
@@ -134,16 +135,7 @@ const jsonLd = {
 				</div>
 
 				<div id="respirer" class="breath" data-breath>
-					<div class="stage">
-						<div class="ring r3" data-ring></div>
-						<div class="ring r2" data-ring></div>
-						<div class="orb" data-orb></div>
-						<p class="phase" aria-live="polite">
-							<span class="idle-in">Inspire</span>
-							<span class="idle-out">Expire</span>
-							<span class="live" data-phase></span>
-						</p>
-					</div>
+					<BreathWave />
 					<div class="controls">
 						<button type="button" class="try" data-start>Respirer une minute ici</button>
 						<p class="count" data-count hidden>1:00</p>
@@ -295,46 +287,38 @@ const jsonLd = {
 </Base>
 
 <script>
-	// Une minute guidée : le disque suit une sinusoïde de 10 s (5 s d'inspiration,
-	// 5 s d'expiration) et le texte annonce la phase. Hors séance, l'animation CSS
-	// tourne en boucle.
+	// Une minute guidée : on relance l'onde depuis le début d'une inspiration
+	// pour que le mot et la bille démarrent ensemble, puis on décompte.
 	const root = document.querySelector<HTMLElement>('[data-breath]');
 	if (root) {
-		const scaled = root.querySelectorAll<HTMLElement>('[data-orb], [data-ring]');
-		const phase = root.querySelector<HTMLElement>('[data-phase]')!;
+		const wave = root.querySelector<HTMLElement>('[data-wave]')!;
 		const count = root.querySelector<HTMLElement>('[data-count]')!;
 		const done = root.querySelector<HTMLElement>('[data-done]')!;
 		const start = root.querySelector<HTMLElement>('.try')!;
 		const DURATION = 60;
-		let raf = 0;
+		let timer = 0;
 
 		const run = () => {
-			cancelAnimationFrame(raf);
-			root.classList.add('running');
+			clearInterval(timer);
+			wave.classList.remove('is-live');
+			void wave.offsetWidth;
+			wave.classList.add('is-live');
 			start.hidden = true;
 			done.hidden = true;
 			count.hidden = false;
-			const t0 = performance.now();
-			const tick = (now: number) => {
-				const t = (now - t0) / 1000;
-				if (t >= DURATION) {
-					root.classList.remove('running');
-					scaled.forEach((el) => (el.style.transform = ''));
+			const t0 = Date.now();
+			const tick = () => {
+				const left = DURATION - Math.floor((Date.now() - t0) / 1000);
+				if (left <= 0) {
+					clearInterval(timer);
 					count.hidden = true;
 					done.hidden = false;
-					phase.textContent = '';
 					return;
 				}
-				const cycle = t % 10;
-				const s = 0.72 + 0.28 * ((1 - Math.cos((Math.PI * cycle) / 5)) / 2);
-				scaled.forEach((el) => (el.style.transform = `scale(${s})`));
-				const label = cycle < 5 ? 'Inspire' : 'Expire';
-				if (phase.textContent !== label) phase.textContent = label;
-				const left = Math.ceil(DURATION - t);
 				count.textContent = left === 60 ? '1:00' : `0:${String(left).padStart(2, '0')}`;
-				raf = requestAnimationFrame(tick);
 			};
-			raf = requestAnimationFrame(tick);
+			tick();
+			timer = window.setInterval(tick, 250);
 		};
 
 		root.querySelectorAll('[data-start]').forEach((b) => b.addEventListener('click', run));
@@ -353,10 +337,6 @@ const jsonLd = {
 		--primary: #5b4bf5;
 		--primary-soft: #ebe9ff;
 		--line: #efeff3;
-
-		--sb-bg: var(--primary);
-		--sb-fg: #fff;
-		--sb-radius: 16px;
 
 		min-height: 100vh;
 		background: var(--bg);
@@ -476,118 +456,14 @@ const jsonLd = {
 		height: 90px;
 	}
 
-	/* Disque interactif */
+	/* Onde de respiration */
 	.breath {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: 20px;
-		scroll-margin-top: 24px;
-	}
-
-	.stage {
-		display: grid;
-		place-items: center;
-		width: min(400px, 78vw);
-		aspect-ratio: 1;
-	}
-
-	.orb,
-	.ring {
-		grid-area: 1 / 1;
-		border-radius: 50%;
-		animation: breathe 10s ease-in-out infinite;
-		will-change: transform;
-	}
-
-	.orb {
-		width: 62%;
-		aspect-ratio: 1;
-		background: radial-gradient(circle at 35% 30%, #8a7dff, var(--primary) 60%, #4334d6);
-	}
-
-	.ring {
-		border: 2px solid rgba(91, 75, 245, 0.2);
-	}
-
-	.r2 {
-		width: 80%;
-		aspect-ratio: 1;
-	}
-
-	.r3 {
+		gap: 12px;
 		width: 100%;
-		aspect-ratio: 1;
-		border-color: rgba(91, 75, 245, 0.1);
-	}
-
-	.running .orb,
-	.running .ring {
-		animation: none;
-	}
-
-	@keyframes breathe {
-		0%,
-		100% {
-			transform: scale(0.72);
-		}
-		50% {
-			transform: scale(1);
-		}
-	}
-
-	.phase {
-		grid-area: 1 / 1;
-		position: relative;
-		margin: 0;
-		color: #fff;
-		font-size: 22px;
-		font-weight: 800;
-	}
-
-	.phase span {
-		display: block;
-		text-align: center;
-	}
-
-	.idle-in {
-		animation: show-in 10s linear infinite;
-	}
-
-	.idle-out {
-		position: absolute;
-		inset: 0;
-		animation: show-out 10s linear infinite;
-	}
-
-	.running .idle-in,
-	.running .idle-out,
-	.breath:not(.running) .live {
-		display: none;
-	}
-
-	@keyframes show-in {
-		0%,
-		46%,
-		100% {
-			opacity: 1;
-		}
-		50%,
-		96% {
-			opacity: 0;
-		}
-	}
-
-	@keyframes show-out {
-		0%,
-		46%,
-		100% {
-			opacity: 0;
-		}
-		50%,
-		96% {
-			opacity: 1;
-		}
+		scroll-margin-top: 24px;
 	}
 
 	.controls {
@@ -622,10 +498,10 @@ const jsonLd = {
 
 	.count {
 		margin: 0;
-		font-size: 28px;
-		font-weight: 800;
+		font-size: 15px;
+		font-weight: 600;
 		font-variant-numeric: tabular-nums;
-		color: var(--primary);
+		color: var(--text-soft);
 	}
 
 	.done p {
@@ -1046,28 +922,11 @@ const jsonLd = {
 		text-decoration: none;
 	}
 
-	@media (prefers-reduced-motion: reduce) {
-		.orb,
-		.ring,
-		.idle-in,
-		.idle-out {
-			animation: none;
-		}
-
-		.idle-out {
-			display: none;
-		}
-	}
-
 	@media (max-width: 900px) {
 		.hero-inner {
 			grid-template-columns: 1fr;
 			gap: 24px;
 			padding-bottom: 110px;
-		}
-
-		.stage {
-			width: min(300px, 72vw);
 		}
 
 		.session-list,

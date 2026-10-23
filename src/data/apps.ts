@@ -15,8 +15,10 @@ export interface AppEntry {
 	name: string;
 	/** Une ligne, pour le hub et les balises meta. */
 	tagline: string;
+	/** Domaine, pour le surtitre de la carte du hub. */
+	category: string;
 	icon: string;
-	/** Deux captures pour la carte du hub. */
+	/** Deux captures sans texte incrusté, pour la carte du hub. */
 	preview: [string, string];
 	/** Couleur d'identité, pour la carte du hub. */
 	accent: string;
@@ -32,9 +34,10 @@ export const APPS: AppEntry[] = [
 	{
 		slug: 'coheria',
 		name: 'Coheria',
-		tagline: 'La cohérence cardiaque, cinq minutes à la fois.',
+		tagline: 'La cohérence cardiaque, cinq minutes à la fois. Une vague à suivre, des rappels qui savent se taire.',
+		category: 'Cohérence cardiaque',
 		icon: '/apps/coheria/icon.png',
-		preview: ['/apps/coheria/01-home.webp', '/apps/coheria/02-state.webp'],
+		preview: ['/apps/coheria/ecrans/01-home.webp', '/apps/coheria/ecrans/02-state.webp'],
 		accent: '#5B4BF5',
 		surface: '#FDEEE1',
 		ink: '#15171C',
@@ -49,9 +52,10 @@ export const APPS: AppEntry[] = [
 	{
 		slug: 'eau-et-cafe',
 		name: 'Eau & Café',
-		tagline: 'Ton eau et ton café en un geste, une œuvre d’art par jour.',
+		tagline: 'Ton eau et ton café en un geste, l’heure de ton dernier café, et une œuvre d’art par jour.',
+		category: 'Eau et caféine',
 		icon: '/apps/eau-et-cafe/icon.png',
-		preview: ['/apps/eau-et-cafe/01-home.webp', '/apps/eau-et-cafe/03-gallery.webp'],
+		preview: ['/apps/eau-et-cafe/ecrans/01-home.webp', '/apps/eau-et-cafe/ecrans/04-coffee.webp'],
 		accent: '#1B2FD6',
 		surface: '#EDEBE4',
 		ink: '#0E0E0E',

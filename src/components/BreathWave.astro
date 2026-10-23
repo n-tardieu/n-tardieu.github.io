@@ -1,0 +1,239 @@
+---
+// L'onde de l'écran de séance de Coheria, portée de V2BreathingWave
+// (coheria/components/ui/v2/V2BreathingWave.tsx) : un tracé calculé une fois,
+// qui défile de droite à gauche d'une période par cycle, et la bille violette
+// qui suit la courbe au centre. Au-dessus, le mot de la phase. Rythme fixe
+// 5 s / 5 s (six respirations par minute). Tout est en CSS : la page peut
+// relancer l'animation en retirant puis remettant la classe `is-live`.
+
+interface Props {
+	height?: number;
+	/** Largeur d'une période, en px (260 dans l'app). */
+	cycleWidth?: number;
+	class?: string;
+}
+
+const { height = 200, cycleWidth = 260, class: className } = Astro.props;
+const cycles = 5;
+const pattern = [5, 0, 5, 0] as const;
+const total = pattern.reduce((a, b) => a + b, 0);
+const bounds = {
+	inhaleEnd: pattern[0] / total,
+	holdInEnd: (pattern[0] + pattern[1]) / total,
+	exhaleEnd: (pattern[0] + pattern[1] + pattern[2]) / total,
+};
+
+/** Hauteur du souffle à l'instant u du cycle : 0 poumons vides, 1 poumons pleins. */
+function breathLevel(u: number): number {
+	if (u < bounds.inhaleEnd) return (1 - Math.cos((u / bounds.inhaleEnd) * Math.PI)) / 2;
+	if (u < bounds.holdInEnd) return 1;
+	if (u < bounds.exhaleEnd) return (1 + Math.cos(((u - bounds.holdInEnd) / (bounds.exhaleEnd - bounds.holdInEnd)) * Math.PI)) / 2;
+	return 0;
+}
+
+const amplitude = height / 2 - 15;
+const mid = height / 2;
+const SAMPLES = 64;
+let d = '';
+for (let c = 0; c < cycles; c++) {
+	for (let i = c === 0 ? 0 : 1; i <= SAMPLES; i++) {
+		const u = i / SAMPLES;
+		const x = (c + u) * cycleWidth;
+		const y = mid - (2 * breathLevel(u) - 1) * amplitude;
+		d += `${d ? ' L' : 'M'} ${x.toFixed(1)} ${y.toFixed(1)}`;
+	}
+}
+/** Le creux de la courbe (début d'inspiration) posé au centre exact. */
+const anchor = cycleWidth * Math.floor(cycles / 2);
+const periodS = total;
+---
+
+<div
+	class:list={['breath-wave', 'is-live', className]}
+	style={`--h: ${height}px; --cw: ${cycleWidth}px; --anchor: ${anchor}px; --amp: ${amplitude}px; --period: ${periodS}s`}
+	data-wave
+	aria-hidden="true"
+>
+	<p class="phase">
+		<span class="w-in">Inspire</span>
+		<span class="w-out">Expire</span>
+	</p>
+	<div class="field">
+		<div class="clip">
+			<svg class="track" width={cycleWidth * cycles} height={height} viewBox={`0 0 ${cycleWidth * cycles} ${height}`}>
+				<path d={d} fill="none" stroke="rgba(21, 23, 28, 0.14)" stroke-width="2" stroke-linecap="round"></path>
+			</svg>
+		</div>
+		<span class="present"></span>
+		<span class="cursor"><span class="halo"></span><span class="dot"></span></span>
+	</div>
+</div>
+
+<style>
+	.breath-wave {
+		width: 100%;
+	}
+
+	.phase {
+		position: relative;
+		height: 44px;
+		margin: 0 0 40px;
+		text-align: center;
+		color: #6e7683;
+		font-size: 32px;
+		font-weight: 600;
+		letter-spacing: -0.4px;
+		line-height: 44px;
+	}
+
+	.phase span {
+		position: absolute;
+		inset: 0;
+	}
+
+	.field {
+		position: relative;
+		height: var(--h);
+	}
+
+	.clip {
+		position: relative;
+		height: 100%;
+		overflow: hidden;
+		-webkit-mask-image: linear-gradient(90deg, transparent, #000 16%, #000 84%, transparent);
+		mask-image: linear-gradient(90deg, transparent, #000 16%, #000 84%, transparent);
+	}
+
+	.track {
+		position: absolute;
+		top: 0;
+		left: 50%;
+		display: block;
+		max-width: none;
+		transform: translateX(calc(-1 * var(--anchor)));
+	}
+
+	.present {
+		position: absolute;
+		top: 0;
+		left: calc(50% - 0.5px);
+		width: 1px;
+		height: 100%;
+		background: rgba(21, 23, 28, 0.1);
+	}
+
+	.cursor {
+		position: absolute;
+		top: calc(50% - 14.5px);
+		left: calc(50% - 14.5px);
+		width: 29px;
+		height: 29px;
+		transform: translateY(var(--amp));
+	}
+
+	.halo,
+	.dot {
+		position: absolute;
+		border-radius: 50%;
+	}
+
+	.halo {
+		inset: 0;
+		background: rgba(91, 75, 245, 0.13);
+	}
+
+	.dot {
+		inset: 7px;
+		background: #5b4bf5;
+	}
+
+	/* Une période par cycle : l'onde défile, la bille monte (inspire) puis descend
+	   (expire) en demi-cosinus, comme breathLevel. */
+	.is-live .track {
+		animation: scroll var(--period) linear infinite;
+	}
+
+	.is-live .cursor {
+		animation: rise var(--period) infinite;
+	}
+
+	.is-live .w-in {
+		animation: word-in var(--period) infinite;
+	}
+
+	.is-live .w-out {
+		animation: word-out var(--period) infinite;
+	}
+
+	@keyframes scroll {
+		from {
+			transform: translateX(calc(-1 * var(--anchor)));
+		}
+		to {
+			transform: translateX(calc(-1 * (var(--anchor) + var(--cw))));
+		}
+	}
+
+	@keyframes rise {
+		0% {
+			transform: translateY(var(--amp));
+			animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1);
+		}
+		50% {
+			transform: translateY(calc(-1 * var(--amp)));
+			animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1);
+		}
+		100% {
+			transform: translateY(var(--amp));
+		}
+	}
+
+	/* Le mot reste immobile pendant sa phase et n'est relayé qu'au passage :
+	   fondu et glissement de 7 px dans le sens du souffle. */
+	@keyframes word-in {
+		0% {
+			opacity: 0;
+			transform: translateY(7px);
+		}
+		4%,
+		47% {
+			opacity: 1;
+			transform: none;
+		}
+		50%,
+		100% {
+			opacity: 0;
+			transform: none;
+		}
+	}
+
+	@keyframes word-out {
+		0%,
+		50% {
+			opacity: 0;
+			transform: translateY(-7px);
+		}
+		54%,
+		97% {
+			opacity: 1;
+			transform: none;
+		}
+		100% {
+			opacity: 0;
+			transform: none;
+		}
+	}
+
+	.w-out {
+		opacity: 0;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.is-live .track,
+		.is-live .cursor,
+		.is-live .w-in,
+		.is-live .w-out {
+			animation: none;
+		}
+	}
+</style>
