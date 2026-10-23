@@ -1,0 +1,195 @@
+---
+// Calculateur du besoin en eau, même formule que l'objectif d'Eau & Café.
+// Le tableau est calculé au build pour être lisible sans JavaScript.
+import Guide from '../../layouts/Guide.astro';
+import {
+	MAX_GOAL_ML,
+	MAX_WEIGHT_FOR_FORMULA_KG,
+	ML_PER_KG_BY_ACTIVITY,
+	calcGoalMl,
+	type ActivityLevel,
+	type AgeBracket,
+} from '../../lib/formulas';
+
+const ages: { id: AgeBracket; label: string }[] = [
+	{ id: '<18', label: 'Moins de 18 ans' },
+	{ id: '18-35', label: '18 – 35 ans' },
+	{ id: '35-55', label: '35 – 55 ans' },
+	{ id: '55+', label: '55 ans et plus' },
+];
+const activities: { id: ActivityLevel; label: string; hint: string }[] = [
+	{ id: 'sedentaire', label: 'Calme', hint: 'Assis la plupart du temps' },
+	{ id: 'actif', label: 'Active', hint: 'Debout, marche, vélo' },
+	{ id: 'sportif', label: 'Sportive', hint: 'Sport presque chaque jour' },
+];
+const weights = [50, 60, 70, 80, 90, 100];
+const liters = (ml: number) => (ml / 1000).toLocaleString('fr-FR', { minimumFractionDigits: 1, maximumFractionDigits: 2 });
+const defaultGoal = calcGoalMl(70, '18-35', 'sedentaire');
+
+const faq = [
+	{
+		q: 'Combien de litres d’eau boire par jour ?',
+		a: 'L’EFSA retient un apport adéquat de 2 litres d’eau par jour pour une femme adulte et 2,5 litres pour un homme, aliments compris. Comme environ 20 % de l’eau vient de l’alimentation, cela fait autour de 1,6 à 2 litres de boissons par jour, davantage si tu bouges beaucoup ou s’il fait chaud.',
+	},
+	{
+		q: 'Faut-il vraiment boire 2 litres d’eau par jour ?',
+		a: 'Les 2 litres sont un ordre de grandeur, pas une règle. Ton besoin dépend de ton poids, de ton activité, de la chaleur et de ce que tu manges. Le calculateur donne une estimation personnalisée.',
+	},
+	{
+		q: 'Le café et le thé comptent-ils ?',
+		a: 'Oui. Aux quantités habituelles, le café et le thé contribuent à l’hydratation : leur effet diurétique est faible. Les boissons sucrées comptent aussi en eau, mais pas pour la santé.',
+	},
+	{
+		q: 'Peut-on boire trop d’eau ?',
+		a: `C’est rare, mais de très grandes quantités en peu de temps peuvent être dangereuses. Le calculateur plafonne l’estimation à ${liters(MAX_GOAL_ML)} L par jour ; au-delà, demande conseil à un professionnel.`,
+	},
+];
+---
+
+<Guide
+	title="Combien d’eau boire par jour ? Calculateur gratuit"
+	description="Estime ton besoin d’eau selon ton poids, ton âge et ton activité, d’après les repères de l’EFSA. Gratuit, sans inscription."
+	h1="Combien d’eau boire par jour : le calcul"
+	lede="Ton poids, ton âge et ton activité suffisent pour estimer la quantité de boissons à viser chaque jour, d’après les repères de l’Autorité européenne de sécurité des aliments."
+	published="2026-10-23"
+	pitch="Eau & Café reprend ce calcul comme objectif du jour et te laisse noter chaque verre en un geste."
+	faq={faq}
+	sources={[
+		{ label: 'EFSA (2010), Scientific Opinion on Dietary Reference Values for water, EFSA Journal 8(3):1459', url: 'https://www.efsa.europa.eu/fr/efsajournal/pub/1459' },
+		{ label: 'American College of Sports Medicine (2007), Exercise and Fluid Replacement, Med Sci Sports Exerc 39(2)', url: 'https://pubmed.ncbi.nlm.nih.gov/17277604/' },
+	]}
+>
+	<form class="tool" data-water onsubmit="return false">
+		<div class="tool-form">
+			<label class="field">
+				<span>Ton poids (kg)</span>
+				<input type="number" name="weight" value="70" min="30" max="200" step="1" inputmode="numeric" required />
+			</label>
+			<fieldset class="field">
+				<legend>Ton âge</legend>
+				<div class="segmented two">
+					{
+						ages.map((a) => (
+							<label>
+								<input type="radio" name="age" value={a.id} checked={a.id === '18-35'} />
+								<span>{a.label}</span>
+							</label>
+						))
+					}
+				</div>
+			</fieldset>
+			<fieldset class="field">
+				<legend>Ta journée</legend>
+				<div class="segmented">
+					{
+						activities.map((a) => (
+							<label>
+								<input type="radio" name="activity" value={a.id} checked={a.id === 'sedentaire'} />
+								<span>
+									{a.label}
+									<small>{a.hint}</small>
+								</span>
+							</label>
+						))
+					}
+				</div>
+			</fieldset>
+		</div>
+		<div class="tool-result" aria-live="polite">
+			<span class="label">À boire chaque jour, environ</span>
+			<p class="result-figure water"><span data-out>{liters(defaultGoal)}</span><small> L</small></p>
+			<p class="result-text" data-explain>Soit environ {Math.round(defaultGoal / 250)} verres de 25 cl, en boissons.</p>
+		</div>
+	</form>
+
+	<h2>Comment l’estimation est calculée</h2>
+	<p>
+		L’EFSA, l’Autorité européenne de sécurité des aliments, fixe un <strong>apport adéquat en eau</strong> de 2 litres par
+		jour pour une femme adulte et 2,5 litres pour un homme, dans un climat tempéré et avec une activité légère. Ces
+		chiffres incluent l’eau des aliments, qui représente environ 20 % du total. Il reste donc autour de 1,6 à 2 litres à
+		boire.
+	</p>
+	<p>Le calculateur ramène ce repère à ton poids, puis l’ajuste à ton activité :</p>
+	<div class="key">
+		<strong>Besoin estimé = poids × {ML_PER_KG_BY_ACTIVITY.sedentaire} à {ML_PER_KG_BY_ACTIVITY.sportif} mL selon l’activité</strong>
+		<p>
+			{ML_PER_KG_BY_ACTIVITY.sedentaire} mL/kg pour une journée calme, {ML_PER_KG_BY_ACTIVITY.actif} mL/kg pour une journée
+			active, {ML_PER_KG_BY_ACTIVITY.sportif} mL/kg avec du sport presque chaque jour. Le résultat ne descend pas sous le
+			repère EFSA le plus bas (1,6 L pour un adulte), le poids est plafonné à {MAX_WEIGHT_FOR_FORMULA_KG} kg et le total à
+			{liters(MAX_GOAL_ML)} L.
+		</p>
+	</div>
+
+	<h2>Combien d’eau selon ton poids</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Poids</th>
+				{activities.map((a) => <th>{a.label}</th>)}
+			</tr>
+		</thead>
+		<tbody>
+			{
+				weights.map((w) => (
+					<tr>
+						<td>{w} kg</td>
+						{activities.map((a) => (
+							<td>{liters(calcGoalMl(w, '18-35', a.id))} L</td>
+						))}
+					</tr>
+				))
+			}
+		</tbody>
+	</table>
+	<p>Ces quantités concernent les boissons : eau, mais aussi café, thé, lait ou soupe.</p>
+
+	<h2>Quand boire plus</h2>
+	<ul>
+		<li><strong>Par forte chaleur</strong> : la transpiration augmente nettement les pertes.</li>
+		<li><strong>Pendant le sport</strong> : l’ACSM suggère de compenser une partie de ce que tu perds pendant l’effort.</li>
+		<li><strong>En cas de fièvre ou de maladie</strong> : demande conseil à un professionnel de santé.</li>
+	</ul>
+	<p>
+		Le café compte-t-il ? Oui, aux quantités habituelles. Pour savoir combien tu en bois vraiment, regarde le
+		<a href="/cafeine/quantite-cafeine-boissons/">tableau de la caféine par boisson</a>, et pour mieux dormir, ton
+		<a href="/cafeine/heure-limite-cafe/">heure limite du café</a>.
+	</p>
+</Guide>
+
+<script>
+	import { calcGoalMl, type ActivityLevel, type AgeBracket } from '../../lib/formulas';
+
+	const form = document.querySelector<HTMLFormElement>('[data-water]');
+	if (form) {
+		const out = form.querySelector<HTMLElement>('[data-out]')!;
+		const explain = form.querySelector<HTMLElement>('[data-explain]')!;
+		const update = () => {
+			const data = new FormData(form);
+			const kg = Number(data.get('weight'));
+			if (!kg || kg < 30 || kg > 250) return;
+			const ml = calcGoalMl(kg, data.get('age') as AgeBracket, data.get('activity') as ActivityLevel);
+			out.textContent = (ml / 1000).toLocaleString('fr-FR', { minimumFractionDigits: 1, maximumFractionDigits: 2 });
+			explain.textContent = `Soit environ ${Math.round(ml / 250)} verres de 25 cl, en boissons.`;
+		};
+		form.addEventListener('input', update);
+		update();
+	}
+</script>
+
+<style>
+	.result-figure.water {
+		color: #1b2fd6;
+	}
+
+	.segmented.two label {
+		flex: 1 1 50%;
+	}
+
+	.segmented.two label:nth-child(3) span {
+		margin-left: 0;
+	}
+
+	.segmented.two label:nth-child(n + 3) span {
+		margin-top: -1.5px;
+	}
+</style>

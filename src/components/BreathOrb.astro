@@ -1,0 +1,136 @@
+---
+// Disque de Coheria qui respire en boucle : 5 s d'inspiration, 5 s d'expiration
+// (six respirations par minute). Décoratif ; la page Coheria pilote sa propre
+// version interactive.
+interface Props {
+	size?: string;
+	label?: boolean;
+}
+
+const { size = 'min(380px, 78vw)', label = true } = Astro.props;
+---
+
+<div class="orb-wrap" style={`--size: ${size}`} aria-hidden="true">
+	<div class="ring r3"></div>
+	<div class="ring r2"></div>
+	<div class="orb"></div>
+	{
+		label && (
+			<p class="phase">
+				<span class="in">Inspire</span>
+				<span class="out">Expire</span>
+			</p>
+		)
+	}
+</div>
+
+<style>
+	.orb-wrap {
+		position: relative;
+		display: grid;
+		place-items: center;
+		width: var(--size);
+		aspect-ratio: 1;
+	}
+
+	.orb,
+	.ring {
+		grid-area: 1 / 1;
+		border-radius: 50%;
+		animation: breathe 10s ease-in-out infinite;
+	}
+
+	.orb {
+		width: 62%;
+		aspect-ratio: 1;
+		background: radial-gradient(circle at 35% 30%, #8a7dff, #5b4bf5 60%, #4334d6);
+	}
+
+	.ring {
+		border: 2px solid rgba(91, 75, 245, 0.2);
+	}
+
+	.r2 {
+		width: 80%;
+		aspect-ratio: 1;
+		animation-delay: 0.2s;
+	}
+
+	.r3 {
+		width: 100%;
+		aspect-ratio: 1;
+		border-color: rgba(91, 75, 245, 0.1);
+		animation-delay: 0.4s;
+	}
+
+	@keyframes breathe {
+		0%,
+		100% {
+			transform: scale(0.72);
+		}
+		50% {
+			transform: scale(1);
+		}
+	}
+
+	.phase {
+		grid-area: 1 / 1;
+		position: relative;
+		margin: 0;
+		color: #fff;
+		font-family: -apple-system, 'SF Pro Display', system-ui, sans-serif;
+		font-size: 20px;
+		font-weight: 800;
+	}
+
+	.phase span {
+		display: block;
+		text-align: center;
+	}
+
+	.phase .in {
+		animation: show-in 10s linear infinite;
+	}
+
+	.phase .out {
+		position: absolute;
+		inset: 0;
+		animation: show-out 10s linear infinite;
+	}
+
+	@keyframes show-in {
+		0%,
+		46%,
+		100% {
+			opacity: 1;
+		}
+		50%,
+		96% {
+			opacity: 0;
+		}
+	}
+
+	@keyframes show-out {
+		0%,
+		46%,
+		100% {
+			opacity: 0;
+		}
+		50%,
+		96% {
+			opacity: 1;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.orb,
+		.ring,
+		.phase span {
+			animation: none;
+		}
+
+		.phase .out {
+			display: none;
+		}
+	}
+</style>

@@ -1,0 +1,71 @@
+---
+// En-tête du cadre du site (hub, guides, outils, à propos) : papier et encre.
+const path = Astro.url.pathname;
+const links = [
+	{ href: '/#apps', label: 'Apps' },
+	{ href: '/guides/', label: 'Guides et outils' },
+	{ href: '/a-propos/', label: 'À propos' },
+];
+---
+
+<header class="site-header">
+	<a href="/" class="mark">Nicolas Tardieu</a>
+	<nav aria-label="Navigation principale">
+		{
+			links.map((l) => (
+				<a href={l.href} aria-current={path.startsWith(l.href) && l.href !== '/#apps' ? 'page' : undefined}>
+					{l.label}
+				</a>
+			))
+		}
+	</nav>
+</header>
+
+<style>
+	.site-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 16px;
+		width: min(1132px, calc(100% - 32px));
+		margin: 0 auto;
+		padding: 20px 0 14px;
+		border-bottom: 2px solid var(--ink, #0e0e0e);
+	}
+
+	.mark {
+		font-family: var(--narrow);
+		font-weight: 700;
+		font-size: 20px;
+		letter-spacing: 0.02em;
+		text-transform: uppercase;
+		text-decoration: none;
+		color: var(--ink, #0e0e0e);
+		white-space: nowrap;
+	}
+
+	nav {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+		gap: 4px 20px;
+	}
+
+	nav a {
+		font-size: 14px;
+		font-weight: 600;
+		color: var(--ink-2, #55544f);
+		text-decoration: none;
+	}
+
+	nav a:hover,
+	nav a[aria-current='page'] {
+		color: var(--ink, #0e0e0e);
+	}
+
+	@media (max-width: 480px) {
+		nav a:first-child {
+			display: none;
+		}
+	}
+</style>

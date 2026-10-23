@@ -1,48 +1,74 @@
 ---
-// Vitrine de Coheria, aux couleurs de l'app : violet, colline pêche, police
-// système en gras serré, aucune ombre. Le cercle du hero respire au rythme de
-// la séance de référence (5 s inspire, 5 s expire, six respirations par minute).
+// Vitrine de Coheria, « respire avec la page » : le disque du hero respire au
+// rythme de la séance de référence (5 s / 5 s) et le visiteur peut lancer une
+// minute sur place. Identité de l'app : violet seul, colline pêche, violet
+// nuit pour le soir, police système grasse, aucune ombre.
 import Base from '../layouts/Base.astro';
 import StoreButtons from '../components/StoreButtons.astro';
 import { getApp } from '../data/apps';
+import { guidesFor } from '../data/guides';
 
 const app = getApp('coheria');
+const guides = guidesFor('coherence-cardiaque');
+
+const moments = [
+	{ time: '8:00', name: 'Le matin', text: 'Avant que la journée ne s’emballe.' },
+	{ time: '12:30', name: 'Le midi', text: 'Une pause entre deux choses.' },
+	{ time: '19:00', name: 'Le soir', text: 'Pour redescendre en fin de journée.' },
+];
 
 const sessions = [
 	{ when: 'Trois fois par jour', name: 'Cohérence cardiaque', meta: ['5 min', '5 s · 5 s'], tone: 'warm', icon: 'heart' },
-	{ when: 'Quand tu n’as pas le temps', name: 'Rapide', meta: ['3 min', '4 s · 6 s'], tone: 'teal', icon: 'wind' },
+	{ when: 'Quand tu n’as pas le temps', name: 'Rapide', meta: ['3 min', '5 s · 5 s'], tone: 'teal', icon: 'wind' },
 	{ when: 'Le soir', name: 'Avant de dormir', meta: ['10 min', '4 s · 6 s'], tone: 'night', icon: 'moon' },
 ];
 
-const features = [
-	{ title: 'Ton ressenti, en un geste', text: 'Après chaque séance, une touche suffit. Coheria en tire la courbe de ta semaine et le moment où tu t’apaises le plus.' },
-	{ title: 'Une série qui pardonne', text: 'Une séance valide ta journée. Les jours de gel, gagnés en pratiquant, protègent ta série quand la vie s’accélère.' },
-	{ title: 'Des rappels qui savent se taire', text: 'Matin, midi et soir, à tes heures. Si tu as déjà respiré, le rappel ne sonne pas.' },
-	{ title: 'Des sons qui posent l’ambiance', text: 'Forêt, pluie fine, feu de cheminée, calme sous-marin, ou le silence complet. Pas de voix, juste un rythme à suivre.' },
-	{ title: 'Tes propres séances', text: 'Choisis ton inspiration, ta pause, ton expiration et ta durée. Chaque séance garde ses réglages.' },
-	{ title: 'Trois thèmes', text: 'Aurore pour la journée, Pur pour la clarté, Nuit pour la pratique du soir.' },
-];
+const icons: Record<string, string> = {
+	heart: 'M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z',
+	wind: 'M3 8h11a3 3 0 1 0-3-3M3 12h15a3 3 0 1 1-3 3M3 16h7',
+	moon: 'M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z',
+};
 
-const shots = [
-	{ file: '01-home', alt: 'Accueil : les séances du jour' },
-	{ file: '02-state', alt: 'Mon état : le ressenti de la semaine' },
-	{ file: '03-streak', alt: 'La série et les jours de gel' },
-	{ file: '04-catalog', alt: 'Les séances proposées' },
-	{ file: '05-free', alt: 'L’essentiel, gratuit pour toujours' },
+const habits = [
+	{
+		img: '01-home',
+		alt: 'L’accueil de Coheria : deux séances sur trois aujourd’hui',
+		kicker: 'Trois moments, un anneau',
+		title: 'Tu sais où tu en es, d’un coup d’œil.',
+		text: 'L’anneau compte tes séances du jour. Une seule suffit à valider ta journée, les trois font la méthode 365. Les rappels du matin, du midi et du soir se taisent si tu as déjà respiré.',
+	},
+	{
+		img: '02-state',
+		alt: 'Mon état : la courbe du ressenti sur la semaine',
+		kicker: 'Mon état',
+		title: 'Vois ce que ça change pour toi.',
+		text: 'Après chaque séance, note ton ressenti en un geste. Coheria en tire la courbe de ta semaine et le moment de la journée où tu t’apaises le plus.',
+	},
+	{
+		img: '03-streak',
+		alt: 'Le calendrier de la série avec un jour de gel',
+		kicker: 'Série et jours de gel',
+		title: 'Un jour manqué ne casse rien.',
+		text: 'Les jours de gel se gagnent en pratiquant et protègent ta série quand la vie s’accélère. Une régularité qui encourage, sans jamais culpabiliser.',
+	},
 ];
 
 const faq = [
 	{
 		q: 'Qu’est-ce que la cohérence cardiaque ?',
-		a: 'C’est une pratique de respiration lente et régulière, autour de six respirations par minute : environ cinq secondes d’inspiration, cinq secondes d’expiration. Ce rythme aide le cœur et le souffle à se synchroniser, et beaucoup de gens l’utilisent pour redescendre du stress.',
+		a: 'Une pratique de respiration lente et régulière, autour de six respirations par minute : environ cinq secondes d’inspiration et cinq secondes d’expiration. Ce rythme aide le cœur et le souffle à se synchroniser, et beaucoup de gens s’en servent pour redescendre quand la journée s’emballe.',
 	},
 	{
-		q: 'Combien de fois par jour faut-il pratiquer ?',
-		a: 'La méthode la plus connue, dite « 365 », propose 3 séances par jour, à 6 respirations par minute, pendant 5 minutes. Coheria est construite autour de ce rythme, mais une seule séance suffit à valider ta journée.',
+		q: 'Comment fonctionne l’application Coheria ?',
+		a: 'Tu suis une vague à l’écran : elle monte quand tu inspires, descend quand tu expires. Pas de voix, juste un rythme à suivre, avec des ambiances sonores si tu le souhaites. Des rappels t’invitent à pratiquer le matin, le midi et le soir.',
 	},
 	{
-		q: 'Coheria est-elle gratuite ?',
-		a: 'Oui : les séances, les rappels et la série sont gratuits, à vie. Coheria Complet, facultatif, ajoute Mon état sur 30 jours, le bilan mensuel et toutes les ambiances sonores.',
+		q: 'Combien de fois par jour pratiquer la cohérence cardiaque ?',
+		a: 'La méthode la plus répandue, dite « 365 », propose 3 séances par jour, à 6 respirations par minute, pendant 5 minutes. Dans Coheria, une seule séance suffit déjà à valider ta journée.',
+	},
+	{
+		q: 'L’application de cohérence cardiaque Coheria est-elle gratuite ?',
+		a: 'Oui : les séances, les rappels et la série sont gratuits, à vie, sur iPhone, iPad et Android. Coheria Complet, facultatif, ajoute Mon état sur 30 jours, le bilan mensuel et toutes les ambiances sonores.',
 	},
 	{
 		q: 'Faut-il créer un compte ?',
@@ -59,37 +85,29 @@ const jsonLd = {
 	'@graph': [
 		{
 			'@type': 'MobileApplication',
-			name: app.name,
+			name: 'Coheria',
+			alternateName: 'Coheria : Cohérence cardiaque',
 			operatingSystem: 'iOS, Android',
 			applicationCategory: 'HealthApplication',
 			description:
-				'Application de cohérence cardiaque : respiration guidée à l’écran, méthode 365, rappels, série et ressenti après chaque séance.',
+				'Application de cohérence cardiaque : respiration guidée par une vague à l’écran, méthode 365, séances de 3 à 10 minutes, rappels et série avec jours de gel.',
 			offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
-			author: { '@type': 'Person', name: 'Nicolas Tardieu' },
+			author: { '@type': 'Person', name: 'Nicolas Tardieu', url: 'https://n-tardieu.github.io/a-propos/' },
 			inLanguage: ['fr', 'en', 'es', 'de'],
 			downloadUrl: [app.stores.ios, app.stores.android].filter(Boolean),
+			screenshot: habits.map((h) => `https://n-tardieu.github.io/apps/coheria/ecrans/${h.img}.webp`),
 		},
 		{
 			'@type': 'FAQPage',
-			mainEntity: faq.map((f) => ({
-				'@type': 'Question',
-				name: f.q,
-				acceptedAnswer: { '@type': 'Answer', text: f.a },
-			})),
+			mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
 		},
 	],
-};
-
-const icons: Record<string, string> = {
-	heart: 'M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z',
-	wind: 'M3 8h11a3 3 0 1 0-3-3M3 12h15a3 3 0 1 1-3 3M3 16h7',
-	moon: 'M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z',
 };
 ---
 
 <Base
-	title="Coheria : cohérence cardiaque, respiration anti-stress"
-	description="Respire en cinq minutes avec Coheria : cohérence cardiaque guidée à l’écran, méthode 365, rappels doux et une série qui pardonne. Gratuit sur iPhone et Android."
+	title="Coheria : application de cohérence cardiaque gratuite"
+	description="Coheria guide ta respiration avec une vague à l’écran : méthode 365, séances de 3 à 10 minutes, rappels doux. Gratuite sur iPhone et Android."
 	image="/apps/coheria/01-home.webp"
 	iosAppId={app.stores.iosId}
 	themeColor="#FCE3CE"
@@ -105,24 +123,36 @@ const icons: Record<string, string> = {
 
 			<div class="hero-inner wrap">
 				<div class="hero-text">
-					<p class="kicker">Cohérence cardiaque</p>
-					<h1>Un peu chaque jour, <em>ça change tout.</em></h1>
+					<p class="kicker">Application de cohérence cardiaque</p>
+					<h1>La cohérence cardiaque, <em>cinq minutes à la fois.</em></h1>
 					<p class="lede">
-						Suis la vague à l’écran, laisse ton souffle ralentir. Cinq minutes suffisent pour redescendre, avant une
-						réunion, après une longue journée ou avant de dormir.
+						Suis la vague, laisse ton souffle ralentir. Trois pauses par jour, des rappels qui savent se taire, et une
+						série qui pardonne un jour manqué.
 					</p>
 					<StoreButtons app={app} />
-					<p class="note">Gratuit pour pratiquer · iPhone, iPad et Android</p>
+					<p class="note">Gratuit · iPhone, iPad et Android · Sans compte obligatoire</p>
 				</div>
 
-				<div class="breath" aria-hidden="true">
-					<div class="ring r3"></div>
-					<div class="ring r2"></div>
-					<div class="orb"></div>
-					<p class="phase">
-						<span class="in">Inspire</span>
-						<span class="out">Expire</span>
-					</p>
+				<div id="respirer" class="breath" data-breath>
+					<div class="stage">
+						<div class="ring r3" data-ring></div>
+						<div class="ring r2" data-ring></div>
+						<div class="orb" data-orb></div>
+						<p class="phase" aria-live="polite">
+							<span class="idle-in">Inspire</span>
+							<span class="idle-out">Expire</span>
+							<span class="live" data-phase></span>
+						</p>
+					</div>
+					<div class="controls">
+						<button type="button" class="try" data-start>Respirer une minute ici</button>
+						<p class="count" data-count hidden>1:00</p>
+						<div class="done" data-done hidden>
+							<p><strong>Une minute de cohérence cardiaque, c’est fait.</strong></p>
+							<p>Avec Coheria, c’est cinq minutes, trois fois par jour.</p>
+							<button type="button" class="again" data-start>Recommencer</button>
+						</div>
+					</div>
 				</div>
 			</div>
 			<svg class="hill" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
@@ -133,86 +163,83 @@ const icons: Record<string, string> = {
 		<main>
 			<section class="method wrap" aria-labelledby="method">
 				<p class="kicker">La méthode 365</p>
-				<h2 id="method">Trois chiffres, une habitude.</h2>
-				<div class="figures">
-					<div><strong>3</strong><span>séances par jour</span></div>
-					<div><strong>6</strong><span>respirations par minute</span></div>
-					<div><strong>5</strong><span>minutes chacune</span></div>
-				</div>
-				<p class="method-text">
-					Coheria est pensée autour de ce rythme et le rend facile à tenir, sans jamais culpabiliser : une seule séance
-					valide déjà ta journée.
-				</p>
-			</section>
-
-			<section class="shots" aria-label="Captures d’écran">
-				<div class="shots-track">
+				<h2 id="method">3 fois par jour. 6 respirations par minute. 5 minutes.</h2>
+				<ol class="day">
 					{
-						shots.map((s) => (
-							<img src={`/apps/coheria/${s.file}.webp`} alt={s.alt} width="660" height="1434" loading="lazy" />
+						moments.map((m) => (
+							<li>
+								<span class="dot" />
+								<span class="time">{m.time}</span>
+								<strong>{m.name}</strong>
+								<span>{m.text}</span>
+							</li>
 						))
 					}
-				</div>
+				</ol>
+				<p class="method-text">
+					Coheria est construite autour de ce rythme, et tu déplaces les rappels selon ta journée.
+					<a href="/coherence-cardiaque/methode-365/">La méthode 365 expliquée</a>
+				</p>
 			</section>
 
 			<section class="sessions wrap" aria-labelledby="sessions">
 				<p class="kicker">Une séance pour chaque moment</p>
-				<h2 id="sessions">Le matin, le midi, <em>avant de dormir.</em></h2>
+				<h2 id="sessions">Prête en un geste.</h2>
 				<ul class="session-list">
 					{
 						sessions.map((s) => (
 							<li class={`tone-${s.tone}`}>
 								<span class="session-icon">
 									<svg viewBox="0 0 24 24" aria-hidden="true">
-										<path
-											d={icons[s.icon]}
-											fill="none"
-											stroke="currentColor"
-											stroke-width="2"
-											stroke-linecap="round"
-											stroke-linejoin="round"
-										/>
+										<path d={icons[s.icon]} fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
 									</svg>
 								</span>
 								<span class="session-when">{s.when}</span>
 								<h3>{s.name}</h3>
-								<span class="chips">
-									{s.meta.map((m) => (
-										<span>{m}</span>
-									))}
-								</span>
+								<span class="chips">{s.meta.map((m) => <span>{m}</span>)}</span>
 							</li>
 						))
 					}
 				</ul>
+				<p class="sessions-note">
+					Et tes propres séances : ton inspiration, ta pause, ton expiration, ta durée. Avec une ambiance (forêt, pluie fine,
+					feu de cheminée, calme sous-marin) ou en silence.
+				</p>
 			</section>
 
-			<section class="features wrap" aria-label="Fonctionnalités">
+			<section class="habits wrap" aria-label="Ce qui aide à tenir">
 				{
-					features.map((f) => (
-						<article>
-							<h3>{f.title}</h3>
-							<p>{f.text}</p>
+					habits.map((h, i) => (
+						<article class:list={['habit', { flip: i % 2 === 1 }]}>
+							<div class="habit-shot">
+								<img src={`/apps/coheria/ecrans/${h.img}.webp`} alt={h.alt} width="600" height="998" loading="lazy" />
+							</div>
+							<div class="habit-text">
+								<p class="kicker">{h.kicker}</p>
+								<h2>{h.title}</h2>
+								<p>{h.text}</p>
+							</div>
 						</article>
 					))
 				}
 			</section>
 
-			<section class="free">
-				<div class="wrap free-inner">
+			<section class="night">
+				<div class="wrap night-inner">
 					<div>
-						<p class="kicker">Sans abonnement pour respirer</p>
-						<h2>L’essentiel, <em>gratuit pour toujours.</em></h2>
+						<p class="kicker">Gratuit pour respirer</p>
+						<h2>L’essentiel ne coûte rien, <em>pour toujours.</em></h2>
+						<p class="night-lede">Pas d’abonnement pour respirer, pas de publicité, et ta pratique reste sur ton téléphone.</p>
 					</div>
 					<div>
 						<ul>
-							<li>Les séances guidées : cohérence, rapide, sommeil</li>
+							<li>Les séances guidées : cohérence, rapide, avant de dormir</li>
+							<li>Tes propres séances</li>
 							<li>Les rappels doux</li>
 							<li>La série et les jours de gel</li>
 						</ul>
-						<p class="free-note">
-							Coheria Complet, facultatif, ajoute Mon état sur 30 jours, le bilan mensuel et toutes les ambiances
-							sonores.
+						<p class="night-note">
+							Coheria Complet, facultatif, ajoute Mon état sur 30 jours, le bilan mensuel et toutes les ambiances sonores.
 						</p>
 					</div>
 				</div>
@@ -227,6 +254,20 @@ const icons: Record<string, string> = {
 							<p>{f.a}</p>
 						</details>
 					))
+				}
+				{
+					guides.length > 0 && (
+						<div class="guides">
+							<p class="kicker">Pour aller plus loin</p>
+							<ul>
+								{guides.map((g) => (
+									<li>
+										<a href={g.href}>{g.title} →</a>
+									</li>
+								))}
+							</ul>
+						</div>
+					)
 				}
 			</section>
 
@@ -253,6 +294,53 @@ const icons: Record<string, string> = {
 	</div>
 </Base>
 
+<script>
+	// Une minute guidée : le disque suit une sinusoïde de 10 s (5 s d'inspiration,
+	// 5 s d'expiration) et le texte annonce la phase. Hors séance, l'animation CSS
+	// tourne en boucle.
+	const root = document.querySelector<HTMLElement>('[data-breath]');
+	if (root) {
+		const scaled = root.querySelectorAll<HTMLElement>('[data-orb], [data-ring]');
+		const phase = root.querySelector<HTMLElement>('[data-phase]')!;
+		const count = root.querySelector<HTMLElement>('[data-count]')!;
+		const done = root.querySelector<HTMLElement>('[data-done]')!;
+		const start = root.querySelector<HTMLElement>('.try')!;
+		const DURATION = 60;
+		let raf = 0;
+
+		const run = () => {
+			cancelAnimationFrame(raf);
+			root.classList.add('running');
+			start.hidden = true;
+			done.hidden = true;
+			count.hidden = false;
+			const t0 = performance.now();
+			const tick = (now: number) => {
+				const t = (now - t0) / 1000;
+				if (t >= DURATION) {
+					root.classList.remove('running');
+					scaled.forEach((el) => (el.style.transform = ''));
+					count.hidden = true;
+					done.hidden = false;
+					phase.textContent = '';
+					return;
+				}
+				const cycle = t % 10;
+				const s = 0.72 + 0.28 * ((1 - Math.cos((Math.PI * cycle) / 5)) / 2);
+				scaled.forEach((el) => (el.style.transform = `scale(${s})`));
+				const label = cycle < 5 ? 'Inspire' : 'Expire';
+				if (phase.textContent !== label) phase.textContent = label;
+				const left = Math.ceil(DURATION - t);
+				count.textContent = left === 60 ? '1:00' : `0:${String(left).padStart(2, '0')}`;
+				raf = requestAnimationFrame(tick);
+			};
+			raf = requestAnimationFrame(tick);
+		};
+
+		root.querySelectorAll('[data-start]').forEach((b) => b.addEventListener('click', run));
+	}
+</script>
+
 <style>
 	.page {
 		--bg: #ffffff;
@@ -260,14 +348,11 @@ const icons: Record<string, string> = {
 		--hero-mid: #fdeee1;
 		--hero-bottom: #fff8f2;
 		--card: #f5f5fa;
-		--card-accent: #ebe9ff;
 		--text: #15171c;
 		--text-soft: #6e7683;
 		--primary: #5b4bf5;
 		--primary-soft: #ebe9ff;
-		--flame: #f97316;
 		--line: #efeff3;
-		--night: #0e0b24;
 
 		--sb-bg: var(--primary);
 		--sb-fg: #fff;
@@ -293,9 +378,9 @@ const icons: Record<string, string> = {
 	h1,
 	h2,
 	h3 {
+		margin: 0;
 		font-weight: 800;
 		letter-spacing: -0.03em;
-		margin: 0;
 	}
 
 	h1 em,
@@ -344,8 +429,8 @@ const icons: Record<string, string> = {
 		display: flex;
 		align-items: center;
 		gap: 10px;
-		font-weight: 800;
 		font-size: 18px;
+		font-weight: 800;
 		letter-spacing: -0.02em;
 	}
 
@@ -355,29 +440,25 @@ const icons: Record<string, string> = {
 
 	.hero-inner {
 		display: grid;
-		grid-template-columns: 1.15fr 0.85fr;
+		grid-template-columns: 1.1fr 0.9fr;
 		gap: 48px;
 		align-items: center;
-		padding: 48px 0 140px;
+		padding: 40px 0 130px;
 		color: var(--text);
 	}
 
 	.hero h1 {
-		font-size: clamp(44px, 6.4vw, 84px);
+		margin-bottom: 24px;
+		font-size: clamp(42px, 6vw, 80px);
 		line-height: 0.98;
 		letter-spacing: -0.045em;
-		margin-bottom: 24px;
-	}
-
-	.hero h1 em {
-		color: var(--flame);
 	}
 
 	.lede {
-		font-size: 20px;
-		color: #4a4f59;
 		max-width: 30em;
 		margin: 0 0 32px;
+		font-size: 20px;
+		color: #4a4f59;
 	}
 
 	.note {
@@ -395,45 +476,54 @@ const icons: Record<string, string> = {
 		height: 90px;
 	}
 
-	/* Cercle qui respire : 10 s par cycle = 6 respirations par minute */
+	/* Disque interactif */
 	.breath {
-		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 20px;
+		scroll-margin-top: 24px;
+	}
+
+	.stage {
 		display: grid;
 		place-items: center;
-		width: min(420px, 80vw);
+		width: min(400px, 78vw);
 		aspect-ratio: 1;
-		justify-self: center;
 	}
 
 	.orb,
 	.ring {
 		grid-area: 1 / 1;
 		border-radius: 50%;
+		animation: breathe 10s ease-in-out infinite;
+		will-change: transform;
 	}
 
 	.orb {
 		width: 62%;
 		aspect-ratio: 1;
 		background: radial-gradient(circle at 35% 30%, #8a7dff, var(--primary) 60%, #4334d6);
-		animation: breathe 10s ease-in-out infinite;
 	}
 
 	.ring {
-		border: 2px solid rgba(91, 75, 245, 0.18);
-		animation: breathe 10s ease-in-out infinite;
+		border: 2px solid rgba(91, 75, 245, 0.2);
 	}
 
 	.r2 {
 		width: 80%;
 		aspect-ratio: 1;
-		animation-delay: 0.25s;
 	}
 
 	.r3 {
 		width: 100%;
 		aspect-ratio: 1;
 		border-color: rgba(91, 75, 245, 0.1);
-		animation-delay: 0.5s;
+	}
+
+	.running .orb,
+	.running .ring {
+		animation: none;
 	}
 
 	@keyframes breathe {
@@ -453,7 +543,6 @@ const icons: Record<string, string> = {
 		color: #fff;
 		font-size: 22px;
 		font-weight: 800;
-		letter-spacing: -0.01em;
 	}
 
 	.phase span {
@@ -461,87 +550,165 @@ const icons: Record<string, string> = {
 		text-align: center;
 	}
 
-	.phase .out {
-		position: absolute;
-		inset: 0;
-	}
-
-	.phase .in {
+	.idle-in {
 		animation: show-in 10s linear infinite;
 	}
 
-	.phase .out {
+	.idle-out {
+		position: absolute;
+		inset: 0;
 		animation: show-out 10s linear infinite;
+	}
+
+	.running .idle-in,
+	.running .idle-out,
+	.breath:not(.running) .live {
+		display: none;
 	}
 
 	@keyframes show-in {
 		0%,
-		46% {
+		46%,
+		100% {
 			opacity: 1;
 		}
 		50%,
 		96% {
 			opacity: 0;
-		}
-		100% {
-			opacity: 1;
 		}
 	}
 
 	@keyframes show-out {
 		0%,
-		46% {
+		46%,
+		100% {
 			opacity: 0;
 		}
 		50%,
 		96% {
 			opacity: 1;
 		}
-		100% {
-			opacity: 0;
-		}
+	}
+
+	.controls {
+		min-height: 96px;
+		text-align: center;
+	}
+
+	.try,
+	.again {
+		padding: 12px 22px;
+		border: 1.5px solid var(--primary);
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.6);
+		color: var(--primary);
+		font: inherit;
+		font-size: 16px;
+		font-weight: 700;
+		cursor: pointer;
+		transition: background 0.2s ease;
+	}
+
+	.try:hover,
+	.again:hover {
+		background: #fff;
+	}
+
+	.try:focus-visible,
+	.again:focus-visible {
+		outline: 2px solid var(--primary);
+		outline-offset: 3px;
+	}
+
+	.count {
+		margin: 0;
+		font-size: 28px;
+		font-weight: 800;
+		font-variant-numeric: tabular-nums;
+		color: var(--primary);
+	}
+
+	.done p {
+		margin: 0 0 4px;
+	}
+
+	.done .again {
+		margin-top: 12px;
 	}
 
 	/* Méthode 365 */
 	.method {
-		padding: 72px 0 24px;
+		padding: 64px 0 24px;
 		text-align: center;
 	}
 
 	.method h2,
 	.sessions h2,
-	.free h2,
+	.night h2,
 	.faq h2 {
 		font-size: clamp(32px, 4.4vw, 52px);
-		line-height: 1.04;
+		line-height: 1.05;
 	}
 
-	.figures {
+	.method h2 {
+		max-width: 18em;
+		margin: 0 auto;
+	}
+
+	.day {
+		position: relative;
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
-		gap: 16px;
-		margin: 48px auto 32px;
-		max-width: 860px;
+		max-width: 900px;
+		margin: 56px auto 32px;
+		padding: 0;
+		list-style: none;
 	}
 
-	.figures div {
-		padding: 32px 16px;
-		background: var(--card);
-		border-radius: 22px;
+	.day::before {
+		content: '';
+		position: absolute;
+		top: 9px;
+		left: 16.6%;
+		right: 16.6%;
+		height: 2px;
+		background: linear-gradient(90deg, var(--hero-top), var(--primary), #211c4a);
 	}
 
-	.figures strong {
-		display: block;
-		font-size: clamp(72px, 10vw, 120px);
+	.day li {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 2px;
+		padding: 0 12px;
+	}
+
+	.dot {
+		width: 20px;
+		height: 20px;
+		margin-bottom: 16px;
+		border-radius: 50%;
+		background: var(--primary);
+		box-sizing: border-box;
+		border: 5px solid var(--primary-soft);
+	}
+
+	.time {
+		font-size: clamp(40px, 5vw, 56px);
 		font-weight: 800;
+		letter-spacing: -0.04em;
 		line-height: 1;
-		letter-spacing: -0.05em;
-		color: var(--primary);
 		font-variant-numeric: tabular-nums;
+		color: var(--primary);
 	}
 
-	.figures span {
-		font-weight: 600;
+	.day strong {
+		margin-top: 8px;
+		font-size: 18px;
+	}
+
+	.day li > span:last-child {
 		color: var(--text-soft);
 	}
 
@@ -551,32 +718,11 @@ const icons: Record<string, string> = {
 		color: var(--text-soft);
 	}
 
-	/* Captures */
-	.shots {
-		margin-top: 72px;
-		padding: 56px 0;
-		background: linear-gradient(160deg, #6f60ff, var(--primary) 55%, #4a3be0);
-	}
-
-	.shots-track {
-		display: flex;
-		gap: 20px;
-		overflow-x: auto;
-		scroll-snap-type: x mandatory;
-		padding: 0 max(24px, calc((100vw - 1120px) / 2));
-		scrollbar-width: none;
-	}
-
-	.shots-track::-webkit-scrollbar {
-		display: none;
-	}
-
-	.shots-track img {
-		flex: 0 0 auto;
-		width: clamp(220px, 24vw, 290px);
-		height: auto;
-		border-radius: 22px;
-		scroll-snap-align: center;
+	.method-text a {
+		display: inline-block;
+		margin-left: 4px;
+		font-weight: 700;
+		color: var(--primary);
 	}
 
 	/* Séances */
@@ -588,20 +734,20 @@ const icons: Record<string, string> = {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		gap: 16px;
-		list-style: none;
-		margin: 40px 0 0;
+		margin: 32px 0 0;
 		padding: 0;
+		list-style: none;
 	}
 
 	.session-list li {
 		display: flex;
 		flex-direction: column;
 		gap: 6px;
+		min-height: 220px;
 		padding: 24px;
 		border-radius: 22px;
 		background: #1a1a21;
 		color: #f3f3f6;
-		min-height: 220px;
 	}
 
 	.session-icon {
@@ -609,8 +755,8 @@ const icons: Record<string, string> = {
 		place-items: center;
 		width: 52px;
 		height: 52px;
-		border-radius: 14px;
 		margin-bottom: auto;
+		border-radius: 14px;
 		color: #fff;
 	}
 
@@ -658,61 +804,91 @@ const icons: Record<string, string> = {
 		font-weight: 600;
 	}
 
-	/* Fonctionnalités */
-	.features {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 0 48px;
-		padding-top: 72px;
-	}
-
-	.features article {
-		padding: 24px 0;
-		border-top: 1px solid var(--line);
-	}
-
-	.features h3 {
-		font-size: 19px;
-		letter-spacing: -0.02em;
-		margin-bottom: 6px;
-	}
-
-	.features p {
-		margin: 0;
+	.sessions-note {
+		max-width: 40em;
+		margin: 20px 0 0;
 		color: var(--text-soft);
-		font-size: 16px;
 	}
 
-	/* Gratuit */
-	.free {
-		margin-top: 80px;
-		background: linear-gradient(180deg, #211c4a, #151134 62%, var(--night));
+	/* Ce qui aide à tenir */
+	.habits {
+		display: grid;
+		gap: 96px;
+		padding-top: 112px;
+	}
+
+	.habit {
+		display: grid;
+		grid-template-columns: 0.9fr 1.1fr;
+		gap: 64px;
+		align-items: center;
+	}
+
+	.habit.flip .habit-shot {
+		order: 2;
+	}
+
+	.habit-shot {
+		justify-self: center;
+		width: min(380px, 100%);
+		border-radius: 28px;
+		overflow: hidden;
+		background: var(--card);
+	}
+
+	.habit-shot img {
+		width: 100%;
+		height: auto;
+	}
+
+	.habit-text h2 {
+		font-size: clamp(30px, 3.8vw, 46px);
+		line-height: 1.05;
+		margin-bottom: 16px;
+	}
+
+	.habit-text p:last-child {
+		max-width: 28em;
+		margin: 0;
+		font-size: 19px;
+		color: #4a4f59;
+	}
+
+	/* Soir */
+	.night {
+		margin-top: 112px;
+		background: linear-gradient(180deg, #211c4a, #151134 62%, #0e0b24);
 		color: #f3f3f6;
 	}
 
-	.free-inner {
+	.night-inner {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 48px;
 		align-items: center;
-		padding: 88px 0;
+		padding: 96px 0;
 	}
 
-	.free .kicker {
+	.night .kicker {
 		color: #a99fff;
 	}
 
-	.free h2 em {
-		color: #fbbf77;
+	.night h2 em {
+		color: #a99fff;
 	}
 
-	.free ul {
-		list-style: none;
+	.night-lede {
+		margin: 16px 0 0;
+		color: #b5b9c4;
+	}
+
+	.night ul {
 		margin: 0;
 		padding: 0;
+		list-style: none;
 	}
 
-	.free li {
+	.night li {
 		display: flex;
 		gap: 12px;
 		align-items: center;
@@ -721,7 +897,7 @@ const icons: Record<string, string> = {
 		font-weight: 600;
 	}
 
-	.free li::before {
+	.night li::before {
 		content: '✓';
 		display: grid;
 		place-items: center;
@@ -733,7 +909,7 @@ const icons: Record<string, string> = {
 		font-size: 14px;
 	}
 
-	.free-note {
+	.night-note {
 		margin: 20px 0 0;
 		font-size: 15px;
 		color: #9aa0ac;
@@ -770,10 +946,10 @@ const icons: Record<string, string> = {
 
 	.faq summary::after {
 		content: '+';
-		flex: 0 0 28px;
-		height: 28px;
 		display: grid;
 		place-items: center;
+		flex: 0 0 28px;
+		height: 28px;
 		border-radius: 50%;
 		background: var(--primary-soft);
 		color: var(--primary);
@@ -790,6 +966,30 @@ const icons: Record<string, string> = {
 		color: var(--text-soft);
 	}
 
+	.guides {
+		margin-top: 40px;
+	}
+
+	.guides ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.guides li {
+		padding: 8px 0;
+	}
+
+	.guides a {
+		font-weight: 700;
+		color: var(--primary);
+		text-decoration: none;
+	}
+
+	.guides a:hover {
+		text-decoration: underline;
+	}
+
 	/* Appel final */
 	.cta {
 		margin-top: 96px;
@@ -800,9 +1000,9 @@ const icons: Record<string, string> = {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		text-align: center;
 		gap: 24px;
 		padding: 80px 0;
+		text-align: center;
 	}
 
 	.cta-inner img {
@@ -830,8 +1030,8 @@ const icons: Record<string, string> = {
 	}
 
 	.footer p {
-		margin: 0;
 		max-width: 40em;
+		margin: 0;
 	}
 
 	.footer nav {
@@ -846,18 +1046,32 @@ const icons: Record<string, string> = {
 		text-decoration: none;
 	}
 
+	@media (prefers-reduced-motion: reduce) {
+		.orb,
+		.ring,
+		.idle-in,
+		.idle-out {
+			animation: none;
+		}
+
+		.idle-out {
+			display: none;
+		}
+	}
+
 	@media (max-width: 900px) {
 		.hero-inner {
 			grid-template-columns: 1fr;
-			padding-bottom: 120px;
+			gap: 24px;
+			padding-bottom: 110px;
 		}
 
-		.breath {
-			width: min(280px, 70vw);
+		.stage {
+			width: min(300px, 72vw);
 		}
 
 		.session-list,
-		.features {
+		.night-inner {
 			grid-template-columns: 1fr;
 		}
 
@@ -865,8 +1079,21 @@ const icons: Record<string, string> = {
 			min-height: 0;
 		}
 
-		.free-inner {
+		.habit,
+		.habit.flip {
 			grid-template-columns: 1fr;
+			gap: 28px;
+		}
+
+		.habit.flip .habit-shot {
+			order: 0;
+		}
+
+		.habit-shot {
+			width: min(320px, 100%);
+		}
+
+		.night-inner {
 			gap: 24px;
 			padding: 64px 0;
 		}
@@ -885,21 +1112,23 @@ const icons: Record<string, string> = {
 			font-size: 18px;
 		}
 
-		.figures {
-			gap: 8px;
+		.day {
+			grid-template-columns: 1fr;
+			gap: 28px;
+			margin-top: 40px;
 		}
 
-		.figures div {
-			padding: 20px 8px;
-			border-radius: 18px;
+		.day::before {
+			display: none;
 		}
 
-		.figures span {
-			font-size: 14px;
+		.dot {
+			margin-bottom: 8px;
 		}
 
-		.shots-track {
-			padding: 0 16px;
+		.habits {
+			gap: 72px;
+			padding-top: 88px;
 		}
 	}
 </style>

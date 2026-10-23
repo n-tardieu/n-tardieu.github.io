@@ -1,0 +1,98 @@
+---
+// Tableau de la caféine par boisson, valeurs du catalogue d'Eau & Café.
+import Guide from '../../layouts/Guide.astro';
+import { CAFFEINE_DRINKS } from '../../data/drinks';
+
+const per100 = (mg: number, ml: number) => Math.round((mg / ml) * 100);
+const sorted = [...CAFFEINE_DRINKS].sort((a, b) => b.caffeineMg - a.caffeineMg);
+
+const faq = [
+	{
+		q: 'Combien de caféine dans un expresso ?',
+		a: 'Environ 80 mg pour un expresso de 60 mL, en moyenne. Selon le grain (l’arabica en contient moins que le robusta) et la préparation, cela peut aller du simple au double.',
+	},
+	{
+		q: 'Y a-t-il plus de caféine dans un expresso ou dans un café allongé ?',
+		a: 'L’expresso est plus concentré, mais une grande tasse de café allongé ou filtre contient souvent autant de caféine, voire plus, parce que le volume est bien plus grand.',
+	},
+	{
+		q: 'Le thé contient-il moins de caféine que le café ?',
+		a: 'Oui, en général : une tasse de thé noir apporte environ 40 mg, soit à peu près la moitié d’un expresso. Le thé vert en contient un peu moins.',
+	},
+	{
+		q: 'Combien de cafés par jour au maximum ?',
+		a: 'L’EFSA considère que jusqu’à 400 mg de caféine par jour ne pose pas de problème de sécurité pour un adulte en bonne santé, et 200 mg pendant la grossesse. 400 mg, c’est environ 5 expressos moyens.',
+	},
+];
+---
+
+<Guide
+	title="Quantité de caféine : café, thé, cola, énergisant"
+	description="Tableau de la caféine par boisson : expresso, café allongé, latte, thé, cola, boisson énergisante. Valeurs moyennes et repères EFSA."
+	h1="Quantité de caféine par boisson"
+	lede="Un expresso contient en moyenne 80 mg de caféine, une tasse de thé noir environ 40 mg, une canette de cola un peu plus de 30 mg. Voici le tableau complet, avec les repères de l’EFSA."
+	published="2026-10-23"
+	pitch="Eau & Café additionne la caféine de chaque boisson notée et te dit où tu en es par rapport aux 400 mg."
+	faq={faq}
+	sources={[
+		{ label: 'EFSA (2015), Scientific Opinion on the safety of caffeine, EFSA Journal 13(5):4102', url: 'https://www.efsa.europa.eu/fr/efsajournal/pub/4102' },
+		{ label: 'EFSA, La caféine (page thématique)', url: 'https://www.efsa.europa.eu/fr/topics/topic/caffeine' },
+		{ label: 'ANSES, Table de composition nutritionnelle des aliments Ciqual', url: 'https://ciqual.anses.fr/' },
+	]}
+>
+	<table>
+		<thead>
+			<tr>
+				<th>Boisson</th>
+				<th>Portion</th>
+				<th>Caféine</th>
+				<th>Pour 100 mL</th>
+			</tr>
+		</thead>
+		<tbody>
+			{
+				sorted.map((d) => (
+					<tr>
+						<td>{d.name}</td>
+						<td>{d.ml} mL</td>
+						<td><strong>{d.caffeineMg} mg</strong></td>
+						<td>{per100(d.caffeineMg, d.ml)} mg</td>
+					</tr>
+				))
+			}
+		</tbody>
+	</table>
+	<p>
+		Ce sont des <strong>valeurs moyennes</strong>, celles qu’utilise l’app Eau &amp; Café. La teneur réelle dépend du
+		grain, de la mouture, du temps d’infusion et de la marque : vérifie l’étiquette des boissons industrielles.
+	</p>
+
+	<h2>Les repères de l’EFSA</h2>
+	<div class="key">
+		<strong>400 mg par jour</strong> pour un adulte en bonne santé, <strong>200 mg en une prise</strong>, et
+		<strong>200 mg par jour</strong> pendant la grossesse.
+		<p>L’EFSA note aussi qu’environ 100 mg pris près du coucher peuvent retarder l’endormissement chez certaines personnes.</p>
+	</div>
+	<p>En pratique, 400 mg représentent par exemple :</p>
+	<ul>
+		<li>5 expressos de 80 mg ;</li>
+		<li>2 doubles expressos et demi ;</li>
+		<li>10 tasses de thé noir ;</li>
+		<li>5 canettes de boisson énergisante de 25 cl.</li>
+	</ul>
+
+	<h2>Ce qui fait varier la caféine du café</h2>
+	<ul>
+		<li><strong>Le grain</strong> : le robusta contient environ deux fois plus de caféine que l’arabica.</li>
+		<li><strong>Le volume</strong> : une grande tasse de café filtre peut dépasser un expresso.</li>
+		<li><strong>Le temps de contact</strong> : plus l’eau reste longtemps au contact du café ou du thé, plus elle extrait de caféine.</li>
+		<li><strong>Le déca</strong> n’est pas à zéro : il en reste quelques milligrammes par tasse.</li>
+	</ul>
+
+	<h2>Et pour le sommeil ?</h2>
+	<p>
+		La quantité compte, mais l’heure aussi : la caféine met plusieurs heures à s’éliminer. Calcule ton
+		<a href="/cafeine/heure-limite-cafe/">heure limite du café</a> selon ta boisson et ton coucher, et lis le guide
+		<a href="/cafeine/demi-vie-cafeine/">demi-vie de la caféine</a>.
+	</p>
+</Guide>

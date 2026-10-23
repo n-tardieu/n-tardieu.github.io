@@ -1,288 +1,586 @@
 ---
-// Le hub : toutes les apps, chacune dans ses propres couleurs.
-import Base from '../layouts/Base.astro';
+// Le hub, « la collection » : un cadre papier et encre, et chaque app numérotée
+// dans sa propre identité, avec ses boutons de stores. Puis les outils gratuits,
+// les guides, les principes et l'auteur.
+import Site from '../layouts/Site.astro';
 import StoreButtons from '../components/StoreButtons.astro';
-import { APPS } from '../data/apps';
+import BreathOrb from '../components/BreathOrb.astro';
+import { getApp, APPS } from '../data/apps';
+import { GUIDES } from '../data/guides';
+
+const coheria = getApp('coheria');
+const eauCafe = getApp('eau-et-cafe');
+const tools = GUIDES.filter((g) => g.kind === 'outil');
+const guides = GUIDES.filter((g) => g.kind === 'guide');
 
 const jsonLd = {
 	'@context': 'https://schema.org',
-	'@type': 'Person',
-	name: 'Nicolas Tardieu',
-	url: 'https://n-tardieu.github.io',
-	jobTitle: 'Éditeur d’applications mobiles',
-	sameAs: ['https://github.com/n-tardieu'],
+	'@graph': [
+		{
+			'@type': 'Person',
+			'@id': 'https://n-tardieu.github.io/#nicolas',
+			name: 'Nicolas Tardieu',
+			url: 'https://n-tardieu.github.io/a-propos/',
+			jobTitle: 'Développeur d’applications mobiles',
+			sameAs: ['https://github.com/n-tardieu'],
+		},
+		{
+			'@type': 'ItemList',
+			name: 'Applications de Nicolas Tardieu',
+			itemListElement: APPS.map((a, i) => ({
+				'@type': 'ListItem',
+				position: i + 1,
+				url: `https://n-tardieu.github.io/${a.slug}`,
+				name: a.name,
+			})),
+		},
+	],
 };
 ---
 
-<Base
-	title="Nicolas Tardieu · Applications mobiles"
-	description="Coheria, Eau & Café : des applications iPhone et Android simples, sans publicité, qui respectent ta vie privée. Conçues et développées par Nicolas Tardieu."
+<Site
+	title="Nicolas Tardieu · Apps de bien-être pour iPhone et Android"
+	description="Coheria pour la cohérence cardiaque, Eau & Café pour l’eau et la caféine : des apps iPhone et Android sans pub, et des outils gratuits en ligne."
 	image="/apps/coheria/01-home.webp"
-	themeColor="#FAF8F4"
-	fonts="family=Inter:wght@400;500;600;700;800"
 	jsonLd={jsonLd}
 >
-	<div class="page">
-		<header class="wrap intro">
-			<p class="eyebrow">Nicolas Tardieu · Éditeur d’applications</p>
-			<h1>Des apps simples, pour prendre soin de ses journées.</h1>
-			<p class="lede">
-				Je conçois et développe des applications mobiles pour iPhone et Android. Peu de réglages, pas de publicité, et
-				tes données restent les tiennes.
-			</p>
-		</header>
+	<main>
+		<section class="intro wrap">
+			<h1 class="display">Des apps qui prennent soin de tes journées.</h1>
+			<ul class="facts">
+				<li><strong>2</strong> apps</li>
+				<li>iPhone &amp; Android</li>
+				<li><strong>0</strong> pub</li>
+				<li>Tes données restent chez toi</li>
+			</ul>
+		</section>
 
-		<main class="wrap apps">
-			{
-				APPS.map((app, i) => (
-					<article
-						class="app"
-						style={`--accent: ${app.accent}; --surface: ${app.surface}; --ink: ${app.ink}; --sb-bg: ${app.accent}; --delay: ${i * 0.12}s`}
-					>
-						<a href={`/${app.slug}`} class="app-link" aria-label={`Découvrir ${app.name}`} />
-						<div class="app-head">
-							<img src={app.icon} alt="" width="72" height="72" class="app-icon" />
-							<span class="app-arrow" aria-hidden="true">
-								→
-							</span>
-						</div>
-						<h2>{app.name}</h2>
-						<p>{app.tagline}</p>
-						<div class="app-shots" aria-hidden="true">
-							{app.preview.map((src) => (
-								<img src={src} alt="" loading="lazy" width="660" height="1434" />
-							))}
-						</div>
-						<StoreButtons app={app} class="app-stores" />
-					</article>
-				))
-			}
-		</main>
+		<div id="apps" class="apps wrap">
+			<!-- N°01 Coheria, dans son identité : pêche, violet, police système -->
+			<article class="app coheria" style="--sb-bg: #5B4BF5; --sb-radius: 14px">
+				<div class="app-text">
+					<p class="num">N°01 · Cohérence cardiaque</p>
+					<h2><a href="/coheria">Coheria</a></h2>
+					<p class="pitch">
+						Respire cinq minutes, trois fois par jour. Une vague à suivre, sans voix, et une série qui pardonne un jour
+						manqué.
+					</p>
+					<ul class="points">
+						<li>La méthode 365 : 3 séances, 6 respirations par minute, 5 minutes</li>
+						<li>Des rappels qui se taisent si tu as déjà respiré</li>
+						<li>Gratuit pour pratiquer</li>
+					</ul>
+					<StoreButtons app={coheria} />
+					<a href="/coheria" class="more">Découvrir Coheria <span aria-hidden="true">→</span></a>
+				</div>
+				<div class="app-visual">
+					<BreathOrb size="min(360px, 70vw)" />
+				</div>
+			</article>
 
-		<footer class="wrap footer">
-			<div>
-				<p class="eyebrow">Contact</p>
-				<a href="mailto:nicolas.tardieu.pro@gmail.com" class="mail">nicolas.tardieu.pro@gmail.com</a>
+			<!-- N°02 Eau & Café, dans son identité : papier, encre, bleu Klein -->
+			<article class="app eau" style="--sb-bg: #1B2FD6; --sb-radius: 0">
+				<div class="app-text">
+					<p class="num">N°02 · Eau et caféine</p>
+					<h2><a href="/eau-et-cafe">Eau &amp; Café</a></h2>
+					<p class="pitch">
+						Ton eau et ton café en un geste, l’heure de ton dernier café, et chaque jour une œuvre d’art à découvrir.
+					</p>
+					<ul class="points">
+						<li>Un objectif d’eau estimé d’après les repères de l’EFSA</li>
+						<li>Ton heure limite du café, selon ton coucher</li>
+						<li>Gratuit, sans compte, sans pub</li>
+					</ul>
+					<StoreButtons app={eauCafe} />
+					<a href="/eau-et-cafe" class="more">Découvrir Eau &amp; Café <span aria-hidden="true">→</span></a>
+				</div>
+				<figure class="app-visual painting">
+					<img
+						src="/apps/eau-et-cafe/oeuvres/cezanne-cafetiere.webp"
+						alt="La Femme à la cafetière, Paul Cézanne"
+						width="900"
+						height="1383"
+						loading="lazy"
+					/>
+					<figcaption>
+						<span class="n">N°12</span>
+						<span>La Femme à la cafetière<small>Paul Cézanne, vers 1895</small></span>
+						<span class="fig">1,4<em>L</em></span>
+					</figcaption>
+				</figure>
+			</article>
+		</div>
+
+		<section class="tools wrap" aria-labelledby="outils">
+			<div class="head">
+				<h2 id="outils" class="display">Outils gratuits</h2>
+				<p>Les calculs de mes apps, utilisables ici, sans inscription.</p>
 			</div>
-			<a href="https://github.com/n-tardieu" target="_blank" rel="noopener" class="gh">GitHub</a>
-		</footer>
-	</div>
-</Base>
+			<ol class="rows">
+				{
+					tools.map((t, i) => (
+						<li>
+							<a href={t.href}>
+								<span class="row-num">{String(i + 1).padStart(2, '0')}</span>
+								<strong>{t.title}</strong>
+								<span class="row-sum">{t.summary}</span>
+								<span class="row-arrow" aria-hidden="true">
+									→
+								</span>
+							</a>
+						</li>
+					))
+				}
+			</ol>
+		</section>
+
+		<section class="tools wrap" aria-labelledby="guides">
+			<div class="head">
+				<h2 id="guides" class="display">Guides</h2>
+				<p>Des réponses claires et sourcées. <a href="/guides/">Tous les guides →</a></p>
+			</div>
+			<ul class="cards">
+				{
+					guides.map((g) => (
+						<li>
+							<a href={g.href}>
+								<strong>{g.title}</strong>
+								<span>{g.summary}</span>
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</section>
+
+		<section class="principles wrap" aria-labelledby="principes">
+			<h2 id="principes" class="label">Comment je fais mes apps</h2>
+			<div class="cols">
+				<div>
+					<p class="big display">Sans pub</p>
+					<p>Ni bannière ni pistage publicitaire. Une app de bien-être ne devrait pas vendre ton attention.</p>
+				</div>
+				<div>
+					<p class="big display">Chez toi</p>
+					<p>Tes données restent sur ton téléphone. Pas de compte obligatoire, aucune donnée revendue.</p>
+				</div>
+				<div>
+					<p class="big display">Gratuit</p>
+					<p>L’essentiel est gratuit, pour toujours. Quand une option payante existe, c’est un achat simple et facultatif.</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="author wrap" aria-labelledby="auteur">
+			<p class="label">Qui fait ces apps</p>
+			<h2 id="auteur" class="display">Nicolas Tardieu, développeur indépendant.</h2>
+			<p>
+				Je conçois, développe et publie seul mes applications pour iPhone et Android, depuis la France. Chaque fonction
+				part d’un besoin simple : respirer un moment, penser à boire, mieux placer son dernier café.
+			</p>
+			<a href="/a-propos/" class="more">En savoir plus sur moi <span aria-hidden="true">→</span></a>
+		</section>
+	</main>
+</Site>
 
 <style>
-	.page {
-		min-height: 100vh;
-		background: #faf8f4;
-		color: #141414;
-		font-family: 'Inter', system-ui, sans-serif;
-		font-size: 17px;
-		line-height: 1.55;
-	}
-
-	.wrap {
-		width: min(1120px, calc(100% - 48px));
-		margin: 0 auto;
-	}
-
-	.eyebrow {
-		margin: 0 0 16px;
-		font-size: 13px;
-		font-weight: 600;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
-		color: #77736b;
-	}
-
 	.intro {
-		padding: 96px 0 56px;
-		animation: rise 0.8s ease-out both;
+		padding: 56px 0 40px;
 	}
 
 	.intro h1 {
-		max-width: 14em;
-		margin: 0 0 20px;
-		font-size: clamp(40px, 6vw, 76px);
-		font-weight: 800;
-		line-height: 1;
-		letter-spacing: -0.045em;
+		max-width: 17ch;
+		margin: 0 0 28px;
+		font-size: clamp(46px, 7.4vw, 112px);
 	}
 
-	.lede {
-		max-width: 34em;
+	.facts {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px 0;
+		list-style: none;
 		margin: 0;
-		font-size: 20px;
-		color: #55524c;
+		padding: 0;
+		font-size: 15px;
+		font-weight: 600;
 	}
 
+	.facts li {
+		padding: 0 18px;
+		border-left: 1px solid var(--line);
+	}
+
+	.facts li:first-child {
+		padding-left: 0;
+		border-left: 0;
+	}
+
+	/* Apps */
 	.apps {
 		display: grid;
-		grid-template-columns: repeat(2, 1fr);
 		gap: 24px;
 	}
 
 	.app {
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		padding: 32px;
-		border-radius: 28px;
-		border: 1px solid rgba(0, 0, 0, 0.06);
-		background: var(--surface);
-		color: var(--ink);
-		overflow: hidden;
-		isolation: isolate;
-		animation: rise 0.8s ease-out both;
-		animation-delay: calc(0.15s + var(--delay));
-		transition: transform 0.3s ease;
-	}
-
-	.app:hover {
-		transform: translateY(-4px);
-	}
-
-	.app-link {
-		position: absolute;
-		inset: 0;
-		z-index: 1;
-		border-radius: inherit;
-	}
-
-	.app-link:focus-visible {
-		outline: 3px solid var(--accent);
-		outline-offset: 3px;
-	}
-
-	.app-head {
-		display: flex;
-		justify-content: space-between;
-		align-items: flex-start;
-	}
-
-	.app-icon {
-		border-radius: 18px;
-	}
-
-	.app-arrow {
 		display: grid;
-		place-items: center;
-		width: 44px;
-		height: 44px;
-		border-radius: 50%;
-		background: var(--accent);
-		color: #fff;
-		font-size: 20px;
-		transition: transform 0.3s ease;
-	}
-
-	.app:hover .app-arrow {
-		transform: translateX(4px);
+		grid-template-columns: 1.1fr 0.9fr;
+		gap: 32px;
+		align-items: center;
+		padding: 48px;
+		overflow: hidden;
 	}
 
 	.app h2 {
-		margin: 24px 0 6px;
-		font-size: 36px;
-		font-weight: 800;
-		letter-spacing: -0.035em;
+		margin: 8px 0 12px;
+		font-size: clamp(44px, 6vw, 72px);
+		line-height: 1;
 	}
 
-	.app > p {
-		margin: 0;
-		max-width: 22em;
-		font-size: 18px;
-		opacity: 0.75;
-	}
-
-	.app-shots {
-		display: flex;
-		justify-content: center;
-		gap: 16px;
-		margin: 32px -8px 28px;
-		height: 300px;
-		overflow: hidden;
-		mask-image: linear-gradient(180deg, #000 70%, transparent);
-	}
-
-	.app-shots img {
-		width: 46%;
-		height: auto;
-		align-self: flex-start;
-		border-radius: 14px;
-		transition: transform 0.5s ease;
-	}
-
-	.app-shots img + img {
-		margin-top: 40px;
-	}
-
-	.app:hover .app-shots img {
-		transform: translateY(-12px);
-	}
-
-	.app-stores {
-		position: relative;
-		z-index: 2;
-		margin-top: auto;
-	}
-
-	.footer {
-		display: flex;
-		justify-content: space-between;
-		align-items: flex-end;
-		gap: 24px;
-		margin-top: 96px;
-		padding: 32px 0 48px;
-		border-top: 1px solid #e4e0d8;
-	}
-
-	.footer .eyebrow {
-		margin-bottom: 4px;
-	}
-
-	.mail,
-	.gh {
-		color: inherit;
-		font-weight: 600;
+	.app h2 a {
 		text-decoration: none;
-		border-bottom: 1px solid currentColor;
 	}
 
-	@keyframes rise {
-		from {
-			opacity: 0;
-			transform: translateY(24px);
-		}
+	.num {
+		margin: 0;
+		font-size: 13px;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
 	}
 
-	@media (max-width: 860px) {
-		.apps {
+	.pitch {
+		margin: 0 0 20px;
+		font-size: 20px;
+		line-height: 1.45;
+		max-width: 26em;
+	}
+
+	.points {
+		list-style: none;
+		margin: 0 0 28px;
+		padding: 0;
+		font-size: 15px;
+	}
+
+	.points li {
+		padding: 8px 0;
+		border-top: 1px solid var(--rule);
+	}
+
+	.more {
+		display: inline-block;
+		margin-top: 20px;
+		font-weight: 700;
+		text-decoration: none;
+	}
+
+	.more:hover {
+		text-decoration: underline;
+	}
+
+	.app-visual {
+		justify-self: center;
+	}
+
+	.coheria {
+		--rule: rgba(21, 23, 28, 0.1);
+		background: linear-gradient(180deg, #fce3ce, #fdeee1 55%, #fff8f2);
+		border-radius: 32px;
+		color: #15171c;
+		font-family: -apple-system, 'SF Pro Display', 'Helvetica Neue', system-ui, sans-serif;
+	}
+
+	.coheria h2 {
+		font-weight: 800;
+		letter-spacing: -0.045em;
+	}
+
+	.coheria .num,
+	.coheria .more {
+		color: #5b4bf5;
+	}
+
+	.coheria .pitch {
+		color: #4a4f59;
+	}
+
+	.eau {
+		--rule: #c9c7be;
+		background: #fbfaf6;
+		border: 2px solid var(--ink);
+	}
+
+	.eau h2 {
+		font-family: var(--narrow);
+		font-weight: 700;
+		text-transform: uppercase;
+	}
+
+	.eau .num,
+	.eau .more {
+		color: #1b2fd6;
+	}
+
+	.eau .pitch {
+		color: var(--ink-2);
+	}
+
+	.painting {
+		margin: 0;
+		width: min(340px, 100%);
+		border: 2px solid var(--ink);
+		background: var(--paper);
+	}
+
+	.painting img {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 4 / 4.2;
+		object-fit: cover;
+		object-position: 50% 30%;
+	}
+
+	.painting figcaption {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		padding: 10px 12px;
+		font-size: 13px;
+		font-weight: 600;
+		line-height: 1.2;
+	}
+
+	.painting small {
+		display: block;
+		font-weight: 400;
+		color: var(--ink-2);
+	}
+
+	.painting .n {
+		padding: 3px 5px;
+		background: #1b2fd6;
+		color: #fff;
+		font-family: var(--narrow);
+	}
+
+	.painting .fig {
+		margin-left: auto;
+		font-family: var(--narrow);
+		font-size: 30px;
+		font-weight: 600;
+	}
+
+	.painting em {
+		font-style: normal;
+		font-size: 14px;
+		color: #1b2fd6;
+	}
+
+	/* Outils et guides */
+	.tools {
+		margin-top: 96px;
+	}
+
+	.head {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 24px;
+		align-items: end;
+		padding-bottom: 14px;
+		border-bottom: 2px solid var(--ink);
+	}
+
+	.head h2 {
+		margin: 0;
+		font-size: clamp(36px, 5vw, 60px);
+	}
+
+	.head p {
+		margin: 0;
+		justify-self: end;
+		color: var(--ink-2);
+	}
+
+	.rows {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.rows a {
+		display: grid;
+		grid-template-columns: 64px 1fr 1.2fr 32px;
+		gap: 24px;
+		align-items: baseline;
+		padding: 24px 0;
+		border-bottom: 1px solid var(--line);
+		text-decoration: none;
+	}
+
+	.rows a:hover strong {
+		text-decoration: underline;
+	}
+
+	.row-num {
+		font-family: var(--narrow);
+		font-size: 34px;
+		font-weight: 700;
+		line-height: 1;
+	}
+
+	.rows strong {
+		font-size: 20px;
+		line-height: 1.25;
+	}
+
+	.row-sum {
+		color: var(--ink-2);
+	}
+
+	.row-arrow {
+		font-size: 22px;
+		transition: transform 0.2s ease;
+	}
+
+	.rows a:hover .row-arrow {
+		transform: translateX(4px);
+	}
+
+	.cards {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 0 24px;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.cards a {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+		height: 100%;
+		padding: 20px 0;
+		border-bottom: 1px solid var(--line);
+		text-decoration: none;
+	}
+
+	.cards strong {
+		font-size: 18px;
+		line-height: 1.25;
+	}
+
+	.cards a:hover strong {
+		text-decoration: underline;
+	}
+
+	.cards span {
+		font-size: 14px;
+		color: var(--ink-2);
+	}
+
+	/* Principes */
+	.principles {
+		margin-top: 96px;
+		padding: 56px 48px;
+		background: var(--ink);
+		color: var(--paper);
+	}
+
+	.principles .cols {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 40px;
+		margin-top: 28px;
+	}
+
+	.principles .big {
+		margin: 0 0 10px;
+		font-size: 44px;
+	}
+
+	.principles p {
+		margin: 0;
+		color: rgba(245, 244, 239, 0.75);
+	}
+
+	/* Auteur */
+	.author {
+		margin-top: 96px;
+	}
+
+	.author h2 {
+		max-width: 22ch;
+		margin: 10px 0 16px;
+		font-size: clamp(34px, 4.6vw, 54px);
+	}
+
+	.author p {
+		max-width: 38em;
+		font-size: 19px;
+	}
+
+	@media (max-width: 960px) {
+		.app {
 			grid-template-columns: 1fr;
+			padding: 32px 24px;
+		}
+
+		.app-visual {
+			order: -1;
+		}
+
+		.head {
+			grid-template-columns: 1fr;
+			gap: 8px;
+		}
+
+		.head p {
+			justify-self: start;
+		}
+
+		.rows a {
+			grid-template-columns: 48px 1fr 24px;
+		}
+
+		.row-sum {
+			grid-column: 2;
+			grid-row: 2;
+		}
+
+		.cards {
+			grid-template-columns: 1fr 1fr;
+		}
+
+		.principles {
+			padding: 40px 24px;
+		}
+
+		.principles .cols {
+			grid-template-columns: 1fr;
+			gap: 28px;
 		}
 	}
 
 	@media (max-width: 560px) {
-		.wrap {
-			width: calc(100% - 32px);
-		}
-
 		.intro {
-			padding: 56px 0 40px;
+			padding: 36px 0 28px;
 		}
 
-		.lede {
+		.facts li {
+			padding: 0 12px;
+		}
+
+		.coheria {
+			border-radius: 24px;
+		}
+
+		.pitch {
 			font-size: 18px;
 		}
 
-		.app {
-			padding: 24px;
-		}
-
-		.app-shots {
-			height: 240px;
-		}
-
-		.footer {
-			flex-direction: column;
-			align-items: flex-start;
+		.cards {
+			grid-template-columns: 1fr;
 		}
 	}
 </style>

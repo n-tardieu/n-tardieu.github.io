@@ -1,0 +1,189 @@
+---
+// Calculateur d'heure limite du café, même formule que l'app Eau & Café.
+// Le tableau est calculé au build pour être lisible sans JavaScript.
+import Guide from '../../layouts/Guide.astro';
+import { CAFFEINE_DRINKS } from '../../data/drinks';
+import { CUTOFF_THRESHOLD_MG, HALF_LIFE_H, cutoffTime, type Sensitivity } from '../../lib/formulas';
+
+const drinks = CAFFEINE_DRINKS.filter((d) => d.cutoff);
+const sensitivities: { id: Sensitivity; label: string; hint: string }[] = [
+	{ id: 'fast', label: 'Rapide', hint: 'Le café me fait peu d’effet' },
+	{ id: 'medium', label: 'Moyenne', hint: 'La plupart des gens' },
+	{ id: 'slow', label: 'Lente', hint: 'Un café me tient longtemps' },
+];
+const defaultCutoff = cutoffTime('23:00', 80, HALF_LIFE_H.medium);
+
+const faq = [
+	{
+		q: 'À quelle heure faut-il arrêter le café ?',
+		a: `Pour un coucher à 23 h et un expresso (environ 80 mg de caféine), l’estimation donne ${defaultCutoff} avec une sensibilité moyenne. Si le café te tient longtemps éveillé, avance cette heure ; si tu l’élimines vite, tu peux la reculer.`,
+	},
+	{
+		q: 'Combien de temps avant de dormir boire son dernier café ?',
+		a: 'Avec une demi-vie de 5 heures, il faut environ 7 heures pour qu’un expresso descende sous 30 mg. Avec un double expresso, plutôt 12 heures. Une étude de 2013 a observé qu’une forte dose prise 6 heures avant le coucher réduisait encore le sommeil.',
+	},
+	{
+		q: 'Le thé empêche-t-il aussi de dormir ?',
+		a: 'Une tasse de thé noir contient environ deux fois moins de caféine qu’un expresso : l’heure limite est donc plus tardive, mais elle existe. Les infusions, elles, n’en contiennent pas.',
+	},
+	{
+		q: 'Ce calcul est-il fiable ?',
+		a: 'C’est une estimation : la vitesse d’élimination varie beaucoup d’une personne à l’autre (tabac, grossesse, contraception orale, génétique). Sers-t’en comme d’un repère, et ajuste-le à ce que tu ressens.',
+	},
+];
+---
+
+<Guide
+	title="Heure limite du café : calculateur de caféine"
+	description="À quelle heure boire ton dernier café ? Indique ton heure de coucher et ta sensibilité : le calcul se base sur la demi-vie de la caféine."
+	h1="À quelle heure boire ton dernier café ?"
+	lede="Indique l’heure de ton coucher, ce que tu bois et ta sensibilité : le calculateur estime l’heure après laquelle un café en laisserait trop au moment de dormir."
+	published="2026-10-23"
+	pitch="Eau & Café fait ce calcul chaque jour avec ce que tu as vraiment bu, et t’affiche ton heure limite dès le matin."
+	faq={faq}
+	sources={[
+		{ label: 'EFSA (2015), Scientific Opinion on the safety of caffeine, EFSA Journal 13(5):4102', url: 'https://www.efsa.europa.eu/fr/efsajournal/pub/4102' },
+		{ label: 'Drake C. et al. (2013), Caffeine effects on sleep taken 0, 3, or 6 hours before going to bed, J Clin Sleep Med 9(11)', url: 'https://jcsm.aasm.org/doi/10.5664/jcsm.3170' },
+	]}
+>
+	<form class="tool" data-cutoff onsubmit="return false">
+		<div class="tool-form">
+			<label class="field">
+				<span>Heure du coucher</span>
+				<input type="time" name="bedtime" value="23:00" step="300" required />
+			</label>
+			<fieldset class="field">
+				<legend>Ton dernier café</legend>
+				<select name="drink">
+					{drinks.map((d) => <option value={d.caffeineMg} selected={d.id === 'espresso'}>{d.name} · {d.caffeineMg} mg</option>)}
+				</select>
+			</fieldset>
+			<fieldset class="field">
+				<legend>Ta sensibilité à la caféine</legend>
+				<div class="segmented">
+					{
+						sensitivities.map((s) => (
+							<label>
+								<input type="radio" name="sensitivity" value={HALF_LIFE_H[s.id]} checked={s.id === 'medium'} />
+								<span>
+									{s.label}
+									<small>{s.hint}</small>
+								</span>
+							</label>
+						))
+					}
+				</div>
+			</fieldset>
+		</div>
+		<div class="tool-result" aria-live="polite">
+			<span class="label">Ton dernier café, avant</span>
+			<p class="result-figure coffee" data-out>{defaultCutoff}</p>
+			<p class="result-text" data-explain>
+				Après cette heure, il te resterait plus de {CUTOFF_THRESHOLD_MG} mg de caféine au moment de dormir.
+			</p>
+		</div>
+	</form>
+
+	<h2>Comment le calcul fonctionne</h2>
+	<p>
+		Le corps élimine la caféine progressivement. On mesure cette vitesse avec la <strong>demi-vie</strong> : le temps
+		qu’il faut pour que la quantité présente dans le sang diminue de moitié. Elle tourne autour de 5 heures chez beaucoup
+		d’adultes, mais varie d’environ 3 à 7 heures selon les personnes. Le détail est dans le guide sur la
+		<a href="/cafeine/demi-vie-cafeine/">demi-vie de la caféine</a>.
+	</p>
+	<p>
+		Le calculateur cherche le moment où ton café devrait être bu pour qu’il en reste moins de {CUTOFF_THRESHOLD_MG} mg à
+		l’heure du coucher, soit l’équivalent d’un petit tiers d’expresso. La formule :
+	</p>
+	<div class="key">
+		<strong>Heure limite = coucher − demi-vie × log₂(caféine du café ÷ {CUTOFF_THRESHOLD_MG} mg)</strong>
+		<p>
+			Exemple : un expresso de 80 mg, une demi-vie de 5 h et un coucher à 23 h donnent 5 × log₂(80 ÷ 30) ≈ 7 h 05 avant
+			le coucher, soit <strong>{defaultCutoff}</strong>.
+		</p>
+	</div>
+
+	<h2>L’heure limite selon la boisson, pour un coucher à 23 h</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Boisson</th>
+				<th>Caféine</th>
+				<th>Rapide (3,5 h)</th>
+				<th>Moyenne (5 h)</th>
+				<th>Lente (7 h)</th>
+			</tr>
+		</thead>
+		<tbody>
+			{
+				drinks.map((d) => (
+					<tr>
+						<td>{d.name}</td>
+						<td>{d.caffeineMg} mg</td>
+						<td>{cutoffTime('23:00', d.caffeineMg, HALF_LIFE_H.fast)}</td>
+						<td>{cutoffTime('23:00', d.caffeineMg, HALF_LIFE_H.medium)}</td>
+						<td>{cutoffTime('23:00', d.caffeineMg, HALF_LIFE_H.slow)}</td>
+					</tr>
+				))
+			}
+		</tbody>
+	</table>
+	<p>
+		Les teneurs sont des moyennes : un café filtre préparé fort ou une grande tasse peuvent contenir bien plus. Voir le
+		<a href="/cafeine/quantite-cafeine-boissons/">tableau de la caféine par boisson</a>.
+	</p>
+
+	<h2>Comment choisir ta sensibilité</h2>
+	<ul>
+		<li><strong>Rapide</strong> : un café en fin d’après-midi ne t’empêche pas de t’endormir.</li>
+		<li><strong>Moyenne</strong> : le bon point de départ si tu ne sais pas.</li>
+		<li>
+			<strong>Lente</strong> : un café après le déjeuner se ressent encore le soir. La grossesse et la contraception
+			orale ralentissent souvent l’élimination ; le tabac l’accélère.
+		</li>
+	</ul>
+	<p>
+		Pour aller plus loin sur le lien entre café et nuit, lis le guide
+		<a href="/cafeine/cafe-et-sommeil/">café et sommeil : quel délai avant le coucher ?</a>
+	</p>
+</Guide>
+
+<script>
+	import { cutoffTime, CUTOFF_THRESHOLD_MG } from '../../lib/formulas';
+
+	const form = document.querySelector<HTMLFormElement>('[data-cutoff]');
+	if (form) {
+		const out = form.querySelector<HTMLElement>('[data-out]')!;
+		const explain = form.querySelector<HTMLElement>('[data-explain]')!;
+		const update = () => {
+			const data = new FormData(form);
+			const bedtime = String(data.get('bedtime') || '23:00');
+			const dose = Number(data.get('drink'));
+			const halfLife = Number(data.get('sensitivity'));
+			out.textContent = cutoffTime(bedtime, dose, halfLife);
+			explain.textContent =
+				dose <= CUTOFF_THRESHOLD_MG
+					? 'Cette boisson contient peu de caféine : elle ne devrait pas peser sur ton coucher.'
+					: `Après cette heure, il te resterait plus de ${CUTOFF_THRESHOLD_MG} mg de caféine au moment de dormir.`;
+		};
+		form.addEventListener('input', update);
+		update();
+	}
+</script>
+
+<style>
+	select {
+		width: 100%;
+		padding: 12px;
+		border: 1.5px solid var(--ink);
+		border-radius: 0;
+		background: #fff;
+		color: var(--ink);
+		font: inherit;
+		font-weight: 600;
+	}
+
+	.result-figure.coffee {
+		color: #c4511e;
+	}
+</style>

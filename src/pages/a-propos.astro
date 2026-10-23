@@ -1,0 +1,169 @@
+---
+// Page auteur : qui fait les apps, comment les contenus sont écrits et sourcés.
+import Site from '../layouts/Site.astro';
+import { APPS } from '../data/apps';
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'ProfilePage',
+	mainEntity: {
+		'@type': 'Person',
+		'@id': 'https://n-tardieu.github.io/#nicolas',
+		name: 'Nicolas Tardieu',
+		jobTitle: 'Développeur d’applications mobiles',
+		url: 'https://n-tardieu.github.io/a-propos/',
+		email: 'mailto:nicolas.tardieu.pro@gmail.com',
+		sameAs: ['https://github.com/n-tardieu'],
+	},
+};
+---
+
+<Site
+	title="Nicolas Tardieu, développeur d’apps de bien-être"
+	description="Qui fait Coheria et Eau & Café, comment les contenus du site sont écrits et sourcés, et comment me contacter."
+	jsonLd={jsonLd}
+>
+	<main class="about wrap">
+		<p class="label">À propos</p>
+		<h1 class="display">Bonjour, je suis Nicolas.</h1>
+		<div class="cols">
+			<div class="text">
+				<p class="lede">
+					Je suis développeur et éditeur indépendant d’applications mobiles. Je conçois, développe et publie seul mes
+					apps pour iPhone et Android, depuis la France.
+				</p>
+				<p>
+					Mes apps partent toutes d’un geste simple de la journée : respirer quelques minutes, penser à boire, mieux placer
+					son dernier café. J’essaie de les faire courtes, belles et respectueuses : pas de publicité, pas de compte
+					obligatoire, et tes données restent sur ton téléphone.
+				</p>
+
+				<h2>Mes apps</h2>
+				<ul class="apps">
+					{
+						APPS.map((a) => (
+							<li>
+								<img src={a.icon} alt="" width="48" height="48" />
+								<a href={`/${a.slug}`}>
+									<strong>{a.name}</strong>
+									<span>{a.tagline}</span>
+								</a>
+							</li>
+						))
+					}
+				</ul>
+
+				<h2>Comment j’écris les guides et les outils</h2>
+				<ul>
+					<li>
+						<strong>Des sources citées</strong> en bas de chaque page : autorités sanitaires (EFSA, ANSES), études publiées,
+						ouvrages de référence.
+					</li>
+					<li>
+						<strong>Les mêmes calculs que dans les apps</strong> : les outils du site reprennent exactement les formules
+						d’Eau &amp; Café, formule affichée.
+					</li>
+					<li>
+						<strong>Des repères, pas des promesses</strong> : je parle d’estimations et d’observations. Ces contenus ne
+						remplacent pas l’avis d’un professionnel de santé.
+					</li>
+					<li><strong>Des mises à jour datées</strong> quand une source ou un chiffre change.</li>
+				</ul>
+				<p>Tu as repéré une erreur ? Écris-moi, je corrige.</p>
+			</div>
+
+			<aside class="contact">
+				<p class="label">Contact</p>
+				<p><a href="mailto:nicolas.tardieu.pro@gmail.com">nicolas.tardieu.pro@gmail.com</a></p>
+				<p class="label">Assistance des apps</p>
+				<p>
+					Coheria : <a href="mailto:coheria.contact@gmail.com">coheria.contact@gmail.com</a><br />
+					Eau &amp; Café : <a href="mailto:ntardieu.contact@gmail.com">ntardieu.contact@gmail.com</a>
+				</p>
+				<p class="label">Ailleurs</p>
+				<p><a href="https://github.com/n-tardieu" rel="me noopener" target="_blank">GitHub</a></p>
+			</aside>
+		</div>
+	</main>
+</Site>
+
+<style>
+	.about {
+		padding-top: 48px;
+	}
+
+	.about h1 {
+		margin: 12px 0 32px;
+		font-size: clamp(48px, 8vw, 104px);
+	}
+
+	.cols {
+		display: grid;
+		grid-template-columns: minmax(0, 720px) 1fr;
+		gap: 64px;
+	}
+
+	.lede {
+		margin-top: 0;
+		font-size: 22px;
+		line-height: 1.45;
+	}
+
+	h2 {
+		margin: 48px 0 12px;
+		font-size: 26px;
+	}
+
+	.apps {
+		display: grid;
+		gap: 12px;
+		padding: 0;
+		list-style: none;
+	}
+
+	.apps li {
+		display: flex;
+		align-items: center;
+		gap: 14px;
+		padding: 12px 0;
+		border-bottom: 1px solid var(--line);
+	}
+
+	.apps img {
+		border-radius: 12px;
+	}
+
+	.apps a {
+		display: flex;
+		flex-direction: column;
+		text-decoration: none;
+	}
+
+	.apps a:hover strong {
+		text-decoration: underline;
+	}
+
+	.apps span {
+		font-size: 15px;
+		color: var(--ink-2);
+	}
+
+	.contact {
+		align-self: start;
+		padding: 24px;
+		border: 2px solid var(--ink);
+		background: #fbfaf6;
+	}
+
+	.contact p:not(.label) {
+		margin: 4px 0 20px;
+		overflow-wrap: anywhere;
+	}
+
+	@media (max-width: 860px) {
+		.cols {
+			grid-template-columns: 1fr;
+			gap: 32px;
+		}
+	}
+</style>

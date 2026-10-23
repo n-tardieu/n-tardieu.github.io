@@ -100,7 +100,7 @@ const jsonLd = {
 ---
 
 <Base
-	title="Eau & Café : suivi de l’eau et de la caféine, une œuvre par jour"
+	title="Eau & Café : suivi de l’eau et de la caféine, gratuit"
 	description="Note ton eau et ton café en un geste, connais l’heure de ton dernier café et reçois des bilans en clair. Une œuvre d’art par jour. Gratuit, sans compte, sans pub."
 	image="/apps/eau-et-cafe/01-home.webp"
 	iosAppId={app.stores.iosId}
@@ -259,6 +259,12 @@ const jsonLd = {
 						))
 					}
 				</div>
+				<p class="tools-links">
+					Essaie les calculs de l’app en ligne :
+					<a href="/cafeine/heure-limite-cafe/">heure limite du café</a>,
+					<a href="/hydratation/combien-d-eau-boire-par-jour/">combien d’eau boire par jour</a>,
+					<a href="/cafeine/quantite-cafeine-boissons/">caféine par boisson</a>.
+				</p>
 			</section>
 
 			<section class="cta wrap">
@@ -689,6 +695,7 @@ const jsonLd = {
 
 	.gallery img {
 		width: 100%;
+		height: auto;
 		aspect-ratio: 3 / 4;
 		object-fit: cover;
 		transition: transform 0.4s ease;
@@ -823,6 +830,16 @@ const jsonLd = {
 		margin: 0 0 24px;
 		max-width: 46em;
 		color: var(--ink-2);
+	}
+
+	.tools-links {
+		margin: 28px 0 0;
+		color: var(--ink-2);
+	}
+
+	.tools-links a {
+		color: var(--water);
+		font-weight: 600;
 	}
 
 	/* Appel final */

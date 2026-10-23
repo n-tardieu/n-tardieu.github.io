@@ -1,0 +1,390 @@
+---
+// Gabarit des guides (pages Markdown, via `layout:` dans le frontmatter) et des
+// outils (pages .astro qui passent les mêmes champs en props). Il porte le fil
+// d'Ariane, l'auteur, les sources, l'encart de l'app et les données structurées.
+import Site from './Site.astro';
+import AppCta from '../components/AppCta.astro';
+import { GUIDES, TOPICS, guidesFor } from '../data/guides';
+import { getApp } from '../data/apps';
+
+export interface GuideFields {
+	/** Balise <title>, moins de 60 caractères. */
+	title: string;
+	/** Meta description, moins de 155 caractères. */
+	description: string;
+	h1: string;
+	/** Chapeau sous le H1. */
+	lede?: string;
+	/** Date de publication, AAAA-MM-JJ. */
+	published: string;
+	/** Date de mise à jour, AAAA-MM-JJ. */
+	updated?: string;
+	sources?: { label: string; url?: string }[];
+	faq?: { q: string; a: string }[];
+	/** Phrase de l'encart de l'app. */
+	pitch?: string;
+	/** Rappel « pas un avis médical » (oui par défaut). */
+	disclaimer?: boolean;
+}
+
+const fields: GuideFields = (Astro.props as { frontmatter?: GuideFields }).frontmatter ?? (Astro.props as GuideFields);
+const { title, description, h1, lede, published, updated, sources = [], faq = [], pitch, disclaimer = true } = fields;
+
+const path = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
+const entry = GUIDES.find((g) => g.href === path);
+if (!entry) throw new Error(`Page absente de src/data/guides.ts : ${path}`);
+const related = guidesFor(entry.topic, entry.href);
+const app = getApp(entry.app);
+
+const fmt = (d: string) =>
+	new Date(`${d}T12:00:00`).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+const site = Astro.site!;
+const url = new URL(path, site).href;
+const crumbs = [
+	{ name: 'Accueil', href: '/' },
+	{ name: 'Guides et outils', href: '/guides/' },
+	{ name: TOPICS[entry.topic], href: `/guides/#${entry.topic}` },
+];
+
+const author = { '@type': 'Person', name: 'Nicolas Tardieu', url: new URL('/a-propos/', site).href };
+const graph: Record<string, unknown>[] = [
+	{
+		'@type': entry.kind === 'outil' ? 'WebApplication' : 'Article',
+		...(entry.kind === 'outil'
+			? { name: h1, applicationCategory: 'HealthApplication', operatingSystem: 'Tous', offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' } }
+			: { headline: h1 }),
+		description,
+		url,
+		inLanguage: 'fr',
+		author,
+		datePublished: published,
+		dateModified: updated ?? published,
+	},
+	{
+		'@type': 'BreadcrumbList',
+		itemListElement: [...crumbs, { name: entry.title, href: path }].map((c, i) => ({
+			'@type': 'ListItem',
+			position: i + 1,
+			name: c.name,
+			item: new URL(c.href, site).href,
+		})),
+	},
+];
+if (faq.length) {
+	graph.push({
+		'@type': 'FAQPage',
+		mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+	});
+}
+---
+
+<Site
+	title={title}
+	description={description}
+	iosAppId={app.stores.iosId}
+	jsonLd={{ '@context': 'https://schema.org', '@graph': graph }}
+>
+	<main class="guide">
+		<nav class="crumbs" aria-label="Fil d’Ariane">
+			{
+				crumbs.map((c) => (
+					<>
+						<a href={c.href}>{c.name}</a>
+						<span aria-hidden="true">/</span>
+					</>
+				))
+			}
+		</nav>
+
+		<header class="guide-head">
+			<p class="label kind">{entry.kind === 'outil' ? 'Outil gratuit' : 'Guide'} · {TOPICS[entry.topic]}</p>
+			<h1 class="display">{h1}</h1>
+			{lede && <p class="lede">{lede}</p>}
+			<p class="byline">
+				Par <a href="/a-propos/">Nicolas Tardieu</a> · {updated ? `Mis à jour le ${fmt(updated)}` : `Publié le ${fmt(published)}`}
+			</p>
+		</header>
+
+		<div class="guide-body">
+			<slot />
+
+			{
+				faq.length > 0 && (
+					<section class="faq" aria-labelledby="faq">
+						<h2 id="faq">Questions fréquentes</h2>
+						{faq.map((f) => (
+							<details>
+								<summary>{f.q}</summary>
+								<p>{f.a}</p>
+							</details>
+						))}
+					</section>
+				)
+			}
+
+			<AppCta app={entry.app} pitch={pitch} />
+
+			{
+				sources.length > 0 && (
+					<section class="sources" aria-labelledby="sources">
+						<h2 id="sources">Sources</h2>
+						<ol>
+							{sources.map((s) => (
+								<li>{s.url ? <a href={s.url} rel="noopener" target="_blank">{s.label}</a> : s.label}</li>
+							))}
+						</ol>
+					</section>
+				)
+			}
+
+			{
+				disclaimer && (
+					<p class="disclaimer">
+						Ce contenu donne des repères généraux de bien-être, pas un avis médical. Si une gêne persiste, parles-en à
+						un professionnel de santé.
+					</p>
+				)
+			}
+		</div>
+
+		{
+			related.length > 0 && (
+				<section class="related" aria-labelledby="related">
+					<h2 id="related" class="label">À lire aussi</h2>
+					<ul>
+						{related.map((g) => (
+							<li>
+								<a href={g.href}>
+									<span class="label">{g.kind === 'outil' ? 'Outil' : 'Guide'}</span>
+									<strong>{g.title}</strong>
+									<span class="sum">{g.summary}</span>
+								</a>
+							</li>
+						))}
+					</ul>
+				</section>
+			)
+		}
+	</main>
+</Site>
+
+<style>
+	.guide {
+		width: min(1132px, calc(100% - 32px));
+		margin: 0 auto;
+	}
+
+	.crumbs {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		padding-top: 20px;
+		font-size: 13px;
+		color: var(--ink-2);
+	}
+
+	.crumbs a {
+		text-decoration: none;
+	}
+
+	.crumbs a:hover {
+		text-decoration: underline;
+	}
+
+	.guide-head {
+		max-width: 860px;
+		padding: 40px 0 32px;
+		border-bottom: 1px solid var(--line);
+	}
+
+	.kind {
+		color: var(--ink-2);
+	}
+
+	.guide-head h1 {
+		font-size: clamp(40px, 6.4vw, 76px);
+		margin: 14px 0 20px;
+	}
+
+	.lede {
+		margin: 0 0 20px;
+		font-size: 21px;
+		line-height: 1.5;
+		color: #2a2a27;
+	}
+
+	.byline {
+		margin: 0;
+		font-size: 14px;
+		color: var(--ink-2);
+	}
+
+	.guide-body {
+		max-width: 720px;
+		padding-top: 16px;
+	}
+
+	.guide-body :global(h2) {
+		font-size: 26px;
+		line-height: 1.2;
+		letter-spacing: -0.01em;
+		margin: 48px 0 12px;
+	}
+
+	.guide-body :global(h3) {
+		font-size: 20px;
+		margin: 32px 0 8px;
+	}
+
+	.guide-body :global(p),
+	.guide-body :global(li) {
+		color: #23231f;
+	}
+
+	.guide-body :global(a) {
+		text-underline-offset: 3px;
+	}
+
+	.guide-body :global(table) {
+		width: 100%;
+		border-collapse: collapse;
+		margin: 24px 0;
+		font-size: 15px;
+	}
+
+	.guide-body :global(th),
+	.guide-body :global(td) {
+		padding: 10px 12px 10px 0;
+		border-bottom: 1px solid var(--line);
+		text-align: left;
+		vertical-align: top;
+	}
+
+	.guide-body :global(th) {
+		font-size: 12px;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		border-bottom: 2px solid var(--ink);
+	}
+
+	.guide-body :global(blockquote) {
+		margin: 28px 0;
+		padding: 4px 0 4px 20px;
+		border-left: 4px solid var(--ink);
+		font-size: 19px;
+	}
+
+	.guide-body :global(.key) {
+		margin: 28px 0;
+		padding: 20px 24px;
+		background: var(--paper-2);
+		border-top: 2px solid var(--ink);
+	}
+
+	.faq details {
+		border-bottom: 1px solid var(--line);
+	}
+
+	.faq summary {
+		display: flex;
+		justify-content: space-between;
+		gap: 16px;
+		padding: 18px 0;
+		font-weight: 600;
+		cursor: pointer;
+		list-style: none;
+	}
+
+	.faq summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.faq summary::after {
+		content: '+';
+		font-family: var(--narrow);
+		font-size: 24px;
+		line-height: 1;
+	}
+
+	.faq details[open] summary::after {
+		content: '−';
+	}
+
+	.faq p {
+		margin: 0 0 20px;
+	}
+
+	.sources ol {
+		padding-left: 20px;
+		font-size: 14px;
+	}
+
+	.sources li {
+		margin-bottom: 6px;
+		color: var(--ink-2);
+	}
+
+	.disclaimer {
+		margin-top: 32px;
+		padding-top: 16px;
+		border-top: 1px solid var(--line);
+		font-size: 13px;
+		color: var(--ink-2);
+	}
+
+	.related {
+		margin-top: 72px;
+		padding-top: 16px;
+		border-top: 2px solid var(--ink);
+	}
+
+	.related ul {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 24px;
+		list-style: none;
+		margin: 16px 0 0;
+		padding: 0;
+	}
+
+	.related a {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		text-decoration: none;
+	}
+
+	.related a:hover strong {
+		text-decoration: underline;
+	}
+
+	.related .label {
+		color: var(--ink-2);
+	}
+
+	.related strong {
+		font-size: 18px;
+		line-height: 1.25;
+	}
+
+	.sum {
+		font-size: 14px;
+		color: var(--ink-2);
+	}
+
+	@media (max-width: 760px) {
+		.related ul {
+			grid-template-columns: 1fr;
+		}
+
+		.lede {
+			font-size: 19px;
+		}
+
+		.guide-body :global(table) {
+			display: block;
+			overflow-x: auto;
+			font-size: 14px;
+		}
+	}
+</style>
