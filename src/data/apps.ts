@@ -30,6 +30,8 @@ export interface AppEntry {
 	stores: StoreLinks;
 	privacy: string;
 	support: string;
+	/** Adresse d'assistance, qui reçoit aussi la liste d'attente. */
+	contact: string;
 }
 
 export const APPS: AppEntry[] = [
@@ -51,6 +53,7 @@ export const APPS: AppEntry[] = [
 		},
 		privacy: '/privacy',
 		support: '/support',
+		contact: 'coheria.contact@gmail.com',
 	},
 	{
 		slug: 'eau-et-cafe',
@@ -67,6 +70,7 @@ export const APPS: AppEntry[] = [
 		stores: { ios: null, iosId: null, android: null },
 		privacy: '/eau-et-cafe/confidentialite',
 		support: '/eau-et-cafe/assistance',
+		contact: 'ntardieu.contact@gmail.com',
 	},
 ];
 
@@ -77,6 +81,30 @@ export function getApp(slug: string): AppEntry {
 }
 
 export const SITE_NAME = 'Nicolas Tardieu';
+
+/** Les pages du mini-site de chaque app, dans l'ordre du menu. */
+export function appPages(app: AppEntry): { href: string; label: string }[] {
+	return [
+		{ href: `/${app.slug}/fonctionnalites/`, label: 'Fonctionnalités' },
+		{ href: `/${app.slug}/tarifs/`, label: 'Tarifs' },
+		{ href: `/${app.slug}/guides/`, label: 'Guides' },
+		{ href: `/${app.slug}/a-propos/`, label: 'À propos' },
+	];
+}
+
+/** Plateformes où l'app n'est pas encore publiée. */
+export function missingStores(app: AppEntry): string[] {
+	return [!app.stores.ios && 'iPhone', !app.stores.android && 'Android'].filter(Boolean) as string[];
+}
+
+/** Liste d'attente par e-mail : un message prérempli vers l'assistance de l'app. */
+export function waitlistHref(app: AppEntry): string | null {
+	const missing = missingStores(app);
+	if (!missing.length) return null;
+	const subject = `Liste d’attente ${app.name} (${missing.join(' et ')})`;
+	const body = `Bonjour,\n\nPréviens-moi quand ${app.name} sort sur ${missing.join(' et ')}.\n\nMerci !`;
+	return `mailto:${app.contact}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
 
 /** Page Ko-fi pour les dons ponctuels. Tant qu'elle vaut null, la carte « Offre-moi un café » est masquée. */
 export const KOFI_URL: string | null = null;

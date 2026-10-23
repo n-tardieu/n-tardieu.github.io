@@ -1,9 +1,9 @@
 ---
 // Calculateur d'heure limite du café, même formule que l'app Eau & Café.
 // Le tableau est calculé au build pour être lisible sans JavaScript.
-import Guide from '../../layouts/Guide.astro';
-import { CAFFEINE_DRINKS } from '../../data/drinks';
-import { CUTOFF_THRESHOLD_MG, HALF_LIFE_H, cutoffTime, type Sensitivity } from '../../lib/formulas';
+import Guide from '../../../layouts/Guide.astro';
+import { CAFFEINE_DRINKS } from '../../../data/drinks';
+import { CUTOFF_THRESHOLD_MG, HALF_LIFE_H, cutoffTime, type Sensitivity } from '../../../lib/formulas';
 
 const drinks = CAFFEINE_DRINKS.filter((d) => d.cutoff);
 const sensitivities: { id: Sensitivity; label: string; hint: string }[] = [
@@ -89,7 +89,7 @@ const faq = [
 		Le corps élimine la caféine progressivement. On mesure cette vitesse avec la <strong>demi-vie</strong> : le temps
 		qu’il faut pour que la quantité présente dans le sang diminue de moitié. Elle tourne autour de 5 heures chez beaucoup
 		d’adultes, mais varie d’environ 3 à 7 heures selon les personnes. Le détail est dans le guide sur la
-		<a href="/cafeine/demi-vie-cafeine/">demi-vie de la caféine</a>.
+		<a href="/eau-et-cafe/guides/demi-vie-cafeine/">demi-vie de la caféine</a>.
 	</p>
 	<p>
 		Le calculateur cherche le moment où ton café devrait être bu pour qu’il en reste moins de {CUTOFF_THRESHOLD_MG} mg à
@@ -130,7 +130,7 @@ const faq = [
 	</table>
 	<p>
 		Les teneurs sont des moyennes : un café filtre préparé fort ou une grande tasse peuvent contenir bien plus. Voir le
-		<a href="/cafeine/quantite-cafeine-boissons/">tableau de la caféine par boisson</a>.
+		<a href="/eau-et-cafe/guides/quantite-cafeine-boissons/">tableau de la caféine par boisson</a>.
 	</p>
 
 	<h2>Comment choisir ta sensibilité</h2>
@@ -144,12 +144,12 @@ const faq = [
 	</ul>
 	<p>
 		Pour aller plus loin sur le lien entre café et nuit, lis le guide
-		<a href="/cafeine/cafe-et-sommeil/">café et sommeil : quel délai avant le coucher ?</a>
+		<a href="/eau-et-cafe/guides/cafe-et-sommeil/">café et sommeil : quel délai avant le coucher ?</a>
 	</p>
 </Guide>
 
 <script>
-	import { cutoffTime, CUTOFF_THRESHOLD_MG } from '../../lib/formulas';
+	import { cutoffTime, CUTOFF_THRESHOLD_MG } from '../../../lib/formulas';
 
 	const form = document.querySelector<HTMLFormElement>('[data-cutoff]');
 	if (form) {

@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/Guide.astro
+layout: ../../../layouts/Guide.astro
 title: "Cohérence cardiaque : combien de fois par jour ?"
 description: "Cohérence cardiaque : combien de fois par jour, combien de temps et à quel moment ? Le repère des 3 séances de 5 minutes, et comment débuter."
 h1: "Combien de séances de cohérence cardiaque par jour ?"
@@ -46,7 +46,7 @@ En pratique, tout le monde ne part pas du même endroit. Voici des repères selo
 
 Il n'existe pas de nombre maximal connu. Mais au-delà de trois séances, ce n'est pas forcément mieux : la clé est la **régularité**, pas la quantité.
 
-Pour le détail de la technique (posture, rythme, respiration par le ventre), lis notre guide sur [la méthode 365 de cohérence cardiaque](/coherence-cardiaque/methode-365/).
+Pour le détail de la technique (posture, rythme, respiration par le ventre), lis notre guide sur [la méthode 365 de cohérence cardiaque](/coheria/guides/methode-365/).
 
 ## Combien de temps dure une séance de cohérence cardiaque ?
 

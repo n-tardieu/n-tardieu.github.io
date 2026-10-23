@@ -1,0 +1,25 @@
+---
+import AppShell from '../../../layouts/AppShell.astro';
+import GuideGrid from '../../../components/GuideGrid.astro';
+import { GUIDES } from '../../../data/guides';
+
+// Les outils d'abord : ce sont les calculs de l'app, utilisables ici.
+const order = { outil: 0, guide: 1 };
+const guides = GUIDES.filter((g) => g.app === 'eau-et-cafe').sort((a, b) => order[a.kind] - order[b.kind]);
+---
+
+<AppShell
+	app="eau-et-cafe"
+	title="Guides et outils : caféine, sommeil, eau · Eau & Café"
+	description="Heure limite du café, eau à boire par jour, caféine par boisson, demi-vie de la caféine : outils gratuits et guides sourcés."
+	image="/guides/covers/van-gogh-terrasse.jpg"
+>
+	<main class="wrap">
+		<header class="ap-head" data-reveal>
+			<p class="label ap-kicker">Guides et outils</p>
+			<h1 class="display">L’eau, le café, et ton sommeil.</h1>
+			<p class="ap-lede">Les calculs de l’app à essayer ici, et des guides clairs et sourcés.</p>
+		</header>
+		<GuideGrid guides={guides} showKind />
+	</main>
+</AppShell>

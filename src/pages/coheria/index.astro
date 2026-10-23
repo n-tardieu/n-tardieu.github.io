@@ -3,11 +3,12 @@
 // l'écran de séance de l'app (5 s / 5 s) et le visiteur peut lancer une
 // minute sur place. Identité de l'app : violet seul, colline pêche, violet
 // nuit pour le soir, police système grasse, aucune ombre.
-import Base from '../layouts/Base.astro';
-import StoreButtons from '../components/StoreButtons.astro';
-import BreathWave from '../components/BreathWave.astro';
-import { getApp } from '../data/apps';
-import { guidesFor } from '../data/guides';
+import AppShell from '../../layouts/AppShell.astro';
+import MakerNote from '../../components/MakerNote.astro';
+import StoreButtons from '../../components/StoreButtons.astro';
+import BreathWave from '../../components/BreathWave.astro';
+import { getApp } from '../../data/apps';
+import { guidesFor } from '../../data/guides';
 
 const app = getApp('coheria');
 const guides = guidesFor('coherence-cardiaque');
@@ -106,21 +107,9 @@ const jsonLd = {
 };
 ---
 
-<Base
-	title="Coheria : application de cohérence cardiaque gratuite"
-	description="Coheria guide ta respiration avec une vague à l’écran : méthode 365, séances de 3 à 10 minutes, rappels doux. Gratuite sur iPhone et Android."
-	image="/apps/coheria/01-home.webp"
-	iosAppId={app.stores.iosId}
-	themeColor="#FCE3CE"
-	favicon={app.icon}
-	jsonLd={jsonLd}
->
+<AppShell app="coheria" overHero title="Coheria : application de cohérence cardiaque gratuite" description="Coheria guide ta respiration avec une vague à l’écran : méthode 365, séances de 3 à 10 minutes, rappels doux. Gratuite sur iPhone et Android." image="/apps/coheria/01-home.webp" jsonLd={jsonLd}>
 	<div class="page">
 		<section class="hero">
-			<header class="nav wrap">
-				<a href="/" class="back">← Nicolas Tardieu</a>
-				<span class="brand"><img src={app.icon} alt="" width="28" height="28" />Coheria</span>
-			</header>
 
 			<div class="hero-inner wrap">
 				<div class="hero-text">
@@ -170,7 +159,7 @@ const jsonLd = {
 				</ol>
 				<p class="method-text">
 					Coheria est construite autour de ce rythme, et tu déplaces les rappels selon ta journée.
-					<a href="/coherence-cardiaque/methode-365/">La méthode 365 expliquée</a>
+					<a href="/coheria/guides/methode-365/">La méthode 365 expliquée</a>
 				</p>
 			</section>
 
@@ -263,6 +252,8 @@ const jsonLd = {
 				}
 			</section>
 
+			<MakerNote app="coheria" />
+
 			<section class="cta">
 				<div class="wrap cta-inner">
 					<img src={app.icon} alt="" width="88" height="88" />
@@ -272,19 +263,8 @@ const jsonLd = {
 			</section>
 		</main>
 
-		<footer class="footer wrap">
-			<p>
-				Coheria est une application de bien-être et n’est pas un dispositif médical. Contact :
-				<a href="mailto:coheria.contact@gmail.com">coheria.contact@gmail.com</a>
-			</p>
-			<nav>
-				<a href={app.privacy}>Confidentialité</a>
-				<a href={app.support}>Assistance</a>
-				<a href="/">Toutes les apps</a>
-			</nav>
-		</footer>
 	</div>
-</Base>
+</AppShell>
 
 <script>
 	// Une minute guidée : on relance l'onde depuis le début d'une inspiration

@@ -1,0 +1,139 @@
+---
+import AppShell from '../../layouts/AppShell.astro';
+import StoreButtons from '../../components/StoreButtons.astro';
+import { APPS, getApp } from '../../data/apps';
+
+const app = getApp('eau-et-cafe');
+const others = APPS.filter((a) => a.slug !== 'eau-et-cafe');
+---
+
+<AppShell
+	app="eau-et-cafe"
+	title="À propos d’Eau & Café, et de celui qui la fait"
+	description="Pourquoi Eau & Café existe, d’où elle vient (Brimm), comment elle est construite, et qui la développe."
+>
+	<main class="wrap story">
+		<header class="ap-head" data-reveal>
+			<p class="label ap-kicker">À propos</p>
+			<h1 class="display">Pourquoi Eau &amp; Café existe.</h1>
+		</header>
+
+		<div class="body">
+			<section data-reveal>
+				<h2>D’abord, il y a eu Brimm</h2>
+				<p>
+					Ma première app aidait à boire assez d’eau. En la faisant évoluer, je me suis rendu compte que l’eau n’était que
+					la moitié de l’histoire : dans une journée, le café compte autant, surtout pour bien dormir.
+				</p>
+			</section>
+
+			<section data-reveal>
+				<h2>Alors Brimm est devenue Eau &amp; Café</h2>
+				<p>
+					L’eau et le café en un geste, l’heure du dernier café, une question le soir et des bilans écrits avec des phrases.
+					Et une œuvre d’art par jour, parce qu’une app qu’on ouvre plusieurs fois par jour mérite d’être belle.
+				</p>
+			</section>
+
+			<section data-reveal>
+				<h2>Comment elle est construite</h2>
+				<p>
+					Je la conçois et la développe seul. Pas de compte, pas de publicité, aucun outil de statistiques : tout reste sur
+					ton téléphone. Les calculs sont expliqués et sourcés, et tu peux les essayer dans les
+					<a href="/eau-et-cafe/guides/">guides</a>.
+				</p>
+			</section>
+
+			{
+				others.length > 0 && (
+					<section data-reveal>
+						<h2>Mes autres apps</h2>
+						<ul class="others">
+							{others.map((a) => (
+								<li>
+									<img src={a.icon} alt="" width="48" height="48" />
+									<a href={`/${a.slug}/`}>
+										<strong>{a.name}</strong>
+										<span>{a.tagline}</span>
+									</a>
+								</li>
+							))}
+						</ul>
+					</section>
+				)
+			}
+
+			<section data-reveal>
+				<h2>Dire bonjour</h2>
+				<p>
+					Une idée, un bug, un mot : écris-moi à <a href={`mailto:${app.contact}`}>{app.contact}</a>.
+				</p>
+				<p class="sign">Nicolas Tardieu · <a href="/a-propos/">qui je suis</a></p>
+			</section>
+
+			<StoreButtons app={app} />
+		</div>
+	</main>
+</AppShell>
+
+<style>
+	.body {
+		max-width: 720px;
+	}
+
+	section {
+		margin-bottom: 40px;
+	}
+
+	h2 {
+		margin: 0 0 10px;
+		font-size: 24px;
+		letter-spacing: -0.01em;
+	}
+
+	p {
+		margin: 0 0 12px;
+		font-size: 19px;
+		line-height: 1.6;
+		color: var(--ink-2);
+	}
+
+	p a {
+		color: var(--accent);
+		font-weight: 600;
+	}
+
+	.sign {
+		font-weight: 700;
+		color: var(--ink);
+	}
+
+	.others {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.others li {
+		display: flex;
+		align-items: center;
+		gap: 14px;
+		padding: 12px 0;
+		border-top: 1px solid var(--line);
+	}
+
+	.others img {
+		border-radius: 12px;
+	}
+
+	.others a {
+		display: flex;
+		flex-direction: column;
+		text-decoration: none;
+	}
+
+	.others span {
+		font-size: 15px;
+		color: var(--ink-2);
+	}
+</style>

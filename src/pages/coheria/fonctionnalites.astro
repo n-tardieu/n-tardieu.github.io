@@ -1,0 +1,89 @@
+---
+import AppShell from '../../layouts/AppShell.astro';
+import Spotlights from '../../components/app/Spotlights.astro';
+import FeatureGrid from '../../components/app/FeatureGrid.astro';
+import StoreButtons from '../../components/StoreButtons.astro';
+import { getApp } from '../../data/apps';
+
+const app = getApp('coheria');
+
+const spots = [
+	{
+		img: '/apps/coheria/ecrans/01-home.webp',
+		alt: 'L’accueil de Coheria : deux séances sur trois aujourd’hui',
+		kicker: 'La méthode 365',
+		title: 'Trois pauses par jour, un anneau pour suivre.',
+		text: '3 séances, 6 respirations par minute, 5 minutes : l’anneau de l’accueil compte tes séances du jour. Une seule suffit déjà à valider ta journée.',
+	},
+	{
+		img: '/apps/coheria/ecrans/04-catalog.webp',
+		alt: 'Les séances proposées : cohérence cardiaque, rapide, avant de dormir',
+		kicker: 'Les séances',
+		title: 'Une séance pour chaque moment.',
+		text: 'Cohérence cardiaque (5 min, 5 s · 5 s), Rapide (3 min) pour redescendre entre deux choses, Avant de dormir (10 min, 4 s · 6 s) avec un écran qui reste sombre. Et les tiennes, avec ton rythme et ta durée.',
+	},
+	{
+		img: '/apps/coheria/ecrans/02-state.webp',
+		alt: 'Mon état : la courbe du ressenti sur la semaine',
+		kicker: 'Mon état',
+		title: 'Vois ce que ça change pour toi.',
+		text: 'Après chaque séance, note ton ressenti en un geste. Coheria en tire la courbe de ta semaine, le moment où tu t’apaises le plus, et un bilan chaque dimanche soir.',
+	},
+	{
+		img: '/apps/coheria/ecrans/03-streak.webp',
+		alt: 'Le calendrier de la série avec un jour de gel',
+		kicker: 'Série et jours de gel',
+		title: 'Un jour manqué ne casse rien.',
+		text: 'Les jours de gel se gagnent en pratiquant et protègent ta série quand la vie s’accélère. Une régularité qui encourage, sans culpabiliser.',
+	},
+];
+
+const more = [
+	{ title: 'Une vague à suivre', text: 'Elle monte quand tu inspires, descend quand tu expires. Pas de voix, juste un rythme.' },
+	{ title: 'Des rappels qui savent se taire', text: 'Matin, midi et soir, à tes heures. Si tu as déjà respiré, le rappel ne sonne pas.' },
+	{ title: 'Des ambiances sonores', text: 'Pluie, feu de cheminée, calme sous l’eau, et des sons pour marquer le souffle. Ou le silence.', badge: 'Complet' },
+	{ title: 'Le bilan mensuel', text: 'Chaque 1ᵉʳ du mois : ce qui a compté, un conseil, et un rappel pour le lire.', badge: 'Complet' },
+	{ title: 'Trois thèmes', text: 'Aurore, Pur, et Nuit pour la pratique du soir.' },
+	{ title: 'Sans compte obligatoire', text: 'Ta pratique reste sur ton téléphone. Connecte-toi avec Apple ou Google pour la sauvegarder.' },
+	{ title: 'iPhone, iPad et Android', text: 'La même app partout, en français, anglais, allemand et espagnol.' },
+];
+---
+
+<AppShell
+	app="coheria"
+	title="Fonctionnalités de Coheria, l’app de cohérence cardiaque"
+	description="Séances guidées par une vague, méthode 365, rappels qui se taisent, ressenti et bilans, série avec jours de gel : tout ce que fait Coheria."
+	image="/apps/coheria/01-home.webp"
+>
+	<main class="wrap">
+		<header class="ap-head" data-reveal>
+			<p class="label ap-kicker">Fonctionnalités</p>
+			<h1 class="display">Simple au quotidien, complet sur la durée.</h1>
+			<p class="ap-lede">Tout ce dont tu as besoin pour pratiquer la cohérence cardiaque chaque jour, et rien de plus.</p>
+		</header>
+
+		<Spotlights items={spots} />
+
+		<section class="ap-section">
+			<h2 class="display" data-reveal>Et aussi</h2>
+			<FeatureGrid items={more} />
+		</section>
+
+		<section class="ap-section end" data-reveal>
+			<h2 class="display">Essaie, c’est gratuit.</h2>
+			<StoreButtons app={app} />
+			<p><a href="/coheria/tarifs/">Ce que contient Coheria Complet →</a></p>
+		</section>
+	</main>
+</AppShell>
+
+<style>
+	.end p {
+		margin-top: 20px;
+	}
+
+	.end a {
+		font-weight: 700;
+		color: var(--accent);
+	}
+</style>

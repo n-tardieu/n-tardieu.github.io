@@ -3,7 +3,8 @@
 // coins carrés, filets au lieu de cartes. Seules les données ont une couleur
 // (bleu Klein pour l'eau, orange brûlé pour le café) et l'œuvre du jour est la
 // seule image en couleur.
-import Base from '../../layouts/Base.astro';
+import AppShell from '../../layouts/AppShell.astro';
+import MakerNote from '../../components/MakerNote.astro';
 import StoreButtons from '../../components/StoreButtons.astro';
 import { getApp } from '../../data/apps';
 
@@ -99,21 +100,8 @@ const jsonLd = {
 };
 ---
 
-<Base
-	title="Eau & Café : suivi de l’eau et de la caféine, gratuit"
-	description="Note ton eau et ton café en un geste, connais l’heure de ton dernier café et reçois des bilans en clair. Une œuvre d’art par jour. Gratuit, sans compte, sans pub."
-	image="/apps/eau-et-cafe/01-home.webp"
-	iosAppId={app.stores.iosId}
-	themeColor="#F5F4EF"
-	favicon={app.icon}
-	fonts="family=Archivo:wght@400;500;600;700;800&family=Archivo+Narrow:wght@500;600;700"
-	jsonLd={jsonLd}
->
+<AppShell app="eau-et-cafe" title="Eau & Café : suivi de l’eau et de la caféine, gratuit" description="Note ton eau et ton café en un geste, connais l’heure de ton dernier café et reçois des bilans en clair. Une œuvre d’art par jour. Gratuit, sans compte, sans pub." image="/apps/eau-et-cafe/01-home.webp" jsonLd={jsonLd}>
 	<div class="page">
-		<header class="topbar wrap">
-			<a href="/" class="back">← Nicolas Tardieu</a>
-			<span class="wordmark">Eau &amp; Café</span>
-		</header>
 
 		<main>
 			<section class="hero wrap">
@@ -261,11 +249,13 @@ const jsonLd = {
 				</div>
 				<p class="tools-links">
 					Essaie les calculs de l’app en ligne :
-					<a href="/cafeine/heure-limite-cafe/">heure limite du café</a>,
-					<a href="/hydratation/combien-d-eau-boire-par-jour/">combien d’eau boire par jour</a>,
-					<a href="/cafeine/quantite-cafeine-boissons/">caféine par boisson</a>.
+					<a href="/eau-et-cafe/guides/heure-limite-cafe/">heure limite du café</a>,
+					<a href="/eau-et-cafe/guides/combien-d-eau-boire-par-jour/">combien d’eau boire par jour</a>,
+					<a href="/eau-et-cafe/guides/quantite-cafeine-boissons/">caféine par boisson</a>.
 				</p>
 			</section>
+
+			<MakerNote app="eau-et-cafe" />
 
 			<section class="cta wrap">
 				<h2>Ta journée, en un geste.</h2>
@@ -273,16 +263,8 @@ const jsonLd = {
 			</section>
 		</main>
 
-		<footer class="footer wrap">
-			<p>Eau &amp; Café est une application de bien-être. Ses estimations ne remplacent pas un avis médical.</p>
-			<nav>
-				<a href={app.privacy}>Confidentialité</a>
-				<a href={app.support}>Assistance</a>
-				<a href="/">Toutes les apps</a>
-			</nav>
-		</footer>
 	</div>
-</Base>
+</AppShell>
 
 <style>
 	.page {

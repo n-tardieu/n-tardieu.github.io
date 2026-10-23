@@ -1,15 +1,15 @@
 ---
 // Le hub, « la collection » : un cadre papier et encre, et chaque app numérotée
 // dans une carte compacte à sa propre identité, avec ses badges de stores. Puis
-// les guides, les principes, l'auteur et comment le soutenir.
+// le journal (masqué tant qu'il est vide), les principes, l'auteur et comment le
+// soutenir. Les guides vivent dans le mini-site de chaque app.
 import Site from '../layouts/Site.astro';
 import StoreButtons from '../components/StoreButtons.astro';
 import SupportSection from '../components/SupportSection.astro';
-import GuideGrid from '../components/GuideGrid.astro';
+import HelloLines from '../components/HelloLines.astro';
 import { APPS } from '../data/apps';
-import { GUIDES } from '../data/guides';
+import { JOURNAL as journal } from '../data/journal';
 
-const guides = GUIDES.filter((g) => g.kind === 'guide');
 
 const jsonLd = {
 	'@context': 'https://schema.org',
@@ -81,13 +81,28 @@ const jsonLd = {
 			}
 		</div>
 
-		<section class="tools wrap" aria-labelledby="guides">
-			<div class="head" data-reveal>
-				<h2 id="guides" class="display">Guides</h2>
-				<p>Des réponses claires et sourcées. <a href="/guides/">Tous les guides et outils →</a></p>
-			</div>
-			<GuideGrid guides={guides} />
-		</section>
+		{
+			journal.length > 0 && (
+				<section class="tools wrap" aria-labelledby="journal">
+					<div class="head" data-reveal>
+						<h2 id="journal" class="display">Journal</h2>
+						<p>Comment je fabrique et j’utilise mes apps, et les nouvelles.</p>
+					</div>
+					<ul class="journal">
+						{journal.slice(0, 4).map((p, i) => (
+							<li data-reveal style={`--d: ${i * 0.08}s`}>
+								<a href={p.href}>
+									{p.cover && <img src={p.cover} alt="" width="1600" height="900" loading="lazy" />}
+									<span class="label">{new Date(`${p.published}T12:00:00`).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+									<strong>{p.title}</strong>
+									<span class="sum">{p.description}</span>
+								</a>
+							</li>
+						))}
+					</ul>
+				</section>
+			)
+		}
 
 		<section class="principles wrap" aria-labelledby="principes" data-reveal>
 			<h2 id="principes" class="label">Comment je fais mes apps</h2>
@@ -114,6 +129,7 @@ const jsonLd = {
 		</section>
 
 		<SupportSection />
+		<HelloLines />
 	</main>
 </Site>
 
@@ -306,7 +322,7 @@ const jsonLd = {
 		color: #fff;
 	}
 
-	/* Outils et guides */
+	/* Sections (journal) */
 	.tools {
 		margin-top: 96px;
 	}
@@ -347,6 +363,44 @@ const jsonLd = {
 
 	.is-eau-et-cafe .price {
 		border: 1.5px solid var(--ink);
+	}
+
+	.journal {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 32px 20px;
+		margin: 24px 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.journal a {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+		text-decoration: none;
+	}
+
+	.journal img {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 16 / 10;
+		object-fit: cover;
+		margin-bottom: 8px;
+	}
+
+	.journal .label,
+	.journal .sum {
+		color: var(--ink-2);
+	}
+
+	.journal strong {
+		font-size: 20px;
+		line-height: 1.22;
+	}
+
+	.journal a:hover strong {
+		text-decoration: underline;
 	}
 
 	/* Principes */
@@ -395,6 +449,10 @@ const jsonLd = {
 			grid-template-columns: 1fr;
 		}
 
+		.journal {
+			grid-template-columns: 1fr 1fr;
+		}
+
 		.head {
 			grid-template-columns: 1fr;
 			gap: 8px;
@@ -415,6 +473,10 @@ const jsonLd = {
 	}
 
 	@media (max-width: 560px) {
+		.journal {
+			grid-template-columns: 1fr;
+		}
+
 		.intro {
 			padding: 36px 0 28px;
 		}

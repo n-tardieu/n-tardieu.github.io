@@ -1,0 +1,110 @@
+---
+// Formules de prix côte à côte ; la formule mise en avant prend la couleur de l'app.
+interface Plan {
+	name: string;
+	price: string;
+	note: string;
+	items: string[];
+	featured?: boolean;
+}
+
+interface Props {
+	plans: Plan[];
+}
+
+const { plans } = Astro.props;
+---
+
+<div class="plans" style={`--n: ${plans.length}`}>
+	{
+		plans.map((p, i) => (
+			<article class:list={['plan', { featured: p.featured }]} data-reveal style={`--d: ${i * 0.08}s`}>
+				<h3>{p.name}</h3>
+				<p class="price">{p.price}</p>
+				<p class="note">{p.note}</p>
+				<ul>
+					{p.items.map((it) => (
+						<li>{it}</li>
+					))}
+				</ul>
+			</article>
+		))
+	}
+</div>
+
+<style>
+	.plans {
+		display: grid;
+		grid-template-columns: repeat(var(--n), minmax(0, 420px));
+		gap: 20px;
+	}
+
+	.plan {
+		padding: 28px;
+		border: 2px solid var(--ink);
+		border-radius: var(--radius);
+		background: var(--paper);
+	}
+
+	:global(.theme-coheria) .plan {
+		border: 1px solid var(--line);
+	}
+
+	.featured {
+		border-color: var(--accent);
+		background: var(--paper-2);
+	}
+
+	:global(.theme-coheria) .featured {
+		border: 2px solid var(--accent);
+		background: var(--accent-soft);
+	}
+
+	h3 {
+		margin: 0;
+		font-size: 22px;
+	}
+
+	.price {
+		margin: 10px 0 2px;
+		font-family: var(--narrow);
+		font-size: 56px;
+		font-weight: 800;
+		line-height: 1;
+		letter-spacing: -0.03em;
+	}
+
+	.featured .price {
+		color: var(--accent);
+	}
+
+	.note {
+		margin: 0 0 20px;
+		color: var(--ink-2);
+	}
+
+	ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	li {
+		display: flex;
+		gap: 10px;
+		padding: 9px 0;
+		border-top: 1px solid var(--line);
+	}
+
+	li::before {
+		content: '✓';
+		color: var(--accent);
+		font-weight: 800;
+	}
+
+	@media (max-width: 760px) {
+		.plans {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

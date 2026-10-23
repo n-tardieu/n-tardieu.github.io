@@ -47,7 +47,7 @@ export const TOPICS: Record<Topic, string> = {
 
 export const GUIDES: Guide[] = [
 	{
-		href: '/cafeine/heure-limite-cafe/',
+		href: '/eau-et-cafe/guides/heure-limite-cafe/',
 		kind: 'outil',
 		topic: 'cafeine',
 		title: 'À quelle heure boire ton dernier café ?',
@@ -57,7 +57,7 @@ export const GUIDES: Guide[] = [
 		minutes: 3,
 	},
 	{
-		href: '/hydratation/combien-d-eau-boire-par-jour/',
+		href: '/eau-et-cafe/guides/combien-d-eau-boire-par-jour/',
 		kind: 'outil',
 		topic: 'hydratation',
 		title: 'Combien d’eau boire par jour ?',
@@ -67,7 +67,7 @@ export const GUIDES: Guide[] = [
 		minutes: 3,
 	},
 	{
-		href: '/cafeine/quantite-cafeine-boissons/',
+		href: '/eau-et-cafe/guides/quantite-cafeine-boissons/',
 		kind: 'outil',
 		topic: 'cafeine',
 		title: 'Quantité de caféine par boisson',
@@ -77,7 +77,7 @@ export const GUIDES: Guide[] = [
 		minutes: 4,
 	},
 	{
-		href: '/coherence-cardiaque/methode-365/',
+		href: '/coheria/guides/methode-365/',
 		kind: 'guide',
 		topic: 'coherence-cardiaque',
 		title: 'La méthode 365 de cohérence cardiaque',
@@ -87,7 +87,7 @@ export const GUIDES: Guide[] = [
 		minutes: 6,
 	},
 	{
-		href: '/coherence-cardiaque/combien-de-fois-par-jour/',
+		href: '/coheria/guides/combien-de-fois-par-jour/',
 		kind: 'guide',
 		topic: 'coherence-cardiaque',
 		title: 'Cohérence cardiaque : combien de fois par jour ?',
@@ -97,7 +97,7 @@ export const GUIDES: Guide[] = [
 		minutes: 6,
 	},
 	{
-		href: '/cafeine/demi-vie-cafeine/',
+		href: '/eau-et-cafe/guides/demi-vie-cafeine/',
 		kind: 'guide',
 		topic: 'cafeine',
 		title: 'Demi-vie de la caféine',
@@ -107,7 +107,7 @@ export const GUIDES: Guide[] = [
 		minutes: 6,
 	},
 	{
-		href: '/cafeine/cafe-et-sommeil/',
+		href: '/eau-et-cafe/guides/cafe-et-sommeil/',
 		kind: 'guide',
 		topic: 'cafeine',
 		title: 'Café et sommeil : quel délai avant le coucher ?',

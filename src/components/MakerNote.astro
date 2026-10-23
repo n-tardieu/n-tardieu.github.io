@@ -1,0 +1,75 @@
+---
+// « Bonjour, je suis Nicolas » : le mot du créateur sur la page d'une app,
+// comme le « Hi, I'm Chris » des sites d'apps de Chris Raroque. Sans photo :
+// le visage n'apparaît que sur la page à propos du site.
+interface Props {
+	app: 'coheria' | 'eau-et-cafe';
+}
+
+const { app } = Astro.props;
+const notes = {
+	coheria: [
+		'J’ai créé Coheria pour que la cohérence cardiaque devienne facile à tenir au quotidien : une vague à suivre, des rappels discrets, et rien qui culpabilise quand on saute un jour.',
+		'Je la conçois et la développe seul. Si elle t’aide à souffler un peu, ça me fait vraiment plaisir.',
+	],
+	'eau-et-cafe': [
+		'Eau & Café est la suite de Brimm, ma première app d’hydratation. J’y ai ajouté le café, parce que l’eau et la caféine se jouent ensemble dans une journée, et une œuvre d’art pour donner envie de l’ouvrir.',
+		'Je la conçois et la développe seul. Si elle t’aide à mieux finir tes journées, ça me fait vraiment plaisir.',
+	],
+};
+---
+
+<section class="maker wrap" data-reveal aria-labelledby={`maker-${app}`}>
+	<h2 id={`maker-${app}`}>Bonjour, je suis Nicolas 👋</h2>
+	{notes[app].map((p) => <p>{p}</p>)}
+	<p class="sign">Nicolas Tardieu · développeur de {app === 'coheria' ? 'Coheria' : 'Eau & Café'}</p>
+	<p class="links">
+		<a href={`/${app}/a-propos/`}>Pourquoi cette app existe →</a>
+		<a href="/#soutenir">Me soutenir →</a>
+	</p>
+</section>
+
+<style>
+	.maker {
+		max-width: 720px;
+		margin-top: 96px;
+		text-align: center;
+	}
+
+	h2 {
+		margin: 0 0 16px;
+		font-size: clamp(28px, 3.6vw, 40px);
+		font-weight: 800;
+		letter-spacing: -0.03em;
+	}
+
+	p {
+		margin: 0 0 14px;
+		font-size: 19px;
+		line-height: 1.6;
+		color: var(--ink-2, #4a4f59);
+	}
+
+	.sign {
+		margin-top: 20px;
+		font-weight: 700;
+		color: var(--ink, #15171c);
+	}
+
+	.links {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 8px 24px;
+	}
+
+	.links a {
+		font-weight: 700;
+		color: var(--accent, #5b4bf5);
+		text-decoration: none;
+	}
+
+	.links a:hover {
+		text-decoration: underline;
+	}
+</style>

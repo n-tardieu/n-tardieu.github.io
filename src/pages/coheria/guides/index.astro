@@ -1,0 +1,23 @@
+---
+import AppShell from '../../../layouts/AppShell.astro';
+import GuideGrid from '../../../components/GuideGrid.astro';
+import { GUIDES } from '../../../data/guides';
+
+const guides = GUIDES.filter((g) => g.app === 'coheria');
+---
+
+<AppShell
+	app="coheria"
+	title="Guides de cohérence cardiaque · Coheria"
+	description="La méthode 365, combien de séances par jour, comment s’y prendre : des guides clairs et sourcés sur la cohérence cardiaque."
+	image="/guides/covers/hokusai-vague.jpg"
+>
+	<main class="wrap">
+		<header class="ap-head" data-reveal>
+			<p class="label ap-kicker">Guides</p>
+			<h1 class="display">Bien pratiquer la cohérence cardiaque.</h1>
+			<p class="ap-lede">Des réponses claires et sourcées aux questions qu’on se pose en commençant.</p>
+		</header>
+		<GuideGrid guides={guides} />
+	</main>
+</AppShell>

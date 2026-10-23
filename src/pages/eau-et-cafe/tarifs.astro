@@ -1,0 +1,66 @@
+---
+import AppShell from '../../layouts/AppShell.astro';
+import Plans from '../../components/app/Plans.astro';
+import StoreButtons from '../../components/StoreButtons.astro';
+import { getApp } from '../../data/apps';
+
+const app = getApp('eau-et-cafe');
+
+const plans = [
+	{
+		name: 'Eau & Café',
+		price: '0 €',
+		note: 'Toutes les fonctions, sans abonnement.',
+		featured: true,
+		items: [
+			'L’eau et le café en un geste',
+			'Ton heure limite du café',
+			'La question du soir',
+			'Les bilans de la semaine et du mois',
+			'L’œuvre du jour et la galerie',
+			'Sans compte, sans publicité',
+		],
+	},
+];
+
+const faq = [
+	{ q: 'Y a-t-il de la publicité ?', a: 'Non, aucune publicité et aucun outil de statistiques.' },
+	{ q: 'Faut-il créer un compte ?', a: 'Non. L’app s’ouvre, c’est tout. Tes données restent sur ton téléphone.' },
+	{
+		q: 'L’app restera-t-elle gratuite ?',
+		a: 'Aujourd’hui, tout est gratuit. Si une option payante arrive un jour, elle sera annoncée ici à l’avance.',
+	},
+];
+---
+
+<AppShell
+	app="eau-et-cafe"
+	title="Tarifs d’Eau & Café : gratuit, sans abonnement"
+	description="Eau & Café est gratuite : toutes les fonctions, sans compte, sans abonnement et sans publicité."
+>
+	<main class="wrap">
+		<header class="ap-head" data-reveal>
+			<p class="label ap-kicker">Tarifs</p>
+			<h1 class="display">Gratuit. Tout simplement.</h1>
+			<p class="ap-lede">Toutes les fonctions, sans compte, sans abonnement, sans publicité.</p>
+		</header>
+
+		<Plans plans={plans} />
+
+		<section class="ap-section ap-faq">
+			<h2 class="display" data-reveal>Questions fréquentes</h2>
+			{
+				faq.map((f) => (
+					<details>
+						<summary>{f.q}</summary>
+						<p>{f.a}</p>
+					</details>
+				))
+			}
+		</section>
+
+		<section class="ap-section" data-reveal>
+			<StoreButtons app={app} />
+		</section>
+	</main>
+</AppShell>

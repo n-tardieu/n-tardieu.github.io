@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/Guide.astro
+layout: ../../../layouts/Guide.astro
 title: "Café et sommeil : combien de temps avant de dormir ?"
 description: "Café et sommeil : une étude montre un effet même 6 h avant le coucher. Quel délai garder, et à quelle heure boire ton dernier café selon ta sensibilité."
 h1: "Café et sommeil : quel délai avant le coucher ?"
@@ -34,7 +34,7 @@ La réponse courte : garde **au moins 6 heures** entre ton dernier café et ton 
 
 Pas forcément de t'endormir, mais il peut **raccourcir et alléger ton sommeil**, parfois sans que tu t'en rendes compte.
 
-L'EFSA, l'autorité européenne de sécurité des aliments, l'indique dans son avis de 2015 : des doses uniques de **100 mg** de caféine peuvent affecter la durée et la qualité du sommeil chez certains adultes, en particulier quand elles sont prises près de l'heure du coucher. Pour savoir combien de caféine contient ta boisson habituelle, consulte notre [tableau de la quantité de caféine par boisson](/cafeine/quantite-cafeine-boissons/).
+L'EFSA, l'autorité européenne de sécurité des aliments, l'indique dans son avis de 2015 : des doses uniques de **100 mg** de caféine peuvent affecter la durée et la qualité du sommeil chez certains adultes, en particulier quand elles sont prises près de l'heure du coucher. Pour savoir combien de caféine contient ta boisson habituelle, consulte notre [tableau de la quantité de caféine par boisson](/eau-et-cafe/guides/quantite-cafeine-boissons/).
 
 La raison tient à la façon dont la caféine agit. Sa cible principale dans le cerveau est le récepteur de l'adénosine, une molécule qui participe à l'envie de dormir. Tant que la caféine circule, elle freine ce signal.
 
@@ -62,7 +62,7 @@ Cette étude a ses limites : peu de participants, une dose forte, et une mesure 
 
 ## Café après 14 h ou après 16 h : combien en reste-t-il au coucher ?
 
-La caféine diminue de moitié à chaque **demi-vie**, environ 5 heures en moyenne chez l'adulte selon l'Institute of Medicine, mais de 1,5 à 9,5 heures selon les personnes. Si tu veux comprendre ce mécanisme en détail, lis notre guide sur [la demi-vie de la caféine et ce qui la fait varier](/cafeine/demi-vie-cafeine/).
+La caféine diminue de moitié à chaque **demi-vie**, environ 5 heures en moyenne chez l'adulte selon l'Institute of Medicine, mais de 1,5 à 9,5 heures selon les personnes. Si tu veux comprendre ce mécanisme en détail, lis notre guide sur [la demi-vie de la caféine et ce qui la fait varier](/eau-et-cafe/guides/demi-vie-cafeine/).
 
 Voici une **estimation** de ce qu'il reste à 23 h d'un café de 100 mg, selon l'heure à laquelle tu l'as bu et selon trois demi-vies : rapide (3,5 h), moyenne (5 h) et lente (7 h).
 
@@ -91,7 +91,7 @@ Pour savoir où tu te situes, observe-toi :
 - **Tu élimines lentement** si même un café de début d'après-midi retarde ton endormissement. La contraception orale et la grossesse ralentissent l'élimination ; l'Institute of Medicine indique que la pilule peut aller jusqu'à doubler la demi-vie.
 - Les écarts viennent surtout d'une enzyme du foie, la **CYP1A2**, dont l'activité varie beaucoup d'une personne à l'autre, en partie pour des raisons génétiques.
 
-Le plus simple pour avoir ton heure à toi : utilise notre [calculateur de l'heure limite du dernier café](/cafeine/heure-limite-cafe/). Tu indiques ton heure de coucher et ta sensibilité, il te donne une heure repère.
+Le plus simple pour avoir ton heure à toi : utilise notre [calculateur de l'heure limite du dernier café](/eau-et-cafe/guides/heure-limite-cafe/). Tu indiques ton heure de coucher et ta sensibilité, il te donne une heure repère.
 
 ## Dernier café avant de dormir : quelques pistes
 

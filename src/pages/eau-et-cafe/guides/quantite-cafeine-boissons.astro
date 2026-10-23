@@ -1,7 +1,7 @@
 ---
 // Tableau de la caféine par boisson, valeurs du catalogue d'Eau & Café.
-import Guide from '../../layouts/Guide.astro';
-import { CAFFEINE_DRINKS } from '../../data/drinks';
+import Guide from '../../../layouts/Guide.astro';
+import { CAFFEINE_DRINKS } from '../../../data/drinks';
 
 const per100 = (mg: number, ml: number) => Math.round((mg / ml) * 100);
 const sorted = [...CAFFEINE_DRINKS].sort((a, b) => b.caffeineMg - a.caffeineMg);
@@ -92,7 +92,7 @@ const faq = [
 	<h2>Et pour le sommeil ?</h2>
 	<p>
 		La quantité compte, mais l’heure aussi : la caféine met plusieurs heures à s’éliminer. Calcule ton
-		<a href="/cafeine/heure-limite-cafe/">heure limite du café</a> selon ta boisson et ton coucher, et lis le guide
-		<a href="/cafeine/demi-vie-cafeine/">demi-vie de la caféine</a>.
+		<a href="/eau-et-cafe/guides/heure-limite-cafe/">heure limite du café</a> selon ta boisson et ton coucher, et lis le guide
+		<a href="/eau-et-cafe/guides/demi-vie-cafeine/">demi-vie de la caféine</a>.
 	</p>
 </Guide>

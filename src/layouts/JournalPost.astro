@@ -1,0 +1,83 @@
+---
+// Gabarit d'un article du journal (pages Markdown de src/pages/journal/, via
+// `layout:`) : le cadre papier et encre du site, une couverture facultative.
+import Site from './Site.astro';
+import type { JournalFrontmatter } from '../data/journal';
+
+const { frontmatter } = Astro.props as { frontmatter: JournalFrontmatter };
+const { title, description, published, cover, minutes } = frontmatter;
+const date = new Date(`${published}T12:00:00`).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'BlogPosting',
+	headline: title,
+	description,
+	datePublished: published,
+	author: { '@type': 'Person', name: 'Nicolas Tardieu', url: 'https://n-tardieu.github.io/a-propos/' },
+	...(cover ? { image: new URL(cover, Astro.site).href } : {}),
+};
+---
+
+<Site title={title} description={description} image={cover} jsonLd={jsonLd}>
+	<main class="post">
+		<header class="post-head" data-reveal>
+			<p class="label">Journal · {date}{minutes ? ` · ${minutes} min` : ''}</p>
+			<h1 class="display">{title}</h1>
+			<p class="lede">{description}</p>
+		</header>
+		{cover && <img class="cover" src={cover} alt="" width="1600" height="900" />}
+		<article class="post-body">
+			<slot />
+		</article>
+	</main>
+</Site>
+
+<style>
+	.post {
+		width: min(1132px, calc(100% - 32px));
+		margin: 0 auto;
+	}
+
+	.post-head,
+	.post-body {
+		max-width: 720px;
+		margin: 0 auto;
+	}
+
+	.post-head {
+		padding: 56px 0 32px;
+	}
+
+	.post-head .label {
+		color: var(--ink-2);
+	}
+
+	h1 {
+		margin: 14px 0 18px;
+		font-size: clamp(40px, 6vw, 72px);
+	}
+
+	.lede {
+		margin: 0;
+		font-size: 21px;
+		color: var(--ink-2);
+	}
+
+	.cover {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 16 / 9;
+		object-fit: cover;
+	}
+
+	.post-body {
+		padding-top: 32px;
+		font-size: 18.5px;
+		line-height: 1.7;
+	}
+
+	.post-body :global(h2) {
+		margin: 44px 0 10px;
+		font-size: 26px;
+	}
+</style>

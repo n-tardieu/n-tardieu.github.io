@@ -1,7 +1,7 @@
 ---
 // Calculateur du besoin en eau, même formule que l'objectif d'Eau & Café.
 // Le tableau est calculé au build pour être lisible sans JavaScript.
-import Guide from '../../layouts/Guide.astro';
+import Guide from '../../../layouts/Guide.astro';
 import {
 	MAX_GOAL_ML,
 	MAX_WEIGHT_FOR_FORMULA_KG,
@@ -9,7 +9,7 @@ import {
 	calcGoalMl,
 	type ActivityLevel,
 	type AgeBracket,
-} from '../../lib/formulas';
+} from '../../../lib/formulas';
 
 const ages: { id: AgeBracket; label: string }[] = [
 	{ id: '<18', label: 'Moins de 18 ans' },
@@ -151,13 +151,13 @@ const faq = [
 	</ul>
 	<p>
 		Le café compte-t-il ? Oui, aux quantités habituelles. Pour savoir combien tu en bois vraiment, regarde le
-		<a href="/cafeine/quantite-cafeine-boissons/">tableau de la caféine par boisson</a>, et pour mieux dormir, ton
-		<a href="/cafeine/heure-limite-cafe/">heure limite du café</a>.
+		<a href="/eau-et-cafe/guides/quantite-cafeine-boissons/">tableau de la caféine par boisson</a>, et pour mieux dormir, ton
+		<a href="/eau-et-cafe/guides/heure-limite-cafe/">heure limite du café</a>.
 	</p>
 </Guide>
 
 <script>
-	import { calcGoalMl, type ActivityLevel, type AgeBracket } from '../../lib/formulas';
+	import { calcGoalMl, type ActivityLevel, type AgeBracket } from '../../../lib/formulas';
 
 	const form = document.querySelector<HTMLFormElement>('[data-water]');
 	if (form) {

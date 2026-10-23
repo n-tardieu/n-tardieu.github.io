@@ -1,0 +1,140 @@
+---
+import AppShell from '../../layouts/AppShell.astro';
+import StoreButtons from '../../components/StoreButtons.astro';
+import { APPS, getApp } from '../../data/apps';
+
+const app = getApp('coheria');
+const others = APPS.filter((a) => a.slug !== 'coheria');
+---
+
+<AppShell
+	app="coheria"
+	title="À propos de Coheria, et de celui qui la fait"
+	description="Pourquoi Coheria existe, comment elle est construite, et qui la développe : Nicolas Tardieu, développeur indépendant."
+>
+	<main class="wrap story">
+		<header class="ap-head" data-reveal>
+			<p class="label ap-kicker">À propos</p>
+			<h1 class="display">Pourquoi Coheria existe.</h1>
+		</header>
+
+		<div class="body">
+			<section data-reveal>
+				<h2>Une pratique simple, difficile à tenir</h2>
+				<p>
+					La cohérence cardiaque tient en une phrase : respirer lentement, environ six fois par minute, quelques minutes
+					par jour. Le plus dur n’est pas de comprendre, c’est d’y penser, jour après jour.
+				</p>
+			</section>
+
+			<section data-reveal>
+				<h2>Alors j’ai fait Coheria</h2>
+				<p>
+					Une vague à suivre plutôt qu’une voix, des rappels qui se taisent quand tu as déjà respiré, et une série qui
+					pardonne un jour manqué. L’idée est que la pratique reste légère : cinq minutes, et on passe à autre chose.
+				</p>
+			</section>
+
+			<section data-reveal>
+				<h2>Comment elle est construite</h2>
+				<p>
+					Je conçois, développe et publie Coheria seul, pour iPhone, iPad et Android. Ta pratique reste sur ton téléphone,
+					sans compte obligatoire. Les séances sont gratuites à vie ; <a href="/coheria/tarifs/">Coheria Complet</a>, un
+					achat unique, finance le reste.
+				</p>
+			</section>
+
+			{
+				others.length > 0 && (
+					<section data-reveal>
+						<h2>Mes autres apps</h2>
+						<ul class="others">
+							{others.map((a) => (
+								<li>
+									<img src={a.icon} alt="" width="48" height="48" />
+									<a href={`/${a.slug}/`}>
+										<strong>{a.name}</strong>
+										<span>{a.tagline}</span>
+									</a>
+								</li>
+							))}
+						</ul>
+					</section>
+				)
+			}
+
+			<section data-reveal>
+				<h2>Dire bonjour</h2>
+				<p>
+					Une idée, un bug, un mot : écris-moi à <a href={`mailto:${app.contact}`}>{app.contact}</a>. Et si Coheria
+					t’aide, <a href="/#soutenir">une note sur le store</a> m’aide énormément.
+				</p>
+				<p class="sign">Nicolas Tardieu · <a href="/a-propos/">qui je suis</a></p>
+			</section>
+
+			<StoreButtons app={app} />
+		</div>
+	</main>
+</AppShell>
+
+<style>
+	.body {
+		max-width: 720px;
+	}
+
+	section {
+		margin-bottom: 40px;
+	}
+
+	h2 {
+		margin: 0 0 10px;
+		font-size: 24px;
+		letter-spacing: -0.02em;
+	}
+
+	p {
+		margin: 0 0 12px;
+		font-size: 19px;
+		line-height: 1.6;
+		color: var(--ink-2);
+	}
+
+	p a {
+		color: var(--accent);
+		font-weight: 600;
+	}
+
+	.sign {
+		font-weight: 700;
+		color: var(--ink);
+	}
+
+	.others {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.others li {
+		display: flex;
+		align-items: center;
+		gap: 14px;
+		padding: 12px 0;
+		border-top: 1px solid var(--line);
+	}
+
+	.others img {
+		border-radius: 12px;
+	}
+
+	.others a {
+		display: flex;
+		flex-direction: column;
+		text-decoration: none;
+	}
+
+	.others span {
+		font-size: 15px;
+		color: var(--ink-2);
+	}
+</style>

@@ -1,0 +1,46 @@
+---
+// Fin de page à la Chris Raroque : trois questions, trois « Clique ici » qui
+// ouvrent un e-mail avec le bon objet. Monté sur l'accueil et la page à propos.
+const EMAIL = 'nicolas.tardieu.pro@gmail.com';
+const lines = [
+	{ q: 'Besoin d’un dev ou d’un designer pour ton entreprise ?', subject: 'Aide dev / design' },
+	{ q: 'Envie de sponsoriser mon travail ?', subject: 'Sponsoring' },
+	{ q: 'Envie de me dire bonjour ?', subject: 'Bonjour' },
+];
+---
+
+<section class="hello wrap" aria-label="Me contacter">
+	{
+		lines.map((l, i) => (
+			<p data-reveal style={`--d: ${i * 0.08}s`}>
+				{l.q}{' '}
+				<a href={`mailto:${EMAIL}?subject=${encodeURIComponent(l.subject)}`}>Clique ici.</a>
+			</p>
+		))
+	}
+</section>
+
+<style>
+	.hello {
+		margin-top: 72px;
+		padding-top: 28px;
+		border-top: 1px solid var(--line);
+	}
+
+	p {
+		margin: 0 0 10px;
+		font-size: clamp(18px, 2vw, 22px);
+		font-weight: 500;
+		line-height: 1.4;
+	}
+
+	a {
+		color: #1b2fd6;
+		font-weight: 700;
+		text-underline-offset: 4px;
+	}
+
+	a:hover {
+		text-decoration-thickness: 2px;
+	}
+</style>

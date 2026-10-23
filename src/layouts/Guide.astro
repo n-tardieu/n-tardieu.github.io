@@ -4,7 +4,7 @@
 // d'Ariane, l'auteur, la couverture (un tableau du domaine public, reprise en
 // image de partage pour LinkedIn et Medium), les sources, l'encart de l'app et
 // les données structurées.
-import Site from './Site.astro';
+import AppShell from './AppShell.astro';
 import AppCta from '../components/AppCta.astro';
 import { GUIDES, TOPICS, coverSrc, guidesFor } from '../data/guides';
 import { getApp } from '../data/apps';
@@ -45,9 +45,8 @@ const url = new URL(path, site).href;
 const ogImage = coverSrc(entry.cover, 'jpg');
 const shareLinkedIn = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
 const crumbs = [
-	{ name: 'Accueil', href: '/' },
-	{ name: 'Guides et outils', href: '/guides/' },
-	{ name: TOPICS[entry.topic], href: `/guides/#${entry.topic}` },
+	{ name: app.name, href: `/${app.slug}/` },
+	{ name: 'Guides', href: `/${app.slug}/guides/` },
 ];
 
 const author = { '@type': 'Person', name: 'Nicolas Tardieu', url: new URL('/a-propos/', site).href };
@@ -83,11 +82,11 @@ if (faq.length) {
 }
 ---
 
-<Site
+<AppShell
+	app={entry.app}
 	title={title}
 	description={description}
 	image={ogImage}
-	iosAppId={app.stores.iosId}
 	jsonLd={{ '@context': 'https://schema.org', '@graph': graph }}
 >
 	<main class="guide">
@@ -186,7 +185,7 @@ if (faq.length) {
 			)
 		}
 	</main>
-</Site>
+</AppShell>
 
 <script>
 	document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((btn) =>

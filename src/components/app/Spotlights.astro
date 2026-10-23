@@ -1,0 +1,92 @@
+---
+// Fonctionnalités phares : une capture et un texte, en alternance.
+interface Props {
+	items: { img: string; alt: string; kicker: string; title: string; text: string }[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="spots">
+	{
+		items.map((it, i) => (
+			<article class:list={['spot', { flip: i % 2 === 1 }]} data-reveal>
+				<div class="shot">
+					<img src={it.img} alt={it.alt} width="600" height="998" loading="lazy" />
+				</div>
+				<div class="text">
+					<p class="label kicker">{it.kicker}</p>
+					<h3>{it.title}</h3>
+					<p>{it.text}</p>
+				</div>
+			</article>
+		))
+	}
+</div>
+
+<style>
+	.spots {
+		display: grid;
+		gap: 88px;
+	}
+
+	.spot {
+		display: grid;
+		grid-template-columns: 0.9fr 1.1fr;
+		gap: 64px;
+		align-items: center;
+	}
+
+	.flip .shot {
+		order: 2;
+	}
+
+	.shot {
+		justify-self: center;
+		width: min(360px, 100%);
+		overflow: hidden;
+		border-radius: var(--radius);
+		background: var(--paper-2);
+	}
+
+	.shot img {
+		width: 100%;
+		height: auto;
+	}
+
+	.kicker {
+		margin: 0 0 10px;
+		color: var(--accent);
+	}
+
+	h3 {
+		margin: 0 0 14px;
+		font-size: clamp(28px, 3.4vw, 42px);
+		font-weight: 800;
+		line-height: 1.08;
+		letter-spacing: -0.03em;
+	}
+
+	.text p:last-child {
+		max-width: 28em;
+		margin: 0;
+		font-size: 19px;
+		color: var(--ink-2);
+	}
+
+	@media (max-width: 860px) {
+		.spot,
+		.flip {
+			grid-template-columns: 1fr;
+			gap: 24px;
+		}
+
+		.flip .shot {
+			order: 0;
+		}
+
+		.shot {
+			width: min(300px, 100%);
+		}
+	}
+</style>

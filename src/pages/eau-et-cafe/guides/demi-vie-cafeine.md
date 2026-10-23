@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/Guide.astro
+layout: ../../../layouts/Guide.astro
 title: "Demi-vie de la caféine : combien de temps elle agit"
 description: "Demi-vie de la caféine : environ 5 h en moyenne, de 1,5 à 9,5 h selon les personnes. Combien de temps elle reste dans le corps et ce qui change ce délai."
 h1: "Demi-vie de la caféine : combien de temps reste-t-elle dans le corps ?"
@@ -38,7 +38,7 @@ Concrètement, si tu bois un café à 14 h, une bonne partie de sa caféine est 
 
 Une fois bue, la caféine passe dans le sang, puis elle est éliminée progressivement, surtout par le foie. Cette élimination suit une règle simple : à chaque demi-vie, la quantité restante est divisée par deux.
 
-Avec une demi-vie de 5 heures et une dose de 100 mg (pour savoir ce que contient ta boisson, consulte notre [tableau de la quantité de caféine par boisson](/cafeine/quantite-cafeine-boissons/)) :
+Avec une demi-vie de 5 heures et une dose de 100 mg (pour savoir ce que contient ta boisson, consulte notre [tableau de la quantité de caféine par boisson](/eau-et-cafe/guides/quantite-cafeine-boissons/)) :
 
 - au bout de **5 heures**, il reste environ **50 mg** ;
 - au bout de **10 heures**, environ **25 mg** ;
@@ -76,7 +76,7 @@ Il faut distinguer l'effet que tu **ressens** et la caféine qui **circule**.
 
 L'effet ressenti (vigilance, coup de fouet) finit par s'estomper, plus ou moins vite selon les personnes. Mais la caféine ne disparaît pas quand tu ne la sens plus. Tant qu'elle circule, elle continue d'agir sur sa cible principale dans le cerveau, les récepteurs de l'adénosine, une molécule qui participe à l'envie de dormir.
 
-C'est ce qui explique un piège fréquent : tu ne te sens plus du tout stimulé le soir, mais ton sommeil est plus court ou plus léger. L'EFSA, l'autorité européenne de sécurité des aliments, le dit dans son avis de 2015 : des doses uniques de 100 mg peuvent affecter la durée et la qualité du sommeil chez certains adultes, en particulier quand la caféine est prise près de l'heure du coucher. Pour le détail de ce que disent les études, lis notre guide [café et sommeil : quel délai avant le coucher](/cafeine/cafe-et-sommeil/).
+C'est ce qui explique un piège fréquent : tu ne te sens plus du tout stimulé le soir, mais ton sommeil est plus court ou plus léger. L'EFSA, l'autorité européenne de sécurité des aliments, le dit dans son avis de 2015 : des doses uniques de 100 mg peuvent affecter la durée et la qualité du sommeil chez certains adultes, en particulier quand la caféine est prise près de l'heure du coucher. Pour le détail de ce que disent les études, lis notre guide [café et sommeil : quel délai avant le coucher](/eau-et-cafe/guides/cafe-et-sommeil/).
 
 ## CYP1A2 : pourquoi la demi-vie varie autant
 
@@ -99,7 +99,7 @@ Sans prise de sang répétée, impossible de la mesurer précisément. Mais tu p
 - **Sensibilité moyenne** : un café après le début d'après-midi commence à se sentir le soir.
 - **Sensibilité lente** : même un café de midi peut retarder ton endormissement. Pense à la pilule, à la grossesse ou à certains traitements, qui ralentissent l'élimination.
 
-C'est cette idée qu'utilise Eau & Café : tu choisis une sensibilité, et l'app retient une demi-vie de 3,5, 5 ou 7 heures pour estimer combien de caféine il te reste au coucher. Tu peux faire le même calcul en ligne avec notre [calculateur de l'heure limite du dernier café](/cafeine/heure-limite-cafe/) : il te donne une heure repère à partir de ton coucher.
+C'est cette idée qu'utilise Eau & Café : tu choisis une sensibilité, et l'app retient une demi-vie de 3,5, 5 ou 7 heures pour estimer combien de caféine il te reste au coucher. Tu peux faire le même calcul en ligne avec notre [calculateur de l'heure limite du dernier café](/eau-et-cafe/guides/heure-limite-cafe/) : il te donne une heure repère à partir de ton coucher.
 
 ## Les repères de l'EFSA à garder en tête
 

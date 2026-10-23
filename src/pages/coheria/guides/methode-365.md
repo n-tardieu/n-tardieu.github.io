@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/Guide.astro
+layout: ../../../layouts/Guide.astro
 title: "Méthode 365 : 3 séances, 6 respirations, 5 minutes"
 description: "Cohérence cardiaque 365 : 3 fois par jour, 6 respirations par minute, 5 minutes. Comment faire, quand faire et à quoi t'attendre, pas à pas."
 h1: "La méthode 365 de cohérence cardiaque"
@@ -80,7 +80,7 @@ La méthode propose trois rendez-vous fixes. L'intérêt d'heures régulières, 
 
 Ces horaires sont des **repères**, pas des règles. Si ton planning ne s'y prête pas, garde l'esprit : une séance le matin, une au milieu de la journée, une en fin de journée. Tu peux aussi ajouter une séance ponctuelle avant un moment que tu appréhendes, une prise de parole ou un rendez-vous par exemple.
 
-Et le soir ? Tu peux aussi respirer avant de dormir. Certaines séances du soir allongent un peu l'expiration, par exemple 4 secondes pour inspirer et 6 pour expirer : le rythme reste de 6 respirations par minute. Pour savoir comment répartir tes séances selon ton emploi du temps, lis notre guide [combien de séances de cohérence cardiaque faire par jour](/coherence-cardiaque/combien-de-fois-par-jour/).
+Et le soir ? Tu peux aussi respirer avant de dormir. Certaines séances du soir allongent un peu l'expiration, par exemple 4 secondes pour inspirer et 6 pour expirer : le rythme reste de 6 respirations par minute. Pour savoir comment répartir tes séances selon ton emploi du temps, lis notre guide [combien de séances de cohérence cardiaque faire par jour](/coheria/guides/combien-de-fois-par-jour/).
 
 ## Au bout de combien de temps la méthode 365 fait-elle effet ?
 

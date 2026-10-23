@@ -1,0 +1,25 @@
+---
+// Apparitions au chargement et au défilement, pour toute page qui pose des [data-reveal].
+---
+
+<script>
+	// Apparitions : chaque [data-reveal] entre en fondu et glisse vers le haut quand il
+	// arrive à l'écran (au chargement pour ce qui est déjà visible). Sans JavaScript,
+	// la classe `js` n'est jamais posée et tout reste visible.
+	const items = document.querySelectorAll<HTMLElement>('[data-reveal]');
+	if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+		const io = new IntersectionObserver(
+			(entries) => {
+				for (const e of entries) {
+					if (!e.isIntersecting) continue;
+					e.target.classList.add('in');
+					io.unobserve(e.target);
+				}
+			},
+			{ rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
+		);
+		items.forEach((el) => io.observe(el));
+	} else {
+		items.forEach((el) => el.classList.add('in'));
+	}
+</script>

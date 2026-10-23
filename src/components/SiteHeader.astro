@@ -1,9 +1,11 @@
 ---
-// En-tête du cadre du site (hub, guides, outils, à propos) : papier et encre.
+// En-tête du site perso (accueil, à propos, journal) : papier et encre.
+import { JOURNAL } from '../data/journal';
+
 const path = Astro.url.pathname;
 const links = [
 	{ href: '/#apps', label: 'Apps' },
-	{ href: '/guides/', label: 'Guides et outils' },
+	...(JOURNAL.length ? [{ href: '/#journal', label: 'Journal' }] : []),
 	{ href: '/a-propos/', label: 'À propos' },
 ];
 ---

@@ -1,0 +1,115 @@
+---
+import AppShell from '../../layouts/AppShell.astro';
+import Plans from '../../components/app/Plans.astro';
+import StoreButtons from '../../components/StoreButtons.astro';
+import { getApp } from '../../data/apps';
+
+const app = getApp('coheria');
+
+const plans = [
+	{
+		name: 'Gratuit',
+		price: '0 €',
+		note: 'Pour pratiquer, à vie.',
+		items: [
+			'Toutes les séances guidées',
+			'Tes propres séances',
+			'Les rappels du matin, du midi et du soir',
+			'La série et les jours de gel',
+			'Ton ressenti et Mon état sur 7 jours',
+			'Le bilan de la semaine',
+		],
+	},
+	{
+		name: 'Coheria Complet',
+		price: '7,99 €',
+		note: 'Un seul achat, à toi pour toujours.',
+		featured: true,
+		items: [
+			'Tout le gratuit',
+			'Mon état sur 30 jours',
+			'Le bilan mensuel, chaque 1ᵉʳ du mois',
+			'Tous tes bilans hebdomadaires, à relire quand tu veux',
+			'Tous les sons : pluie, feu, sous l’eau, cristal, cloche, triangles',
+		],
+	},
+];
+
+const faq = [
+	{
+		q: 'Les séances resteront-elles gratuites ?',
+		a: 'Oui. Les séances, les rappels et la série sont gratuits, à vie. Complet ajoute le suivi sur la durée et les sons, il ne retire rien au gratuit.',
+	},
+	{
+		q: 'Pourquoi un achat unique plutôt qu’un abonnement ?',
+		a: 'Respirer ne devrait pas coûter quelque chose tous les mois. Complet se paie une fois, et c’est tout.',
+	},
+	{
+		q: 'Peut-on essayer Complet ?',
+		a: 'La version gratuite, sans limite de temps, sert d’essai : tu peux pratiquer aussi longtemps que tu veux avant de décider.',
+	},
+	{
+		q: 'J’ai changé de téléphone, comment retrouver mon achat ?',
+		a: 'Dans les réglages de Coheria, « Restaurer les achats » le retrouve avec le même compte App Store ou Google Play.',
+	},
+	{
+		q: 'Le prix est-il le même partout ?',
+		a: 'Le prix affiché ici est celui de la France. Le store affiche le prix exact de ton pays au moment de l’achat.',
+	},
+];
+---
+
+<AppShell
+	app="coheria"
+	title="Tarifs de Coheria : gratuit, ou Complet à 7,99 €"
+	description="Coheria est gratuite pour pratiquer, à vie. Coheria Complet, 7,99 € en un seul achat, ajoute Mon état sur 30 jours, le bilan mensuel et tous les sons."
+>
+	<main class="wrap">
+		<header class="ap-head" data-reveal>
+			<p class="label ap-kicker">Tarifs</p>
+			<h1 class="display">Gratuit pour respirer. Complet pour aller plus loin.</h1>
+			<p class="ap-lede">Pas d’abonnement, pas de publicité.</p>
+		</header>
+
+		<Plans plans={plans} />
+
+		<section class="ap-section note" data-reveal>
+			<h2 class="display">Un mot sur le prix</h2>
+			<p>
+				Je développe Coheria seul. L’essentiel, respirer chaque jour, restera toujours gratuit : c’est ce qui compte vraiment.
+				Complet existe pour celles et ceux qui veulent suivre leur pratique sur la durée, et il finance le temps que je
+				passe à améliorer l’app. Un seul achat, parce que je n’aime pas l’idée de payer tous les mois pour respirer.
+			</p>
+			<p class="sign">Nicolas</p>
+		</section>
+
+		<section class="ap-section ap-faq">
+			<h2 class="display" data-reveal>Questions fréquentes</h2>
+			{
+				faq.map((f) => (
+					<details>
+						<summary>{f.q}</summary>
+						<p>{f.a}</p>
+					</details>
+				))
+			}
+		</section>
+
+		<section class="ap-section" data-reveal>
+			<StoreButtons app={app} />
+		</section>
+	</main>
+</AppShell>
+
+<style>
+	.note p {
+		max-width: 40em;
+		font-size: 19px;
+		color: var(--ink-2);
+	}
+
+	.note .sign {
+		font-weight: 800;
+		color: var(--ink);
+	}
+</style>

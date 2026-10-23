@@ -1,0 +1,76 @@
+---
+import AppShell from '../../layouts/AppShell.astro';
+import Spotlights from '../../components/app/Spotlights.astro';
+import FeatureGrid from '../../components/app/FeatureGrid.astro';
+import StoreButtons from '../../components/StoreButtons.astro';
+import { getApp } from '../../data/apps';
+
+const app = getApp('eau-et-cafe');
+
+const spots = [
+	{
+		img: '/apps/eau-et-cafe/ecrans/01-home.webp',
+		alt: 'L’accueil d’Eau & Café : l’œuvre du jour et le total d’eau',
+		kicker: 'Un geste',
+		title: 'Ton eau, notée en un appui.',
+		text: 'Trois favoris pour l’eau et un « + » pour le reste. L’objectif du jour est estimé d’après ton poids, ton âge et ton activité, selon les repères de l’EFSA.',
+	},
+	{
+		img: '/apps/eau-et-cafe/ecrans/04-coffee.webp',
+		alt: 'L’heure limite du dernier café',
+		kicker: 'Café et caféine',
+		title: 'Ton dernier café, à l’heure.',
+		text: 'L’app estime la caféine encore active d’après ce que tu as bu et ta sensibilité, puis t’indique l’heure de ton dernier café pour aborder ton coucher sereinement.',
+	},
+	{
+		img: '/apps/eau-et-cafe/ecrans/05-report.webp',
+		alt: 'Le bilan de la semaine',
+		kicker: 'Bilans',
+		title: 'Chaque semaine, en clair.',
+		text: 'Un bilan hebdomadaire et mensuel écrit avec des phrases, pas un score. Chaque observation montre ses comptes et ne s’affiche qu’avec assez de jours.',
+	},
+	{
+		img: '/apps/eau-et-cafe/ecrans/03-gallery.webp',
+		alt: 'La galerie des œuvres découvertes',
+		kicker: 'L’œuvre du jour',
+		title: 'Ta galerie grandit chaque jour.',
+		text: 'Trente œuvres du domaine public, de Vermeer à Hokusai. Une nouvelle se découvre à chaque jour d’ouverture, avec un petit texte pour la regarder autrement.',
+	},
+];
+
+const more = [
+	{ title: 'La question du soir', text: 'Comment s’est passée ta journée ? Une réponse en un appui, jamais de note sur ton humeur.' },
+	{ title: 'Des rappels doux', text: 'Au bon moment de la journée, avec le prochain rappel affiché sur l’accueil.' },
+	{ title: 'Ta propre carte des boissons', text: 'Expresso, thé, cola, boisson énergisante… avec leur caféine estimée, et les tiennes.' },
+	{ title: 'Partager ton heure limite', text: 'Une petite carte à envoyer, avec ton heure et l’œuvre du jour.' },
+	{ title: 'Sans compte, sans pub', text: 'Rien à créer, aucun outil de statistiques. Tout reste sur ton téléphone.' },
+	{ title: 'En quatre langues', text: 'Français, anglais, espagnol et allemand.' },
+];
+---
+
+<AppShell
+	app="eau-et-cafe"
+	title="Fonctionnalités d’Eau & Café : eau, caféine, bilans"
+	description="Ton eau en un geste, l’heure de ton dernier café, des bilans en clair et une œuvre d’art par jour : tout ce que fait Eau & Café."
+	image="/apps/eau-et-cafe/01-home.webp"
+>
+	<main class="wrap">
+		<header class="ap-head" data-reveal>
+			<p class="label ap-kicker">Fonctionnalités</p>
+			<h1 class="display">Ta journée, en un geste.</h1>
+			<p class="ap-lede">L’eau, le café, et ce que ça change pour toi. Le reste, l’app s’en occupe.</p>
+		</header>
+
+		<Spotlights items={spots} />
+
+		<section class="ap-section">
+			<h2 class="display" data-reveal>Et aussi</h2>
+			<FeatureGrid items={more} />
+		</section>
+
+		<section class="ap-section end" data-reveal>
+			<h2 class="display">Gratuit, sans compte.</h2>
+			<StoreButtons app={app} />
+		</section>
+	</main>
+</AppShell>
