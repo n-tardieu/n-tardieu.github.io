@@ -1,15 +1,19 @@
 ---
 // Le hub, « la collection » : un cadre papier et encre, et chaque app numérotée
 // dans une carte compacte à sa propre identité, avec ses badges de stores. Puis
-// le journal (masqué tant qu'il est vide), les principes, l'auteur et comment le
-// soutenir. Les guides vivent dans le mini-site de chaque app.
+// les guides (chacun rattaché au mini-site de son app), le journal (masqué tant
+// qu'il est vide), les principes, l'auteur et comment le soutenir.
 import Site from '../layouts/Site.astro';
 import StoreButtons from '../components/StoreButtons.astro';
 import SupportSection from '../components/SupportSection.astro';
 import HelloLines from '../components/HelloLines.astro';
 import { APPS } from '../data/apps';
+import GuideGrid from '../components/GuideGrid.astro';
+import { GUIDES } from '../data/guides';
 import { JOURNAL as journal } from '../data/journal';
 
+
+const guides = GUIDES.filter((g) => g.kind === 'guide');
 
 const jsonLd = {
 	'@context': 'https://schema.org',
@@ -80,6 +84,22 @@ const jsonLd = {
 				))
 			}
 		</div>
+
+		<section class="tools wrap" aria-labelledby="guides">
+			<div class="head" data-reveal>
+				<h2 id="guides" class="display">Guides</h2>
+				<p>
+					Des réponses claires et sourcées.
+					{APPS.map((a, i) => (
+						<>
+							{i > 0 && ' · '}
+							<a href={`/${a.slug}/guides/`}>{a.name} →</a>
+						</>
+					))}
+				</p>
+			</div>
+			<GuideGrid guides={guides} />
+		</section>
 
 		{
 			journal.length > 0 && (
