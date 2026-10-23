@@ -1,0 +1,48 @@
+---
+import EauCafeShell from '../../components/EauCafeShell.astro';
+
+const contact = 'ntardieu.contact@gmail.com';
+---
+
+<EauCafeShell
+	title="Assistance · Eau & Café"
+	description="Besoin d’aide avec Eau & Café ? Réponses aux questions fréquentes et contact par e-mail."
+>
+	<h1>Assistance</h1>
+	<p class="updated">Une question, un souci, une idée ? Écris-moi, je réponds sous quelques jours.</p>
+
+	<p>
+		<strong>Contact :</strong> <a href={`mailto:${contact}?subject=Eau%20%26%20Caf%C3%A9`}>{contact}</a><br />
+		Précise ton téléphone (iPhone ou Android) et la version de l’app, visible en bas des réglages.
+	</p>
+
+	<h2>Je ne reçois pas les rappels</h2>
+	<p>
+		Vérifie que les notifications d’Eau &amp; Café sont autorisées dans les réglages de ton téléphone, puis que les
+		rappels sont activés dans l’app. Les modes Concentration ou Ne pas déranger peuvent aussi les masquer.
+	</p>
+
+	<h2>Comment changer mon objectif d’eau ?</h2>
+	<p>
+		Depuis le profil, ouvre les réglages puis « Objectif » : choisis une des valeurs proposées ou ajuste-la avec les
+		boutons + et −.
+	</p>
+
+	<h2>Comment est calculée l’heure limite du café ?</h2>
+	<p>
+		L’app estime la caféine encore active à partir de tes boissons et de ta sensibilité (une demi-vie de 3,5 à 7 heures),
+		puis cherche le dernier moment où un café en laisserait peu au moment de ton coucher. Ajuste ta sensibilité et ton
+		heure de coucher dans les réglages si l’heure ne te ressemble pas. C’est une estimation, pas un avis médical.
+	</p>
+
+	<h2>Comment effacer mes données ?</h2>
+	<p>
+		Toutes tes données sont sur ton téléphone uniquement. Supprimer l’application les efface entièrement. Il n’existe aucun
+		compte en ligne à supprimer.
+	</p>
+
+	<h2>L’app est-elle vraiment gratuite ?</h2>
+	<p>Oui. Toutes les fonctions sont gratuites, sans abonnement ni publicité.</p>
+
+	<p style="margin-top: 40px">Voir aussi la <a href="/eau-et-cafe/confidentialite">politique de confidentialité</a>.</p>
+</EauCafeShell>

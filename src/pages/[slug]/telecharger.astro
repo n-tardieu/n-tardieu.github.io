@@ -1,0 +1,34 @@
+---
+// Lien unique à partager (bio, réseaux, QR code) : envoie l'iPhone vers
+// l'App Store, l'Android vers Google Play, et tout le reste vers la page de l'app.
+import { APPS, type AppEntry } from '../../data/apps';
+
+export function getStaticPaths() {
+	return APPS.map((app) => ({ params: { slug: app.slug }, props: { app } }));
+}
+
+const { app } = Astro.props as { app: AppEntry };
+const page = `/${app.slug}`;
+const targets = { ios: app.stores.ios, android: app.stores.android, page };
+---
+
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="robots" content="noindex" />
+		<title>Télécharger {app.name}</title>
+		<link rel="canonical" href={new URL(page, Astro.site)} />
+		<script is:inline define:vars={{ targets }}>
+			const ua = navigator.userAgent;
+			const isIOS = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+			const isAndroid = /Android/.test(ua);
+			location.replace((isIOS && targets.ios) || (isAndroid && targets.android) || targets.page);
+		</script>
+		<noscript><meta http-equiv="refresh" content={`0; url=${page}`} /></noscript>
+	</head>
+	<body style="font-family: system-ui, sans-serif; padding: 24px">
+		<p><a href={page}>Ouvrir la page de {app.name}</a></p>
+	</body>
+</html>

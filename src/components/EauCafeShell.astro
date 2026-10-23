@@ -1,0 +1,151 @@
+---
+// Habillage des pages annexes d'Eau & Café (confidentialité, assistance) :
+// même papier, même encre que la vitrine, texte courant lisible.
+import Base from '../layouts/Base.astro';
+import { getApp } from '../data/apps';
+
+interface Props {
+	title: string;
+	description: string;
+}
+
+const { title, description } = Astro.props;
+const app = getApp('eau-et-cafe');
+---
+
+<Base
+	title={title}
+	description={description}
+	themeColor="#F5F4EF"
+	favicon={app.icon}
+	fonts="family=Archivo:wght@400;500;600;700&family=Archivo+Narrow:wght@600;700"
+>
+	<div class="shell">
+		<header class="bar">
+			<a href="/eau-et-cafe" class="back">← Eau &amp; Café</a>
+			<nav>
+				<a href={app.privacy}>Confidentialité</a>
+				<a href={app.support}>Assistance</a>
+			</nav>
+		</header>
+		<main class="prose">
+			<slot />
+		</main>
+		<footer class="foot">
+			<a href="/eau-et-cafe">Eau &amp; Café</a> · <a href="/">Toutes les apps</a>
+		</footer>
+	</div>
+</Base>
+
+<style>
+	.shell {
+		--ink: #0e0e0e;
+		--ink-2: #55544f;
+		--line: #c9c7be;
+		--water: #1b2fd6;
+
+		min-height: 100vh;
+		background: #f5f4ef;
+		color: var(--ink);
+		font-family: 'Archivo', system-ui, sans-serif;
+		font-size: 17px;
+		line-height: 1.65;
+	}
+
+	.bar,
+	.prose,
+	.foot {
+		width: min(760px, calc(100% - 32px));
+		margin: 0 auto;
+	}
+
+	.bar {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 16px;
+		padding: 20px 0 14px;
+		border-bottom: 2px solid var(--ink);
+		font-size: 14px;
+		font-weight: 600;
+	}
+
+	.bar a {
+		color: var(--ink);
+		text-decoration: none;
+	}
+
+	.bar nav {
+		display: flex;
+		gap: 18px;
+	}
+
+	.bar nav a {
+		color: var(--ink-2);
+	}
+
+	.bar nav a:hover {
+		color: var(--ink);
+	}
+
+	.prose {
+		padding: 48px 0 64px;
+	}
+
+	.prose :global(h1) {
+		font-family: 'Archivo Narrow', 'Archivo', sans-serif;
+		font-weight: 700;
+		font-size: clamp(38px, 7vw, 60px);
+		line-height: 0.95;
+		text-transform: uppercase;
+		margin: 0 0 12px;
+	}
+
+	.prose :global(h2) {
+		font-size: 19px;
+		margin: 36px 0 8px;
+		padding-top: 18px;
+		border-top: 1px solid var(--line);
+	}
+
+	.prose :global(p),
+	.prose :global(li) {
+		color: #2a2a27;
+	}
+
+	.prose :global(a) {
+		color: var(--water);
+	}
+
+	.prose :global(.updated) {
+		font-size: 14px;
+		color: var(--ink-2);
+		margin-bottom: 28px;
+	}
+
+	.prose :global(.lang) {
+		display: flex;
+		gap: 16px;
+		font-size: 14px;
+		font-weight: 600;
+		margin-bottom: 32px;
+	}
+
+	.prose :global(hr) {
+		border: 0;
+		border-top: 2px solid var(--ink);
+		margin: 64px 0 48px;
+	}
+
+	.foot {
+		padding: 20px 0 40px;
+		border-top: 1px solid var(--line);
+		font-size: 13px;
+		color: var(--ink-2);
+	}
+
+	.foot a {
+		color: var(--ink);
+		font-weight: 600;
+	}
+</style>

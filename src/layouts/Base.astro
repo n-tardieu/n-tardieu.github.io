@@ -1,0 +1,102 @@
+---
+// En-tête commun des pages vitrines : SEO, Open Graph, bannière App Store.
+// Contrairement à Layout.astro, n'impose aucun style : chaque page porte
+// l'identité de son app.
+import { SITE_NAME } from '../data/apps';
+
+interface Props {
+	title: string;
+	description: string;
+	/** Image de partage, chemin absolu depuis /public. */
+	image?: string;
+	/** Identifiant App Store : affiche la bannière Smart App Banner dans Safari iOS. */
+	iosAppId?: string | null;
+	themeColor?: string;
+	favicon?: string;
+	/** Fonts Google à charger (paramètre family=…). */
+	fonts?: string;
+	jsonLd?: Record<string, unknown>;
+}
+
+const { title, description, image, iosAppId, themeColor = '#ffffff', favicon = '/favicon.svg', fonts, jsonLd } =
+	Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const imageUrl = image ? new URL(image, Astro.site).href : undefined;
+---
+
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonical} />
+		<link rel="icon" href={favicon} />
+		<link rel="apple-touch-icon" href={favicon} />
+		<meta name="theme-color" content={themeColor} />
+		<meta name="generator" content={Astro.generator} />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content={SITE_NAME} />
+		<meta property="og:locale" content="fr_FR" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+		{imageUrl && <meta property="og:image" content={imageUrl} />}
+		<meta name="twitter:card" content={imageUrl ? 'summary_large_image' : 'summary'} />
+
+		{iosAppId && <meta name="apple-itunes-app" content={`app-id=${iosAppId}`} />}
+
+		{
+			fonts && (
+				<>
+					<link rel="preconnect" href="https://fonts.googleapis.com" />
+					<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+					<link href={`https://fonts.googleapis.com/css2?${fonts}&display=swap`} rel="stylesheet" />
+				</>
+			)
+		}
+
+		{jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+
+<style is:global>
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	html {
+		-webkit-text-size-adjust: 100%;
+		scroll-behavior: smooth;
+	}
+
+	body {
+		margin: 0;
+		-webkit-font-smoothing: antialiased;
+	}
+
+	img {
+		display: block;
+		max-width: 100%;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto;
+		}
+
+		*,
+		*::before,
+		*::after {
+			animation-duration: 0.01ms !important;
+			transition-duration: 0.01ms !important;
+		}
+	}
+</style>

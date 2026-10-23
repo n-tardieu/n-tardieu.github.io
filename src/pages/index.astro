@@ -1,228 +1,288 @@
 ---
-import Layout from '../layouts/Layout.astro';
+// Le hub : toutes les apps, chacune dans ses propres couleurs.
+import Base from '../layouts/Base.astro';
+import StoreButtons from '../components/StoreButtons.astro';
+import { APPS } from '../data/apps';
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	name: 'Nicolas Tardieu',
+	url: 'https://n-tardieu.github.io',
+	jobTitle: 'Éditeur d’applications mobiles',
+	sameAs: ['https://github.com/n-tardieu'],
+};
 ---
 
-<Layout>
-	<main class="container">
-		<div class="content">
-			<h1 class="name">Nicolas Tardieu</h1>
-			
-			<div class="bio">
-				<p>Créateur de <a href="/coheria" rel="noopener noreferrer">Coheria</a> et <a href="/brimm" rel="noopener noreferrer">Brimm</a>.</p>
-				<p>Éditeur de logiciels. Spécialisé dans la conception et le développement d'applications mobiles Android, iOS et Web.
-			</div>
+<Base
+	title="Nicolas Tardieu · Applications mobiles"
+	description="Coheria, Eau & Café : des applications iPhone et Android simples, sans publicité, qui respectent ta vie privée. Conçues et développées par Nicolas Tardieu."
+	image="/apps/coheria/01-home.webp"
+	themeColor="#FAF8F4"
+	fonts="family=Inter:wght@400;500;600;700;800"
+	jsonLd={jsonLd}
+>
+	<div class="page">
+		<header class="wrap intro">
+			<p class="eyebrow">Nicolas Tardieu · Éditeur d’applications</p>
+			<h1>Des apps simples, pour prendre soin de ses journées.</h1>
+			<p class="lede">
+				Je conçois et développe des applications mobiles pour iPhone et Android. Peu de réglages, pas de publicité, et
+				tes données restent les tiennes.
+			</p>
+		</header>
 
-			<div class="links">
-				<a href="https://github.com/n-tardieu" target="_blank" rel="noopener noreferrer" class="link github-link">
-					<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="github-icon">
-						<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-					</svg>
-					GitHub
-				</a>
-				<a href="mailto:nicolas.tardieu.pro@gmail.com" class="link button">
-					Me contacter
-				</a>
+		<main class="wrap apps">
+			{
+				APPS.map((app, i) => (
+					<article
+						class="app"
+						style={`--accent: ${app.accent}; --surface: ${app.surface}; --ink: ${app.ink}; --sb-bg: ${app.accent}; --delay: ${i * 0.12}s`}
+					>
+						<a href={`/${app.slug}`} class="app-link" aria-label={`Découvrir ${app.name}`} />
+						<div class="app-head">
+							<img src={app.icon} alt="" width="72" height="72" class="app-icon" />
+							<span class="app-arrow" aria-hidden="true">
+								→
+							</span>
+						</div>
+						<h2>{app.name}</h2>
+						<p>{app.tagline}</p>
+						<div class="app-shots" aria-hidden="true">
+							{app.preview.map((src) => (
+								<img src={src} alt="" loading="lazy" width="660" height="1434" />
+							))}
+						</div>
+						<StoreButtons app={app} class="app-stores" />
+					</article>
+				))
+			}
+		</main>
+
+		<footer class="wrap footer">
+			<div>
+				<p class="eyebrow">Contact</p>
+				<a href="mailto:nicolas.tardieu.pro@gmail.com" class="mail">nicolas.tardieu.pro@gmail.com</a>
 			</div>
-		</div>
-	</main>
-</Layout>
+			<a href="https://github.com/n-tardieu" target="_blank" rel="noopener" class="gh">GitHub</a>
+		</footer>
+	</div>
+</Base>
 
 <style>
-	.container {
+	.page {
 		min-height: 100vh;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: 2rem;
-		max-width: 800px;
+		background: #faf8f4;
+		color: #141414;
+		font-family: 'Inter', system-ui, sans-serif;
+		font-size: 17px;
+		line-height: 1.55;
+	}
+
+	.wrap {
+		width: min(1120px, calc(100% - 48px));
 		margin: 0 auto;
-		transform: translateY(-5vh);
 	}
 
-	.content {
-		width: 100%;
-		max-width: 600px;
-		animation: fadeInUp 0.8s ease-out;
+	.eyebrow {
+		margin: 0 0 16px;
+		font-size: 13px;
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: #77736b;
 	}
 
-	@keyframes fadeInUp {
+	.intro {
+		padding: 96px 0 56px;
+		animation: rise 0.8s ease-out both;
+	}
+
+	.intro h1 {
+		max-width: 14em;
+		margin: 0 0 20px;
+		font-size: clamp(40px, 6vw, 76px);
+		font-weight: 800;
+		line-height: 1;
+		letter-spacing: -0.045em;
+	}
+
+	.lede {
+		max-width: 34em;
+		margin: 0;
+		font-size: 20px;
+		color: #55524c;
+	}
+
+	.apps {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 24px;
+	}
+
+	.app {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		padding: 32px;
+		border-radius: 28px;
+		border: 1px solid rgba(0, 0, 0, 0.06);
+		background: var(--surface);
+		color: var(--ink);
+		overflow: hidden;
+		isolation: isolate;
+		animation: rise 0.8s ease-out both;
+		animation-delay: calc(0.15s + var(--delay));
+		transition: transform 0.3s ease;
+	}
+
+	.app:hover {
+		transform: translateY(-4px);
+	}
+
+	.app-link {
+		position: absolute;
+		inset: 0;
+		z-index: 1;
+		border-radius: inherit;
+	}
+
+	.app-link:focus-visible {
+		outline: 3px solid var(--accent);
+		outline-offset: 3px;
+	}
+
+	.app-head {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+	}
+
+	.app-icon {
+		border-radius: 18px;
+	}
+
+	.app-arrow {
+		display: grid;
+		place-items: center;
+		width: 44px;
+		height: 44px;
+		border-radius: 50%;
+		background: var(--accent);
+		color: #fff;
+		font-size: 20px;
+		transition: transform 0.3s ease;
+	}
+
+	.app:hover .app-arrow {
+		transform: translateX(4px);
+	}
+
+	.app h2 {
+		margin: 24px 0 6px;
+		font-size: 36px;
+		font-weight: 800;
+		letter-spacing: -0.035em;
+	}
+
+	.app > p {
+		margin: 0;
+		max-width: 22em;
+		font-size: 18px;
+		opacity: 0.75;
+	}
+
+	.app-shots {
+		display: flex;
+		justify-content: center;
+		gap: 16px;
+		margin: 32px -8px 28px;
+		height: 300px;
+		overflow: hidden;
+		mask-image: linear-gradient(180deg, #000 70%, transparent);
+	}
+
+	.app-shots img {
+		width: 46%;
+		height: auto;
+		align-self: flex-start;
+		border-radius: 14px;
+		transition: transform 0.5s ease;
+	}
+
+	.app-shots img + img {
+		margin-top: 40px;
+	}
+
+	.app:hover .app-shots img {
+		transform: translateY(-12px);
+	}
+
+	.app-stores {
+		position: relative;
+		z-index: 2;
+		margin-top: auto;
+	}
+
+	.footer {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-end;
+		gap: 24px;
+		margin-top: 96px;
+		padding: 32px 0 48px;
+		border-top: 1px solid #e4e0d8;
+	}
+
+	.footer .eyebrow {
+		margin-bottom: 4px;
+	}
+
+	.mail,
+	.gh {
+		color: inherit;
+		font-weight: 600;
+		text-decoration: none;
+		border-bottom: 1px solid currentColor;
+	}
+
+	@keyframes rise {
 		from {
 			opacity: 0;
-			transform: translateY(30px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
+			transform: translateY(24px);
 		}
 	}
 
-	.name {
-		font-size: 2.5rem;
-		font-weight: 600;
-		margin: 0 0 1.5rem 0;
-		color: #ffffff;
-		background: linear-gradient(135deg, #ffffff, #e5e5e5, #cccccc);
-		background-size: 200% 200%;
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
-		animation: textShimmer 3s ease-in-out infinite alternate;
-	}
-
-	@keyframes textShimmer {
-		0% {
-			background-position: 0% 50%;
-		}
-		100% {
-			background-position: 100% 50%;
+	@media (max-width: 860px) {
+		.apps {
+			grid-template-columns: 1fr;
 		}
 	}
 
-	.bio {
-		font-size: 1.125rem;
-		margin-bottom: 2rem;
-		color: #ffffff;
-		animation: fadeInUp 0.8s ease-out 0.2s both;
-	}
-
-	.bio p {
-		margin: 0 0 1rem 0;
-	}
-
-	.bio p:last-child {
-		margin-bottom: 0;
-	}
-
-	.skills {
-		margin-bottom: 2.5rem;
-		animation: fadeInUp 0.8s ease-out 0.3s both;
-	}
-
-	.skills h3 {
-		font-size: 1.25rem;
-		font-weight: 600;
-		margin: 0 0 1rem 0;
-		color: #ffffff;
-	}
-
-	.skill-tags {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-	}
-
-	.tag {
-		padding: 0.4rem 0.8rem;
-		background: rgba(255, 255, 255, 0.08);
-		border: 1px solid rgba(255, 255, 255, 0.2);
-		border-radius: 20px;
-		font-size: 0.875rem;
-		color: #e5e5e5;
-		transition: all 0.3s ease;
-	}
-
-	.tag:hover {
-		background: rgba(255, 255, 255, 0.15);
-		border-color: #ffffff;
-		transform: translateY(-1px);
-	}
-
-	.bio a {
-		color: #e5e5e5;
-		font-weight: 500;
-		border-bottom: 1px solid #e5e5e5;
-		text-decoration: none;
-		transition: all 0.3s ease;
-	}
-
-	.bio a:hover {
-		color: #ffffff;
-		border-bottom-color: #ffffff;
-		opacity: 1;
-		text-decoration: none;
-		transform: translateY(-1px);
-	}
-
-	.links {
-		display: flex;
-		gap: 1rem;
-		flex-wrap: wrap;
-		animation: fadeInUp 0.8s ease-out 0.5s both;
-	}
-
-	.link {
-		font-size: 1rem;
-		font-weight: 500;
-		padding: 0.75rem 1.5rem;
-		border: 1px solid #444;
-		border-radius: 6px;
-		transition: all 0.3s ease;
-		text-decoration: none;
-		display: inline-block;
-		color: #ffffff;
-		backdrop-filter: blur(10px);
-		background: rgba(255, 255, 255, 0.05);
-	}
-
-	.github-link {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-	}
-
-	.github-icon {
-		width: 20px;
-		height: 20px;
-		flex-shrink: 0;
-	}
-
-	.link:hover {
-		border-color: #ffffff;
-		text-decoration: none;
-		transform: translateY(-2px);
-		box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
-		background: rgba(255, 255, 255, 0.05);
-	}
-
-	.button {
-		background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.1) 100%);
-		color: #e5e5e5;
-		border: 1px solid rgba(255, 255, 255, 0.2);
-		backdrop-filter: blur(10px);
-	}
-
-	.button:hover {
-		background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.2) 100%);
-		border-color: rgba(255, 255, 255, 0.4);
-		transform: translateY(-2px);
-		box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
-		color: #ffffff;
-	}
-
-	@media (max-width: 768px) {
-		.container {
-			padding: 1.5rem;
-			transform: translateY(-3vh);
+	@media (max-width: 560px) {
+		.wrap {
+			width: calc(100% - 32px);
 		}
 
-		.name {
-			font-size: 2rem;
+		.intro {
+			padding: 56px 0 40px;
 		}
 
-		.bio {
-			font-size: 1rem;
+		.lede {
+			font-size: 18px;
 		}
 
-		.links {
+		.app {
+			padding: 24px;
+		}
+
+		.app-shots {
+			height: 240px;
+		}
+
+		.footer {
 			flex-direction: column;
-		}
-
-		.link {
-			text-align: center;
-		}
-
-		.github-link {
-			justify-content: center;
+			align-items: flex-start;
 		}
 	}
 </style>

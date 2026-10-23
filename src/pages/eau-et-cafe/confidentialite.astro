@@ -1,0 +1,118 @@
+---
+import EauCafeShell from '../../components/EauCafeShell.astro';
+
+const contact = 'ntardieu.contact@gmail.com';
+---
+
+<EauCafeShell
+	title="Confidentialité · Eau & Café"
+	description="Politique de confidentialité d’Eau & Café : toutes les données restent sur ton téléphone, sans compte, sans statistiques ni publicité."
+>
+	<nav class="lang">
+		<a href="#fr">Français</a>
+		<a href="#en">English</a>
+	</nav>
+
+	<section id="fr">
+		<h1>Confidentialité</h1>
+		<p class="updated">Dernière mise à jour : 23 octobre 2026</p>
+
+		<p>
+			Eau &amp; Café t’aide à suivre ce que tu bois (eau et caféine) et à faire le point sur tes journées. Cette page
+			explique quelles informations l’application traite et comment. En résumé : tout reste sur ton téléphone.
+		</p>
+
+		<h2>1. Les informations que tu saisis</h2>
+		<p>
+			L’application ne traite que ce que tu y entres toi-même : ton poids, ta tranche d’âge et ton niveau d’activité
+			(pour estimer ton objectif d’eau), les boissons que tu notes et la caféine qu’elles contiennent, ta réponse du soir
+			sur ta journée, tes horaires (journée, coucher), ta sensibilité à la caféine et tes préférences (langue, thème,
+			rappels). Eau &amp; Café ne demande ni compte, ni nom, ni adresse e-mail.
+		</p>
+
+		<h2>2. Où elles sont stockées</h2>
+		<p>
+			Uniquement sur ton appareil. L’application n’a pas de serveur et n’envoie aucune donnée sur Internet : ni tes
+			boissons, ni tes réponses du soir, ni ta consommation de caféine.
+		</p>
+
+		<h2>3. Notifications</h2>
+		<p>
+			Les rappels sont programmés sur ton appareil par le système (iOS ou Android). Aucune information ne nous est
+			transmise, ni à un tiers, pour les programmer ou les afficher.
+		</p>
+
+		<h2>4. Aucun tiers</h2>
+		<p>
+			Eau &amp; Café n’intègre aucun outil de statistiques, de publicité ou de pistage, et ne partage aucune donnée avec
+			qui que ce soit.
+		</p>
+
+		<h2>5. Tes données, ton contrôle</h2>
+		<p>
+			Comme tout reste sur ton appareil, tu gardes la main : supprimer l’application efface toutes ses données. Il n’y a
+			pas de compte en ligne à supprimer, puisqu’aucun compte n’est créé.
+		</p>
+
+		<h2>6. Mineurs</h2>
+		<p>
+			L’application ne s’adresse pas aux enfants et ne collecte sciemment aucune information personnelle les concernant.
+		</p>
+
+		<h2>7. Modifications</h2>
+		<p>Si l’application venait à traiter les données autrement, cette page serait mise à jour avant ce changement.</p>
+
+		<h2>Contact</h2>
+		<p>Une question sur cette politique ? Écris à <a href={`mailto:${contact}`}>{contact}</a>.</p>
+	</section>
+
+	<hr />
+
+	<section id="en" lang="en">
+		<h1>Privacy</h1>
+		<p class="updated">Last updated: October 23, 2026</p>
+
+		<p>
+			Eau &amp; Café helps you track what you drink (water and caffeine) and look back on your days. This page explains
+			what information the app processes and how. In short: everything stays on your phone.
+		</p>
+
+		<h2>1. Information you enter</h2>
+		<p>
+			The app only processes what you enter yourself: your weight, age range and activity level (to estimate your water
+			goal), the drinks you log and their caffeine, your evening answer about your day, your schedule (day, bedtime), your
+			caffeine sensitivity and your preferences (language, theme, reminders). Eau &amp; Café asks for no account, name or
+			email address.
+		</p>
+
+		<h2>2. Where it is stored</h2>
+		<p>
+			Only on your device. The app has no server and sends no data over the Internet: not your drinks, not your evening
+			answers, not your caffeine intake.
+		</p>
+
+		<h2>3. Notifications</h2>
+		<p>
+			Reminders are scheduled on your device by the operating system (iOS or Android). No information is sent to us or
+			to any third party to schedule or display them.
+		</p>
+
+		<h2>4. No third parties</h2>
+		<p>Eau &amp; Café includes no analytics, advertising or tracking tools, and shares no data with anyone.</p>
+
+		<h2>5. Your data, your control</h2>
+		<p>
+			Since everything stays on your device, you stay in control: deleting the app erases all its data. There is no
+			online account to delete, as none is ever created.
+		</p>
+
+		<h2>6. Children</h2>
+		<p>The app is not directed at children and does not knowingly collect personal information about them.</p>
+
+		<h2>7. Changes</h2>
+		<p>If the app were ever to process data differently, this page would be updated before that change.</p>
+
+		<h2>Contact</h2>
+		<p>Questions about this policy? Write to <a href={`mailto:${contact}`}>{contact}</a>.</p>
+	</section>
+</EauCafeShell>

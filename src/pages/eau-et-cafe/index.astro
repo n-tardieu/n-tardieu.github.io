@@ -1,0 +1,960 @@
+---
+// Vitrine d'Eau & Café, dans la direction « Klein » de l'app : papier et encre,
+// coins carrés, filets au lieu de cartes. Seules les données ont une couleur
+// (bleu Klein pour l'eau, orange brûlé pour le café) et l'œuvre du jour est la
+// seule image en couleur.
+import Base from '../../layouts/Base.astro';
+import StoreButtons from '../../components/StoreButtons.astro';
+import { getApp } from '../../data/apps';
+
+const app = getApp('eau-et-cafe');
+
+const steps = [
+	{
+		title: 'Un geste, c’est noté',
+		text: 'Trois favoris pour l’eau, un « + » pour le reste. Un verre de 250 mL, une gourde de 500 : un appui suffit, et l’annulation reste à portée de pouce.',
+		tone: 'water',
+	},
+	{
+		title: 'Ton dernier café, à l’heure',
+		text: 'L’app estime la caféine encore active d’après ce que tu as bu et ta sensibilité, puis t’indique l’heure de ton dernier café pour aborder ton coucher sereinement.',
+		tone: 'coffee',
+	},
+	{
+		title: 'Le soir, une question',
+		text: 'Comment s’est passée ta journée ? Une réponse en un appui. Rien de plus, et jamais de note sur ton humeur.',
+		tone: 'ink',
+	},
+	{
+		title: 'Chaque semaine, en clair',
+		text: 'Un bilan hebdomadaire et mensuel écrit avec des phrases, pas un score. Chaque observation montre ses comptes et ne s’affiche qu’avec assez de jours.',
+		tone: 'ink',
+	},
+];
+
+const shots = [
+	{ file: '01-home', alt: 'Accueil : l’œuvre du jour et le total d’eau' },
+	{ file: '02-gesture', alt: 'Un geste pour noter un verre d’eau' },
+	{ file: '03-gallery', alt: 'La galerie des œuvres découvertes' },
+	{ file: '04-coffee', alt: 'L’heure limite du dernier café' },
+	{ file: '05-report', alt: 'Le bilan de la semaine' },
+	{ file: '06-private', alt: 'Sans compte, sans pub, sans suivi' },
+];
+
+const artworks = [
+	{ id: 'monet-impression', n: 1, title: 'Impression, soleil levant', artist: 'Claude Monet', year: '1872' },
+	{ id: 'van-gogh-terrasse', n: 2, title: 'Terrasse du café le soir', artist: 'Vincent van Gogh', year: '1888' },
+	{ id: 'vermeer-laitiere', n: 3, title: 'La Laitière', artist: 'Johannes Vermeer', year: 'vers 1658' },
+	{ id: 'hokusai-vague', n: 4, title: 'La Grande Vague de Kanagawa', artist: 'Katsushika Hokusai', year: 'vers 1831' },
+	{ id: 'hiroshige-averse', n: 7, title: 'Averse soudaine sur le pont Shin-Ōhashi', artist: 'Utagawa Hiroshige', year: '1857' },
+	{ id: 'caillebotte-pluie', n: 21, title: 'Rue de Paris, temps de pluie', artist: 'Gustave Caillebotte', year: '1877' },
+];
+
+const faq = [
+	{
+		q: 'Combien d’eau dois-je boire par jour ?',
+		a: 'Cela dépend de ton poids, de ton âge et de ton activité. Eau & Café calcule une estimation à partir des repères de l’EFSA (l’Autorité européenne de sécurité des aliments) : autour de 2 L de boissons par jour pour un adulte, davantage si tu es actif. Tu peux l’ajuster à tout moment.',
+	},
+	{
+		q: 'Comment l’heure limite du café est-elle calculée ?',
+		a: 'La caféine s’élimine progressivement : on estime qu’il en reste la moitié après 3 à 7 heures selon les personnes. À partir de tes cafés, de ta sensibilité et de ton heure de coucher, l’app estime le moment après lequel un café de plus en laisserait trop au coucher. C’est une estimation, pas un avis médical.',
+	},
+	{
+		q: 'L’application est-elle gratuite ?',
+		a: 'Oui, entièrement : toutes les fonctions sont gratuites, sans abonnement et sans publicité.',
+	},
+	{
+		q: 'Que deviennent mes données ?',
+		a: 'Elles restent sur ton téléphone. Il n’y a pas de compte, pas d’outil de statistiques ni de publicité, et aucune donnée n’est envoyée à un serveur.',
+	},
+	{
+		q: 'D’où viennent les œuvres ?',
+		a: 'Trente tableaux et estampes du domaine public, de Vermeer à Hokusai. Une nouvelle œuvre se découvre à chaque nouveau jour d’ouverture de l’app, avec un petit texte pour la regarder autrement.',
+	},
+];
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@graph': [
+		{
+			'@type': 'MobileApplication',
+			name: app.name,
+			operatingSystem: 'iOS, Android',
+			applicationCategory: 'HealthApplication',
+			description:
+				'Suivi de l’eau et de la caféine en un geste, heure limite du dernier café, bilans en clair et une œuvre d’art par jour. Gratuit, sans compte, sans publicité.',
+			offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+			author: { '@type': 'Person', name: 'Nicolas Tardieu' },
+			inLanguage: ['fr', 'en', 'es', 'de'],
+		},
+		{
+			'@type': 'FAQPage',
+			mainEntity: faq.map((f) => ({
+				'@type': 'Question',
+				name: f.q,
+				acceptedAnswer: { '@type': 'Answer', text: f.a },
+			})),
+		},
+	],
+};
+---
+
+<Base
+	title="Eau & Café : suivi de l’eau et de la caféine, une œuvre par jour"
+	description="Note ton eau et ton café en un geste, connais l’heure de ton dernier café et reçois des bilans en clair. Une œuvre d’art par jour. Gratuit, sans compte, sans pub."
+	image="/apps/eau-et-cafe/01-home.webp"
+	iosAppId={app.stores.iosId}
+	themeColor="#F5F4EF"
+	favicon={app.icon}
+	fonts="family=Archivo:wght@400;500;600;700;800&family=Archivo+Narrow:wght@500;600;700"
+	jsonLd={jsonLd}
+>
+	<div class="page">
+		<header class="topbar wrap">
+			<a href="/" class="back">← Nicolas Tardieu</a>
+			<span class="wordmark">Eau &amp; Café</span>
+		</header>
+
+		<main>
+			<section class="hero wrap">
+				<div class="hero-text">
+					<p class="label">Application iOS &amp; Android · Gratuite</p>
+					<h1>Bois de l’eau,<br />découvre une œuvre.</h1>
+					<p class="lede">
+						Note ton eau et ton café en un geste. Sache à quelle heure prendre ton dernier café. Et chaque
+						jour, un tableau à regarder.
+					</p>
+					<StoreButtons app={app} class="stores" />
+					<ul class="marks">
+						<li>Sans compte</li>
+						<li>Sans pub</li>
+						<li>Rien ne quitte ton téléphone</li>
+					</ul>
+				</div>
+
+				<figure class="artwork-card" aria-label="L’écran d’accueil de l’app">
+					<div class="artwork-frame">
+						<img
+							src="/apps/eau-et-cafe/oeuvres/cezanne-cafetiere.webp"
+							alt="La Femme à la cafetière, Paul Cézanne"
+							width="900"
+							height="1383"
+							fetchpriority="high"
+						/>
+						<span class="date-tag">Vendredi 23 octobre</span>
+					</div>
+					<figcaption class="cartel">
+						<div class="cartel-row">
+							<span class="num">N°12</span>
+							<span class="cartel-title">La Femme à la cafetière<small>Paul Cézanne, vers 1895</small></span>
+							<span class="arrow" aria-hidden="true">↗</span>
+						</div>
+						<div class="cartel-figures">
+							<p class="figure">1,4<span>L</span><small>sur 2 L</small></p>
+							<dl>
+								<div><dt>Encore</dt><dd>0,6 L</dd></div>
+								<div><dt>Rappel</dt><dd>16:30</dd></div>
+							</dl>
+						</div>
+						<div class="gauge"><span style="width: 70%"></span></div>
+						<div class="favs" aria-hidden="true">
+							<span>250</span><span>500</span><span>750</span><span class="plus">+</span>
+						</div>
+					</figcaption>
+				</figure>
+			</section>
+
+			<section class="section wrap" aria-labelledby="how">
+				<div class="section-head">
+					<h2 id="how">Comment ça marche</h2>
+					<p>Quatre moments, rien de plus.</p>
+				</div>
+				<ol class="index">
+					{
+						steps.map((s, i) => (
+							<li class={`tone-${s.tone}`}>
+								<span class="index-num">{String(i + 1).padStart(2, '0')}</span>
+								<h3>{s.title}</h3>
+								<p>{s.text}</p>
+							</li>
+						))
+					}
+				</ol>
+			</section>
+
+			<section class="shots" aria-label="Captures d’écran">
+				<div class="shots-track">
+					{
+						shots.map((s) => (
+							<img
+								src={`/apps/eau-et-cafe/${s.file}.webp`}
+								alt={s.alt}
+								width="660"
+								height="1434"
+								loading="lazy"
+							/>
+						))
+					}
+				</div>
+			</section>
+
+			<section class="section wrap" aria-labelledby="gallery">
+				<div class="section-head">
+					<h2 id="gallery">Ta galerie grandit chaque jour</h2>
+					<p>
+						Trente œuvres du domaine public, une par jour d’ouverture. Les suivantes restent à découvrir.
+					</p>
+				</div>
+				<ul class="gallery">
+					{
+						artworks.map((a) => (
+							<li>
+								<img
+									src={`/apps/eau-et-cafe/oeuvres/${a.id}.webp`}
+									alt={`${a.title}, ${a.artist}`}
+									loading="lazy"
+									width="420"
+									height="646"
+								/>
+								<p>
+									<span class="label">N°{a.n}</span>
+									<strong>{a.title}</strong>
+									{a.artist}, {a.year}
+								</p>
+							</li>
+						))
+					}
+				</ul>
+			</section>
+
+			<section class="figures wrap" aria-label="En chiffres">
+				<div><strong class="water">2 L</strong><span>objectif estimé selon ton poids, ton âge et ton activité</span></div>
+				<div><strong class="coffee">15:55</strong><span>ton heure limite, d’après ton coucher et ta sensibilité</span></div>
+				<div><strong>30</strong><span>œuvres à découvrir, une par jour</span></div>
+				<div><strong>4</strong><span>langues : français, anglais, espagnol, allemand</span></div>
+			</section>
+
+			<section class="private">
+				<div class="wrap private-inner">
+					<h2>Tout reste<br />sur ton téléphone.</h2>
+					<ul>
+						<li><span class="label">Sans compte</span>Rien à créer. L’app s’ouvre, c’est tout.</li>
+						<li><span class="label">Sans pub ni suivi</span>Aucun outil de statistiques, aucune publicité.</li>
+						<li><span class="label">Gratuit</span>Toutes les fonctions, sans abonnement.</li>
+					</ul>
+				</div>
+			</section>
+
+			<section class="section wrap" aria-labelledby="faq">
+				<div class="section-head">
+					<h2 id="faq">Questions fréquentes</h2>
+				</div>
+				<div class="faq">
+					{
+						faq.map((f) => (
+							<details>
+								<summary>{f.q}</summary>
+								<p>{f.a}</p>
+							</details>
+						))
+					}
+				</div>
+			</section>
+
+			<section class="cta wrap">
+				<h2>Ta journée, en un geste.</h2>
+				<StoreButtons app={app} class="stores" />
+			</section>
+		</main>
+
+		<footer class="footer wrap">
+			<p>Eau &amp; Café est une application de bien-être. Ses estimations ne remplacent pas un avis médical.</p>
+			<nav>
+				<a href={app.privacy}>Confidentialité</a>
+				<a href={app.support}>Assistance</a>
+				<a href="/">Toutes les apps</a>
+			</nav>
+		</footer>
+	</div>
+</Base>
+
+<style>
+	.page {
+		--paper: #f5f4ef;
+		--paper-2: #edebe4;
+		--ink: #0e0e0e;
+		--ink-2: #55544f;
+		--line: #c9c7be;
+		--water: #1b2fd6;
+		--coffee: #c4511e;
+		--sans: 'Archivo', system-ui, sans-serif;
+		--narrow: 'Archivo Narrow', 'Archivo', system-ui, sans-serif;
+
+		--sb-bg: var(--water);
+		--sb-fg: #fff;
+		--sb-radius: 0;
+		--sb-font: var(--sans);
+
+		min-height: 100vh;
+		background: var(--paper);
+		color: var(--ink);
+		font-family: var(--sans);
+		font-size: 17px;
+		line-height: 1.55;
+	}
+
+	.wrap {
+		width: min(1132px, calc(100% - 48px));
+		margin: 0 auto;
+	}
+
+	a {
+		color: inherit;
+	}
+
+	.label {
+		display: block;
+		font-size: 12px;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	/* En-tête */
+	.topbar {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding-top: 20px;
+		padding-bottom: 14px;
+		border-bottom: 2px solid var(--ink);
+	}
+
+	.back {
+		font-size: 14px;
+		font-weight: 500;
+		text-decoration: none;
+		color: var(--ink-2);
+	}
+
+	.back:hover {
+		color: var(--ink);
+	}
+
+	.wordmark {
+		font-family: var(--narrow);
+		font-weight: 700;
+		font-size: 20px;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+	}
+
+	/* Hero */
+	.hero {
+		display: grid;
+		grid-template-columns: 1.1fr 0.9fr;
+		gap: 64px;
+		align-items: center;
+		padding-top: 72px;
+		padding-bottom: 96px;
+	}
+
+	.hero h1 {
+		font-family: var(--narrow);
+		font-weight: 700;
+		font-size: clamp(48px, 7.4vw, 104px);
+		line-height: 0.92;
+		letter-spacing: -0.01em;
+		text-transform: uppercase;
+		margin: 18px 0 28px;
+	}
+
+	.hero .label {
+		color: var(--water);
+	}
+
+	.lede {
+		font-size: 20px;
+		color: var(--ink-2);
+		max-width: 30em;
+		margin: 0 0 32px;
+	}
+
+	.marks {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px 24px;
+		list-style: none;
+		padding: 0;
+		margin: 28px 0 0;
+		font-size: 14px;
+		font-weight: 600;
+	}
+
+	.marks li::before {
+		content: '';
+		display: inline-block;
+		width: 8px;
+		height: 8px;
+		margin-right: 8px;
+		background: var(--ink);
+		vertical-align: 1px;
+	}
+
+	/* Carte « accueil de l'app » */
+	.artwork-card {
+		margin: 0;
+		width: min(440px, 100%);
+		justify-self: end;
+		border: 2px solid var(--ink);
+		background: var(--paper);
+	}
+
+	.artwork-frame {
+		position: relative;
+		aspect-ratio: 4 / 4.4;
+		overflow: hidden;
+	}
+
+	.artwork-frame img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: 50% 30%;
+		animation: settle 1.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+	}
+
+	@keyframes settle {
+		from {
+			transform: scale(1.06);
+			opacity: 0;
+		}
+	}
+
+	.date-tag {
+		position: absolute;
+		top: 14px;
+		left: 14px;
+		padding: 6px 10px;
+		background: var(--paper);
+		font-size: 11px;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	.cartel {
+		padding: 0 16px 16px;
+	}
+
+	.cartel-row {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		padding: 12px 0;
+		border-bottom: 1px solid var(--line);
+	}
+
+	.num {
+		padding: 4px 6px;
+		background: var(--water);
+		color: #fff;
+		font-family: var(--narrow);
+		font-weight: 700;
+		font-size: 14px;
+	}
+
+	.cartel-title {
+		flex: 1;
+		font-size: 14px;
+		font-weight: 600;
+		line-height: 1.25;
+	}
+
+	.cartel-title small {
+		display: block;
+		font-weight: 400;
+		color: var(--ink-2);
+	}
+
+	.cartel-figures {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-end;
+		padding: 14px 0 12px;
+	}
+
+	.figure {
+		margin: 0;
+		font-family: var(--narrow);
+		font-weight: 600;
+		font-size: 64px;
+		line-height: 0.9;
+	}
+
+	.figure span {
+		font-size: 24px;
+		color: var(--water);
+	}
+
+	.figure small {
+		display: block;
+		font-family: var(--sans);
+		font-size: 12px;
+		font-weight: 500;
+		color: var(--ink-2);
+		margin-top: 6px;
+	}
+
+	.cartel dl {
+		display: flex;
+		margin: 0;
+	}
+
+	.cartel dl div {
+		padding: 0 14px;
+		border-left: 1px solid var(--line);
+	}
+
+	.cartel dt {
+		font-size: 10px;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--ink-2);
+	}
+
+	.cartel dd {
+		margin: 2px 0 0;
+		font-family: var(--narrow);
+		font-weight: 600;
+		font-size: 22px;
+	}
+
+	.gauge {
+		height: 6px;
+		background: #dad8d0;
+	}
+
+	.gauge span {
+		display: block;
+		height: 100%;
+		background: var(--water);
+		transform-origin: left;
+		animation: fill 1.6s 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+	}
+
+	@keyframes fill {
+		from {
+			transform: scaleX(0);
+		}
+	}
+
+	.favs {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr 48px;
+		gap: 6px;
+		margin-top: 14px;
+	}
+
+	.favs span {
+		display: grid;
+		place-items: center;
+		height: 42px;
+		border: 1.5px solid var(--ink);
+		font-family: var(--narrow);
+		font-weight: 600;
+		font-size: 16px;
+	}
+
+	.favs .plus {
+		background: var(--water);
+		border-color: var(--water);
+		color: #fff;
+		font-size: 22px;
+	}
+
+	/* Sections */
+	.section {
+		padding-top: 88px;
+		padding-bottom: 24px;
+	}
+
+	.section-head {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 32px;
+		align-items: end;
+		padding-bottom: 16px;
+		border-bottom: 2px solid var(--ink);
+		margin-bottom: 8px;
+	}
+
+	.section-head h2,
+	.private h2,
+	.cta h2 {
+		font-family: var(--narrow);
+		font-weight: 700;
+		font-size: clamp(34px, 4.6vw, 56px);
+		line-height: 0.95;
+		text-transform: uppercase;
+		margin: 0;
+	}
+
+	.section-head p {
+		margin: 0;
+		color: var(--ink-2);
+		max-width: 28em;
+		justify-self: end;
+	}
+
+	.index {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.index li {
+		display: grid;
+		grid-template-columns: 80px 1fr 1.3fr;
+		gap: 24px;
+		align-items: baseline;
+		padding: 28px 0;
+		border-bottom: 1px solid var(--line);
+	}
+
+	.index-num {
+		font-family: var(--narrow);
+		font-weight: 700;
+		font-size: 40px;
+		line-height: 1;
+	}
+
+	.tone-water .index-num {
+		color: var(--water);
+	}
+
+	.tone-coffee .index-num {
+		color: var(--coffee);
+	}
+
+	.index h3 {
+		margin: 0;
+		font-size: 22px;
+		font-weight: 700;
+		line-height: 1.2;
+	}
+
+	.index p {
+		margin: 0;
+		color: var(--ink-2);
+	}
+
+	/* Captures */
+	.shots {
+		margin-top: 80px;
+		padding: 48px 0;
+		background: var(--ink);
+	}
+
+	.shots-track {
+		display: flex;
+		gap: 20px;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		padding: 0 max(24px, calc((100vw - 1132px) / 2));
+		scrollbar-width: none;
+	}
+
+	.shots-track::-webkit-scrollbar {
+		display: none;
+	}
+
+	.shots-track img {
+		flex: 0 0 auto;
+		width: clamp(220px, 24vw, 290px);
+		height: auto;
+		scroll-snap-align: center;
+	}
+
+	/* Galerie */
+	.gallery {
+		display: grid;
+		grid-template-columns: repeat(6, 1fr);
+		gap: 16px;
+		list-style: none;
+		margin: 24px 0 0;
+		padding: 0;
+	}
+
+	.gallery img {
+		width: 100%;
+		aspect-ratio: 3 / 4;
+		object-fit: cover;
+		transition: transform 0.4s ease;
+	}
+
+	.gallery li:hover img {
+		transform: translateY(-4px);
+	}
+
+	.gallery p {
+		margin: 10px 0 0;
+		font-size: 13px;
+		line-height: 1.35;
+		color: var(--ink-2);
+	}
+
+	.gallery .label {
+		color: var(--water);
+		margin-bottom: 2px;
+	}
+
+	.gallery strong {
+		display: block;
+		color: var(--ink);
+		font-weight: 600;
+	}
+
+	/* Chiffres */
+	.figures {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		margin-top: 88px;
+	}
+
+	.figures div {
+		padding: 24px 24px 24px 0;
+		border-top: 2px solid var(--ink);
+	}
+
+	.figures div + div {
+		padding-left: 24px;
+		border-left: 1px solid var(--line);
+	}
+
+	.figures strong {
+		display: block;
+		font-family: var(--narrow);
+		font-weight: 600;
+		font-size: 64px;
+		line-height: 1;
+		margin-bottom: 10px;
+	}
+
+	.figures .water {
+		color: var(--water);
+	}
+
+	.figures .coffee {
+		color: var(--coffee);
+	}
+
+	.figures span {
+		font-size: 15px;
+		color: var(--ink-2);
+	}
+
+	/* Confidentialité */
+	.private {
+		margin-top: 88px;
+		background: var(--ink);
+		color: var(--paper);
+	}
+
+	.private-inner {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 48px;
+		padding-top: 80px;
+		padding-bottom: 80px;
+	}
+
+	.private ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.private li {
+		padding: 18px 0;
+		border-top: 1px solid rgba(245, 244, 239, 0.25);
+		color: rgba(245, 244, 239, 0.75);
+	}
+
+	.private li .label {
+		color: var(--paper);
+		margin-bottom: 4px;
+	}
+
+	/* FAQ */
+	.faq details {
+		border-bottom: 1px solid var(--line);
+	}
+
+	.faq summary {
+		display: flex;
+		justify-content: space-between;
+		gap: 24px;
+		padding: 22px 0;
+		font-size: 19px;
+		font-weight: 600;
+		cursor: pointer;
+		list-style: none;
+	}
+
+	.faq summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.faq summary::after {
+		content: '+';
+		font-family: var(--narrow);
+		font-size: 28px;
+		line-height: 0.9;
+		color: var(--water);
+	}
+
+	.faq details[open] summary::after {
+		content: '−';
+	}
+
+	.faq p {
+		margin: 0 0 24px;
+		max-width: 46em;
+		color: var(--ink-2);
+	}
+
+	/* Appel final */
+	.cta {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: center;
+		gap: 32px;
+		margin-top: 88px;
+		padding-top: 40px;
+		padding-bottom: 40px;
+		border-top: 2px solid var(--ink);
+	}
+
+	/* Pied de page */
+	.footer {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: 16px;
+		padding-top: 24px;
+		padding-bottom: 40px;
+		font-size: 13px;
+		color: var(--ink-2);
+		border-top: 1px solid var(--line);
+	}
+
+	.footer p {
+		margin: 0;
+		max-width: 36em;
+	}
+
+	.footer nav {
+		display: flex;
+		gap: 20px;
+	}
+
+	.footer a {
+		color: var(--ink);
+		font-weight: 600;
+	}
+
+	@media (max-width: 960px) {
+		.hero {
+			grid-template-columns: 1fr;
+			gap: 48px;
+			padding-top: 48px;
+			padding-bottom: 64px;
+		}
+
+		.artwork-card {
+			justify-self: center;
+		}
+
+		.section-head,
+		.private-inner {
+			grid-template-columns: 1fr;
+			gap: 12px;
+		}
+
+		.section-head p {
+			justify-self: start;
+		}
+
+		.index li {
+			grid-template-columns: 56px 1fr;
+		}
+
+		.index p {
+			grid-column: 2;
+		}
+
+		.gallery {
+			grid-template-columns: repeat(3, 1fr);
+		}
+
+		.figures {
+			grid-template-columns: 1fr 1fr;
+		}
+
+		.figures div:nth-child(3) {
+			padding-left: 0;
+			border-left: 0;
+		}
+	}
+
+	@media (max-width: 560px) {
+		.wrap {
+			width: calc(100% - 32px);
+		}
+
+		.shots-track {
+			padding: 0 16px;
+		}
+
+		.lede {
+			font-size: 18px;
+		}
+
+		.section {
+			padding-top: 56px;
+		}
+
+		.index li {
+			grid-template-columns: 1fr;
+			gap: 8px;
+			padding: 22px 0;
+		}
+
+		.index p {
+			grid-column: 1;
+		}
+
+		.gallery {
+			grid-template-columns: 1fr 1fr;
+		}
+
+		.figures strong {
+			font-size: 48px;
+		}
+
+		.figures div {
+			padding-right: 12px;
+		}
+
+		.figures div + div {
+			padding-left: 12px;
+		}
+
+		.footer nav {
+			flex-wrap: wrap;
+		}
+	}
+</style>
