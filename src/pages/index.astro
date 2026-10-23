@@ -5,7 +5,7 @@
 // qu'il est vide), les principes, l'auteur et comment le soutenir.
 import Site from '../layouts/Site.astro';
 import StoreButtons from '../components/StoreButtons.astro';
-import SupportSection from '../components/SupportSection.astro';
+import SupportPanel from '../components/SupportPanel.astro';
 import HelloLines from '../components/HelloLines.astro';
 import { APPS } from '../data/apps';
 import GuideGrid from '../components/GuideGrid.astro';
@@ -148,7 +148,7 @@ const jsonLd = {
 			<a href="/a-propos/" class="more">En savoir plus sur moi <span aria-hidden="true">→</span></a>
 		</section>
 
-		<SupportSection />
+		<SupportPanel />
 		<HelloLines />
 	</main>
 </Site>

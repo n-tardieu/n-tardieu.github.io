@@ -5,6 +5,7 @@
 // seule image en couleur.
 import AppShell from '../../layouts/AppShell.astro';
 import MakerNote from '../../components/MakerNote.astro';
+import SupportPanel from '../../components/SupportPanel.astro';
 import StoreButtons from '../../components/StoreButtons.astro';
 import { getApp } from '../../data/apps';
 
@@ -256,6 +257,7 @@ const jsonLd = {
 			</section>
 
 			<MakerNote app="eau-et-cafe" />
+			<SupportPanel app="eau-et-cafe" />
 
 			<section class="cta wrap">
 				<h2>Ta journée, en un geste.</h2>

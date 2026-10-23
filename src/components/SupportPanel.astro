@@ -1,0 +1,416 @@
+---
+// « Me soutenir » : « Tu as combien de temps ? ». Quatre gestes, un seul visible à
+// la fois (noter, commenter, en parler, financer), celui qui aide le plus ouvert
+// par défaut.
+// - Sans `app` (accueil, à propos du site) : « Pour quelle app ? », juste au-dessus
+//   des boutons, avec un groupe d'icônes qui s'écartent au survol (AppPicker).
+// - Avec `app` (mini-site d'une app) : l'app est connue, pas de choix.
+// Noter et écrire un avis proposent un bouton par store (App Store, Google Play) ;
+// une app pas encore publiée propose la liste d'attente.
+import AppPicker from './AppPicker.astro';
+import { APPS, KOFI_URL, getApp, waitlistHref } from '../data/apps';
+
+interface Props {
+	app?: 'coheria' | 'eau-et-cafe';
+}
+
+const { app: only } = Astro.props;
+const apps = only ? [getApp(only)] : APPS;
+const site = Astro.site!;
+const data = apps.map((a) => ({
+	slug: a.slug,
+	name: a.name,
+	tagline: a.tagline,
+	icon: a.icon,
+	url: new URL(`/${a.slug}/`, site).href,
+	ios: a.stores.ios ? `${a.stores.ios}?action=write-review` : null,
+	android: a.stores.android ? `${a.stores.android}&showAllReviews=true` : null,
+	waitlist: waitlistHref(a),
+	contact: a.contact,
+}));
+// Par défaut, la première app déjà sur un store : c'est celle qu'on peut noter.
+const initial = data.find((d) => d.ios || d.android) ?? data[0];
+const released = Boolean(initial.ios || initial.android);
+const fund = KOFI_URL ?? `mailto:nicolas.tardieu.pro@gmail.com?subject=${encodeURIComponent('Soutenir mes apps')}`;
+const appleIcon = 'M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z';
+const playIcon = 'M22.018 13.298l-3.919 2.218-3.515-3.493 3.543-3.521 3.891 2.202a1.49 1.49 0 0 1 0 2.594zM1.337.924a1.486 1.486 0 0 0-.112.568v21.017c0 .217.045.419.124.6l11.155-11.087L1.337.924zm12.207 10.065l3.258-3.238L3.45.195a1.466 1.466 0 0 0-.946-.179l11.04 10.973zm0 2.067l-11 10.933c.298.036.612-.016.906-.183l13.324-7.54-3.23-3.21z';
+const star = 'M12 2.5l2.9 6.2 6.6.8-4.9 4.6 1.3 6.6L12 17.4l-5.9 3.3 1.3-6.6L2.5 9.5l6.6-.8z';
+const title = only ? (released ? `Tu utilises déjà ${initial.name} ?` : `Tu attends ${initial.name} ?`) : 'Tu as combien de temps ?';
+---
+
+<section class="support wrap" id="soutenir" aria-labelledby="soutenir-titre" data-support data-apps={JSON.stringify(data)} data-reveal>
+	<div class="left">
+		<p class="label">Me soutenir</p>
+		<h2 id="soutenir-titre" class="display">{title}</h2>
+
+		<div class="tabs" role="tablist" aria-label="Temps disponible">
+			<button role="tab" aria-selected="true" data-tab="rate">10 secondes</button>
+			<button role="tab" aria-selected="false" data-tab="review">1 minute</button>
+			<button role="tab" aria-selected="false" data-tab="share">Un message</button>
+			<button role="tab" aria-selected="false" data-tab="fund">Un café</button>
+		</div>
+	</div>
+
+	<div class="panels">
+		<!-- 10 secondes : noter, ou liste d'attente si l'app n'est pas sortie -->
+		<div class="panel" data-panel="rate">
+			<div data-when="released" hidden={!released}>
+				<span class="stars" aria-hidden="true">{[0, 1, 2, 3, 4].map((i) => <svg viewBox="0 0 24 24" style={`--i:${i}`}><path d={star} /></svg>)}</span>
+				<h3>Note <span data-name>{initial.name}</span> sur le store</h3>
+				<p>Ta note, quelle qu’elle soit, aide l’app à être trouvée, et ton avis honnête m’aide à l’améliorer. C’est le geste qui compte le plus.</p>
+				{!only && <AppPicker apps={data} initial={initial.slug} />}
+				<div class="btns">
+					<a class="btn store-ios" href={initial.ios ?? '#'} hidden={!initial.ios} target="_blank" rel="noopener" data-store="ios"><svg viewBox="0 0 24 24" aria-hidden="true"><path d={appleIcon} /></svg>Noter sur l’App Store</a>
+					<a class="btn store-android" href={initial.android ?? '#'} hidden={!initial.android} target="_blank" rel="noopener" data-store="android"><svg viewBox="0 0 24 24" aria-hidden="true"><path d={playIcon} /></svg>Noter sur Google Play</a>
+				</div>
+			</div>
+			<div data-when="unreleased" hidden={released}>
+				<h3><span data-name>{initial.name}</span> arrive bientôt</h3>
+				<p>Elle n’est pas encore sur les stores. Laisse ton e-mail : je te préviens le jour de la sortie.</p>
+				{!only && <AppPicker apps={data} initial={initial.slug} />}
+				<a class="btn" href={initial.waitlist ?? '#'} data-waitlist>Préviens-moi à la sortie</a>
+			</div>
+		</div>
+
+		<!-- 1 minute : un avis écrit -->
+		<div class="panel" data-panel="review" hidden>
+			<div data-when="released" hidden={!released}>
+				<span class="big" aria-hidden="true">✎</span>
+				<h3>Écris deux lignes</h3>
+				<p>Un avis rassure ceux qui hésitent. Pour démarrer, choisis une phrase, elle est copiée :</p>
+				<div class="chips">
+					<button type="button" data-prompt="J’utilise {name} pour…">J’utilise <span data-name>{initial.name}</span> pour…</button>
+					<button type="button" data-prompt="Ce qui m’aide le plus, c’est…">Ce qui m’aide le plus, c’est…</button>
+					<button type="button" data-prompt="Ce que j’améliorerais, c’est…">Ce que j’améliorerais, c’est…</button>
+				</div>
+				{!only && <AppPicker apps={data} initial={initial.slug} />}
+				<div class="btns">
+					<a class="btn store-ios" href={initial.ios ?? '#'} hidden={!initial.ios} target="_blank" rel="noopener" data-store="ios"><svg viewBox="0 0 24 24" aria-hidden="true"><path d={appleIcon} /></svg>Avis sur l’App Store</a>
+					<a class="btn store-android" href={initial.android ?? '#'} hidden={!initial.android} target="_blank" rel="noopener" data-store="android"><svg viewBox="0 0 24 24" aria-hidden="true"><path d={playIcon} /></svg>Avis sur Google Play</a>
+				</div>
+			</div>
+			<div data-when="unreleased" hidden={released}>
+				<span class="big" aria-hidden="true">✎</span>
+				<h3>Dis-moi ce que tu en attends</h3>
+				<p>Pas encore d’avis possible sur les stores, mais ton idée peut entrer dans l’app avant sa sortie.</p>
+				{!only && <AppPicker apps={data} initial={initial.slug} />}
+				<a class="btn" href={`mailto:${initial.contact}`} data-contact>M’écrire</a>
+			</div>
+		</div>
+
+		<!-- Un message : partager l'app choisie -->
+		<div class="panel" data-panel="share" hidden>
+			<span class="big" aria-hidden="true">↗</span>
+			<h3>Parle de <span data-name>{initial.name}</span> autour de toi</h3>
+			<p>À quelqu’un qui oublie de boire ou qui a besoin de souffler. Le bouche-à-oreille compte plus que tout.</p>
+			{!only && <AppPicker apps={data} initial={initial.slug} />}
+			<button type="button" class="btn" data-share>Partager <span data-name>{initial.name}</span></button>
+		</div>
+
+		<!-- Un café : financer -->
+		<div class="panel" data-panel="fund" hidden>
+			<span class="big" aria-hidden="true">☕</span>
+			<h3>Offre-moi un café</h3>
+			<p>Je fais ces apps seul. Un don, même petit, m’aide à leur consacrer plus de temps.</p>
+			<a class="btn" href={fund} target={KOFI_URL ? '_blank' : undefined} rel="noopener">
+				{KOFI_URL ? 'Offrir un café sur Ko-fi' : 'Me soutenir financièrement'}
+			</a>
+		</div>
+	</div>
+</section>
+
+<script>
+	type AppData = {
+		slug: string;
+		name: string;
+		tagline: string;
+		url: string;
+		ios: string | null;
+		android: string | null;
+		waitlist: string | null;
+		contact: string;
+	};
+
+	document.querySelectorAll<HTMLElement>('[data-support]').forEach((root) => {
+		const apps: AppData[] = JSON.parse(root.dataset.apps!);
+		let current = apps.find((a) => a.ios || a.android) ?? apps[0];
+
+		const $all = <T extends Element = HTMLElement>(s: string) => root.querySelectorAll<T & HTMLElement>(s);
+
+		const render = () => {
+			const released = Boolean(current.ios || current.android);
+			$all('[data-name]').forEach((el) => (el.textContent = current.name));
+			$all('[data-when="released"]').forEach((el) => (el.hidden = !released));
+			$all('[data-when="unreleased"]').forEach((el) => (el.hidden = released));
+			$all<HTMLAnchorElement>('[data-store]').forEach((a) => {
+				const url = a.dataset.store === 'ios' ? current.ios : current.android;
+				a.hidden = !url;
+				if (url) a.href = url;
+			});
+			$all<HTMLAnchorElement>('[data-waitlist]').forEach((a) => (a.href = current.waitlist ?? '#'));
+			$all<HTMLAnchorElement>('[data-contact]').forEach((a) => (a.href = `mailto:${current.contact}?subject=${encodeURIComponent(`Idée pour ${current.name}`)}`));
+
+			$all('[data-pick]').forEach((b) => b.setAttribute('aria-checked', String(b.dataset.pick === current.slug)));
+		};
+
+		$all('[data-pick]').forEach((b) =>
+			b.addEventListener('click', () => {
+				current = apps.find((a) => a.slug === b.dataset.pick) ?? current;
+				render();
+			}),
+		);
+
+		const tabs = $all('[data-tab]');
+		tabs.forEach((t) =>
+			t.addEventListener('click', () => {
+				tabs.forEach((x) => x.setAttribute('aria-selected', String(x === t)));
+				$all('[data-panel]').forEach((p) => (p.hidden = p.dataset.panel !== t.dataset.tab));
+			}),
+		);
+
+		$all<HTMLButtonElement>('[data-prompt]').forEach((b) =>
+			b.addEventListener('click', async () => {
+				await navigator.clipboard.writeText(b.dataset.prompt!.replace('{name}', current.name));
+				$all('[data-prompt]').forEach((x) => x.classList.remove('copied'));
+				b.classList.add('copied');
+			}),
+		);
+
+		$all<HTMLButtonElement>('[data-share]').forEach((b) =>
+			b.addEventListener('click', async () => {
+				const data = { title: current.name, text: `Je te conseille ${current.name} : ${current.tagline}`, url: current.url };
+				if (navigator.share) {
+					await navigator.share(data).catch(() => {});
+					return;
+				}
+				await navigator.clipboard.writeText(`${data.text} ${data.url}`);
+				const before = b.innerHTML;
+				b.textContent = 'Lien copié ✓';
+				setTimeout(() => {
+					b.innerHTML = before;
+					render();
+				}, 2000);
+			}),
+		);
+
+		render();
+	});
+</script>
+
+<style>
+	.support {
+		--sel: var(--accent, var(--ink));
+		--sel-ink: var(--accent-ink, var(--paper));
+		--r: var(--radius, 0px);
+
+		display: grid;
+		grid-template-columns: 1fr 1.2fr;
+		gap: 48px;
+		margin-top: 96px;
+		padding: 48px;
+		border: 2px solid var(--ink);
+		border-radius: var(--r);
+		background: var(--paper-2, #fbfaf6);
+	}
+
+	:global(.theme-coheria) .support {
+		border: 0;
+		background: linear-gradient(180deg, #fce3ce, #fff8f2);
+	}
+
+	.label {
+		color: var(--ink-2);
+	}
+
+	h2 {
+		margin: 10px 0 24px;
+		font-size: clamp(34px, 4.4vw, 56px);
+	}
+
+	button {
+		font: inherit;
+		color: inherit;
+		cursor: pointer;
+	}
+
+	/* Onglets « combien de temps » */
+	.tabs {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+
+	.tabs button {
+		padding: 14px 18px;
+		border: 2px solid var(--ink);
+		border-radius: var(--r);
+		background: transparent;
+		font-size: 17px;
+		font-weight: 700;
+		text-align: left;
+		transition: background 0.2s ease;
+	}
+
+	:global(.theme-coheria) .tabs button {
+		border-color: rgba(21, 23, 28, 0.12);
+		background: rgba(255, 255, 255, 0.6);
+	}
+
+	.tabs button[aria-selected='true'] {
+		border-color: var(--sel);
+		background: var(--sel);
+		color: var(--sel-ink);
+	}
+
+	.tabs button[aria-selected='true']::after {
+		content: ' →';
+	}
+
+	.panel {
+		animation: panel-in 0.4s ease;
+	}
+
+	@keyframes panel-in {
+		from {
+			opacity: 0;
+			transform: translateY(10px);
+		}
+	}
+
+	.stars {
+		display: flex;
+		gap: 6px;
+	}
+
+	.stars svg {
+		width: 48px;
+		height: 48px;
+		fill: #dad8d0;
+		transition: fill 0.35s ease calc(var(--i) * 0.12s + 0.25s);
+	}
+
+	:global(.in) .stars svg,
+	:global(html:not(.js)) .stars svg {
+		fill: #e8a317;
+	}
+
+	.big {
+		display: block;
+		font-size: 56px;
+		line-height: 1;
+	}
+
+	h3 {
+		margin: 18px 0 8px;
+		font-size: 28px;
+		line-height: 1.2;
+	}
+
+	.panel p {
+		margin: 0 0 20px;
+		font-size: 18px;
+		color: var(--ink-2);
+	}
+
+	.btns {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+
+	.btn[hidden] {
+		display: none;
+	}
+
+	/* Une couleur par store : noir pour l'App Store, vert Google Play. */
+	.btn.store-ios,
+	.btn.store-android {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		color: #fff;
+	}
+
+	.btn.store-ios {
+		background: #000;
+	}
+
+	.btn.store-android {
+		background: #01875f;
+	}
+
+	.btn svg {
+		width: 20px;
+		height: 20px;
+		fill: currentColor;
+		flex-shrink: 0;
+	}
+
+	.btn {
+		display: inline-block;
+		padding: 14px 20px;
+		border: 0;
+		border-radius: var(--r);
+		background: var(--sel);
+		color: var(--sel-ink);
+		font-weight: 700;
+		text-decoration: none;
+		transition: transform 0.2s ease;
+	}
+
+	:global(.theme-coheria) .btn {
+		border-radius: 999px;
+	}
+
+	.btn:hover {
+		transform: translateY(-2px);
+	}
+
+	.chips {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin-bottom: 18px;
+	}
+
+	.chips button {
+		padding: 8px 12px;
+		border: 1.5px dashed var(--ink);
+		border-radius: var(--r);
+		background: transparent;
+		font-size: 14px;
+	}
+
+	.chips button.copied {
+		border-style: solid;
+		background: #e8a317;
+		color: #0e0e0e;
+	}
+
+	.chips button.copied::after {
+		content: ' · copié';
+	}
+
+	@media (max-width: 900px) {
+		.support {
+			grid-template-columns: 1fr;
+			gap: 28px;
+			padding: 32px 20px;
+		}
+
+		.tabs {
+			flex-direction: row;
+			flex-wrap: wrap;
+		}
+
+		.tabs button {
+			flex: 1 1 40%;
+			padding: 12px;
+			font-size: 15px;
+		}
+
+		.tabs button[aria-selected='true']::after {
+			content: '';
+		}
+	}
+</style>

@@ -1,6 +1,7 @@
 ---
 import AppShell from '../../layouts/AppShell.astro';
 import StoreButtons from '../../components/StoreButtons.astro';
+import SupportPanel from '../../components/SupportPanel.astro';
 import { APPS, getApp } from '../../data/apps';
 
 const app = getApp('eau-et-cafe');
@@ -73,6 +74,7 @@ const others = APPS.filter((a) => a.slug !== 'eau-et-cafe');
 
 			<StoreButtons app={app} />
 		</div>
+		<SupportPanel app={app.slug as 'coheria' | 'eau-et-cafe'} />
 	</main>
 </AppShell>
 

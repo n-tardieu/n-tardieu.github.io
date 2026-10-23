@@ -1,6 +1,7 @@
 ---
 import AppShell from '../../layouts/AppShell.astro';
 import StoreButtons from '../../components/StoreButtons.astro';
+import SupportPanel from '../../components/SupportPanel.astro';
 import { APPS, getApp } from '../../data/apps';
 
 const app = getApp('coheria');
@@ -67,13 +68,14 @@ const others = APPS.filter((a) => a.slug !== 'coheria');
 				<h2>Dire bonjour</h2>
 				<p>
 					Une idée, un bug, un mot : écris-moi à <a href={`mailto:${app.contact}`}>{app.contact}</a>. Et si Coheria
-					t’aide, <a href="/#soutenir">une note sur le store</a> m’aide énormément.
+					t’aide, <a href="#soutenir">une note sur le store</a> m’aide énormément.
 				</p>
 				<p class="sign">Nicolas Tardieu · <a href="/a-propos/">qui je suis</a></p>
 			</section>
 
 			<StoreButtons app={app} />
 		</div>
+		<SupportPanel app={app.slug as 'coheria' | 'eau-et-cafe'} />
 	</main>
 </AppShell>
 
