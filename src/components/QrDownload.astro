@@ -1,0 +1,140 @@
+---
+// QR code de téléchargement, généré à la construction du site (aucun service
+// extérieur). Il pointe vers /<app>/telecharger/, qui envoie un iPhone sur
+// l'App Store et un Android sur Google Play.
+// - Sur ordinateur : un encart sous les badges ; un clic l'agrandit en plein écran.
+// - Sur téléphone : un bouton « Afficher le QR code », pour le montrer à quelqu'un.
+import QRCode from 'qrcode';
+import QrDialog from './QrDialog.astro';
+import { getApp } from '../data/apps';
+
+interface Props {
+	app: 'coheria' | 'eau-et-cafe';
+}
+
+const app = getApp(Astro.props.app);
+const target = new URL(`/${app.slug}/telecharger/`, Astro.site).href;
+const id = `qr-download-${app.slug}`;
+const svg = await QRCode.toString(target, {
+	type: 'svg',
+	margin: 0,
+	errorCorrectionLevel: 'M',
+	color: { dark: '#15171c', light: '#ffffff' },
+});
+---
+
+<button type="button" class="qr" data-qr-open={id} aria-label={`Agrandir le QR code pour télécharger ${app.name}`}>
+	<span class="code" set:html={svg} aria-hidden="true" />
+	<span class="text">
+		<strong>Scanne avec ton téléphone</strong>
+		<span>iPhone ou Android, il t’emmène sur le bon store.</span>
+		<span class="zoom">Agrandir ↗</span>
+	</span>
+</button>
+
+<button type="button" class="qr-mobile" data-qr-open={id}>
+	<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h3v3h-3zM18 18h3v3h-3zM14 18h2M18 14h3" /></svg>
+	Afficher le QR code
+</button>
+
+<QrDialog
+	id={id}
+	url={target}
+	icon={app.icon}
+	title={`Télécharger ${app.name}`}
+	caption="Scanne avec l’appareil photo de ton téléphone."
+/>
+
+<style>
+	.qr {
+		display: inline-flex;
+		align-items: center;
+		gap: 14px;
+		margin-top: 20px;
+		padding: 12px 18px 12px 12px;
+		border: 0;
+		border-radius: 18px;
+		background: rgba(255, 255, 255, 0.75);
+		color: inherit;
+		font: inherit;
+		text-align: left;
+		cursor: zoom-in;
+		transition:
+			transform 0.2s ease,
+			background 0.2s ease;
+	}
+
+	.qr:hover {
+		background: #fff;
+		transform: translateY(-2px);
+	}
+
+	.code {
+		width: 88px;
+		height: 88px;
+		padding: 8px;
+		border-radius: 12px;
+		background: #fff;
+	}
+
+	.code :global(svg) {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.text {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+		font-size: 15px;
+		line-height: 1.35;
+	}
+
+	.text span {
+		max-width: 15em;
+		font-size: 13px;
+		color: var(--text-soft, #6e7683);
+	}
+
+	.text .zoom {
+		margin-top: 4px;
+		font-weight: 700;
+		color: var(--primary, #5b4bf5);
+	}
+
+	.qr-mobile {
+		display: none;
+		align-items: center;
+		gap: 8px;
+		margin-top: 16px;
+		padding: 10px 16px;
+		border: 1.5px solid currentColor;
+		border-radius: 999px;
+		background: transparent;
+		color: inherit;
+		font: inherit;
+		font-size: 15px;
+		font-weight: 700;
+		cursor: pointer;
+	}
+
+	.qr-mobile svg {
+		width: 18px;
+		height: 18px;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 2;
+	}
+
+	/* Téléphones et tablettes tactiles : le bouton remplace l'encart. */
+	@media (max-width: 900px), (pointer: coarse) {
+		.qr {
+			display: none;
+		}
+
+		.qr-mobile {
+			display: inline-flex;
+		}
+	}
+</style>

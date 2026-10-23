@@ -5,6 +5,7 @@
 // Le thème (couleurs, typographie, coins) suit l'identité de l'app.
 import Base from './Base.astro';
 import Reveal from '../components/Reveal.astro';
+import SharePage from '../components/SharePage.astro';
 import { APPS, appPages, getApp, waitlistHref } from '../data/apps';
 import '../styles/frame.css';
 
@@ -97,6 +98,9 @@ const fonts =
 					{others.map((a) => <a href={`/${a.slug}/`}>{a.name}</a>)}
 					<a href="/">Fait par Nicolas Tardieu</a>
 				</div>
+			</div>
+			<div class="bottom">
+				<SharePage />
 			</div>
 			<p class="legal">
 				{app.name} est une application de bien-être, pas un dispositif médical. © {new Date().getFullYear()} Nicolas
@@ -304,6 +308,10 @@ const fonts =
 	.cols a:not(.brand):hover {
 		color: var(--ink);
 		text-decoration: underline;
+	}
+
+	.bottom {
+		margin-top: 28px;
 	}
 
 	.legal {

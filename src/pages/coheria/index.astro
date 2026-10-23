@@ -6,6 +6,7 @@
 import AppShell from '../../layouts/AppShell.astro';
 import MakerNote from '../../components/MakerNote.astro';
 import StoreButtons from '../../components/StoreButtons.astro';
+import QrDownload from '../../components/QrDownload.astro';
 import BreathWave from '../../components/BreathWave.astro';
 import { getApp } from '../../data/apps';
 import { guidesFor } from '../../data/guides';
@@ -121,6 +122,7 @@ const jsonLd = {
 					</p>
 					<StoreButtons app={app} />
 					<p class="note">Gratuit · iPhone, iPad et Android · Sans compte obligatoire</p>
+					<QrDownload app="coheria" />
 				</div>
 
 				<div id="respirer" class="breath" data-breath>

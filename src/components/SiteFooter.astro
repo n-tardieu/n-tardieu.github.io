@@ -1,4 +1,5 @@
 ---
+import SharePage from './SharePage.astro';
 import { APPS } from '../data/apps';
 import { GUIDES } from '../data/guides';
 
@@ -20,6 +21,9 @@ const tools = GUIDES.filter((g) => g.kind === 'outil');
 			<a href="/a-propos/">À propos</a>
 			<a href="mailto:nicolas.tardieu.pro@gmail.com">Contact</a>
 		</div>
+	</div>
+	<div class="bottom">
+		<SharePage />
 	</div>
 	<p class="legal">
 		Les contenus de ce site sont des repères de bien-être, pas des avis médicaux. © {new Date().getFullYear()} Nicolas
@@ -64,6 +68,10 @@ const tools = GUIDES.filter((g) => g.kind === 'outil');
 	.cols a:hover {
 		color: var(--ink, #0e0e0e);
 		text-decoration: underline;
+	}
+
+	.bottom {
+		margin-top: 28px;
 	}
 
 	.legal {
