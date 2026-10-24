@@ -26,15 +26,13 @@ faq:
 pitch: "Coheria propose une séance de 5 minutes, une rapide de 3 minutes et une de 10 minutes avant de dormir, avec des rappels qui se taisent si tu as déjà respiré."
 ---
 
-La réponse courte : **3 fois par jour, 5 minutes à chaque fois**. C'est le repère de la méthode dite 365, popularisée par David O'Hare : 3 séances, 6 respirations par minute, 5 minutes. Mais ce chiffre est un objectif, pas un point de départ obligatoire. Si tu débutes, une séance par jour, tous les jours, vaut mieux que trois séances un jour sur deux.
-
-Voyons combien de séances faire selon ton cas, combien de temps chacune, à quels moments, et au bout de combien de temps tu peux espérer remarquer quelque chose.
+**3 fois par jour, 5 minutes à chaque fois** : c'est le repère de la méthode dite 365, popularisée par David O'Hare (3 séances, 6 respirations par minute, 5 minutes). Tu n'es pas obligé de commencer par là. Si tu débutes, une séance par jour, tous les jours, vaut mieux que trois séances un jour sur deux.
 
 ## Combien de fois par jour faire de la cohérence cardiaque ?
 
-Le repère classique est de **trois séances quotidiennes**. L'idée, telle que la méthode la présente, est que l'effet d'une séance se prolongerait quelques heures : la présentation reprise par l'Université Laval parle de 4 à 6 heures. Trois séances bien réparties couvriraient donc l'essentiel de la journée. Ce chiffre vient de la méthode elle-même : prends-le comme une **piste**, pas comme une mesure valable pour tout le monde.
+Le repère classique est de **trois séances quotidiennes**. L'idée, telle que la méthode la présente, est que l'effet d'une séance se prolongerait quelques heures : la présentation reprise par l'Université Laval parle de 4 à 6 heures. Trois séances bien réparties couvriraient donc l'essentiel de la journée. Ce chiffre vient de la méthode elle-même : c'est une estimation, qui ne vaut pas forcément pour toi.
 
-En pratique, tout le monde ne part pas du même endroit. Voici des repères selon ton profil :
+Selon où tu en es :
 
 | Ton cas | Combien de séances | Durée | Moments suggérés |
 | --- | --- | --- | --- |
@@ -44,7 +42,7 @@ En pratique, tout le monde ne part pas du même endroit. Voici des repères selo
 | En plus, ponctuellement | 1 de temps en temps | 3 à 5 min | Avant un moment que tu appréhendes |
 | Le soir | 1 | 5 à 10 min | Avant de dormir, au calme |
 
-Il n'existe pas de nombre maximal connu. Mais au-delà de trois séances, ce n'est pas forcément mieux : la clé est la **régularité**, pas la quantité.
+Il n'existe pas de nombre maximal connu, mais au-delà de trois séances, ce n'est pas forcément mieux. Pratiquer tous les jours compte davantage.
 
 Pour le détail de la technique (posture, rythme, respiration par le ventre), lis notre guide sur [la méthode 365 de cohérence cardiaque](/coheria/guides/methode-365/).
 
@@ -52,7 +50,7 @@ Pour le détail de la technique (posture, rythme, respiration par le ventre), li
 
 La durée de référence est de **5 minutes**. À 6 respirations par minute, cela fait une trentaine de cycles : environ 5 secondes d'inspiration, 5 secondes d'expiration.
 
-Pourquoi 5 minutes ? C'est un compromis : assez long pour que le rythme s'installe, assez court pour tenir dans n'importe quelle journée. Mais d'autres durées ont leur place :
+5 minutes, c'est assez long pour que le rythme s'installe et assez court pour tenir dans n'importe quelle journée. D'autres durées ont leur place :
 
 - **3 minutes** quand tu n'as vraiment pas le temps. Une séance courte reste mieux qu'une séance sautée.
 - **5 minutes** pour la pratique quotidienne.
@@ -71,7 +69,7 @@ Pourquoi 5 minutes ? C'est un compromis : assez long pour que le rythme s'instal
 
 ## Quand faire la cohérence cardiaque ?
 
-Les trois moments proposés par la méthode sont **au réveil**, **avant le déjeuner** et **en fin d'après-midi**. Ce ne sont pas des horaires magiques : leur intérêt est d'être répartis sur la journée et accrochés à des moments que tu vis déjà.
+Les trois moments proposés par la méthode sont au réveil, avant le déjeuner et en fin d'après-midi. Leur intérêt est d'être répartis sur la journée et accrochés à des moments que tu vis déjà.
 
 Quelques pistes pour choisir les tiens :
 
@@ -85,17 +83,15 @@ Quelques pistes pour choisir les tiens :
 
 ## Au bout de combien de temps la cohérence cardiaque fait-elle effet ?
 
-Il faut distinguer deux choses.
-
 **Pendant une séance**, le corps répond vite. Paul Lehrer et Richard Gevirtz, dans une synthèse de 2014, expliquent qu'en respirant lentement autour de 6 cycles par minute, les oscillations du rythme cardiaque deviennent bien plus amples qu'au repos. Ils notent que ce phénomène apparaît chez presque tout le monde, souvent en moins d'une minute. Ils précisent aussi que le rythme idéal varie un peu selon les personnes, autour de 5,5 respirations par minute en moyenne.
 
-**Sur la durée**, il faut de la patience. Dans les travaux qu'ils décrivent, certains changements mesurés au repos sont apparus après environ trois mois de pratique régulière à la maison, deux fois par jour. Tu ne seras pas forcément transformé en une semaine, et c'est normal.
+**Sur la durée**, il faut de la patience. Dans les travaux qu'ils décrivent, certains changements mesurés au repos sont apparus après environ trois mois de pratique régulière à la maison, deux fois par jour. N'attends donc pas de changement net au bout d'une semaine.
 
-Le meilleur moyen de savoir ce que la pratique t'apporte, c'est de **noter ton ressenti** après chaque séance, même d'un simple mot. Au bout de quelques semaines, tu verras ce qu'on observe chez toi : à quel moment de la journée tu te sens le plus apaisé, si les séances du matin te réussissent mieux que celles du soir, etc.
+Le meilleur moyen de savoir ce que la pratique t'apporte, c'est de **noter ton ressenti** après chaque séance, même d'un simple mot. Au bout de quelques semaines, tu verras à quel moment de la journée tu te sens le plus apaisé, ou si les séances du matin te réussissent mieux que celles du soir.
 
 ## Débutant : comment commencer sans te décourager ?
 
-La plupart des gens qui abandonnent ne le font pas parce que la séance est difficile, mais parce qu'ils oublient. Voici une progression simple :
+La séance elle-même est facile ; quand on abandonne, c'est le plus souvent parce qu'on oublie. Voici une progression simple :
 
 1. **Semaine 1 :** une séance de 5 minutes le matin, au même moment chaque jour.
 2. **Semaine 2 :** ajoute une séance en fin d'après-midi.
@@ -107,10 +103,10 @@ Et quelques astuces :
 - **Mets des rappels**, mais des rappels discrets : un rappel qui sonne alors que tu viens de respirer devient vite agaçant.
 - **Ne vise pas la perfection.** Une séance manquée n'efface rien. Reprends simplement à la suivante.
 
-Tu veux voir à quoi ressemble une séance avant de t'y mettre ? [Respire une minute avec la vague de Coheria](/coheria#respirer), directement sur la page, sans rien installer.
+Pour voir à quoi ressemble une séance avant de t'y mettre, [respire une minute avec la vague de Coheria](/coheria#respirer), directement sur la page, sans rien installer.
 
 ## Quelles précautions ?
 
-La respiration lente est une pratique douce. Si tu ressens des vertiges ou des fourmillements, c'est en général que tu respires trop amplement : réduis l'amplitude ou fais une pause. Si tu as un problème cardiaque ou respiratoire, ou un traitement en cours, demande l'avis d'un professionnel de santé avant de commencer. La cohérence cardiaque est un outil de bien-être, pas un substitut à un suivi médical.
+La respiration lente est une pratique douce. Si tu ressens des vertiges ou des fourmillements, c'est en général que tu respires trop amplement : réduis l'amplitude ou fais une pause. Si tu as un problème cardiaque ou respiratoire, ou un traitement en cours, demande l'avis d'un professionnel de santé avant de commencer. La cohérence cardiaque est un outil de bien-être et ne remplace pas un suivi médical.
 
 Pour t'aider à tenir le rythme, [l'app Coheria](/coheria) propose trois séances (5 minutes à 5 s / 5 s, une rapide de 3 minutes au même rythme, et 10 minutes avant de dormir à 4 s / 6 s), des rappels le matin, le midi et le soir qui ne sonnent pas si tu as déjà respiré, et une série avec des jours de gel pour qu'un oubli ne remette pas tout à zéro.

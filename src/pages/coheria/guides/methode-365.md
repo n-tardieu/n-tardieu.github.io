@@ -26,21 +26,17 @@ faq:
 pitch: "Coheria te guide avec une vague à l'écran, sans voix, et ses rappels du matin, du midi et du soir se taisent si tu as déjà respiré."
 ---
 
-La **cohérence cardiaque 365** tient en trois chiffres : **3** séances par jour, **6** respirations par minute, **5** minutes par séance. Tu inspires environ 5 secondes, tu expires environ 5 secondes, et tu recommences pendant 5 minutes. C'est tout. Pas de matériel, pas de posture compliquée, juste un rythme lent et régulier.
-
-Ce guide t'explique d'où vient la méthode, comment faire une séance, quand la placer dans ta journée, et à quoi t'attendre sans promesses exagérées.
+La **cohérence cardiaque 365** tient en trois chiffres : 3 séances par jour, 6 respirations par minute, 5 minutes par séance. Tu inspires environ 5 secondes, tu expires environ 5 secondes, et tu recommences pendant 5 minutes. Tu n'as besoin d'aucun matériel.
 
 ## Qu'est-ce que la méthode 365 ?
 
-La formule « 365 » a été popularisée en France par **David O'Hare**, dans son livre *Cohérence cardiaque 365*. Son idée : rendre une pratique respiratoire aussi simple à retenir qu'une routine du quotidien. Il la compare d'ailleurs au brossage des dents, qu'on fait non parce que c'est passionnant, mais parce que la régularité finit par compter.
+La formule « 365 » a été popularisée en France par **David O'Hare**, dans son livre *Cohérence cardiaque 365*. Son idée : rendre une pratique respiratoire aussi simple à retenir qu'une routine du quotidien. Il la compare d'ailleurs au brossage des dents : un geste banal, dont l'intérêt vient de la répétition.
 
-Derrière ces chiffres, il y a un phénomène que les chercheurs étudient depuis longtemps. Quand tu respires lentement, autour de **6 cycles par minute**, ton rythme cardiaque se met à onduler avec ta respiration : il accélère un peu à l'inspiration, ralentit à l'expiration. Paul Lehrer et Richard Gevirtz, dans une synthèse publiée en 2014, décrivent qu'à ce rythme, voisin de 0,1 hertz, l'amplitude de ces oscillations devient bien plus grande qu'au repos. C'est ce qu'on appelle une hausse de la **variabilité de la fréquence cardiaque**. Ils notent aussi que le rythme idéal varie un peu d'une personne à l'autre, plutôt autour de 5,5 respirations par minute en moyenne.
+Le chiffre de 6 respirations par minute a une base physiologique. Quand tu respires lentement, autour de 6 cycles par minute, ton rythme cardiaque se met à onduler avec ta respiration : il accélère un peu à l'inspiration, ralentit à l'expiration. Paul Lehrer et Richard Gevirtz, dans une synthèse publiée en 2014, décrivent qu'à ce rythme, voisin de 0,1 hertz, l'amplitude de ces oscillations devient bien plus grande qu'au repos. C'est ce qu'on appelle une hausse de la **variabilité de la fréquence cardiaque**. Ils notent aussi que le rythme idéal varie un peu d'une personne à l'autre, plutôt autour de 5,5 respirations par minute en moyenne.
 
-Autrement dit : 6 respirations par minute est un **repère pratique**, pas un chiffre magique. Si 5 secondes te semblent trop longues au début, raccourcis un peu, puis allonge petit à petit.
+6 respirations par minute est donc un repère pratique, à ajuster. Si 5 secondes te semblent trop longues au début, raccourcis un peu, puis allonge petit à petit.
 
 ## Comment faire une séance de cohérence cardiaque 365 ?
-
-Voici une séance pas à pas, pour un débutant.
 
 1. **Installe-toi.** Assis, dos droit sans être raide, pieds à plat au sol, épaules relâchées. Tu peux garder les yeux ouverts.
 2. **Pose une main sur ton ventre.** Elle t'aide à sentir la respiration descendre vers l'abdomen plutôt que de rester dans la poitrine.
@@ -49,13 +45,13 @@ Voici une séance pas à pas, pour un débutant.
 5. **Enchaîne sans pause** pendant 5 minutes, soit une trentaine de respirations.
 6. **Termine en douceur.** Reprends une respiration naturelle quelques instants avant de te lever.
 
-Quelques conseils qui changent tout :
+Quelques conseils :
 
 - **Ne gonfle pas au maximum.** L'amplitude doit rester confortable. Si tu as la tête qui tourne, tu respires trop fort : ralentis l'effort, pas le rythme.
 - **Suis un guide.** Compter dans sa tête est fatigant. Une vague, un point qui monte et descend ou un son régulier te libèrent de ce calcul.
 - **Accepte les pensées qui passent.** Ce n'est pas de la méditation : ton seul travail est de suivre le rythme.
 
-Tu veux essayer tout de suite ? Tu peux [faire une minute de respiration guidée sur la page Coheria](/coheria#respirer), directement dans ton navigateur.
+Pour essayer tout de suite, [fais une minute de respiration guidée sur la page Coheria](/coheria#respirer), directement dans ton navigateur.
 
 <div class="key">
 <strong>La méthode 365 en bref</strong>
@@ -78,15 +74,13 @@ La méthode propose trois rendez-vous fixes. L'intérêt d'heures régulières, 
 | Midi | Avant le déjeuner | Faire une coupure au milieu de la journée |
 | Fin d'après-midi | Vers 16 h à 18 h | Marquer la transition entre travail et soirée |
 
-Ces horaires sont des **repères**, pas des règles. Si ton planning ne s'y prête pas, garde l'esprit : une séance le matin, une au milieu de la journée, une en fin de journée. Tu peux aussi ajouter une séance ponctuelle avant un moment que tu appréhendes, une prise de parole ou un rendez-vous par exemple.
+Tu peux décaler ces horaires. Si ton planning ne s'y prête pas, garde l'idée : une séance le matin, une au milieu de la journée, une en fin de journée. Tu peux aussi ajouter une séance ponctuelle avant un moment que tu appréhendes, une prise de parole ou un rendez-vous par exemple.
 
-Et le soir ? Tu peux aussi respirer avant de dormir. Certaines séances du soir allongent un peu l'expiration, par exemple 4 secondes pour inspirer et 6 pour expirer : le rythme reste de 6 respirations par minute. Pour savoir comment répartir tes séances selon ton emploi du temps, lis notre guide [combien de séances de cohérence cardiaque faire par jour](/coheria/guides/combien-de-fois-par-jour/).
+Tu peux aussi respirer le soir, avant de dormir. Certaines séances du soir allongent un peu l'expiration, par exemple 4 secondes pour inspirer et 6 pour expirer : le rythme reste de 6 respirations par minute. Pour savoir comment répartir tes séances selon ton emploi du temps, lis notre guide [combien de séances de cohérence cardiaque faire par jour](/coheria/guides/combien-de-fois-par-jour/).
 
 ## Au bout de combien de temps la méthode 365 fait-elle effet ?
 
-Il y a deux échelles de temps à distinguer.
-
-**Pendant la séance**, la réponse du corps est rapide. Lehrer et Gevirtz rapportent que les grandes oscillations du rythme cardiaque apparaissent chez presque tout le monde, souvent en moins d'une minute de respiration lente. La présentation de la méthode reprise par l'Université Laval parle d'effets qui commenceraient après environ 3 minutes et dureraient ensuite 4 à 6 heures. C'est d'ailleurs l'argument derrière les trois séances : en couvrir toute la journée. Garde ce chiffre comme une **estimation** issue de la méthode, pas comme une mesure valable pour tout le monde.
+**Pendant la séance**, la réponse du corps est rapide. Lehrer et Gevirtz rapportent que les grandes oscillations du rythme cardiaque apparaissent chez presque tout le monde, souvent en moins d'une minute de respiration lente. La présentation de la méthode reprise par l'Université Laval parle d'effets qui commenceraient après environ 3 minutes et dureraient ensuite 4 à 6 heures. C'est l'argument derrière les trois séances : couvrir toute la journée. Ce chiffre est une estimation donnée par la méthode, et il ne vaut pas forcément pour toi.
 
 **Sur plusieurs semaines**, ce qu'on observe dépend de la régularité. Dans les travaux cités par Lehrer et Gevirtz, certains changements au repos ont été mesurés après environ trois mois de pratique à la maison, deux fois par jour. Le plus simple est donc de te donner quelques semaines avant de juger, et de noter comment tu te sens après chaque séance : c'est souvent là qu'on remarque les premiers changements.
 
@@ -102,11 +96,11 @@ La cohérence cardiaque est un outil de bien-être. Elle ne remplace pas un suiv
 
 ## Comment tenir la méthode 365 dans la durée ?
 
-La difficulté n'est pas la séance elle-même, c'est d'y penser trois fois par jour. Quelques pistes :
+Le plus dur, c'est de penser à ses séances trois fois par jour. Quelques pistes :
 
 - **Accroche chaque séance à une habitude existante** : le café du matin, le moment où tu fermes ton ordinateur pour déjeuner, le retour à la maison.
 - **Programme des rappels** à heures fixes, mais pas trop insistants.
 - **Commence petit.** Si trois séances te semblent beaucoup, commence par une seule, le matin, pendant une semaine.
 - **Ne cherche pas la série parfaite.** Une séance manquée n'efface rien : reprends à la suivante.
 
-C'est exactement pour ça que [Coheria](/coheria) existe : une vague à suivre des yeux, sans voix, des rappels le matin, le midi et le soir qui ne sonnent pas si tu as déjà respiré, et un ressenti à noter en un geste après chaque séance.
+[Coheria](/coheria) t'aide sur ce point : une vague à suivre des yeux, sans voix, des rappels le matin, le midi et le soir qui ne sonnent pas si tu as déjà respiré, et un ressenti à noter en un geste après chaque séance.

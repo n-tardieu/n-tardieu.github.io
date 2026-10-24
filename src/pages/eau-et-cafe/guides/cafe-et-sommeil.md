@@ -28,7 +28,7 @@ faq:
 pitch: "Eau & Café estime l'heure de ton dernier café d'après ton heure de coucher et ta sensibilité. Gratuite, sans compte, sans pub."
 ---
 
-La réponse courte : garde **au moins 6 heures** entre ton dernier café et ton coucher. C'est le délai que recommandent les auteurs d'une étude publiée en 2013, qui a mesuré l'effet de la caféine prise 0, 3 et 6 heures avant de dormir. Mais 6 heures n'est qu'un repère : selon la vitesse à laquelle ton corps élimine la caféine, ton heure limite peut tomber en fin d'après-midi ou dès la fin de matinée.
+Garde **au moins 6 heures** entre ton dernier café et ton coucher. C'est le délai que recommandent les auteurs d'une étude publiée en 2013, qui a mesuré l'effet de la caféine prise 0, 3 et 6 heures avant de dormir. Selon la vitesse à laquelle ton corps élimine la caféine, ton heure limite peut tomber en fin d'après-midi ou dès la fin de matinée.
 
 ## Le café empêche-t-il de dormir ?
 
@@ -36,18 +36,15 @@ Pas forcément de t'endormir, mais il peut **raccourcir et alléger ton sommeil*
 
 L'EFSA, l'autorité européenne de sécurité des aliments, l'indique dans son avis de 2015 : des doses uniques de **100 mg** de caféine peuvent affecter la durée et la qualité du sommeil chez certains adultes, en particulier quand elles sont prises près de l'heure du coucher. Pour savoir combien de caféine contient ta boisson habituelle, consulte notre [tableau de la quantité de caféine par boisson](/eau-et-cafe/guides/quantite-cafeine-boissons/).
 
-La raison tient à la façon dont la caféine agit. Sa cible principale dans le cerveau est le récepteur de l'adénosine, une molécule qui participe à l'envie de dormir. Tant que la caféine circule, elle freine ce signal.
+Dans le cerveau, la caféine agit surtout sur le récepteur de l'adénosine, une molécule qui participe à l'envie de dormir. Tant que la caféine circule, elle freine ce signal.
 
 ## Café et sommeil : que dit l'étude des 0, 3 et 6 heures ?
 
-L'étude la plus citée sur le sujet a été menée par Christopher Drake et ses collègues, et publiée en 2013 dans le *Journal of Clinical Sleep Medicine*.
+Christopher Drake et ses collègues ont publié en 2013, dans le *Journal of Clinical Sleep Medicine*, une étude souvent citée sur le sujet. 12 adultes, bons dormeurs, ont pris 400 mg de caféine (une dose élevée, l'équivalent de plusieurs cafés) soit au moment du coucher, soit 3 heures avant, soit 6 heures avant, ou un placebo. Leur sommeil était mesuré chez eux, avec un appareil et un carnet.
 
-- **Le protocole :** 12 adultes, bons dormeurs, ont pris 400 mg de caféine (une dose élevée, l'équivalent de plusieurs cafés) soit au moment du coucher, soit 3 heures avant, soit 6 heures avant, ou un placebo. Leur sommeil était mesuré chez eux, avec un appareil et un carnet.
-- **Le résultat :** la caféine perturbait le sommeil dans les trois cas. **Même prise 6 heures avant le coucher**, elle réduisait le temps de sommeil mesuré de **plus d'une heure**.
-- **Le détail qui surprend :** dans leur carnet, les participants ne percevaient pas pleinement cette perte de sommeil quand la caféine était prise 6 heures avant.
-- **La conclusion des auteurs :** éviter une quantité importante de caféine pendant au moins 6 heures avant le coucher.
+La caféine perturbait le sommeil dans les trois cas. Même prise 6 heures avant le coucher, elle réduisait le temps de sommeil mesuré de **plus d'une heure**, et les participants ne s'en rendaient pas vraiment compte dans leur carnet. Les auteurs conseillent donc d'éviter une quantité importante de caféine pendant au moins 6 heures avant le coucher.
 
-Cette étude a ses limites : peu de participants, une dose forte, et une mesure par appareil portable plutôt qu'en laboratoire. Elle donne une **piste solide**, pas une règle universelle. Avec un seul café, l'effet est probablement plus faible ; avec une élimination lente, il peut durer plus longtemps.
+Cette étude a ses limites : peu de participants, une dose forte, et une mesure par appareil portable plutôt qu'en laboratoire. C'est une piste solide, à adapter à ton cas. Avec un seul café, l'effet est probablement plus faible ; avec une élimination lente, il peut durer plus longtemps.
 
 <div class="key">
 <strong>À retenir</strong>
@@ -83,7 +80,7 @@ Pour transformer ces chiffres en heure limite, il faut choisir un seuil : la qua
 - **sensibilité moyenne** (demi-vie 5 h) : dernier café vers **14 h 15** ;
 - **sensibilité lente** (demi-vie 7 h) : dernier café vers **10 h 45**.
 
-C'est là qu'on voit pourquoi les conseils du type « pas de café après 14 h » ou « pas après 16 h » marchent pour certains et pas pour d'autres. Le bon repère dépend de ton heure de coucher, de la quantité bue et de ta sensibilité.
+Ces écarts expliquent pourquoi les conseils du type « pas de café après 14 h » ou « pas après 16 h » marchent pour certains et pas pour d'autres. Le bon repère dépend de ton heure de coucher, de la quantité bue et de ta sensibilité.
 
 Pour savoir où tu te situes, observe-toi :
 
@@ -91,7 +88,7 @@ Pour savoir où tu te situes, observe-toi :
 - **Tu élimines lentement** si même un café de début d'après-midi retarde ton endormissement. La contraception orale et la grossesse ralentissent l'élimination ; l'Institute of Medicine indique que la pilule peut aller jusqu'à doubler la demi-vie.
 - Les écarts viennent surtout d'une enzyme du foie, la **CYP1A2**, dont l'activité varie beaucoup d'une personne à l'autre, en partie pour des raisons génétiques.
 
-Le plus simple pour avoir ton heure à toi : utilise notre [calculateur de l'heure limite du dernier café](/eau-et-cafe/guides/heure-limite-cafe/). Tu indiques ton heure de coucher et ta sensibilité, il te donne une heure repère.
+Pour avoir ton heure à toi, utilise notre [calculateur de l'heure limite du dernier café](/eau-et-cafe/guides/heure-limite-cafe/) : tu indiques ton heure de coucher et ta sensibilité, il te donne une heure repère.
 
 ## Dernier café avant de dormir : quelques pistes
 

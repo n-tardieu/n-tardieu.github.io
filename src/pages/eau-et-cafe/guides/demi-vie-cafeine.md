@@ -32,7 +32,7 @@ pitch: "Eau & Café estime l'heure de ton dernier café d'après ton heure de co
 
 La **demi-vie de la caféine** est le temps qu'il faut pour que la quantité de caféine dans ton sang diminue de moitié. Chez un adulte en bonne santé, elle est en moyenne d'**environ 5 heures**, selon la synthèse de l'Institute of Medicine américain. Mais elle varie énormément d'une personne à l'autre : de **1,5 à 9,5 heures**.
 
-Concrètement, si tu bois un café à 14 h, une bonne partie de sa caféine est encore là au moment du dîner, et une part non négligeable au moment de te coucher.
+Si tu bois un café à 14 h, une bonne partie de sa caféine est encore là au moment du dîner, et une part non négligeable au moment de te coucher.
 
 ## Qu'est-ce que la demi-vie de la caféine ?
 
@@ -48,7 +48,7 @@ On n'atteint donc jamais exactement zéro d'un coup : la caféine s'efface par p
 
 ## Caféine : combien de temps dans le corps selon ta demi-vie ?
 
-Le tableau suivant montre ce qu'il reste d'une dose de 100 mg au fil des heures, pour trois demi-vies : rapide (3,5 h), moyenne (5 h) et lente (7 h). Ce sont des **estimations** calculées avec le modèle de décroissance classique, pas des mesures individuelles.
+Le tableau suivant montre ce qu'il reste d'une dose de 100 mg au fil des heures, pour trois demi-vies : rapide (3,5 h), moyenne (5 h) et lente (7 h). Les valeurs sont calculées avec le modèle de décroissance classique : ce sont des estimations, pas tes chiffres à toi.
 
 | Heures après le café | Demi-vie 3,5 h | Demi-vie 5 h | Demi-vie 7 h |
 | --- | --- | --- | --- |
@@ -89,7 +89,7 @@ D'autres facteurs modifient cette vitesse :
 - **La grossesse** l'allonge nettement. Une étude de 1982 a mesuré une demi-vie moyenne passant d'environ 3 heures chez des femmes non enceintes à environ 10,5 heures dans les quatre dernières semaines de grossesse. L'EFSA retient d'ailleurs un repère plus bas pendant la grossesse : jusqu'à 200 mg par jour.
 - **L'âge, le poids, certaines maladies du foie et certains médicaments** jouent aussi, comme le rappelle la revue de Nehlig.
 
-Résultat : deux personnes qui boivent le même café à la même heure peuvent avoir des quantités très différentes de caféine dans le sang au moment de se coucher. Si tu dors mal après un café de l'après-midi alors que ton collègue n'a aucun souci, ce n'est pas dans ta tête.
+Deux personnes qui boivent le même café à la même heure peuvent donc avoir des quantités très différentes de caféine dans le sang au moment de se coucher. Si tu dors mal après un café de l'après-midi alors que ton collègue n'a aucun souci, ce n'est pas dans ta tête.
 
 ## Comment connaître ta propre demi-vie ?
 
@@ -99,7 +99,7 @@ Sans prise de sang répétée, impossible de la mesurer précisément. Mais tu p
 - **Sensibilité moyenne** : un café après le début d'après-midi commence à se sentir le soir.
 - **Sensibilité lente** : même un café de midi peut retarder ton endormissement. Pense à la pilule, à la grossesse ou à certains traitements, qui ralentissent l'élimination.
 
-C'est cette idée qu'utilise Eau & Café : tu choisis une sensibilité, et l'app retient une demi-vie de 3,5, 5 ou 7 heures pour estimer combien de caféine il te reste au coucher. Tu peux faire le même calcul en ligne avec notre [calculateur de l'heure limite du dernier café](/eau-et-cafe/guides/heure-limite-cafe/) : il te donne une heure repère à partir de ton coucher.
+Eau & Café part de là : tu choisis une sensibilité, et l'app retient une demi-vie de 3,5, 5 ou 7 heures pour estimer combien de caféine il te reste au coucher. Tu peux faire le même calcul en ligne avec notre [calculateur de l'heure limite du dernier café](/eau-et-cafe/guides/heure-limite-cafe/) : il te donne une heure repère à partir de ton coucher.
 
 ## Les repères de l'EFSA à garder en tête
 
