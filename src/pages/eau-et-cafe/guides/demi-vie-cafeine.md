@@ -27,7 +27,7 @@ faq:
     a: "Oui, la contraception orale ralentit l'élimination de la caféine. L'Institute of Medicine indique qu'elle peut aller jusqu'à doubler sa demi-vie."
   - q: "Au bout de combien de temps la caféine est-elle éliminée ?"
     a: "Il n'y a pas d'heure précise où elle disparaît : elle diminue de moitié à chaque demi-vie. Avec une demi-vie de 5 heures, il reste encore environ 12 % de la dose au bout de 15 heures. Le plus utile est de savoir combien il en reste à l'heure du coucher."
-pitch: "Eau & Café estime l'heure de ton dernier café d'après ton heure de coucher et ta sensibilité. Gratuite, sans compte, sans pub."
+pitch: "Eau, Art & Café estime l'heure de ton dernier café d'après ton heure de coucher et ce que tu as bu. Gratuite, sans compte, sans pub."
 ---
 
 La **demi-vie de la caféine** est le temps qu'il faut pour que la quantité de caféine dans ton sang diminue de moitié. Chez un adulte en bonne santé, elle est en moyenne d'**environ 5 heures**, selon la synthèse de l'Institute of Medicine américain. Mais elle varie énormément d'une personne à l'autre : de **1,5 à 9,5 heures**.
@@ -99,7 +99,7 @@ Sans prise de sang répétée, impossible de la mesurer précisément. Mais tu p
 - **Sensibilité moyenne** : un café après le début d'après-midi commence à se sentir le soir.
 - **Sensibilité lente** : même un café de midi peut retarder ton endormissement. Pense à la pilule, à la grossesse ou à certains traitements, qui ralentissent l'élimination.
 
-Eau & Café part de là : tu choisis une sensibilité, et l'app retient une demi-vie de 3,5, 5 ou 7 heures pour estimer combien de caféine il te reste au coucher. Tu peux faire le même calcul en ligne avec notre [calculateur de l'heure limite du dernier café](/eau-et-cafe/guides/heure-limite-cafe/) : il te donne une heure repère à partir de ton coucher.
+Eau, Art & Café part de là : l'app retient une demi-vie de 5 heures, la valeur médiane, pour estimer combien de caféine il te reste au coucher. Tu peux faire le même calcul en ligne avec notre [calculateur de l'heure limite du dernier café](/eau-et-cafe/guides/heure-limite-cafe/) : il te donne une heure repère à partir de ton coucher.
 
 ## Les repères de l'EFSA à garder en tête
 

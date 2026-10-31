@@ -13,7 +13,7 @@ const notes = {
 		'Je la conçois et la développe seul. Si elle t’aide à souffler un peu, ça me fait vraiment plaisir.',
 	],
 	'eau-et-cafe': [
-		'Eau & Café est la suite de Brimm, ma première app d’hydratation. J’y ai ajouté le café, parce que l’eau et la caféine se jouent ensemble dans une journée, et une œuvre d’art pour donner envie de l’ouvrir.',
+		'Eau, Art & Café est la suite de Brimm, ma première app d’hydratation. J’y ai ajouté le café, parce que l’eau et la caféine se jouent ensemble dans une journée, et une œuvre d’art pour donner envie de l’ouvrir.',
 		'Je la conçois et la développe seul. Si elle t’aide à mieux finir tes journées, ça me fait vraiment plaisir.',
 	],
 };
@@ -22,7 +22,7 @@ const notes = {
 <section class="maker wrap" data-reveal aria-labelledby={`maker-${app}`}>
 	<h2 id={`maker-${app}`}>Bonjour, je suis Nicolas 👋</h2>
 	{notes[app].map((p) => <p>{p}</p>)}
-	<p class="sign">Nicolas Tardieu · développeur de {app === 'coheria' ? 'Coheria' : 'Eau & Café'}</p>
+	<p class="sign">Nicolas Tardieu · développeur de {app === 'coheria' ? 'Coheria' : 'Eau, Art & Café'}</p>
 	<p class="links">
 		<a href={`/${app}/a-propos/`}>Pourquoi cette app existe →</a>
 		<a href={`/${app}/a-propos/#soutenir`}>Me soutenir →</a>

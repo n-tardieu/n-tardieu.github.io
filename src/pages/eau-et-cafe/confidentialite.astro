@@ -2,11 +2,12 @@
 import EauCafeShell from '../../components/EauCafeShell.astro';
 
 const contact = 'ntardieu.contact@gmail.com';
+const rcPrivacy = 'https://www.revenuecat.com/privacy/';
 ---
 
 <EauCafeShell
-	title="Confidentialité · Eau & Café"
-	description="Politique de confidentialité d’Eau & Café : toutes les données restent sur ton téléphone, sans compte, sans statistiques ni publicité."
+	title="Confidentialité · Eau, Art & Café"
+	description="Politique de confidentialité d’Eau, Art & Café : tes boissons restent sur ton téléphone, sans compte, sans statistiques ni publicité. Un seul tiers, pour l’achat facultatif « Offrir un café »."
 >
 	<nav class="lang">
 		<a href="#fr">Français</a>
@@ -15,43 +16,58 @@ const contact = 'ntardieu.contact@gmail.com';
 
 	<section id="fr">
 		<h1>Confidentialité</h1>
-		<p class="updated">Dernière mise à jour : 23 octobre 2026</p>
+		<p class="updated">Dernière mise à jour : 31 octobre 2026</p>
 
 		<p>
-			Eau &amp; Café t’aide à suivre ce que tu bois (eau et caféine) et à faire le point sur tes journées. Cette page
-			explique quelles informations l’application traite et comment. En résumé : tout reste sur ton téléphone.
+			Eau, Art &amp; Café (anciennement Brimm) t’aide à noter ce que tu bois, eau et caféine, et te montre une œuvre
+			d’art par jour. Cette page explique quelles informations l’application traite et comment. En résumé : ce que tu
+			notes reste sur ton téléphone, et le seul service extérieur sert à l’achat facultatif « Offrir un café ».
 		</p>
 
 		<h2>1. Les informations que tu saisis</h2>
 		<p>
 			L’application ne traite que ce que tu y entres toi-même : ton poids, ta tranche d’âge et ton niveau d’activité
-			(pour estimer ton objectif d’eau), les boissons que tu notes et la caféine qu’elles contiennent, ta réponse du soir
-			sur ta journée, tes horaires (journée, coucher), ta sensibilité à la caféine et tes préférences (langue, thème,
-			rappels). Eau &amp; Café ne demande ni compte, ni nom, ni adresse e-mail.
+			(pour estimer ton objectif d’eau), les boissons que tu notes avec leur caféine et leur sucre estimés, tes horaires
+			de journée et de coucher, tes rappels, tes œuvres favorites et tes préférences (langue, thème, unité, vibrations).
+			Eau, Art &amp; Café ne demande ni compte, ni nom, ni adresse e-mail.
 		</p>
 
 		<h2>2. Où elles sont stockées</h2>
 		<p>
-			Uniquement sur ton appareil. L’application n’a pas de serveur et n’envoie aucune donnée sur Internet : ni tes
-			boissons, ni tes réponses du soir, ni ta consommation de caféine.
+			Uniquement sur ton appareil. L’application n’a pas de serveur. Tes boissons, ta caféine, ton profil et tes
+			horaires ne sont jamais envoyés sur Internet, ni à nous, ni à personne.
 		</p>
 
 		<h2>3. Notifications</h2>
 		<p>
-			Les rappels sont programmés sur ton appareil par le système (iOS ou Android). Aucune information ne nous est
-			transmise, ni à un tiers, pour les programmer ou les afficher.
+			Les rappels et les avis de bilan sont programmés sur ton appareil par le système (iOS ou Android). Aucune
+			information n’est transmise pour les programmer ou les afficher, et aucune notification ne contient de quantité de
+			caféine.
 		</p>
 
-		<h2>4. Aucun tiers</h2>
+		<h2>4. Un seul tiers : l’achat « Offrir un café »</h2>
 		<p>
-			Eau &amp; Café n’intègre aucun outil de statistiques, de publicité ou de pistage, et ne partage aucune donnée avec
-			qui que ce soit.
+			L’application est gratuite. Tu peux, si tu le veux, offrir un café au développeur par un achat intégré. Le
+			paiement est traité par l’App Store ou Google Play. Pour savoir si tu as déjà offert un café, et donc si la salle
+			« Au café » est ouverte, l’application utilise le service RevenueCat.
+		</p>
+		<p>
+			À chaque ouverture, l’application contacte RevenueCat avec un identifiant anonyme, créé au hasard pour ton
+			installation, qui n’est relié à aucune identité. RevenueCat reçoit ton historique d’achats dans l’app (produit, date,
+			prix, reçu du store) et les informations techniques nécessaires à la requête (version de l’app et du système,
+			pays du store, adresse IP). Il ne reçoit aucune boisson, aucune quantité de caféine, aucune donnée de ton profil.
+			Ces informations ne servent qu’à valider tes achats et à les restaurer, jamais à la publicité ni au pistage.
+			Voir la <a href={rcPrivacy}>politique de confidentialité de RevenueCat</a>.
+		</p>
+		<p>
+			L’application n’intègre aucun outil de statistiques, de publicité ou de pistage.
 		</p>
 
 		<h2>5. Tes données, ton contrôle</h2>
 		<p>
-			Comme tout reste sur ton appareil, tu gardes la main : supprimer l’application efface toutes ses données. Il n’y a
-			pas de compte en ligne à supprimer, puisqu’aucun compte n’est créé.
+			Tu peux modifier ou supprimer n’importe quelle boisson depuis l’historique. Supprimer l’application efface toutes
+			ses données de ton téléphone. Il n’y a pas de compte en ligne à fermer. Pour faire effacer l’historique d’achats
+			conservé par RevenueCat, écris-nous à l’adresse ci-dessous.
 		</p>
 
 		<h2>6. Mineurs</h2>
@@ -70,40 +86,54 @@ const contact = 'ntardieu.contact@gmail.com';
 
 	<section id="en" lang="en">
 		<h1>Privacy</h1>
-		<p class="updated">Last updated: October 23, 2026</p>
+		<p class="updated">Last updated: October 31, 2026</p>
 
 		<p>
-			Eau &amp; Café helps you track what you drink (water and caffeine) and look back on your days. This page explains
-			what information the app processes and how. In short: everything stays on your phone.
+			Water, Art &amp; Coffee (formerly Brimm) helps you log what you drink, water and caffeine, and shows you one
+			artwork a day. This page explains what information the app processes and how. In short: what you log stays on your
+			phone, and the only outside service handles the optional “Buy us a coffee” purchase.
 		</p>
 
 		<h2>1. Information you enter</h2>
 		<p>
 			The app only processes what you enter yourself: your weight, age range and activity level (to estimate your water
-			goal), the drinks you log and their caffeine, your evening answer about your day, your schedule (day, bedtime), your
-			caffeine sensitivity and your preferences (language, theme, reminders). Eau &amp; Café asks for no account, name or
-			email address.
+			goal), the drinks you log with their estimated caffeine and sugar, your day and bedtime hours, your reminders, your
+			favourite artworks and your preferences (language, theme, unit, haptics). Water, Art &amp; Coffee asks for no
+			account, name or email address.
 		</p>
 
 		<h2>2. Where it is stored</h2>
 		<p>
-			Only on your device. The app has no server and sends no data over the Internet: not your drinks, not your evening
-			answers, not your caffeine intake.
+			Only on your device. The app has no server. Your drinks, caffeine, profile and hours are never sent over the
+			Internet, to us or to anyone.
 		</p>
 
 		<h2>3. Notifications</h2>
 		<p>
-			Reminders are scheduled on your device by the operating system (iOS or Android). No information is sent to us or
-			to any third party to schedule or display them.
+			Reminders and report notices are scheduled on your device by the operating system (iOS or Android). No information
+			is sent to schedule or display them, and no notification contains a caffeine amount.
 		</p>
 
-		<h2>4. No third parties</h2>
-		<p>Eau &amp; Café includes no analytics, advertising or tracking tools, and shares no data with anyone.</p>
+		<h2>4. One third party: the “Buy us a coffee” purchase</h2>
+		<p>
+			The app is free. If you wish, you can buy the developer a coffee through an in-app purchase. Payment is handled by
+			the App Store or Google Play. To know whether you have already bought a coffee, and so whether the “At the café”
+			room is open, the app uses the RevenueCat service.
+		</p>
+		<p>
+			Each time it opens, the app contacts RevenueCat with an anonymous identifier, created at random for your install
+			and tied to no identity. RevenueCat receives your in-app purchase history (product, date, price, store receipt) and
+			the technical information the request needs (app and system version, store country, IP address). It receives no
+			drink, no caffeine amount and no profile data. This information is only used to validate and restore your
+			purchases, never for advertising or tracking. See
+			<a href={rcPrivacy}>RevenueCat’s privacy policy</a>.
+		</p>
+		<p>The app includes no analytics, advertising or tracking tools.</p>
 
 		<h2>5. Your data, your control</h2>
 		<p>
-			Since everything stays on your device, you stay in control: deleting the app erases all its data. There is no
-			online account to delete, as none is ever created.
+			You can edit or delete any drink from the history. Deleting the app erases all its data from your phone. There is
+			no online account to close. To have the purchase history kept by RevenueCat erased, write to the address below.
 		</p>
 
 		<h2>6. Children</h2>

@@ -25,7 +25,7 @@ faq:
     a: "Le décaféiné contient beaucoup moins de caféine qu'un café classique, mais pas zéro. Pour la plupart des gens, c'est une bonne option l'après-midi. Si tu es très sensible, regarde sa teneur dans le tableau des boissons."
   - q: "Pourquoi je m'endors bien mais je me réveille fatigué après un café le soir ?"
     a: "Dans l'étude de Drake, les participants ne percevaient pas toujours la perte de sommeil mesurée par l'appareil. On peut s'endormir sans difficulté et dormir pourtant moins longtemps ou moins profondément."
-pitch: "Eau & Café estime l'heure de ton dernier café d'après ton heure de coucher et ta sensibilité. Gratuite, sans compte, sans pub."
+pitch: "Eau, Art & Café estime l'heure de ton dernier café d'après ton heure de coucher et ce que tu as bu. Gratuite, sans compte, sans pub."
 ---
 
 Garde **au moins 6 heures** entre ton dernier café et ton coucher. C'est le délai que recommandent les auteurs d'une étude publiée en 2013, qui a mesuré l'effet de la caféine prise 0, 3 et 6 heures avant de dormir. Selon la vitesse à laquelle ton corps élimine la caféine, ton heure limite peut tomber en fin d'après-midi ou dès la fin de matinée.
@@ -74,7 +74,7 @@ Avec une boisson deux fois plus chargée, ou deux cafés, ces chiffres doublent.
 
 ## À quelle heure boire ton dernier café ?
 
-Pour transformer ces chiffres en heure limite, il faut choisir un seuil : la quantité de caféine qu'il est raisonnable d'avoir encore dans le sang au moment de te coucher. Eau & Café retient **30 mg** restants. Avec ce seuil, un café de 100 mg et un coucher à 23 h, l'estimation donne :
+Pour transformer ces chiffres en heure limite, il faut choisir un seuil : la quantité de caféine qu'il est raisonnable d'avoir encore dans le sang au moment de te coucher. Eau, Art & Café retient **30 mg** restants. Avec ce seuil, un café de 100 mg et un coucher à 23 h, l'estimation donne :
 
 - **sensibilité rapide** (demi-vie 3,5 h) : dernier café vers **17 h** ;
 - **sensibilité moyenne** (demi-vie 5 h) : dernier café vers **14 h 15** ;
@@ -97,4 +97,4 @@ Pour avoir ton heure à toi, utilise notre [calculateur de l'heure limite du der
 - **Pense aux autres sources** : thé, cola, boissons énergisantes et chocolat contiennent aussi de la caféine.
 - **Observe tes nuits sur quelques semaines** plutôt que de te fier à une seule soirée. Comme le montre l'étude de Drake, on ne perçoit pas toujours l'effet sur le moment.
 
-Si tu veux que ce calcul se fasse tout seul au fil de tes journées, [l'app Eau & Café](/eau-et-cafe) estime l'heure limite de ton dernier café d'après ton heure de coucher et la sensibilité que tu as choisie.
+Si tu veux que ce calcul se fasse tout seul au fil de tes journées, [l'app Eau, Art & Café](/eau-et-cafe) estime l'heure limite de ton dernier café d'après ton heure de coucher et ce que tu as vraiment bu, avec une demi-vie de 5 heures.

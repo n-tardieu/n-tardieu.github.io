@@ -8,16 +8,16 @@ const app = getApp('eau-et-cafe');
 
 const plans = [
 	{
-		name: 'Eau & Café',
+		name: 'Eau, Art & Café',
 		price: '0 €',
 		note: 'Toutes les fonctions, sans abonnement.',
 		featured: true,
 		items: [
 			'L’eau et le café en un geste',
 			'Ton heure limite du café',
-			'La question du soir',
+			'Ta journée en clair, le soir',
 			'Les bilans de la semaine et du mois',
-			'L’œuvre du jour et la galerie',
+			'L’œuvre du jour, la galerie et tes favoris',
 			'Sans compte, sans publicité',
 		],
 	},
@@ -28,15 +28,19 @@ const faq = [
 	{ q: 'Faut-il créer un compte ?', a: 'Non. L’app s’ouvre, c’est tout. Tes données restent sur ton téléphone.' },
 	{
 		q: 'L’app restera-t-elle gratuite ?',
-		a: 'Aujourd’hui, tout est gratuit. Si une option payante arrive un jour, elle sera annoncée ici à l’avance.',
+		a: 'Oui. Toutes les fonctions sont et resteront gratuites.',
+	},
+	{
+		q: 'Que veut dire « Offrir un café » ?',
+		a: 'Un achat intégré facultatif pour soutenir le développeur : un café à 2,99 €, un café et un croissant à 4,99 €, ou un petit-déjeuner à 12,99 €. Le premier café ouvre une petite salle de six œuvres, en remerciement. Il ne débloque aucune fonction.',
 	},
 ];
 ---
 
 <AppShell
 	app="eau-et-cafe"
-	title="Tarifs d’Eau & Café : gratuit, sans abonnement"
-	description="Eau & Café est gratuite : toutes les fonctions, sans compte, sans abonnement et sans publicité."
+	title="Tarifs d’Eau, Art & Café : gratuit, sans abonnement"
+	description="Eau, Art & Café est gratuite : toutes les fonctions, sans compte, sans abonnement et sans publicité. Un café à offrir, si tu veux."
 >
 	<main class="wrap">
 		<header class="ap-head" data-reveal>

@@ -57,16 +57,18 @@ export const APPS: AppEntry[] = [
 	},
 	{
 		slug: 'eau-et-cafe',
-		name: 'Eau & Café',
+		name: 'Eau, Art & Café',
 		tagline: 'Ton eau et ton café en un geste, l’heure de ton dernier café, et une œuvre d’art par jour.',
 		category: 'Eau et caféine',
-		price: 'Gratuit',
+		price: 'Gratuit · café à offrir',
 		icon: '/apps/eau-et-cafe/icon.png',
 		preview: ['/apps/eau-et-cafe/ecrans/01-home.webp', '/apps/eau-et-cafe/ecrans/04-coffee.webp'],
 		accent: '#1B2FD6',
 		surface: '#EDEBE4',
 		ink: '#0E0E0E',
-		// Nouvelle fiche créée à la soumission : renseigner les URLs et l'identifiant ici.
+		// L'app reprend les fiches de Brimm (même identifiant com.brimm.app). À la sortie de la v2, renseigner :
+		// ios 'https://apps.apple.com/app/id6784258874', iosId '6784258874',
+		// android 'https://play.google.com/store/apps/details?id=com.brimm.app'.
 		stores: { ios: null, iosId: null, android: null },
 		privacy: '/eau-et-cafe/confidentialite',
 		support: '/eau-et-cafe/assistance',
