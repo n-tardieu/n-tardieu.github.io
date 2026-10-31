@@ -1,34 +1,26 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import CoheriaShell from '../components/CoheriaShell.astro';
 
 // Même texte que l'écran Confidentialité de l'app (features/privacy/Privacy*.tsx) : à tenir à jour ensemble.
-const lastUpdatedFr = '13 octobre 2026';
-const lastUpdatedEn = 'October 13, 2026';
-const lastUpdatedDe = '13. Oktober 2026';
-const lastUpdatedEs = '13 de octubre de 2026';
+const lastUpdatedFr = '31 octobre 2026';
+const lastUpdatedEn = 'October 31, 2026';
+const lastUpdatedDe = '31. Oktober 2026';
+const lastUpdatedEs = '31 de octubre de 2026';
 ---
 
-<Layout title="Confidentialité · Coheria" description="Politique de confidentialité de Coheria, l’application de cohérence cardiaque.">
-	<main class="container">
-		<div class="content">
-			<div class="back-link">
-				<a href="/coheria" class="back-btn">← Retour à Coheria / Back to Coheria</a>
-			</div>
+<CoheriaShell title="Confidentialité · Coheria" description="Politique de confidentialité de Coheria, l’application de cohérence cardiaque.">
 
-			<nav class="lang-switch">
-				<a href="#fr" class="lang-link">Français</a>
-				<span class="lang-sep">·</span>
-				<a href="#en" class="lang-link">English</a>
-				<span class="lang-sep">·</span>
-				<a href="#de" class="lang-link">Deutsch</a>
-				<span class="lang-sep">·</span>
-				<a href="#es" class="lang-link">Español</a>
+			<nav class="lang" aria-label="Langue">
+				<a href="#fr">Français</a>
+				<a href="#en">English</a>
+				<a href="#de">Deutsch</a>
+				<a href="#es">Español</a>
 			</nav>
 
-			<section id="fr" class="lang-section">
+			<section id="fr" lang="fr">
 				<h1>Politique de confidentialité</h1>
 				<p class="updated">Dernière mise à jour : {lastUpdatedFr}</p>
-				<p>Coheria est une application de respiration guidée, éditée par Nicolas Tardieu. Cette page décrit, sans jargon, les données que l’application utilise, où elles vont et comment tu en gardes le contrôle. En deux mots : tout reste sur ton téléphone, sauf si tu crées un compte (sauvegarde), si tu prends Coheria Complet, par abonnement ou en un seul achat (paiement), ou si tu acceptes les statistiques d’usage (mesure). Rien d’autre ne sort de l’appareil.</p>
+				<p>Coheria est une application de respiration guidée, éditée par Nicolas Tardieu. Cette page décrit, sans jargon, les données que l’application utilise, où elles vont et comment tu en gardes le contrôle. En deux mots : tout reste sur ton téléphone, sauf si tu crées un compte (sauvegarde), si tu prends Coheria Complet, en un seul achat (paiement), ou si tu acceptes les statistiques d’usage (mesure). Rien d’autre ne sort de l’appareil.</p>
 				<article>
 					<h2>1. Qui est responsable</h2>
 					<p>Coheria est éditée par Nicolas Tardieu, développeur indépendant, responsable du traitement de tes données. Pour toute question : Réglages › Écrire au créateur, ou <a href="mailto:coheria.contact@gmail.com">coheria.contact@gmail.com</a>.</p>
@@ -41,7 +33,7 @@ const lastUpdatedEs = '13 de octubre de 2026';
 						<li>tes ressentis de fin de séance ;</li>
 						<li>tes séances personnalisées et les réglages de chaque séance (durée, rythme, sons, vibrations) ;</li>
 						<li>tes préférences : thème, langue, rappels, réponse donnée sur les statistiques d’usage ;</li>
-						<li>l’état de ton abonnement ou de ton achat.</li>
+						<li>l’état de ton achat.</li>
 					</ul>
 					<p>Ces données disparaissent si tu désinstalles l’application, ou d’un geste dans Réglages › Compte › Effacer mes données.</p>
 				</article>
@@ -55,7 +47,7 @@ const lastUpdatedEs = '13 de octubre de 2026';
 				</article>
 				<article>
 					<h2>4. Les achats</h2>
-					<p>Coheria Complet s’achète par abonnement annuel (avec une période d’essai) ou en une fois, à vie, via l’App Store ou Google Play. Le paiement est traité par Apple ou Google : Coheria ne voit jamais tes informations bancaires.</p>
+					<p>Coheria Complet s’achète en une fois, à vie, sans abonnement, via l’App Store ou Google Play. Le paiement est traité par Apple ou Google : Coheria ne voit jamais tes informations bancaires.</p>
 					<p>Pour vérifier l’achat et ouvrir Complet, Coheria s’appuie sur RevenueCat (RevenueCat Inc.), qui reçoit un identifiant d’application anonyme, l’identifiant de la transaction et le type d’appareil. « Restaurer l’achat » relit tes achats auprès d’Apple ou de Google. Politique de RevenueCat : <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener noreferrer">revenuecat.com/privacy</a>.</p>
 				</article>
 				<article>
@@ -100,12 +92,12 @@ const lastUpdatedEs = '13 de octubre de 2026';
 				</article>
 			</section>
 
-			<hr class="lang-divider" />
+			<hr />
 
-			<section id="en" class="lang-section">
+			<section id="en" lang="en">
 				<h1>Privacy Policy</h1>
 				<p class="updated">Last updated: {lastUpdatedEn}</p>
-				<p>Coheria is a guided breathing app, published by Nicolas Tardieu. This page describes, in plain words, the data the app uses, where it goes and how you stay in control. In short: everything stays on your phone, unless you create an account (backup), get Coheria Complete, as a subscription or a one-time purchase (payment), or agree to usage statistics (measurement). Nothing else leaves the device.</p>
+				<p>Coheria is a guided breathing app, published by Nicolas Tardieu. This page describes, in plain words, the data the app uses, where it goes and how you stay in control. In short: everything stays on your phone, unless you create an account (backup), get Coheria Complete as a one-time purchase (payment), or agree to usage statistics (measurement). Nothing else leaves the device.</p>
 				<article>
 					<h2>1. Who is responsible</h2>
 					<p>Coheria is published by Nicolas Tardieu, an independent developer, who is the data controller. For any question: Settings › Write to the creator, or <a href="mailto:coheria.contact@gmail.com">coheria.contact@gmail.com</a>.</p>
@@ -118,7 +110,7 @@ const lastUpdatedEs = '13 de octubre de 2026';
 						<li>how you felt at the end of each session;</li>
 						<li>your custom sessions and each session’s settings (duration, rhythm, sounds, vibrations);</li>
 						<li>your preferences: theme, language, reminders, your answer about usage statistics;</li>
-						<li>the state of your subscription or purchase.</li>
+						<li>the state of your purchase.</li>
 					</ul>
 					<p>This data disappears when you uninstall the app, or with one tap in Settings › Account › Erase my data.</p>
 				</article>
@@ -132,7 +124,7 @@ const lastUpdatedEs = '13 de octubre de 2026';
 				</article>
 				<article>
 					<h2>4. Purchases</h2>
-					<p>Coheria Complete is sold as a yearly subscription (with a trial period) or as a one-time lifetime purchase, through the App Store or Google Play. Payment is handled by Apple or Google: Coheria never sees your payment details.</p>
+					<p>Coheria Complete is sold as a one-time lifetime purchase, with no subscription, through the App Store or Google Play. Payment is handled by Apple or Google: Coheria never sees your payment details.</p>
 					<p>To verify the purchase and unlock Complete, Coheria relies on RevenueCat (RevenueCat Inc.), which receives an anonymous app identifier, the transaction identifier and the device type. “Restore purchase” re-reads your purchases from Apple or Google. RevenueCat privacy policy: <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener noreferrer">revenuecat.com/privacy</a>.</p>
 				</article>
 				<article>
@@ -177,12 +169,12 @@ const lastUpdatedEs = '13 de octubre de 2026';
 				</article>
 			</section>
 
-			<hr class="lang-divider" />
+			<hr />
 
-			<section id="de" class="lang-section">
+			<section id="de" lang="de">
 				<h1>Datenschutzerklärung</h1>
 				<p class="updated">Letzte Aktualisierung: {lastUpdatedDe}</p>
-				<p>Coheria ist eine App für geführtes Atmen. Diese Seite beschreibt in einfachen Worten, welche Daten die App nutzt, wohin sie gehen und wie du die Kontrolle behältst. Kurz gesagt: Alles bleibt auf deinem Telefon, außer du legst ein Konto an (Sicherung), Coheria Komplett nimmst, im Abo oder als Einmalkauf (Zahlung), oder stimmst Nutzungsstatistiken zu (Messung). Sonst verlässt nichts das Gerät.</p>
+				<p>Coheria ist eine App für geführtes Atmen. Diese Seite beschreibt in einfachen Worten, welche Daten die App nutzt, wohin sie gehen und wie du die Kontrolle behältst. Kurz gesagt: Alles bleibt auf deinem Telefon, außer du legst ein Konto an (Sicherung), Coheria Komplett als Einmalkauf nimmst (Zahlung), oder stimmst Nutzungsstatistiken zu (Messung). Sonst verlässt nichts das Gerät.</p>
 				<article>
 					<h2>1. Wer verantwortlich ist</h2>
 					<p>Coheria wird von Nicolas Tardieu, unabhängiger Entwickler, herausgegeben; er ist für die Verarbeitung deiner Daten verantwortlich. Bei Fragen: Einstellungen › Dem Entwickler schreiben, oder <a href="mailto:coheria.contact@gmail.com">coheria.contact@gmail.com</a>.</p>
@@ -195,7 +187,7 @@ const lastUpdatedEs = '13 de octubre de 2026';
 						<li>wie du dich am Ende jeder Sitzung gefühlt hast;</li>
 						<li>deine eigenen Sitzungen und die Einstellungen jeder Sitzung (Dauer, Rhythmus, Klänge, Vibration);</li>
 						<li>deine Vorlieben: Thema, Sprache, Erinnerungen, deine Antwort zu den Nutzungsstatistiken;</li>
-						<li>der Stand deines Abonnements oder Kaufs.</li>
+						<li>der Stand deines Kaufs.</li>
 					</ul>
 					<p>Diese Daten verschwinden, wenn du die App deinstallierst, oder mit einem Tipp unter Einstellungen › Konto › Meine Daten löschen.</p>
 				</article>
@@ -209,7 +201,7 @@ const lastUpdatedEs = '13 de octubre de 2026';
 				</article>
 				<article>
 					<h2>4. Käufe</h2>
-					<p>Coheria Komplett gibt es als Jahresabonnement (mit Testzeitraum) oder als einmaligen Kauf auf Lebenszeit, über den App Store oder Google Play. Die Zahlung wickelt Apple oder Google ab: Coheria sieht deine Zahlungsdaten nie.</p>
+					<p>Coheria Komplett gibt es als einmaligen Kauf auf Lebenszeit, ohne Abo, über den App Store oder Google Play. Die Zahlung wickelt Apple oder Google ab: Coheria sieht deine Zahlungsdaten nie.</p>
 					<p>Um den Kauf zu prüfen und Komplett freizuschalten, nutzt Coheria RevenueCat (RevenueCat Inc.), das eine anonyme App-Kennung, die Transaktionskennung und den Gerätetyp erhält. „Kauf wiederherstellen“ liest deine Käufe erneut bei Apple oder Google aus. Datenschutz von RevenueCat: <a href="https://www.revenuecat.com/privacy">revenuecat.com/privacy</a>.</p>
 				</article>
 				<article>
@@ -254,12 +246,12 @@ const lastUpdatedEs = '13 de octubre de 2026';
 				</article>
 			</section>
 
-			<hr class="lang-divider" />
+			<hr />
 
-			<section id="es" class="lang-section">
+			<section id="es" lang="es">
 				<h1>Política de privacidad</h1>
 				<p class="updated">Última actualización: {lastUpdatedEs}</p>
-				<p>Coheria es una aplicación de respiración guiada. Esta página describe, sin tecnicismos, los datos que usa la aplicación, adónde van y cómo mantienes el control. En pocas palabras: todo se queda en tu teléfono, salvo que crees una cuenta (copia de seguridad), obtengas Coheria Completo, por suscripción o con una sola compra (pago), o aceptes las estadísticas de uso (medición). Nada más sale del dispositivo.</p>
+				<p>Coheria es una aplicación de respiración guiada. Esta página describe, sin tecnicismos, los datos que usa la aplicación, adónde van y cómo mantienes el control. En pocas palabras: todo se queda en tu teléfono, salvo que crees una cuenta (copia de seguridad), obtengas Coheria Completo con una sola compra (pago), o aceptes las estadísticas de uso (medición). Nada más sale del dispositivo.</p>
 				<article>
 					<h2>1. Quién es responsable</h2>
 					<p>Coheria la publica Nicolas Tardieu, desarrollador independiente y responsable del tratamiento de tus datos. Para cualquier pregunta: Ajustes › Escribir al creador, o <a href="mailto:coheria.contact@gmail.com">coheria.contact@gmail.com</a>.</p>
@@ -272,7 +264,7 @@ const lastUpdatedEs = '13 de octubre de 2026';
 						<li>cómo te has sentido al final de cada sesión;</li>
 						<li>tus sesiones personalizadas y los ajustes de cada sesión (duración, ritmo, sonidos, vibraciones);</li>
 						<li>tus preferencias: tema, idioma, recordatorios, tu respuesta sobre las estadísticas de uso;</li>
-						<li>el estado de tu suscripción o compra.</li>
+						<li>el estado de tu compra.</li>
 					</ul>
 					<p>Estos datos desaparecen si desinstalas la aplicación, o con un toque en Ajustes › Cuenta › Borrar mis datos.</p>
 				</article>
@@ -286,7 +278,7 @@ const lastUpdatedEs = '13 de octubre de 2026';
 				</article>
 				<article>
 					<h2>4. Las compras</h2>
-					<p>Coheria Completo se compra por suscripción anual (con periodo de prueba) o de una vez, de por vida, a través del App Store o Google Play. El pago lo procesa Apple o Google: Coheria nunca ve tus datos bancarios.</p>
+					<p>Coheria Completo se compra de una vez, de por vida, sin suscripción, a través del App Store o Google Play. El pago lo procesa Apple o Google: Coheria nunca ve tus datos bancarios.</p>
 					<p>Para verificar la compra y abrir Completo, Coheria se apoya en RevenueCat (RevenueCat Inc.), que recibe un identificador de aplicación anónimo, el identificador de la transacción y el tipo de dispositivo. «Restaurar la compra» vuelve a leer tus compras en Apple o Google. Política de RevenueCat: <a href="https://www.revenuecat.com/privacy">revenuecat.com/privacy</a>.</p>
 				</article>
 				<article>
@@ -330,130 +322,4 @@ const lastUpdatedEs = '13 de octubre de 2026';
 					<p>La fecha al inicio de esta página indica la última actualización. Puede solicitarse una versión anterior del texto por correo.</p>
 				</article>
 			</section>
-		</div>
-	</main>
-</Layout>
-
-<style>
-	.container {
-		min-height: 100vh;
-		display: flex;
-		justify-content: center;
-		padding: 2rem 1.5rem 4rem;
-	}
-
-	.content {
-		width: min(780px, 100%);
-		animation: fadeInUp 0.5s ease-out;
-	}
-
-	@keyframes fadeInUp {
-		from {
-			opacity: 0;
-			transform: translateY(20px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-
-	.back-link {
-		margin-bottom: 1.5rem;
-	}
-
-	.back-btn {
-		color: #e5e5e5;
-		font-size: 0.9rem;
-		font-weight: 500;
-	}
-
-	.lang-switch {
-		margin-bottom: 1.5rem;
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-	}
-
-	.lang-sep {
-		color: rgba(255, 255, 255, 0.45);
-		font-size: 0.85rem;
-	}
-
-	.lang-link {
-		font-size: 0.85rem;
-		color: rgba(255, 255, 255, 0.72);
-		text-decoration: none;
-		border-bottom: 1px solid transparent;
-		transition: color 0.2s ease, border-color 0.2s ease;
-	}
-
-	.lang-link:hover {
-		color: rgba(255, 255, 255, 0.95);
-		border-color: rgba(255, 255, 255, 0.55);
-	}
-
-	.lang-divider {
-		margin: 2.5rem 0;
-		border: none;
-		border-top: 1px solid rgba(255, 255, 255, 0.1);
-	}
-
-	h1 {
-		margin: 0;
-		font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-		line-height: 1.2;
-	}
-
-	.updated {
-		margin-top: 0.65rem;
-		color: #cccccc;
-		font-size: 0.95rem;
-	}
-
-	p {
-		color: #f2f2f2;
-		line-height: 1.7;
-	}
-
-	article {
-		margin-top: 1.3rem;
-		padding: 1rem 1.1rem;
-		background: rgba(255, 255, 255, 0.03);
-		border: 1px solid rgba(255, 255, 255, 0.08);
-		border-radius: 12px;
-	}
-
-	h2 {
-		margin: 0 0 0.5rem;
-		font-size: 1.08rem;
-		color: #ffffff;
-	}
-
-	ul {
-		margin: 0.35rem 0 0;
-		padding-left: 1.2rem;
-	}
-
-	li {
-		line-height: 1.6;
-		margin-bottom: 0.35rem;
-	}
-
-	code {
-		font-size: 0.9em;
-		background: rgba(255, 255, 255, 0.08);
-		padding: 0.1rem 0.35rem;
-		border-radius: 4px;
-	}
-
-	@media (max-width: 768px) {
-		.container {
-			padding: 1.25rem 1rem 2.25rem;
-		}
-
-		article {
-			padding: 0.9rem;
-		}
-	}
-</style>
+</CoheriaShell>

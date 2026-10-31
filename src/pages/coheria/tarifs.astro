@@ -13,11 +13,12 @@ const plans = [
 		note: 'Pour pratiquer, à vie.',
 		items: [
 			'Toutes les séances guidées',
-			'Tes propres séances',
+			'Tes propres séances, à ton rythme',
 			'Les rappels du matin, du midi et du soir',
 			'La série et les jours de gel',
-			'Ton ressenti et Mon état sur 7 jours',
-			'Le bilan de la semaine',
+			'Ton ressenti et Mon état sur 30 jours',
+			'Les bilans de la semaine et du mois, et leur partage',
+			'Une ambiance (forêt) et un repère de souffle (bol)',
 		],
 	},
 	{
@@ -27,10 +28,9 @@ const plans = [
 		featured: true,
 		items: [
 			'Tout le gratuit',
-			'Mon état sur 30 jours',
-			'Le bilan mensuel, chaque 1ᵉʳ du mois',
-			'Tous tes bilans hebdomadaires, à relire quand tu veux',
-			'Tous les sons : pluie, feu, sous l’eau, cristal, cloche, triangles',
+			'Toutes les ambiances : pluie, feu, sous l’eau, en plus de la forêt',
+			'Tous les repères de souffle : cristal, cloche et triangles, en plus du bol',
+			'Les sons à venir, sans autre achat',
 		],
 	},
 ];
@@ -38,15 +38,15 @@ const plans = [
 const faq = [
 	{
 		q: 'Les séances resteront-elles gratuites ?',
-		a: 'Oui. Les séances, les rappels et la série sont gratuits, à vie. Complet ajoute le suivi sur la durée et les sons, il ne retire rien au gratuit.',
+		a: 'Oui. Les séances, les rappels, la série et tout le suivi (Mon état, les bilans) sont gratuits, à vie. Complet ajoute l’ambiance sonore, il ne retire rien au gratuit.',
 	},
 	{
 		q: 'Pourquoi un achat unique plutôt qu’un abonnement ?',
-		a: 'Respirer ne devrait pas coûter quelque chose tous les mois. Complet se paie une fois, et c’est tout.',
+		a: 'Respirer ne devrait pas coûter quelque chose tous les mois. Complet se paie une fois, sans abonnement ni période d’essai, et c’est tout.',
 	},
 	{
 		q: 'Peut-on essayer Complet ?',
-		a: 'La version gratuite, sans limite de temps, sert d’essai : tu peux pratiquer aussi longtemps que tu veux avant de décider.',
+		a: 'Il n’y a pas de période d’essai, mais la version gratuite, sans limite de temps, en tient lieu : tu entends déjà la forêt et le bol, et tu peux pratiquer aussi longtemps que tu veux avant de décider.',
 	},
 	{
 		q: 'J’ai changé de téléphone, comment retrouver mon achat ?',
@@ -62,7 +62,7 @@ const faq = [
 <AppShell
 	app="coheria"
 	title="Tarifs de Coheria : gratuit, ou Complet à 7,99 €"
-	description="Coheria est gratuite pour pratiquer, à vie. Coheria Complet, 7,99 € en un seul achat, ajoute Mon état sur 30 jours, le bilan mensuel et tous les sons."
+	description="Coheria est gratuite pour pratiquer et suivre ta pratique, à vie. Coheria Complet, 7,99 € en un seul achat, sans abonnement, ajoute toutes les ambiances et tous les sons."
 >
 	<main class="wrap">
 		<header class="ap-head" data-reveal>
@@ -76,9 +76,10 @@ const faq = [
 		<section class="ap-section note" data-reveal>
 			<h2 class="display">Un mot sur le prix</h2>
 			<p>
-				Je développe Coheria seul. L’essentiel, respirer chaque jour, restera toujours gratuit : c’est ce qui compte vraiment.
-				Complet existe pour celles et ceux qui veulent suivre leur pratique sur la durée, et il finance le temps que je
-				passe à améliorer l’app. Un seul achat, parce que je n’aime pas l’idée de payer tous les mois pour respirer.
+				Je développe Coheria seul. L’essentiel, respirer chaque jour et voir ce que ça change, restera toujours gratuit :
+				c’est ce qui compte vraiment. Complet existe pour celles et ceux qui veulent envelopper leur pratique d’une
+				ambiance, et il finance le temps que je passe à améliorer l’app. Un seul achat, sans abonnement, parce que je
+				n’aime pas l’idée de payer tous les mois pour respirer.
 			</p>
 			<p class="sign">Nicolas</p>
 		</section>

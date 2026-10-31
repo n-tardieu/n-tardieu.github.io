@@ -1,21 +1,15 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import CoheriaShell from '../components/CoheriaShell.astro';
 ---
 
-<Layout title="Assistance · Coheria" description="Aide et contact pour Coheria, l’application de cohérence cardiaque.">
-	<main class="container">
-		<div class="content">
-			<div class="back-link">
-				<a href="/coheria" class="back-btn">← Retour à Coheria / Back to Coheria</a>
-			</div>
+<CoheriaShell title="Assistance · Coheria" description="Aide et contact pour Coheria, l’application de cohérence cardiaque.">
 
-			<nav class="lang-switch">
-				<a href="#fr" class="lang-link">Français</a>
-				<span class="lang-sep">·</span>
-				<a href="#en" class="lang-link">English</a>
+			<nav class="lang" aria-label="Langue">
+				<a href="#fr">Français</a>
+				<a href="#en">English</a>
 			</nav>
 
-			<section id="fr" class="lang-section">
+			<section id="fr" lang="fr">
 				<h1>Assistance</h1>
 
 				<p>
@@ -36,9 +30,9 @@ import Layout from '../layouts/Layout.astro';
 				<article>
 					<h2>Comment obtenir Coheria Complet ?</h2>
 					<p>
-						Coheria Complet s'obtient depuis Réglages › Coheria Complet, par abonnement annuel (avec
-						une période d'essai, annulable à tout moment depuis votre compte App Store ou Google Play)
-						ou en un seul achat à vie, sans frais récurrents. Le paiement est géré de manière
+						Coheria Complet s'obtient depuis Réglages › Coheria Complet, en un seul achat à vie, sans
+						abonnement ni frais récurrents. Il ajoute toutes les ambiances sonores et tous les repères de
+						souffle ; respirer, les rappels et le suivi restent gratuits. Le paiement est géré de manière
 						sécurisée par l'App Store ou Google Play ; Coheria ne voit jamais vos informations
 						bancaires.
 					</p>
@@ -93,9 +87,9 @@ import Layout from '../layouts/Layout.astro';
 				</article>
 			</section>
 
-			<hr class="lang-divider" />
+			<hr />
 
-			<section id="en" class="lang-section">
+			<section id="en" lang="en">
 				<h1>Support</h1>
 
 				<p>
@@ -115,9 +109,9 @@ import Layout from '../layouts/Layout.astro';
 				<article>
 					<h2>How do I get Coheria Complete?</h2>
 					<p>
-						Coheria Complete is available from Settings › Coheria Complete, as a yearly subscription
-						(with a trial period, cancellable at any time from your App Store or Google Play account)
-						or as a one-time lifetime purchase with no recurring fees. Payment is securely handled by
+						Coheria Complete is available from Settings › Coheria Complete, as a one-time lifetime
+						purchase, with no subscription and no recurring fees. It adds every soundscape and every
+						breath cue; breathing, reminders and your progress stay free. Payment is securely handled by
 						the App Store or Google Play; Coheria never sees your payment details.
 					</p>
 				</article>
@@ -168,107 +162,4 @@ import Layout from '../layouts/Layout.astro';
 					</p>
 				</article>
 			</section>
-		</div>
-	</main>
-</Layout>
-
-<style>
-	.container {
-		min-height: 100vh;
-		display: flex;
-		justify-content: center;
-		padding: 2rem 1.5rem 4rem;
-	}
-
-	.content {
-		width: min(780px, 100%);
-		animation: fadeInUp 0.5s ease-out;
-	}
-
-	@keyframes fadeInUp {
-		from {
-			opacity: 0;
-			transform: translateY(20px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-
-	.back-link {
-		margin-bottom: 1.5rem;
-	}
-
-	.back-btn {
-		color: #e5e5e5;
-		font-size: 0.9rem;
-		font-weight: 500;
-	}
-
-	.lang-switch {
-		margin-bottom: 1.5rem;
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-	}
-
-	.lang-sep {
-		color: rgba(255, 255, 255, 0.45);
-		font-size: 0.85rem;
-	}
-
-	.lang-link {
-		font-size: 0.85rem;
-		color: rgba(255, 255, 255, 0.72);
-		text-decoration: none;
-		border-bottom: 1px solid transparent;
-		transition: color 0.2s ease, border-color 0.2s ease;
-	}
-
-	.lang-link:hover {
-		color: rgba(255, 255, 255, 0.95);
-		border-color: rgba(255, 255, 255, 0.55);
-	}
-
-	.lang-divider {
-		margin: 2.5rem 0;
-		border: none;
-		border-top: 1px solid rgba(255, 255, 255, 0.1);
-	}
-
-	h1 {
-		margin: 0 0 1rem;
-		font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-		line-height: 1.2;
-	}
-
-	p {
-		color: #f2f2f2;
-		line-height: 1.7;
-	}
-
-	article {
-		margin-top: 1.3rem;
-		padding: 1rem 1.1rem;
-		background: rgba(255, 255, 255, 0.03);
-		border: 1px solid rgba(255, 255, 255, 0.08);
-		border-radius: 12px;
-	}
-
-	h2 {
-		margin: 0 0 0.5rem;
-		font-size: 1.08rem;
-		color: #ffffff;
-	}
-
-	@media (max-width: 768px) {
-		.container {
-			padding: 1.25rem 1rem 2.25rem;
-		}
-
-		article {
-			padding: 0.9rem;
-		}
-	}
-</style>
+</CoheriaShell>

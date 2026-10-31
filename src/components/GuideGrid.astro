@@ -1,7 +1,7 @@
 ---
 // Grille de cartes façon blog : couverture, thème et durée de lecture, titre,
 // résumé. Utilisée sur la page Guides de chaque app.
-import { TOPICS, coverSrc, type Guide } from '../data/guides';
+import { TOPICS, coverSrc, coverSrcSet, type Guide } from '../data/guides';
 
 interface Props {
 	guides: Guide[];
@@ -18,7 +18,15 @@ const { guides, showKind = false } = Astro.props;
 			<li data-reveal style={`--d: ${(i % 4) * 0.08}s`}>
 				<a href={g.href}>
 					<span class="img">
-						<img src={coverSrc(g.cover)} alt="" width="1600" height="900" loading="lazy" />
+						<img
+							src={coverSrc(g.cover)}
+							srcset={coverSrcSet(g.cover)}
+							sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 960px) calc(50vw - 26px), 268px"
+							alt=""
+							width="1600"
+							height="900"
+							loading="lazy"
+						/>
 					</span>
 					<span class="meta-line">
 						{showKind ? (g.kind === 'outil' ? 'Outil gratuit' : 'Guide') : TOPICS[g.topic]} · {g.minutes} min

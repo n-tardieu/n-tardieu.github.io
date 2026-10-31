@@ -39,6 +39,13 @@ const COVERS = {
 
 export const coverSrc = (c: Cover, ext: 'webp' | 'jpg' = 'webp') => `/guides/covers/${c.id}.${ext}`;
 
+/** Largeurs disponibles en WebP : <id>-480.webp, <id>-960.webp et l'original en 1600. */
+export const COVER_WIDTHS = [480, 960, 1600] as const;
+
+/** `srcset` des trois largeurs, pour servir la bonne taille selon la carte et l'écran. */
+export const coverSrcSet = (c: Cover) =>
+	COVER_WIDTHS.map((w) => `${w === 1600 ? coverSrc(c) : `/guides/covers/${c.id}-${w}.webp`} ${w}w`).join(', ');
+
 export const TOPICS: Record<Topic, string> = {
 	'coherence-cardiaque': 'Cohérence cardiaque',
 	cafeine: 'Caféine',
